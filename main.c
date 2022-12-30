@@ -4,8 +4,8 @@
 #include <editline/readline.h>
 
 int main() {
-        printf("CLisp 0.1");
-        printf("Press Ctrcl+c to exit.");
+        printf("CLisp 0.1\n");
+        printf("Press Ctrcl+c to exit.\n");
 
         while (true) {
                 char* input = readline("> ");
