@@ -9,7 +9,7 @@ int main() {
 
         while (true) {
                 char* input = readline("> ");
-                add_history(input);
+                (void) add_history(input);
                 free(input);
         }
 
