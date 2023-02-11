@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <editline/readline.h>
-#include "../libs/mpc.h"
+#include "../libs/mpc/mpc.h"
 
 long eval_op(long x, char* op, long y)
 {
@@ -36,7 +36,7 @@ long eval(mpc_ast_t* ast)
         return x;
 }
 
-int main()
+int main(void)
 {
         mpc_parser_t* number   = mpc_new("number");
         mpc_parser_t* operator = mpc_new("operator");
