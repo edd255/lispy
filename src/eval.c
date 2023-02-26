@@ -9,7 +9,8 @@ lisp_value_t eval_op(lisp_value_t x, char* op, lisp_value_t y)
                 return y;
         }
         if (strcmp(op, "+") == 0) {
-                return lisp_val_num(x.number + y.number); }
+                return lisp_val_num(x.number + y.number); 
+        }
         if (strcmp(op, "-") == 0) {
                 return lisp_val_num(x.number - y.number);
         }
