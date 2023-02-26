@@ -9,6 +9,7 @@ DEBUG_FLAGS    := -Og -g -fsanitize=address -fsanitize=undefined
 OPT_FLAGS      := -Ofast
 LD_FLAGS       := -ledit -lm
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes
+MAKEFLAGS      := --jobs=$(shell nproc)
 
 all: debug opt
 
@@ -18,5 +19,5 @@ debug:
 opt:
 	${CC} ${OPT_FLAGS} ${ERROR_FLAGS} ${MAIN} ${LIB} ${HEADERS} ${LD_FLAGS} -o ${OUT}_opt
 
-run: 
+memcheck: 
 	valgrind ${VALGRIND_FLAGS} ./${OUT}_debug
