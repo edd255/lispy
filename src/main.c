@@ -8,33 +8,30 @@
 
 int main(void)
 {
-        mpc_parser_t* number   = mpc_new("number");
-        mpc_parser_t* operator = mpc_new("operator");
-        mpc_parser_t* expr     = mpc_new("expr");
-        mpc_parser_t* clisp    = mpc_new("clisp");
-
+        mpc_parser_t* number = mpc_new("number");
+        mpc_parser_t* symbol = mpc_new("symbol");
+        mpc_parser_t* s_expr = mpc_new("sexpr");
+        mpc_parser_t* expr   = mpc_new("expr");
+        mpc_parser_t* clisp  = mpc_new("clisp");
         mpca_lang(
                 MPCA_LANG_DEFAULT,
-                "                                                       \
-                number   : /-?[0-9]+/ ;                                 \
-                operator : '+' | '-' | '*' | '/' ;                      \
-                expr     : <number> | '(' <operator> <expr>+ ')' ;      \
-                clisp    : /^/ <operator> <expr>+ /$/ ;                 \
+                " \
+                number : /-?[0-9]+/ ;                    \
+                symbol : '+' | '-' | '*' | '/' ;         \
+                sexpr  : '(' <expr>* ')' ;               \
+                expr   : <number> | <symbol> | <sexpr> ; \
+                lispy  : /^/ <expr>* /$/ ;               \
                 ",
-                number, operator, expr, clisp
+                number, symbol, s_expr, expr, clisp
         );
-
         printf("CLisp 0.1\n");
         printf("Press Ctrcl+c to exit.\n");
-
         while (true) {
                 char* input = readline("> ");
                 if (strncmp(input, "exit", 4) == 0) {
                         return 0;
                 }
-
                 (void) add_history(input);
-
                 mpc_result_t r;
                 if (mpc_parse("<stdin>", input, clisp, &r)) {
                         mpc_ast_print(r.output);
@@ -48,7 +45,6 @@ int main(void)
 
                 free(input);
         }
-
-        mpc_cleanup(4, number, operator, expr, clisp);
+        mpc_cleanup(5, number, symbol, s_expr, expr, clisp);
         return 0;
 }
