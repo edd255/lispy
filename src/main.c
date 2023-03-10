@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <editline/readline.h>
-#include "../libs/mpc/mpc.h"
+#include "../deps/mpc/mpc.h"
 #include "lisp_value.h"
 #include "eval.h"
 
@@ -34,10 +34,9 @@ int main(void)
                 (void) add_history(input);
                 mpc_result_t r;
                 if (mpc_parse("<stdin>", input, clisp, &r)) {
-                        mpc_ast_print(r.output);
-                        lisp_value_t result = eval(r.output);
-                        lisp_val_println(result);
-                        mpc_ast_delete(r.output);
+                        lisp_value_t* x = lisp_eval.eval(lisp_value.read(r.output));
+                        lisp_value.println(x);
+                        lisp_value.free(x);
                 } else {
                         mpc_err_print(r.error);
                         mpc_err_delete(r.error);
