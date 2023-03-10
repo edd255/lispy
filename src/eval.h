@@ -48,7 +48,10 @@ typedef struct {
          */
         lisp_value_t* (* const builtin_join)(lisp_value_t* a);
 
-        /* Call the correct function depending on what symbol we encounter in evaluation */
+        /* 
+         * Call the correct function depending on what symbol we encounter in 
+         * evaluation 
+         * */
         lisp_value_t* (* const bultin)(lisp_value_t* a, char* func);
 } namespace_lisp_eval;
 
