@@ -1,5 +1,5 @@
 CC      := clang
-LIB     := libs/mpc/mpc.c
+LIB     := deps/mpc/mpc.c
 HEADERS := src/eval.c src/lisp_value.c
 MAIN    := src/main.c
 OUT     := bin/clisp
