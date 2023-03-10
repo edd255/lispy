@@ -8,7 +8,8 @@ typedef enum {
         LISP_VALUE_NUMBER,
         LISP_VALUE_ERROR,
         LISP_VALUE_SYMBOL,
-        LISP_VALUE_SEXPR
+        LISP_VALUE_SEXPR,
+        LISP_VALUE_QEXPR
 } LISP_TYPE;
 
 typedef enum {
@@ -39,6 +40,9 @@ typedef struct {
 
         /* Construct a pointer to a new empty sexpr lval */
         lisp_value_t* (* const sexpr)(void);
+
+        /* Construct a pointer to a new empty qexpr lval */
+        lisp_value_t* (* const qexpr)(void);
 
         /* Print a value */
         void (* const print)(lisp_value_t* value);

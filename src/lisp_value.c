@@ -2,7 +2,9 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 #include "lisp_value.h"
+
 
 //=== DECLARATIONS =============================================================
 
@@ -10,6 +12,7 @@ static lisp_value_t* lval_num(long x);
 static lisp_value_t* lval_err(char* m);
 static lisp_value_t* lval_sym(char* s);
 static lisp_value_t* lval_sexpr(void);
+static lisp_value_t* lval_qexpr(void);
 static void lval_print(lisp_value_t* value);
 static void lval_println(lisp_value_t* value);
 static void lval_free(lisp_value_t* value);
@@ -19,6 +22,7 @@ static lisp_value_t* lval_add(lisp_value_t* value, lisp_value_t* x);
 static void lval_expr_print(lisp_value_t* value, char open, char close);
 static lisp_value_t* lval_pop(lisp_value_t* value, int i);
 static lisp_value_t* lval_take(lisp_value_t* value, int i);
+
 
 //=== DEFINITIONS ==============================================================
 
@@ -63,22 +67,37 @@ static lisp_value_t* lval_sexpr(void)
         return value;
 }
 
+static lisp_value_t* lval_qexpr(void)
+{
+        lisp_value_t* value = malloc(sizeof(lisp_value_t));
+        value -> type = LISP_VALUE_QEXPR;
+        value -> count = 0;
+        value -> cell = NULL;
+        return value;
+}
+
+
 //--- Printing expressions -----------------------------------------------------
 
 /* Print out the value */
 static void lval_print(lisp_value_t* value)
 {
+        assert(value != NULL);
+
         switch (value -> type) {
                 case LISP_VALUE_NUMBER: printf("%li", value -> number); break;
                 case LISP_VALUE_ERROR:  printf("Error: %s", value -> error); break;
                 case LISP_VALUE_SYMBOL: printf("%s", value -> symbol); break;
                 case LISP_VALUE_SEXPR:  lval_expr_print(value, '(', ')'); break;
+                case LISP_VALUE_QEXPR:  lval_expr_print(value, '{', '}'); break;
         }
 }
 
 /* Print out the value with newline */
 static void lval_println(lisp_value_t* value)
 {
+        assert(value != NULL);
+
         lval_print(value);
         printf("\n");
 }
@@ -86,6 +105,8 @@ static void lval_println(lisp_value_t* value)
 /* Print an expression */
 static void lval_expr_print(lisp_value_t* value, char open, char close)
 {
+        assert(value != NULL);
+
         putchar(open);
         for (int i = 0; i < value -> count; i++) {
 
@@ -105,6 +126,8 @@ static void lval_expr_print(lisp_value_t* value, char open, char close)
 /* Free the memory of the value */
 static void lval_free(lisp_value_t* value)
 {
+        assert(value != NULL);
+
         switch (value -> type) {
                 // Number types don't need special treatment
                 case LISP_VALUE_NUMBER: break;
@@ -113,7 +136,8 @@ static void lval_free(lisp_value_t* value)
                 case LISP_VALUE_ERROR:  free(value -> error); break;
                 case LISP_VALUE_SYMBOL: free(value -> symbol); break;
 
-                // Free all elements inside S-expressions
+                // Free all elements inside S-expressions and Q-expressions
+                case LISP_VALUE_QEXPR:
                 case LISP_VALUE_SEXPR: {
                         for (int i = 0; i < value -> count; i++) {
                                 lval_free(value -> cell[i]);
@@ -134,14 +158,18 @@ static void lval_free(lisp_value_t* value)
 /* Read a number from a tree */
 static lisp_value_t* lval_read_num(mpc_ast_t* tree)
 {
+        assert(tree != NULL);
+
         errno = 0;
         long x = strtol(tree -> contents, NULL, 10);
         return errno != ERANGE ? lval_num(x) : lval_err("Invalid number");
 }
 
-/* Read a valuefrom a tree */
+/* Read a value from a tree */
 static lisp_value_t* lval_read(mpc_ast_t* tree)
 {
+        assert(tree != NULL);
+
         // If symbol or number return conversion to that type
         if (strstr(tree -> tag, "number")) {
                 return lval_read_num(tree);
@@ -158,6 +186,9 @@ static lisp_value_t* lval_read(mpc_ast_t* tree)
         if (strstr(tree -> tag, "sexpr")) {
                 x = lval_sexpr();
         }
+        if (strstr(tree -> tag, "qexpr")) {
+                x = lval_qexpr();
+        }
 
         // Fill this list with any valid expression contained within
         for (int i = 0; i < tree -> children_num; i++) {
@@ -165,6 +196,12 @@ static lisp_value_t* lval_read(mpc_ast_t* tree)
                         continue;
                 }
                 if (strcmp(tree -> children[i] -> contents, ")") == 0) {
+                        continue;
+                }
+                if (strcmp(tree -> children[i] -> contents, "}") == 0) {
+                        continue;
+                }
+                if (strcmp(tree -> children[i] -> contents, "{") == 0) {
                         continue;
                 }
                 if (strcmp(tree -> children[i] -> tag,  "regex") == 0) {
@@ -178,10 +215,13 @@ static lisp_value_t* lval_read(mpc_ast_t* tree)
 /* Add an element to an S-expression */
 static lisp_value_t* lval_add(lisp_value_t* value, lisp_value_t* x)
 {
+        assert(value != NULL);
+        assert(x != NULL);
+
         value -> count++;
         value -> cell = realloc(
-                        value -> cell,
-                        sizeof(lisp_value_t*) * value -> count
+                value -> cell,
+                sizeof(lisp_value_t*) * value -> count
         );
         value -> cell[value -> count - 1] = x;
         return value;
@@ -193,6 +233,8 @@ static lisp_value_t* lval_add(lisp_value_t* value, lisp_value_t* x)
 /* Extract a single element from an S-Expression at index i */
 static lisp_value_t* lval_pop(lisp_value_t* value, int i)
 {
+        assert(value != NULL);
+
         // Find the element at index i
         lisp_value_t* x = value -> cell[i];
 
@@ -217,6 +259,7 @@ static lisp_value_t* lval_pop(lisp_value_t* value, int i)
 /* Deletes the list it has extracted the element at index i from */
 static lisp_value_t* lval_take(lisp_value_t* value, int i)
 {
+        assert(value != NULL);
         lisp_value_t* x = lval_pop(value, i);
         lval_free(value);
         return x;
@@ -230,6 +273,7 @@ namespace_lisp_value const lisp_value = {
         lval_err,
         lval_sym,
         lval_sexpr,
+        lval_qexpr,
         lval_print,
         lval_println,
         lval_free,
