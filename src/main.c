@@ -11,18 +11,21 @@ int main(void)
         mpc_parser_t* number = mpc_new("number");
         mpc_parser_t* symbol = mpc_new("symbol");
         mpc_parser_t* s_expr = mpc_new("sexpr");
+        mpc_parser_t* q_expr = mpc_new("qexpr");
         mpc_parser_t* expr   = mpc_new("expr");
         mpc_parser_t* clisp  = mpc_new("clisp");
         mpca_lang(
                 MPCA_LANG_DEFAULT,
-                " \
-                number : /-?[0-9]+/ ;                    \
-                symbol : '+' | '-' | '*' | '/' ;         \
-                sexpr  : '(' <expr>* ')' ;               \
-                expr   : <number> | <symbol> | <sexpr> ; \
-                clisp  : /^/ <expr>* /$/ ;               \
+                "                                                     \
+                number : /-?[0-9]+/ ;                                 \
+                symbol : \"list\" | \"head\" | \"tail\"               \
+                       | \"join\"| \"eval\" | '+' | '-' | '*' | '/' ; \
+                sexpr  : '(' <expr>* ')' ;                            \
+                qexpr  : '{' <expr>* '}' ;                            \
+                expr   : <number> | <symbol> | <sexpr> | <qexpr> ;    \
+                clisp  : /^/ <expr>* /$/ ;                            \
                 ",
-                number, symbol, s_expr, expr, clisp
+                number, symbol, s_expr, q_expr, expr, clisp
         );
         printf("CLisp 0.1\n");
         printf("Press Ctrcl+c to exit.\n");
@@ -44,6 +47,6 @@ int main(void)
 
                 free(input);
         }
-        mpc_cleanup(5, number, symbol, s_expr, expr, clisp);
+        mpc_cleanup(6, number, symbol, s_expr, q_expr, expr, clisp);
         return 0;
 }
