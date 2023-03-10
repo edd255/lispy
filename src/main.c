@@ -20,7 +20,7 @@ int main(void)
                 symbol : '+' | '-' | '*' | '/' ;         \
                 sexpr  : '(' <expr>* ')' ;               \
                 expr   : <number> | <symbol> | <sexpr> ; \
-                lispy  : /^/ <expr>* /$/ ;               \
+                clisp  : /^/ <expr>* /$/ ;               \
                 ",
                 number, symbol, s_expr, expr, clisp
         );
