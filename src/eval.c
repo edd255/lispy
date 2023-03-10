@@ -249,7 +249,9 @@ static lisp_value_t* lval_eval_sexpr(lisp_value_t* value)
         if (first -> type != LISP_VALUE_SYMBOL) {
                 lisp_value.free(first);
                 lisp_value.free(value);
-                return lisp_value.error("S-Expression does not start with a symbol.");
+                return lisp_value.error(
+                        "S-Expression does not start with a symbol."
+                );
         }
 
         // Call builtin with operator

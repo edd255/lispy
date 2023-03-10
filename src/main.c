@@ -37,7 +37,9 @@ int main(void)
                 (void) add_history(input);
                 mpc_result_t r;
                 if (mpc_parse("<stdin>", input, clisp, &r)) {
-                        lisp_value_t* x = lisp_eval.eval(lisp_value.read(r.output));
+                        lisp_value_t* x = lisp_eval.eval(
+                                        lisp_value.read(r.output)
+                        );
                         lisp_value.println(x);
                         lisp_value.free(x);
                 } else {

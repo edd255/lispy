@@ -85,11 +85,26 @@ static void lval_print(lisp_value_t* value)
         assert(value != NULL);
 
         switch (value -> type) {
-                case LISP_VALUE_NUMBER: printf("%li", value -> number); break;
-                case LISP_VALUE_ERROR:  printf("Error: %s", value -> error); break;
-                case LISP_VALUE_SYMBOL: printf("%s", value -> symbol); break;
-                case LISP_VALUE_SEXPR:  lval_expr_print(value, '(', ')'); break;
-                case LISP_VALUE_QEXPR:  lval_expr_print(value, '{', '}'); break;
+                case LISP_VALUE_NUMBER: {
+                        printf("%li", value -> number);
+                        break;
+                }
+                case LISP_VALUE_ERROR: {
+                        printf("Error: %s", value -> error);
+                        break;
+                }
+                case LISP_VALUE_SYMBOL: {
+                        printf("%s", value -> symbol);
+                        break;
+                }
+                case LISP_VALUE_SEXPR: {
+                        lval_expr_print(value, '(', ')');
+                        break;
+                }
+                case LISP_VALUE_QEXPR: {
+                        lval_expr_print(value, '{', '}');
+                        break;
+                }
         }
 }
 
@@ -228,7 +243,7 @@ static lisp_value_t* lval_add(lisp_value_t* value, lisp_value_t* x)
 }
 
 
-//--- MANIPULATING S-EXPRESSIONS ----------------------------------------------
+//--- MANIPULATING S-EXPRESSIONS -----------------------------------------------
 
 /* Extract a single element from an S-Expression at index i */
 static lisp_value_t* lval_pop(lisp_value_t* value, int i)
