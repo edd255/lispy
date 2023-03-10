@@ -2,13 +2,17 @@
 #define CLISP_EVAL_H
 
 #include <errno.h>
-#include "../libs/mpc/mpc.h"
+#include "../deps/mpc/mpc.h"
 #include "lisp_value.h"
-#include "lisp_value.h"
 
+typedef struct {
+        /* Evaluate S-expressions */
+        lisp_value_t* (* const sexpr)(lisp_value_t* value);
 
-lisp_value_t eval_op(lisp_value_t x, char* op, lisp_value_t y);
+        /* Evaluate expressions */
+        lisp_value_t* (* const eval)(lisp_value_t* value);
+} namespace_lisp_eval;
 
-lisp_value_t eval(mpc_ast_t* ast);
+extern namespace_lisp_eval const lisp_eval;
 
 #endif
