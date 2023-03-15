@@ -4,53 +4,99 @@
 NAME    := clisp
 VERSION := 0.1
 
+#---- COLORS -------------------------------------------------------------------
+
+BOLD   := \x1b[1m
+NOBOLD := \x1b[0m
+
 #---- TOOLS --------------------------------------------------------------------
 
-CC := clang
-LD := clang
-RM := rm --force
+CC    := clang
+LD    := clang
+RM    := rm --force
+MKDIR := mkdir --parents
+Q     ?= @
 
-#---- DIRS ---------------------------------------------------------------------
+#---- DIRECTORIES --------------------------------------------------------------
 
-SRC_DIRS := ./src
-LIB_DIRS := ./deps
-BIN_DIR  := ./bin
+SRC_DIRS  := src $(wildcard ./deps/*)
+BUILD_DIR := build
+BIN_DIR   := bin
+INC_DIRS  := $(shell find $(SRC_DIRS) -type d)
 
 #---- FILES --------------------------------------------------------------------
 
-LIBS := $(shell find $(LIB_DIRS) -name *.c)
-SRCS := $(shell find $(SRC_DIRS) -name *.c)
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+BIN  := $(BIN_DIR)/$(NAME)
+SRCS := $(shell find $(SRC_DIRS) -name '*.c')
+OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
-BIN  := ${BIN_DIR}/${NAME}
 
 #---- FLAGS --------------------------------------------------------------------
 
-ERROR_FLAGS    := -Wall -Wpedantic -Wextra -Werror
-DEBUG_FLAGS    := -Og -g -fsanitize=address -fsanitize=pointer-compare \
-				  -fsanitize=pointer-subtract -fsanitize=shadow-call-stack \
-				  -fsanitize=leak -fsanitize=undefined \
-				  -fsanitize-address-use-after-scope
-OPT_FLAGS      := -Ofast -DNDEBUG
-LD_FLAGS       := -ledit
-RELEASE_FLAGS  := ${ERROR_FLAGS} ${OPT_FLAGS} ${LD_FLAGS}
-TESTING_FLAGS  := ${ERROR_FLAGS} ${DEBUG_FLAGS} ${LD_FLAGS}
-VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes
-MAKEFLAGS      := --jobs=$(shell nproc)
+LDFLAGS   += -ledit
+CFLAGS    := $(INC_FLAGS) -MMD -MP
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-#==== PROCEDURES ===============================================================
+ERR := -Wall -Wpedantic -Wextra -Werror
+OPT := -Ofast -DNDEBUG
+DBG := -Og -g 
+SAN := -fsanitize=address \
+	   -fsanitize=pointer-compare \
+	   -fsanitize=pointer-subtract \
+	   -fsanitize=shadow-call-stack \
+	   -fsanitize=leak \
+	   -fsanitize=undefined \
+	   -fsanitize-address-use-after-scope
 
-all: opt debug
+RELEASE   := ${ERR} ${OPT}
+DEBUGGING := ${ERR} ${DBG}
+MEMCHECK  := ${ERR} ${DBG} ${SAN}
 
-opt:
-	${CC} ${RELEASE_FLAGS} ${SRCS} ${LIBS} -o ${BIN}_opt
+#==== RULES ====================================================================
+#---- RELEASE ------------------------------------------------------------------
 
-debug:
-	export detect_invalid_pointer_pairs=2
-	${CC} ${TESTING_FLAGS} ${SRCS} ${LIBS} -o ${BIN}_debug
+$(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS)) 
+	$(Q)$(MKDIR) $(BIN_DIR)
+	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
+
+$(BUILD_DIR)/%.opt.o: src/%.c
+	$(Q)echo "====> CC $@"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
+
+#---- DEBUGGING ----------------------------------------------------------------
+
+$(BIN)_debugging: $(patsubst src/%.c, build/%.dbg.o, $(SRCS)) 
+	$(Q)$(MKDIR) $(BIN_DIR)
+	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
+
+$(BUILD_DIR)/%.dbg.o: src/%.c
+	$(Q)echo "====> CC $@"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
+
+#---- MEMCHECK -----------------------------------------------------------------
+
+$(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
+	$(Q)$(MKDIR) $(BIN_DIR)
+	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
+
+$(BUILD_DIR)/%.san.o: src/%.c
+	$(Q)echo "====> CC $@"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
+
+#---- EPILOGUE -----------------------------------------------------------------
+
+.PHONY: all clean
 
 clean:
-	${RM} ${BIN}_opt ${BIN}_debug 
+	$(Q)$(RM) --recursive $(BUILD_DIR)
 
-memcheck:
-	valgrind ${VALGRIND_FLAGS} ./${BIN}_debug
+all: $(BIN)_release $(BIN)_debugging $(BIN)_sanitized
+
+# Include the .d makefiles
+-include $(DEPS)
