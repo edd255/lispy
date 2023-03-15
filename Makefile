@@ -82,12 +82,12 @@ $(BUILD_DIR)/%.dbg.o: src/%.c
 $(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
-	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
+	$(Q)$(CC) $(MEMCHECK) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: src/%.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
+	$(Q)$(CC) $(MEMCHECK) $(CFLAGS) -c $< -o $@
 
 #---- EPILOGUE -----------------------------------------------------------------
 
