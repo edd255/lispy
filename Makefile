@@ -11,11 +11,12 @@ NOBOLD := \x1b[0m
 
 #---- TOOLS --------------------------------------------------------------------
 
-CC    := clang
-LD    := clang
-RM    := rm --force
-MKDIR := mkdir --parents
-Q     ?= @
+CCACHE := ccache
+CC     := $(CCACHE) clang
+LD     := $(CCACHE) clang
+RM     := rm --force
+MKDIR  := mkdir --parents
+Q      ?= @
 
 #---- DIRECTORIES --------------------------------------------------------------
 
