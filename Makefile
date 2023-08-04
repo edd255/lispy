@@ -12,8 +12,8 @@ NOBOLD := \x1b[0m
 #---- TOOLS --------------------------------------------------------------------
 
 CCACHE := ccache
-CC     := $(CCACHE) clang
-LD     := $(CCACHE) clang
+CC     := $(CCACHE) gcc
+LD     := $(CCACHE) gcc
 RM     := rm --force
 MKDIR  := mkdir --parents
 Q      ?= @
@@ -37,6 +37,7 @@ DEPS := $(OBJS:.o=.d)
 LDFLAGS   += -ledit
 CFLAGS    := $(INC_FLAGS) -MMD -MP
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+MAKEFLAGS := --jobs=$(shell nproc)
 
 ERR := -Wall -Wpedantic -Wextra -Werror
 OPT := -Ofast -DNDEBUG
@@ -44,7 +45,7 @@ DBG := -Og -g
 SAN := -fsanitize=address \
 	   -fsanitize=pointer-compare \
 	   -fsanitize=pointer-subtract \
-	   -fsanitize=shadow-call-stack \
+	   # -fsanitize=shadow-call-stack \
 	   -fsanitize=leak \
 	   -fsanitize=undefined \
 	   -fsanitize-address-use-after-scope
@@ -58,7 +59,7 @@ MEMCHECK  := ${ERR} ${DBG} ${SAN}
 
 $(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: src/%.c
@@ -70,7 +71,7 @@ $(BUILD_DIR)/%.opt.o: src/%.c
 
 $(BIN)_debugging: $(patsubst src/%.c, build/%.dbg.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.dbg.o: src/%.c
@@ -82,7 +83,7 @@ $(BUILD_DIR)/%.dbg.o: src/%.c
 
 $(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@\n${NOBOLD}"
+	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
 	$(Q)$(CC) $(MEMCHECK) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: src/%.c
@@ -96,6 +97,7 @@ $(BUILD_DIR)/%.san.o: src/%.c
 
 clean:
 	$(Q)$(RM) --recursive $(BUILD_DIR)
+	$(Q)$(RM) --recursive $(BIN_DIR)
 
 all: $(BIN)_release $(BIN)_debugging $(BIN)_sanitized
 
