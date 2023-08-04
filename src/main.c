@@ -882,6 +882,8 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {
+    UNUSED(e);
+
     // Print each argument followed by a space
     for (int i = 0; i < a -> count; i++) {
         lval_print(a -> cell[i]);
@@ -894,6 +896,7 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_error(lenv_t* e, lval_t* a) {
+    UNUSED(e);
     LASSERT_NUM("error", a, 1);
     LASSERT_TYPE("error", a, 0, LVAL_STR);
 
