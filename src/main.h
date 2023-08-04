@@ -6,41 +6,6 @@
 #include <stdbool.h>
 
 //=== DECLARATIONS =============================================================
-//--- Structs ------------------------------------------------------------------
-struct lval_t;
-struct lenv_t;
-typedef struct lval_t lval_t;
-typedef struct lenv_t lenv_t;
-typedef lval_t*(*lbuiltin_t)(lenv_t*, lval_t*);
-
-//--- Constructors & Destructors -----------------------------------------------
-lval_t* lval_num(long x);
-lval_t* lval_err(char* fmt, ...);
-lval_t* lval_sym(char* s);
-lval_t* lval_sexpr(void);
-lval_t* lval_qexpr(void);
-lval_t* lval_fn(lbuiltin_t fn);
-void lval_del(lval_t* v);
-
-//--- Values -------------------------------------------------------------------
-lval_t* lval_copy(lval_t* v);
-lval_t* lval_add(lval_t* v, lval_t* x);
-lval_t* lval_join(lval_t* x, lval_t* y);
-lval_t* lval_pop(lval_t* v, int i);
-lval_t* lval_take(lval_t* v, int i);
-
-//--- Printing -----------------------------------------------------------------
-void lval_print(lval_t* v);
-void lval_print_expr(lval_t* v, char open, char close);
-void lval_println(lval_t* v);
-char* ltype_name(int t);
-
-//--- Environment --------------------------------------------------------------
-lenv_t* lenv_new(void);
-void lenv_del(lenv_t* e);
-lval_t* lenv_get(lenv_t* e, lval_t* k);
-void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
-
 //--- Macros -------------------------------------------------------------------
 #define LASSERT(args, cond, fmt, ...) \
     if (!(cond)) { \
@@ -48,7 +13,6 @@ void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
         lval_del(args); \
         return err; \
     }
-
 
 #define LASSERT_TYPE(fn, args, index, expect) \
     LASSERT( \
@@ -82,6 +46,45 @@ void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
 
 #define UNUSED(x) (void) x
 
+//--- Structs ------------------------------------------------------------------
+struct lval_t;
+struct lenv_t;
+typedef struct lval_t lval_t;
+typedef struct lenv_t lenv_t;
+typedef lval_t*(*lbuiltin_t)(lenv_t*, lval_t*);
+
+//--- Constructors & Destructors -----------------------------------------------
+lval_t* lval_num(long x);
+lval_t* lval_err(char* fmt, ...);
+lval_t* lval_sym(char* s);
+lval_t* lval_sexpr(void);
+lval_t* lval_qexpr(void);
+lval_t* lval_fn(lbuiltin_t fn);
+lval_t* lval_lambda(lval_t* formals, lval_t* body);
+void lval_del(lval_t* v);
+
+//--- Values -------------------------------------------------------------------
+lval_t* lval_copy(lval_t* v);
+lval_t* lval_add(lval_t* v, lval_t* x);
+lval_t* lval_join(lval_t* x, lval_t* y);
+lval_t* lval_pop(lval_t* v, int i);
+lval_t* lval_take(lval_t* v, int i);
+lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a);
+
+//--- Printing -----------------------------------------------------------------
+void lval_print(lval_t* v);
+void lval_print_expr(lval_t* v, char open, char close);
+void lval_println(lval_t* v);
+char* ltype_name(int t);
+
+//--- Environment --------------------------------------------------------------
+lenv_t* lenv_new(void);
+void lenv_del(lenv_t* e);
+lval_t* lenv_get(lenv_t* e, lval_t* k);
+void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
+lenv_t* lenv_copy(lenv_t* e);
+void lenv_def(lenv_t* e, lval_t* k, lval_t* v);
+
 //--- Builtins -----------------------------------------------------------------
 lval_t* builtin_list(lenv_t* e, lval_t* a);
 lval_t* builtin_head(lenv_t* e, lval_t* a);
@@ -93,7 +96,10 @@ lval_t* builtin_add(lenv_t* e, lval_t* a);
 lval_t* builtin_sub(lenv_t* e, lval_t* a);
 lval_t* builtin_mul(lenv_t* e, lval_t* a);
 lval_t* builtin_div(lenv_t* e, lval_t* a);
+lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn);
 lval_t* builtin_def(lenv_t* e, lval_t* a);
+lval_t* builtin_put(lenv_t* e, lval_t* a);
+lval_t* builtin_lambda(lenv_t* e, lval_t* a);
 void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t func);
 void lenv_add_builtins(lenv_t* e);
 
@@ -129,20 +135,27 @@ enum {
 };
 
 struct lval_t {
+    // Type
     int type;
-    long num;
 
-    /* Error and Symbol types have some string data */
+    // Basic
+    long num;
     char* err;
     char* sym;
-    lbuiltin_t fn;
 
-    /* Count and Pointer to a list of lval_t */
+    // Function
+    lbuiltin_t builtin;
+    lenv_t* env;
+    lval_t* formals;
+    lval_t* body;
+
+    // Expression
     int count;
     lval_t** cell;
 };
 
 struct lenv_t {
+    lenv_t* parent;
     int count;
     char** syms;
     lval_t** vals;
