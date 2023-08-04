@@ -12,8 +12,8 @@ NOBOLD := \x1b[0m
 #---- TOOLS --------------------------------------------------------------------
 
 CCACHE := ccache
-CC     := $(CCACHE) gcc
-LD     := $(CCACHE) gcc
+CC     := $(CCACHE) clang
+LD     := $(CCACHE) clang
 RM     := rm --force
 MKDIR  := mkdir --parents
 Q      ?= @
@@ -39,13 +39,13 @@ CFLAGS    := $(INC_FLAGS) -MMD -MP
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 MAKEFLAGS := --jobs=$(shell nproc)
 
-ERR := -Wall -Wpedantic -Wextra -Werror
+ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
 OPT := -Ofast -DNDEBUG
 DBG := -Og -g 
 SAN := -fsanitize=address \
 	   -fsanitize=pointer-compare \
 	   -fsanitize=pointer-subtract \
-	   # -fsanitize=shadow-call-stack \
+	   -fsanitize=shadow-call-stack \
 	   -fsanitize=leak \
 	   -fsanitize=undefined \
 	   -fsanitize-address-use-after-scope
