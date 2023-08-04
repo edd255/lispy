@@ -99,7 +99,13 @@ clean:
 	$(Q)$(RM) --recursive $(BUILD_DIR)
 	$(Q)$(RM) --recursive $(BIN_DIR)
 
-all: $(BIN)_release $(BIN)_debugging $(BIN)_sanitized
+release: $(BIN)_release
+
+debugging: $(BIN)_debugging
+
+memcheck: $(BIN)_sanitized
+
+all: release debugging memcheck
 
 # Include the .d makefiles
 -include $(DEPS)
