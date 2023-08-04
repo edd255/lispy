@@ -61,6 +61,7 @@ lval_t* lval_sexpr(void);
 lval_t* lval_qexpr(void);
 lval_t* lval_fn(lbuiltin_t fn);
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
+lval_t* lval_str(char* s);
 void lval_del(lval_t* v);
 
 //--- Values -------------------------------------------------------------------
@@ -70,11 +71,13 @@ lval_t* lval_join(lval_t* x, lval_t* y);
 lval_t* lval_pop(lval_t* v, int i);
 lval_t* lval_take(lval_t* v, int i);
 lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a);
+int lval_eq(lval_t* x, lval_t* y);
 
 //--- Printing -----------------------------------------------------------------
 void lval_print(lval_t* v);
 void lval_print_expr(lval_t* v, char open, char close);
 void lval_println(lval_t* v);
+void lval_print_str(lval_t* v);
 char* ltype_name(int t);
 
 //--- Environment --------------------------------------------------------------
@@ -100,6 +103,18 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn);
 lval_t* builtin_def(lenv_t* e, lval_t* a);
 lval_t* builtin_put(lenv_t* e, lval_t* a);
 lval_t* builtin_lambda(lenv_t* e, lval_t* a);
+lval_t* builtin_gt(lenv_t* e, lval_t* a);
+lval_t* builtin_lt(lenv_t* e, lval_t* a);
+lval_t* builtin_ge(lenv_t* e, lval_t* a);
+lval_t* builtin_le(lenv_t* e, lval_t* a);
+lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op);
+lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op);
+lval_t* builtin_eq(lenv_t* e, lval_t* a);
+lval_t* builtin_ne(lenv_t* e, lval_t* a);
+lval_t* builtin_if(lenv_t* e, lval_t* a);
+lval_t* builtin_load(lenv_t* e, lval_t* a);
+lval_t* builtin_print(lenv_t* e, lval_t* a);
+lval_t* builtin_error(lenv_t* e, lval_t* a);
 void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t func);
 void lenv_add_builtins(lenv_t* e);
 
@@ -110,9 +125,12 @@ lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v);
 //--- Reading ------------------------------------------------------------------
 lval_t* lval_read_num(mpc_ast_t* t);
 lval_t* lval_read(mpc_ast_t* t);
+lval_t* lval_read_str(mpc_ast_t* tree);
 
 //--- Main funciton ------------------------------------------------------------
-int main(void);
+void cli_interpreter(lenv_t* e);
+void file_interpreter(lenv_t* e, int argc, char** argv);
+int main(int argc, char** argv);
 
 
 //=== STRUCTS AND ENUMS ========================================================
@@ -129,6 +147,7 @@ enum {
     LVAL_ERR,
     LVAL_NUM,
     LVAL_SYM,
+    LVAL_STR,
     LVAL_SEXPR,
     LVAL_QEXPR,
     LVAL_FN
@@ -142,6 +161,7 @@ struct lval_t {
     long num;
     char* err;
     char* sym;
+    char* str;
 
     // Function
     lbuiltin_t builtin;
