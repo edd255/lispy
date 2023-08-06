@@ -20,7 +20,8 @@ Q      ?= @
 
 #---- DIRECTORIES --------------------------------------------------------------
 
-SRC_DIRS  := src $(wildcard ./deps/*)
+SRC_DIR   := src
+SRC_DIRS  := $(SRC_DIR) $(wildcard ./deps/*)
 BUILD_DIR := build
 BIN_DIR   := bin
 INC_DIRS  := $(shell find $(SRC_DIRS) -type d)
@@ -105,7 +106,11 @@ debugging: $(BIN)_debugging
 
 memcheck: $(BIN)_sanitized
 
-all: release debugging memcheck
+style:
+	$(Q)echo "====> Formatting..."
+	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i
+
+all: style release debugging memcheck
 
 # Include the .d makefiles
 -include $(DEPS)
