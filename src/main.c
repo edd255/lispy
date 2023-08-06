@@ -1,9 +1,9 @@
+#include "builtins.h"
 #include "common.h"
-#include "values.h"
+#include "eval.h"
 #include "printing.h"
 #include "reading.h"
-#include "builtins.h"
-#include "eval.h"
+#include "values.h"
 
 //=== DECLARATIONS =============================================================
 //--- Functions ----------------------------------------------------------------
@@ -23,14 +23,14 @@ mpc_parser_t* lispy;
 //=== MAIN METHOD ==============================================================
 
 int main(int argc, char** argv) {
-    number  = mpc_new("number");
-    symbol  = mpc_new("symbol");
-    sexpr   = mpc_new("sexpr");
-    qexpr   = mpc_new("qexpr");
-    string  = mpc_new("string");
+    number = mpc_new("number");
+    symbol = mpc_new("symbol");
+    sexpr = mpc_new("sexpr");
+    qexpr = mpc_new("qexpr");
+    string = mpc_new("string");
     comment = mpc_new("comment");
-    expr    = mpc_new("expr");
-    lispy   = mpc_new("lispy");
+    expr = mpc_new("expr");
+    lispy = mpc_new("lispy");
     mpca_lang(
         MPCA_LANG_DEFAULT,
         "                                                \
@@ -98,7 +98,7 @@ void file_interpreter(lenv_t* e, int argc, char** argv) {
         lval_t* x = builtin_load(e, args);
 
         // If the result is an error, be sure to print it
-        if (x -> type == LVAL_ERR) {
+        if (x->type == LVAL_ERR) {
             lval_println(x);
         }
         lval_del(x);
