@@ -1,5 +1,6 @@
-#include "common.h"
 #include "builtins.h"
+
+#include "common.h"
 #include "eval.h"
 #include "main.h"
 #include "printing.h"
@@ -10,7 +11,7 @@
 
 lval_t* builtin_list(lenv_t* e, lval_t* a) {
     UNUSED(e);
-    a -> type = LVAL_QEXPR;
+    a->type = LVAL_QEXPR;
     return a;
 }
 
@@ -24,7 +25,7 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     lval_t* v = lval_take(a, 0);
 
     // Delete all elements that are not head and return
-    while (v -> count > 1) {
+    while (v->count > 1) {
         lval_del(lval_pop(v, 1));
     }
     return v;
@@ -48,17 +49,17 @@ lval_t* builtin_eval(lenv_t* e, lval_t* a) {
     LASSERT_NUM("eval", a, 1);
     LASSERT_TYPE("eval", a, 0, LVAL_QEXPR);
     lval_t* x = lval_take(a, 0);
-    x -> type = LVAL_SEXPR;
+    x->type = LVAL_SEXPR;
     return lval_eval(e, x);
 }
 
 lval_t* builtin_join(lenv_t* e, lval_t* a) {
     UNUSED(e);
-    for (int i = 0; i < a -> count; i++) {
+    for (int i = 0; i < a->count; i++) {
         LASSERT_TYPE("join", a, i, LVAL_QEXPR);
     }
     lval_t* x = lval_pop(a, 0);
-    while (a -> count) {
+    while (a->count) {
         x = lval_join(x, lval_pop(a, 0));
     }
     lval_del(a);
@@ -69,7 +70,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     UNUSED(e);
 
     // Ensure all arguments are numbers
-    for (int i = 0; i < a -> count; i++) {
+    for (int i = 0; i < a->count; i++) {
         LASSERT_TYPE(op, a, i, LVAL_NUM);
     }
 
@@ -77,25 +78,31 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     lval_t* x = lval_pop(a, 0);
 
     // If no arguments and sub then perform unary negation
-    if ((strcmp(op, "-") == 0) && a -> count == 0) {
-        x -> num = -x -> num;
+    if ((strcmp(op, "-") == 0) && a->count == 0) {
+        x->num = -x->num;
     }
 
     // While there are still elements remaining
-    while (a -> count > 0) {
+    while (a->count > 0) {
         // Pop the next element
         lval_t* y = lval_pop(a, 0);
-        if (strcmp(op, "+") == 0) { x -> num += y -> num; }
-        if (strcmp(op, "-") == 0) { x -> num -= y -> num; }
-        if (strcmp(op, "*") == 0) { x -> num *= y -> num; }
+        if (strcmp(op, "+") == 0) {
+            x->num += y->num;
+        }
+        if (strcmp(op, "-") == 0) {
+            x->num -= y->num;
+        }
+        if (strcmp(op, "*") == 0) {
+            x->num *= y->num;
+        }
         if (strcmp(op, "/") == 0) {
-            if (y -> num == 0) {
+            if (y->num == 0) {
                 lval_del(x);
                 lval_del(y);
                 x = lval_err("Division By Zero!");
                 break;
             }
-            x -> num /= y -> num;
+            x->num /= y->num;
         }
         lval_del(y);
     }
@@ -123,36 +130,36 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
     LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
 
     // First argument is symbol list
-    lval_t* syms = a -> cell[0];
+    lval_t* syms = a->cell[0];
 
     // Ensure all elements of first list are symbols
-    for (int i = 0; i < syms -> count; i++) {
+    for (int i = 0; i < syms->count; i++) {
         LASSERT(
             a,
-            (syms -> cell[i] -> type == LVAL_SYM),
+            (syms->cell[i]->type == LVAL_SYM),
             "Function '%s' cannot define non-symbol! Got %s. Expected %s.",
             fn,
-            ltype_name(syms -> cell[i] -> type),
+            ltype_name(syms->cell[i]->type),
             ltype_name(LVAL_SYM)
         );
     }
     // Check correct number of symbols and values
     LASSERT(
         a,
-        (syms -> count == a -> count - 1),
+        (syms->count == a->count - 1),
         "Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
         fn,
-        syms -> count,
-        a -> count - 1
+        syms->count,
+        a->count - 1
     );
     // Assign copies of values to symbols
-    for (int i = 0; i < syms -> count; i++) {
+    for (int i = 0; i < syms->count; i++) {
         // If 'def' define in globally. If 'put' define in locally.
         if (strcmp(fn, "def") == 0) {
-            lenv_def(e, syms -> cell[i], a -> cell[i + 1]);
+            lenv_def(e, syms->cell[i], a->cell[i + 1]);
         }
         if (strcmp(fn, "=") == 0) {
-            lenv_put(e, syms -> cell[i], a -> cell[i + 1]);
+            lenv_put(e, syms->cell[i], a->cell[i + 1]);
         }
     }
     lval_del(a);
@@ -176,12 +183,12 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
     LASSERT_TYPE("\\", a, 1, LVAL_QEXPR);
 
     // Check first Q-Expression contains only Symbols
-    for (int i = 0; i < a -> cell[0] -> count; i++) {
+    for (int i = 0; i < a->cell[0]->count; i++) {
         LASSERT(
             a,
-            (a -> cell[0] -> cell[i] -> type == LVAL_SYM),
+            (a->cell[0]->cell[i]->type == LVAL_SYM),
             "Cannot define non-symbol. Got %s. Expected %s.",
-            ltype_name(a -> cell[0] -> cell[i] -> type),
+            ltype_name(a->cell[0]->cell[i]->type),
             ltype_name(LVAL_SYM)
         );
     }
@@ -215,16 +222,16 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     LASSERT_TYPE(op, a, 1, LVAL_NUM);
     int r;
     if (strcmp(op, ">") == 0) {
-        r = (a -> cell[0] -> num > a -> cell[1] -> num);
+        r = (a->cell[0]->num > a->cell[1]->num);
     }
     if (strcmp(op, "<") == 0) {
-        r = (a -> cell[0] -> num < a -> cell[1] -> num);
+        r = (a->cell[0]->num < a->cell[1]->num);
     }
     if (strcmp(op, ">=") == 0) {
-        r = (a -> cell[0] -> num >= a -> cell[1] -> num);
+        r = (a->cell[0]->num >= a->cell[1]->num);
     }
     if (strcmp(op, "<=") == 0) {
-        r = (a -> cell[0] -> num <= a -> cell[1] -> num);
+        r = (a->cell[0]->num <= a->cell[1]->num);
     }
 
     lval_del(a);
@@ -236,10 +243,10 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
     LASSERT_NUM(op, a, 2);
     int r;
     if (strcmp(op, "==") == 0) {
-        r = lval_eq(a -> cell[0], a -> cell[1]);
+        r = lval_eq(a->cell[0], a->cell[1]);
     }
     if (strcmp(op, "!=") == 0) {
-        r = !lval_eq(a -> cell[0], a -> cell[1]);
+        r = !lval_eq(a->cell[0], a->cell[1]);
     }
     lval_del(a);
     return lval_num(r);
@@ -261,10 +268,10 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
 
     // Mark both expressions as evaluable
     lval_t* x;
-    a -> cell[1] -> type = LVAL_SEXPR;
-    a -> cell[2] -> type = LVAL_SEXPR;
+    a->cell[1]->type = LVAL_SEXPR;
+    a->cell[2]->type = LVAL_SEXPR;
 
-    if (a -> cell[0] -> num) {
+    if (a->cell[0]->num) {
         // If condition is true evaluate first expression
         x = lval_eval(e, lval_pop(a, 1));
     } else {
@@ -283,17 +290,17 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
     // Parse file given by string name
     mpc_result_t r;
     mpc_parser_t* lispy = get_lispy_parser();
-    if (mpc_parse_contents(a -> cell[0] -> str, lispy, &r)) {
+    if (mpc_parse_contents(a->cell[0]->str, lispy, &r)) {
         // Read contents
         lval_t* expr = lval_read(r.output);
         mpc_ast_delete(r.output);
 
         // Evaluate each expression
-        while (expr -> count) {
+        while (expr->count) {
             lval_t* x = lval_eval(e, lval_pop(expr, 0));
 
             // If evaluation leads to error print it
-            if (x -> type == LVAL_ERR) {
+            if (x->type == LVAL_ERR) {
                 lval_println(x);
             }
             lval_del(x);
@@ -301,7 +308,7 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
         // Delete expressions and arguments
         lval_del(expr);
         lval_del(a);
-        
+
         // Return empty list
         return lval_sexpr();
     } else {
@@ -323,8 +330,8 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
     UNUSED(e);
 
     // Print each argument followed by a space
-    for (int i = 0; i < a -> count; i++) {
-        lval_print(a -> cell[i]);
+    for (int i = 0; i < a->count; i++) {
+        lval_print(a->cell[i]);
         putchar(' ');
     }
     // Print a newline and delete arguments
@@ -339,7 +346,7 @@ lval_t* builtin_error(lenv_t* e, lval_t* a) {
     LASSERT_TYPE("error", a, 0, LVAL_STR);
 
     // Construct error from first argument
-    lval_t* err = lval_err(a -> cell[0] -> str);
+    lval_t* err = lval_err(a->cell[0]->str);
 
     // Delete arguments and return
     lval_del(a);
@@ -377,14 +384,13 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "if", builtin_if);
     lenv_add_builtin(e, "==", builtin_eq);
     lenv_add_builtin(e, "!=", builtin_ne);
-    lenv_add_builtin(e, ">",  builtin_gt);
-    lenv_add_builtin(e, "<",  builtin_lt);
+    lenv_add_builtin(e, ">", builtin_gt);
+    lenv_add_builtin(e, "<", builtin_lt);
     lenv_add_builtin(e, ">=", builtin_ge);
     lenv_add_builtin(e, "<=", builtin_le);
 
     // String Functions
-    lenv_add_builtin(e, "load",  builtin_load);
+    lenv_add_builtin(e, "load", builtin_load);
     lenv_add_builtin(e, "error", builtin_error);
     lenv_add_builtin(e, "print", builtin_print);
 }
-

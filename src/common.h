@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../deps/mpc/mpc.h"
 #include <editline/readline.h>
-#include <string.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <string.h>
+
+#include "../deps/mpc/mpc.h"
 
 //=== DECLARATIONS =============================================================
 //--- Macros -------------------------------------------------------------------
@@ -30,32 +31,30 @@
 #define LASSERT_NUM(fn, args, num) \
     LASSERT( \
         args, \
-        args -> count == num, \
+        args->count == num, \
         "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
         fn, \
-        args -> count, \
+        args->count, \
         num \
     )
 
 #define LASSERT_NOT_EMPTY(fn, args, index) \
     LASSERT( \
         args, \
-        args -> cell[index] -> count != 0, \
+        args->cell[index]->count != 0, \
         "Function '%s' passed  for argument %i.", \
         fn, \
         index \
     )
 
-#define UNUSED(x) (void) x
-
+#define UNUSED(x) (void)x
 
 //--- Structs ------------------------------------------------------------------
 struct lval_t;
 struct lenv_t;
 typedef struct lval_t lval_t;
 typedef struct lenv_t lenv_t;
-typedef lval_t*(*lbuiltin_t)(lenv_t*, lval_t*);
-
+typedef lval_t* (*lbuiltin_t)(lenv_t*, lval_t*);
 
 //--- Constructors & Destructors -----------------------------------------------
 lval_t* lval_num(long x);
@@ -68,7 +67,6 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body);
 lval_t* lval_str(char* s);
 void lval_del(lval_t* v);
 
-
 //--- Environment --------------------------------------------------------------
 lenv_t* lenv_new(void);
 void lenv_del(lenv_t* e);
@@ -77,15 +75,10 @@ void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
 lenv_t* lenv_copy(lenv_t* e);
 void lenv_def(lenv_t* e, lval_t* k, lval_t* v);
 
-
 //=== STRUCTS AND ENUMS ========================================================
 
 /* Create enumeration of possible error types */
-enum {
-    LERR_DIV_ZERO,
-    LERR_BAD_OP,
-    LERR_BAD_NUM
-};
+enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
 
 /* Create enumeration of possible lval_t types */
 enum {
