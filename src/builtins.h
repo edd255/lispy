@@ -1,8 +1,8 @@
-#pragma once
+#ifndef BUILTINS_H
+#define BUILTINS_H
 
 #include "common.h"
 
-//--- Builtins -----------------------------------------------------------------
 lval_t* builtin_list(lenv_t* e, lval_t* a);
 lval_t* builtin_head(lenv_t* e, lval_t* a);
 lval_t* builtin_tail(lenv_t* e, lval_t* a);
@@ -31,3 +31,5 @@ lval_t* builtin_print(lenv_t* e, lval_t* a);
 lval_t* builtin_error(lenv_t* e, lval_t* a);
 void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t func);
 void lenv_add_builtins(lenv_t* e);
+
+#endif

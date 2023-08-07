@@ -122,9 +122,7 @@ void lval_del(lval_t* v) {
         }
         case LVAL_STR: {
             if (!(v->str)) {
-                printf("LVAL_STR\n");
                 free(v->str);
-                printf("String is freed!");
             }
             break;
         }
