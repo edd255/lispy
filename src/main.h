@@ -1,6 +1,8 @@
-#pragma once
+#ifndef MAIN_H
+#define MAIN_H
 
 #include "common.h"
 
-//=== DECLARATIONS =============================================================
 mpc_parser_t* get_lispy_parser(void);
+
+#endif

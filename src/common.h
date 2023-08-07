@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMMON_H
+#define COMMON_H
 
 #include <editline/readline.h>
 #include <stdbool.h>
@@ -118,3 +119,5 @@ struct lenv_t {
     char** syms;
     lval_t** vals;
 };
+
+#endif
