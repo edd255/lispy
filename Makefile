@@ -68,6 +68,8 @@ $(BUILD_DIR)/%.opt.o: src/%.c
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
 
+release: $(BIN)_release
+
 #---- DEBUGGING ----------------------------------------------------------------
 
 $(BIN)_debugging: $(patsubst src/%.c, build/%.dbg.o, $(SRCS)) 
@@ -79,6 +81,8 @@ $(BUILD_DIR)/%.dbg.o: src/%.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
+
+debugging: $(BIN)_debugging
 
 #---- MEMCHECK -----------------------------------------------------------------
 
@@ -92,25 +96,23 @@ $(BUILD_DIR)/%.san.o: src/%.c
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(MEMCHECK) $(CFLAGS) -c $< -o $@
 
-#---- EPILOGUE -----------------------------------------------------------------
+memcheck: $(BIN)_sanitized
 
-.PHONY: all clean
+#---- CLEANING -----------------------------------------------------------------
 
 clean:
 	$(Q)$(RM) --recursive $(BUILD_DIR)
-	$(Q)$(RM) --recursive $(BIN_DIR)
 
-release: $(BIN)_release
-
-debugging: $(BIN)_debugging
-
-memcheck: $(BIN)_sanitized
+#---- STYLE --------------------------------------------------------------------
 
 style:
 	$(Q)echo "====> Formatting..."
 	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i
 
+#==== EPILOGUE =================================================================
+
 all: style release debugging memcheck
 
 # Include the .d makefiles
 -include $(DEPS)
+.PHONY: all clean style
