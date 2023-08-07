@@ -13,6 +13,7 @@ lval_t* builtin_add(lenv_t* e, lval_t* a);
 lval_t* builtin_sub(lenv_t* e, lval_t* a);
 lval_t* builtin_mul(lenv_t* e, lval_t* a);
 lval_t* builtin_div(lenv_t* e, lval_t* a);
+lval_t* builtin_mod(lenv_t* e, lval_t* a);
 lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn);
 lval_t* builtin_def(lenv_t* e, lval_t* a);
 lval_t* builtin_put(lenv_t* e, lval_t* a);
