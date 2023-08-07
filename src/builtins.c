@@ -104,6 +104,15 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
             }
             x->num /= y->num;
         }
+        if (strcmp(op, "%") == 0) {
+            if (y->num == 0) {
+                lval_del(x);
+                lval_del(y);
+                x = lval_err("Division By Zero!");
+                break;
+            }
+            x->num %= y->num;
+        }
         lval_del(y);
     }
     lval_del(a);
@@ -124,6 +133,10 @@ lval_t* builtin_mul(lenv_t* e, lval_t* a) {
 
 lval_t* builtin_div(lenv_t* e, lval_t* a) {
     return builtin_op(e, a, "/");
+}
+
+lval_t* builtin_mod(lenv_t* e, lval_t* a) {
+    return builtin_op(e, a, "%");
 }
 
 lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
@@ -379,6 +392,7 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "-", builtin_sub);
     lenv_add_builtin(e, "*", builtin_mul);
     lenv_add_builtin(e, "/", builtin_div);
+    lenv_add_builtin(e, "%", builtin_mod);
 
     // Comparison functions
     lenv_add_builtin(e, "if", builtin_if);
