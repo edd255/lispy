@@ -65,10 +65,10 @@ int main(int argc, char** argv) {
 }
 
 void cli_interpreter(lenv_t* e) {
-    printf("CLisp 0.1\n");
+    printf("Lispy 1.0\n");
     printf("Press Ctrcl+c to exit.\n");
     while (true) {
-        char* input = readline("lispy> ");
+        char* input = readline(">>> ");
         add_history(input);
         if (strcmp(input, "exit") == 0) {
             free(input);
