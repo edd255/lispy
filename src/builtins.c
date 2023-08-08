@@ -123,10 +123,11 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
 
 lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     UNUSED(e);
+    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
 
     // Ensure all arguments are numbers
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(op, a, i, LVAL_NUM);
+        LASSERT_TYPE(op, a, i, a->cell[0]->type);
     }
 
     // Pop the first element
@@ -143,17 +144,44 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
         lval_t* y = lval_pop(a, 0);
         switch (op_from_string(op)) {
             case LOP_ADD: {
-                x->num += y->num;
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num += y->num;
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        x->dec += y->dec;
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
             case LOP_SUB: {
-                x->num -= y->num;
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num -= y->num;
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        x->dec -= y->dec;
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
             case LOP_MUL: {
-                x->num *= y->num;
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num *= y->num;
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        x->dec *= y->dec;
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
@@ -164,7 +192,16 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                     x = lval_err("Division By Zero!");
                     break;
                 }
-                x->num /= y->num;
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num /= y->num;
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        x->dec /= y->dec;
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
@@ -175,12 +212,32 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                     x = lval_err("Division By Zero!");
                     break;
                 }
-                x->num %= y->num;
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num %= y->num;
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        lval_del(x);
+                        lval_del(y);
+                        x = lval_err("Modulo not allowed for decimals!");
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
             case LOP_POW: {
-                x->num = power_long(x->num, y->num);
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        x->num = power_long(x->num, y->num);
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        x->dec = pow(x->dec, y->dec);
+                        break;
+                    }
+                }
                 lval_del(y);
                 break;
             }
