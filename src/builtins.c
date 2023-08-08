@@ -64,6 +64,125 @@ long power_long(long base, long exponent) {
 
 //==== BUILTIN METHODS =========================================================
 
+void lenv_add_builtins(lenv_t* e) {
+    // Variable functions
+    lenv_add_builtin(e, "\\", builtin_lambda);
+    lenv_add_builtin(e, "def", builtin_def);
+    lenv_add_builtin(e, "=", builtin_put);
+
+    // List functions
+    lenv_add_builtin(e, "list", builtin_list);
+    lenv_add_builtin(e, "head", builtin_head);
+    lenv_add_builtin(e, "tail", builtin_tail);
+    lenv_add_builtin(e, "eval", builtin_eval);
+    lenv_add_builtin(e, "join", builtin_join);
+
+    // Mathematical functions
+    lenv_add_builtin(e, "+", builtin_add);
+    lenv_add_builtin(e, "-", builtin_sub);
+    lenv_add_builtin(e, "*", builtin_mul);
+    lenv_add_builtin(e, "/", builtin_div);
+    lenv_add_builtin(e, "%", builtin_mod);
+    lenv_add_builtin(e, "^", builtin_pow);
+
+    // Comparison functions
+    lenv_add_builtin(e, "if", builtin_if);
+    lenv_add_builtin(e, "==", builtin_eq);
+    lenv_add_builtin(e, "!=", builtin_ne);
+    lenv_add_builtin(e, ">", builtin_gt);
+    lenv_add_builtin(e, "<", builtin_lt);
+    lenv_add_builtin(e, ">=", builtin_ge);
+    lenv_add_builtin(e, "<=", builtin_le);
+
+    // String Functions
+    lenv_add_builtin(e, "load", builtin_load);
+    lenv_add_builtin(e, "error", builtin_error);
+    lenv_add_builtin(e, "print", builtin_print);
+}
+
+void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
+    lval_t* k = lval_sym(name);
+    lval_t* v = lval_fn(fn);
+    lenv_put(e, k, v);
+    lval_del(k);
+    lval_del(v);
+}
+
+//==== Variable functions ======================================================
+lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
+    LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
+
+    // First argument is symbol list
+    lval_t* syms = a->cell[0];
+
+    // Ensure all elements of first list are symbols
+    for (int i = 0; i < syms->count; i++) {
+        LASSERT(
+            a,
+            (syms->cell[i]->type == LVAL_SYM),
+            "Function '%s' cannot define non-symbol! Got %s. Expected %s.",
+            fn,
+            ltype_name(syms->cell[i]->type),
+            ltype_name(LVAL_SYM)
+        );
+    }
+    // Check correct number of symbols and values
+    LASSERT(
+        a,
+        (syms->count == a->count - 1),
+        "Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
+        fn,
+        syms->count,
+        a->count - 1
+    );
+    // Assign copies of values to symbols
+    for (int i = 0; i < syms->count; i++) {
+        // If 'def' define in globally. If 'put' define in locally.
+        if (strcmp(fn, "def") == 0) {
+            lenv_def(e, syms->cell[i], a->cell[i + 1]);
+        }
+        if (strcmp(fn, "=") == 0) {
+            lenv_put(e, syms->cell[i], a->cell[i + 1]);
+        }
+    }
+    lval_del(a);
+    return lval_sexpr();
+}
+
+lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
+    UNUSED(e);
+
+    // Check two arguments, each of which are Q-Expressions
+    LASSERT_NUM("\\", a, 2);
+    LASSERT_TYPE("\\", a, 0, LVAL_QEXPR);
+    LASSERT_TYPE("\\", a, 1, LVAL_QEXPR);
+
+    // Check first Q-Expression contains only Symbols
+    for (int i = 0; i < a->cell[0]->count; i++) {
+        LASSERT(
+            a,
+            (a->cell[0]->cell[i]->type == LVAL_SYM),
+            "Cannot define non-symbol. Got %s. Expected %s.",
+            ltype_name(a->cell[0]->cell[i]->type),
+            ltype_name(LVAL_SYM)
+        );
+    }
+    // Pop first two arguments and pass them to lval_lambda
+    lval_t* formals = lval_pop(a, 0);
+    lval_t* body = lval_pop(a, 0);
+    lval_del(a);
+    return lval_lambda(formals, body);
+}
+
+lval_t* builtin_def(lenv_t* e, lval_t* a) {
+    return builtin_var(e, a, "def");
+}
+
+lval_t* builtin_put(lenv_t* e, lval_t* a) {
+    return builtin_var(e, a, "=");
+}
+
+//==== List functions ==========================================================
 lval_t* builtin_list(lenv_t* e, lval_t* a) {
     UNUSED(e);
     a->type = LVAL_QEXPR;
@@ -121,6 +240,7 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     return x;
 }
 
+//==== Mathematical functions ==================================================
 lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     UNUSED(e);
     LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
@@ -275,140 +395,7 @@ lval_t* builtin_pow(lenv_t* e, lval_t* a) {
     return builtin_op(e, a, "^");
 }
 
-lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
-    LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
-
-    // First argument is symbol list
-    lval_t* syms = a->cell[0];
-
-    // Ensure all elements of first list are symbols
-    for (int i = 0; i < syms->count; i++) {
-        LASSERT(
-            a,
-            (syms->cell[i]->type == LVAL_SYM),
-            "Function '%s' cannot define non-symbol! Got %s. Expected %s.",
-            fn,
-            ltype_name(syms->cell[i]->type),
-            ltype_name(LVAL_SYM)
-        );
-    }
-    // Check correct number of symbols and values
-    LASSERT(
-        a,
-        (syms->count == a->count - 1),
-        "Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
-        fn,
-        syms->count,
-        a->count - 1
-    );
-    // Assign copies of values to symbols
-    for (int i = 0; i < syms->count; i++) {
-        // If 'def' define in globally. If 'put' define in locally.
-        if (strcmp(fn, "def") == 0) {
-            lenv_def(e, syms->cell[i], a->cell[i + 1]);
-        }
-        if (strcmp(fn, "=") == 0) {
-            lenv_put(e, syms->cell[i], a->cell[i + 1]);
-        }
-    }
-    lval_del(a);
-    return lval_sexpr();
-}
-
-lval_t* builtin_def(lenv_t* e, lval_t* a) {
-    return builtin_var(e, a, "def");
-}
-
-lval_t* builtin_put(lenv_t* e, lval_t* a) {
-    return builtin_var(e, a, "=");
-}
-
-lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
-    UNUSED(e);
-
-    // Check two arguments, each of which are Q-Expressions
-    LASSERT_NUM("\\", a, 2);
-    LASSERT_TYPE("\\", a, 0, LVAL_QEXPR);
-    LASSERT_TYPE("\\", a, 1, LVAL_QEXPR);
-
-    // Check first Q-Expression contains only Symbols
-    for (int i = 0; i < a->cell[0]->count; i++) {
-        LASSERT(
-            a,
-            (a->cell[0]->cell[i]->type == LVAL_SYM),
-            "Cannot define non-symbol. Got %s. Expected %s.",
-            ltype_name(a->cell[0]->cell[i]->type),
-            ltype_name(LVAL_SYM)
-        );
-    }
-    // Pop first two arguments and pass them to lval_lambda
-    lval_t* formals = lval_pop(a, 0);
-    lval_t* body = lval_pop(a, 0);
-    lval_del(a);
-    return lval_lambda(formals, body);
-}
-
-lval_t* builtin_gt(lenv_t* e, lval_t* a) {
-    return builtin_ord(e, a, ">");
-}
-
-lval_t* builtin_lt(lenv_t* e, lval_t* a) {
-    return builtin_ord(e, a, "<");
-}
-
-lval_t* builtin_ge(lenv_t* e, lval_t* a) {
-    return builtin_ord(e, a, ">=");
-}
-
-lval_t* builtin_le(lenv_t* e, lval_t* a) {
-    return builtin_ord(e, a, "<=");
-}
-
-lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
-    UNUSED(e);
-    LASSERT_NUM(op, a, 2);
-    LASSERT_TYPE(op, a, 0, LVAL_NUM);
-    LASSERT_TYPE(op, a, 1, LVAL_NUM);
-    int r;
-    if (strcmp(op, ">") == 0) {
-        r = (a->cell[0]->num > a->cell[1]->num);
-    }
-    if (strcmp(op, "<") == 0) {
-        r = (a->cell[0]->num < a->cell[1]->num);
-    }
-    if (strcmp(op, ">=") == 0) {
-        r = (a->cell[0]->num >= a->cell[1]->num);
-    }
-    if (strcmp(op, "<=") == 0) {
-        r = (a->cell[0]->num <= a->cell[1]->num);
-    }
-
-    lval_del(a);
-    return lval_num(r);
-}
-
-lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
-    UNUSED(e);
-    LASSERT_NUM(op, a, 2);
-    int r;
-    if (strcmp(op, "==") == 0) {
-        r = lval_eq(a->cell[0], a->cell[1]);
-    }
-    if (strcmp(op, "!=") == 0) {
-        r = !lval_eq(a->cell[0], a->cell[1]);
-    }
-    lval_del(a);
-    return lval_num(r);
-}
-
-lval_t* builtin_eq(lenv_t* e, lval_t* a) {
-    return builtin_cmp(e, a, "==");
-}
-
-lval_t* builtin_ne(lenv_t* e, lval_t* a) {
-    return builtin_cmp(e, a, "!=");
-}
-
+//==== Comparison functions ====================================================
 lval_t* builtin_if(lenv_t* e, lval_t* a) {
     LASSERT_NUM("if", a, 3);
     LASSERT_TYPE("if", a, 0, LVAL_NUM);
@@ -432,6 +419,74 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
     return x;
 }
 
+//---- Magnitude comparison functions ------------------------------------------
+lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
+    UNUSED(e);
+    LASSERT_NUM(op, a, 2);
+    LASSERT_TYPE(op, a, 0, LVAL_NUM);
+    LASSERT_TYPE(op, a, 1, LVAL_NUM);
+    int r;
+    if (strcmp(op, ">") == 0) {
+        r = (a->cell[0]->num > a->cell[1]->num);
+    }
+    if (strcmp(op, "<") == 0) {
+        r = (a->cell[0]->num < a->cell[1]->num);
+    }
+    if (strcmp(op, ">=") == 0) {
+        r = (a->cell[0]->num >= a->cell[1]->num);
+    }
+    if (strcmp(op, "<=") == 0) {
+        r = (a->cell[0]->num <= a->cell[1]->num);
+    }
+
+    lval_del(a);
+    return lval_num(r);
+}
+
+lval_t* builtin_gt(lenv_t* e, lval_t* a) {
+    return builtin_ord(e, a, ">");
+}
+
+lval_t* builtin_lt(lenv_t* e, lval_t* a) {
+    return builtin_ord(e, a, "<");
+}
+
+lval_t* builtin_ge(lenv_t* e, lval_t* a) {
+    return builtin_ord(e, a, ">=");
+}
+
+lval_t* builtin_le(lenv_t* e, lval_t* a) {
+    return builtin_ord(e, a, "<=");
+}
+
+//---- Equality comparison functions -------------------------------------------
+lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op);
+lval_t* builtin_eq(lenv_t* e, lval_t* a);
+lval_t* builtin_ne(lenv_t* e, lval_t* a);
+
+lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
+    UNUSED(e);
+    LASSERT_NUM(op, a, 2);
+    int r;
+    if (strcmp(op, "==") == 0) {
+        r = lval_eq(a->cell[0], a->cell[1]);
+    }
+    if (strcmp(op, "!=") == 0) {
+        r = !lval_eq(a->cell[0], a->cell[1]);
+    }
+    lval_del(a);
+    return lval_num(r);
+}
+
+lval_t* builtin_eq(lenv_t* e, lval_t* a) {
+    return builtin_cmp(e, a, "==");
+}
+
+lval_t* builtin_ne(lenv_t* e, lval_t* a) {
+    return builtin_cmp(e, a, "!=");
+}
+
+//==== String functions ========================================================
 lval_t* builtin_load(lenv_t* e, lval_t* a) {
     LASSERT_NUM("load", a, 1);
     LASSERT_TYPE("load", a, 0, LVAL_STR);
@@ -500,48 +555,4 @@ lval_t* builtin_error(lenv_t* e, lval_t* a) {
     // Delete arguments and return
     lval_del(a);
     return err;
-}
-
-void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
-    lval_t* k = lval_sym(name);
-    lval_t* v = lval_fn(fn);
-    lenv_put(e, k, v);
-    lval_del(k);
-    lval_del(v);
-}
-
-void lenv_add_builtins(lenv_t* e) {
-    // Variable functions
-    lenv_add_builtin(e, "\\", builtin_lambda);
-    lenv_add_builtin(e, "def", builtin_def);
-    lenv_add_builtin(e, "=", builtin_put);
-
-    // List functions
-    lenv_add_builtin(e, "list", builtin_list);
-    lenv_add_builtin(e, "head", builtin_head);
-    lenv_add_builtin(e, "tail", builtin_tail);
-    lenv_add_builtin(e, "eval", builtin_eval);
-    lenv_add_builtin(e, "join", builtin_join);
-
-    // Mathematical functions
-    lenv_add_builtin(e, "+", builtin_add);
-    lenv_add_builtin(e, "-", builtin_sub);
-    lenv_add_builtin(e, "*", builtin_mul);
-    lenv_add_builtin(e, "/", builtin_div);
-    lenv_add_builtin(e, "%", builtin_mod);
-    lenv_add_builtin(e, "^", builtin_pow);
-
-    // Comparison functions
-    lenv_add_builtin(e, "if", builtin_if);
-    lenv_add_builtin(e, "==", builtin_eq);
-    lenv_add_builtin(e, "!=", builtin_ne);
-    lenv_add_builtin(e, ">", builtin_gt);
-    lenv_add_builtin(e, "<", builtin_lt);
-    lenv_add_builtin(e, ">=", builtin_ge);
-    lenv_add_builtin(e, "<=", builtin_le);
-
-    // String Functions
-    lenv_add_builtin(e, "load", builtin_load);
-    lenv_add_builtin(e, "error", builtin_error);
-    lenv_add_builtin(e, "print", builtin_print);
 }
