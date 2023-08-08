@@ -12,6 +12,10 @@ void lval_print(lval_t* v) {
             printf("%li", v->num);
             break;
         }
+        case LVAL_DEC: {
+            printf("%f", v->dec);
+            break;
+        }
         case LVAL_ERR: {
             printf("Error: %s", v->err);
             break;
@@ -91,6 +95,8 @@ char* ltype_name(int t) {
             return "Function";
         case LVAL_NUM:
             return "Number";
+        case LVAL_DEC:
+            return "Decimal";
         case LVAL_ERR:
             return "Error";
         case LVAL_SYM:

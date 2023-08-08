@@ -25,6 +25,10 @@ lval_t* lval_copy(lval_t* v) {
             x->num = v->num;
             break;
         }
+        case LVAL_DEC: {
+            x->dec = v->dec;
+            break;
+        }
         // Copy Strings using malloc and strcpy
         case LVAL_ERR: {
             x->err = malloc(strlen(v->err) + 1);
@@ -189,6 +193,9 @@ int lval_eq(lval_t* x, lval_t* y) {
         // Compare number value
         case LVAL_NUM: {
             return (x->num == y->num);
+        }
+        case LVAL_DEC: {
+            return (x->dec == y->dec);
         }
         // Compare string values
         case LVAL_ERR: {

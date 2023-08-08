@@ -35,7 +35,7 @@ DEPS := $(OBJS:.o=.d)
 
 #---- FLAGS --------------------------------------------------------------------
 
-LDFLAGS   += -ledit
+LDFLAGS   += -ledit -lm
 CFLAGS    := $(INC_FLAGS) -MMD -MP
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 MAKEFLAGS := --jobs=$(shell nproc)

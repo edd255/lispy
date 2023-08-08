@@ -79,6 +79,7 @@ typedef lval_t* (*lbuiltin_t)(lenv_t*, lval_t*);
 
 //--- Constructors & Destructors -----------------------------------------------
 lval_t* lval_num(long x);
+lval_t* lval_dec(double x);
 lval_t* lval_err(char* fmt, ...);
 lval_t* lval_sym(char* s);
 lval_t* lval_sexpr(void);
@@ -105,6 +106,7 @@ enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
 enum {
     LVAL_ERR,
     LVAL_NUM,
+    LVAL_DEC,
     LVAL_SYM,
     LVAL_STR,
     LVAL_SEXPR,
@@ -118,6 +120,7 @@ struct lval_t {
 
     // Basic
     long num;
+    double dec;
     char* err;
     char* sym;
     char* str;

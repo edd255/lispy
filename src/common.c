@@ -13,6 +13,13 @@ lval_t* lval_num(long x) {
     return v;
 }
 
+lval_t* lval_dec(double x) {
+    lval_t* v = malloc(sizeof(lval_t));
+    v->type = LVAL_DEC;
+    v->dec = x;
+    return v;
+}
+
 lval_t* lval_err(char* fmt, ...) {
     lval_t* v = malloc(sizeof(lval_t));
     v->type = LVAL_ERR;
