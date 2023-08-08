@@ -1,11 +1,66 @@
 #include "builtins.h"
 
+#include <math.h>
+
 #include "common.h"
 #include "eval.h"
 #include "main.h"
 #include "printing.h"
 #include "reading.h"
 #include "values.h"
+
+//==== HELPER METHODS ==========================================================
+
+enum LOP { LOP_ADD, LOP_SUB, LOP_MUL, LOP_DIV, LOP_MOD, LOP_POW, LOP_UNKNOWN };
+
+typedef struct op_map_t op_map_t;
+struct op_map_t {
+    char* key;
+    enum LOP value;
+};
+
+const op_map_t op_map[] = {
+    {"+", LOP_ADD},
+    {"-", LOP_SUB},
+    {"*", LOP_MUL},
+    {"/", LOP_DIV},
+    {"%", LOP_MOD},
+    {"^", LOP_POW},
+};
+
+#define NUMBER_OF_OPS (int)(sizeof(op_map) / sizeof(op_map_t))
+
+enum LOP op_from_string(char* key) {
+    for (int i = 0; i < NUMBER_OF_OPS; i++) {
+        op_map_t op = op_map[i];
+        if (strcmp(op.key, key) == 0) {
+            return op.value;
+        }
+    }
+    return LOP_UNKNOWN;
+}
+
+long power_long(long base, long exponent) {
+    if (exponent == 0) {
+        return 1;
+    }
+    if (exponent == 1) {
+        return base;
+    }
+    long result = 1;
+    bool neg = false;
+    if (exponent < 0) {
+        neg = true;
+    }
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result *= base;
+        }
+        base *= base;
+        exponent /= 2;
+    }
+    return neg ? 1 / result : result;
+}
 
 //==== BUILTIN METHODS =========================================================
 
@@ -86,34 +141,54 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     while (a->count > 0) {
         // Pop the next element
         lval_t* y = lval_pop(a, 0);
-        if (strcmp(op, "+") == 0) {
-            x->num += y->num;
-        }
-        if (strcmp(op, "-") == 0) {
-            x->num -= y->num;
-        }
-        if (strcmp(op, "*") == 0) {
-            x->num *= y->num;
-        }
-        if (strcmp(op, "/") == 0) {
-            if (y->num == 0) {
-                lval_del(x);
+        switch (op_from_string(op)) {
+            case LOP_ADD: {
+                x->num += y->num;
                 lval_del(y);
-                x = lval_err("Division By Zero!");
                 break;
             }
-            x->num /= y->num;
-        }
-        if (strcmp(op, "%") == 0) {
-            if (y->num == 0) {
-                lval_del(x);
+            case LOP_SUB: {
+                x->num -= y->num;
                 lval_del(y);
-                x = lval_err("Division By Zero!");
                 break;
             }
-            x->num %= y->num;
+            case LOP_MUL: {
+                x->num *= y->num;
+                lval_del(y);
+                break;
+            }
+            case LOP_DIV: {
+                if (y->num == 0) {
+                    lval_del(x);
+                    lval_del(y);
+                    x = lval_err("Division By Zero!");
+                    break;
+                }
+                x->num /= y->num;
+                lval_del(y);
+                break;
+            }
+            case LOP_MOD: {
+                if (y->num == 0) {
+                    lval_del(x);
+                    lval_del(y);
+                    x = lval_err("Division By Zero!");
+                    break;
+                }
+                x->num %= y->num;
+                lval_del(y);
+                break;
+            }
+            case LOP_POW: {
+                x->num = power_long(x->num, y->num);
+                lval_del(y);
+                break;
+            }
+            case LOP_UNKNOWN: {
+                lval_del(y);
+                break;
+            }
         }
-        lval_del(y);
     }
     lval_del(a);
     return x;
@@ -137,6 +212,10 @@ lval_t* builtin_div(lenv_t* e, lval_t* a) {
 
 lval_t* builtin_mod(lenv_t* e, lval_t* a) {
     return builtin_op(e, a, "%");
+}
+
+lval_t* builtin_pow(lenv_t* e, lval_t* a) {
+    return builtin_op(e, a, "^");
 }
 
 lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
@@ -393,6 +472,7 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "*", builtin_mul);
     lenv_add_builtin(e, "/", builtin_div);
     lenv_add_builtin(e, "%", builtin_mod);
+    lenv_add_builtin(e, "^", builtin_pow);
 
     // Comparison functions
     lenv_add_builtin(e, "if", builtin_if);
