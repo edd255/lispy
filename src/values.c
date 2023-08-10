@@ -6,6 +6,8 @@
 //=== VALUES ===================================================================
 
 lval_t* lval_copy(lval_t* v) {
+    assert(v != NULL);
+
     lval_t* x = malloc(sizeof(lval_t));
     x->type = v->type;
     switch (v->type) {
@@ -59,6 +61,9 @@ lval_t* lval_copy(lval_t* v) {
 }
 
 lval_t* lval_add(lval_t* v, lval_t* x) {
+    assert(v != NULL);
+    assert(x != NULL);
+
     v->count++;
     v->cell = realloc(v->cell, sizeof(lval_t*) * v->count);
     v->cell[v->count - 1] = x;
@@ -66,9 +71,13 @@ lval_t* lval_add(lval_t* v, lval_t* x) {
 }
 
 lval_t* lval_join(lval_t* x, lval_t* y) {
+    assert(x != NULL);
+    assert(y != NULL);
+
     // For each cell in 'y' add it to 'x'
-    while (y->count) {
-        x = lval_add(x, lval_pop(y, 0));
+    for (int i = 0; i < y->count; i++) {
+        assert(y->cell[i] != NULL);
+        x = lval_add(x, y->cell[i]);
     }
     // Delete the empty 'y' and return 'x'
     lval_del(y);
@@ -76,6 +85,8 @@ lval_t* lval_join(lval_t* x, lval_t* y) {
 }
 
 lval_t* lval_pop(lval_t* v, int i) {
+    assert(v != NULL);
+
     // Find the item at "i"
     lval_t* x = v->cell[i];
 
@@ -91,12 +102,18 @@ lval_t* lval_pop(lval_t* v, int i) {
 }
 
 lval_t* lval_take(lval_t* v, int i) {
+    assert(v != NULL);
+
     lval_t* x = lval_pop(v, i);
     lval_del(v);
     return x;
 }
 
 lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
+    assert(e != NULL);
+    assert(f != NULL);
+    assert(a != NULL);
+
     // If Builtin, then simply call that
     if (f->builtin) {
         return f->builtin(e, a);
@@ -176,7 +193,14 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         f->env->parent = e;
 
         // Evaluate and return
-        return builtin_eval(f->env, lval_add(lval_sexpr(), lval_copy(f->body)));
+        lval_t* new_sexpr = lval_sexpr();
+        lval_t* body_copy = lval_copy(f->body);
+
+        assert(new_sexpr != NULL);
+        assert(body_copy != NULL);
+        assert(f->env);
+
+        return builtin_eval(f->env, lval_add(new_sexpr, body_copy));
     } else {
         // Otherwise return partially evaluated function
         return lval_copy(f);
@@ -184,6 +208,9 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
 }
 
 int lval_eq(lval_t* x, lval_t* y) {
+    assert(x != NULL);
+    assert(y != NULL);
+
     // Different types are always unequal
     if (x->type != y->type) {
         return false;

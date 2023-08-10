@@ -6,6 +6,9 @@
 //==== EVALUATION METHODS ======================================================
 
 lval_t* lval_eval(lenv_t* e, lval_t* v) {
+    assert(e != NULL);
+    assert(v != NULL);
+
     if (v->type == LVAL_SYM) {
         lval_t* x = lenv_get(e, v);
         lval_del(v);
@@ -20,6 +23,9 @@ lval_t* lval_eval(lenv_t* e, lval_t* v) {
 }
 
 lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v) {
+    assert(e != NULL);
+    assert(v != NULL);
+
     // Evaluate Children
     for (int i = 0; i < v->count; i++) {
         v->cell[i] = lval_eval(e, v->cell[i]);

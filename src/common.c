@@ -44,6 +44,8 @@ lval_t* lval_err(char* fmt, ...) {
 }
 
 lval_t* lval_sym(char* s) {
+    assert(s != NULL);
+
     lval_t* v = malloc(sizeof(lval_t));
     v->type = LVAL_SYM;
     v->sym = malloc(strlen(s) + 1);
@@ -68,6 +70,8 @@ lval_t* lval_qexpr(void) {
 }
 
 lval_t* lval_fn(lbuiltin_t fn) {
+    assert(fn != NULL);
+
     lval_t* v = malloc(sizeof(lval_t));
     v->type = LVAL_FN;
     v->builtin = fn;
@@ -75,6 +79,9 @@ lval_t* lval_fn(lbuiltin_t fn) {
 }
 
 lval_t* lval_lambda(lval_t* formals, lval_t* body) {
+    assert(formals != NULL);
+    assert(body != NULL);
+
     lval_t* v = malloc(sizeof(lval_t));
     v->type = LVAL_FN;
 
@@ -91,6 +98,8 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
 }
 
 lval_t* lval_str(char* s) {
+    assert(s != NULL);
+
     lval_t* v = malloc(sizeof(lval_t));
     v->type = LVAL_STR;
     v->str = malloc(strlen(s) + 1);
@@ -99,6 +108,8 @@ lval_t* lval_str(char* s) {
 }
 
 void lval_del(lval_t* v) {
+    assert(v != NULL);
+
     if (v == NULL) {
         return;
     }
@@ -160,6 +171,8 @@ lenv_t* lenv_new(void) {
 }
 
 void lenv_del(lenv_t* e) {
+    assert(e != NULL);
+
     for (int i = 0; i < e->count; i++) {
         free(e->syms[i]);
         lval_del(e->vals[i]);
@@ -170,6 +183,9 @@ void lenv_del(lenv_t* e) {
 }
 
 lval_t* lenv_get(lenv_t* e, lval_t* k) {
+    assert(e != NULL);
+    assert(k != NULL);
+
     // Iterate over all items in environment
     for (int i = 0; i < e->count; i++) {
         // Check if the stored string matches the symbol string. If it does,
@@ -187,6 +203,10 @@ lval_t* lenv_get(lenv_t* e, lval_t* k) {
 }
 
 void lenv_put(lenv_t* e, lval_t* k, lval_t* v) {
+    assert(e != NULL);
+    assert(k != NULL);
+    assert(v != NULL);
+
     // Iterate over all items in enviroment. This is to see if variable already
     // exists.
     for (int i = 0; i < e->count; i++) {
@@ -210,6 +230,8 @@ void lenv_put(lenv_t* e, lval_t* k, lval_t* v) {
 }
 
 lenv_t* lenv_copy(lenv_t* e) {
+    assert(e != NULL);
+
     lenv_t* n = malloc(sizeof(lenv_t));
     n->parent = e->parent;
     n->count = e->count;
@@ -224,6 +246,10 @@ lenv_t* lenv_copy(lenv_t* e) {
 }
 
 void lenv_def(lenv_t* e, lval_t* k, lval_t* v) {
+    assert(e != NULL);
+    assert(k != NULL);
+    assert(v != NULL);
+
     // Iterate until e has no parent
     while (e->parent) {
         e = e->parent;

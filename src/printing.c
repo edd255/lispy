@@ -4,6 +4,8 @@
 
 /* Print an lval_t */
 void lval_print(lval_t* v) {
+    assert(v != NULL);
+
     if (v == NULL) {
         return;
     }
@@ -52,6 +54,8 @@ void lval_print(lval_t* v) {
 }
 
 void lval_print_expr(lval_t* v, char open, char close) {
+    assert(v != NULL);
+
     putchar(open);
     for (int i = 0; i < v->count; i++) {
         // Print Value contained within
@@ -67,11 +71,15 @@ void lval_print_expr(lval_t* v, char open, char close) {
 
 /* Print an lval_t followed by a newline */
 void lval_println(lval_t* v) {
+    assert(v != NULL);
+
     lval_print(v);
     putchar('\n');
 }
 
 void lval_print_str(lval_t* v) {
+    assert(v != NULL);
+
     if (v == NULL) {
         return;
     }

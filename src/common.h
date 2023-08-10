@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <assert.h>
 #include <editline/readline.h>
 #include <stdbool.h>
 #include <stdio.h>
