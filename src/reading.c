@@ -5,6 +5,8 @@
 //==== READING =================================================================
 
 lval_t* lval_read_num(mpc_ast_t* tree) {
+    assert(tree != NULL);
+
     errno = 0;
     if (strchr(tree->contents, '.') == NULL) {
         long x = strtol(tree->contents, NULL, 10);
@@ -16,9 +18,14 @@ lval_t* lval_read_num(mpc_ast_t* tree) {
 }
 
 lval_t* lval_read(mpc_ast_t* tree) {
-    // If Symbol or Number return conversion to that type
+    assert(tree != NULL);
+
+    // If Symbol, String or Number return conversion to that type
     if (strstr(tree->tag, "number")) {
         return lval_read_num(tree);
+    }
+    if (strstr(tree->tag, "string")) {
+        return lval_read_str(tree);
     }
     if (strstr(tree->tag, "symbol")) {
         return lval_sym(tree->contents);
@@ -34,9 +41,6 @@ lval_t* lval_read(mpc_ast_t* tree) {
     }
     if (strstr(tree->tag, "qexpr")) {
         x = lval_qexpr();
-    }
-    if (strstr(tree->tag, "string")) {
-        return lval_read_str(tree);
     }
 
     // Fill this list with any valid expression contained within
@@ -56,15 +60,22 @@ lval_t* lval_read(mpc_ast_t* tree) {
         if (strcmp(tree->children[i]->tag, "regex") == 0) {
             continue;
         }
-        if (strcmp(tree->children[i]->tag, "comment") == 0) {
+        if (strstr(tree->children[i]->tag, "comment")) {
             continue;
         }
-        x = lval_add(x, lval_read(tree->children[i]));
+        lval_t* y = lval_read(tree->children[i]);
+
+        assert(tree->children[i] != NULL);
+        assert(y != NULL);
+
+        x = lval_add(x, y);
     }
     return x;
 }
 
 lval_t* lval_read_str(mpc_ast_t* tree) {
+    assert(tree != NULL);
+
     // Cut off final quote character
     tree->contents[strlen(tree->contents) - 1] = '\0';
     // Copy the string missing out the first quote character
