@@ -9,14 +9,14 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Splitted the code into smaller modules
 - [X] Heavily modified the Makefile
 - [X] Added an exit function
+- [X] Including an (optional) standard library
+- [X] Improving the macros to support printing the C function name
 
 ## TODO
 However, I'm far from finished.
 - [ ] Fixing memory bugs
 - [ ] Adding more tests
 - [ ] Using a logger
-- [ ] Including an (optional) standard library
-- [ ] Improving the macros to support printing the C function name
 - [ ] Writing a function that prints all out named values in an environment
 - [ ] Adding builtin logical operators
 - [ ] Adapt some builtin functions to work on strings
