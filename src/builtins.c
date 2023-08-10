@@ -65,6 +65,8 @@ long power_long(long base, long exponent) {
 //==== BUILTIN METHODS =========================================================
 
 void lenv_add_builtins(lenv_t* e) {
+    assert(e != NULL);
+
     // Variable functions
     lenv_add_builtin(e, "\\", builtin_lambda);
     lenv_add_builtin(e, "def", builtin_def);
@@ -101,6 +103,10 @@ void lenv_add_builtins(lenv_t* e) {
 }
 
 void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
+    assert(e != NULL);
+    assert(name != NULL);
+    assert(fn != NULL);
+
     lval_t* k = lval_sym(name);
     lval_t* v = lval_fn(fn);
     lenv_put(e, k, v);
@@ -110,6 +116,9 @@ void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
 
 //==== Variable functions ======================================================
 lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
+    assert(e != NULL);
+    assert(a != NULL);
+    assert(fn != NULL);
     LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
 
     // First argument is symbol list
@@ -120,7 +129,8 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
         LASSERT(
             a,
             (syms->cell[i]->type == LVAL_SYM),
-            "Function '%s' cannot define non-symbol! Got %s. Expected %s.",
+            "Error in procedure %s. Function '%s' cannot define non-symbol! Got %s. Expected %s.",
+            __FUNCTION__,
             fn,
             ltype_name(syms->cell[i]->type),
             ltype_name(LVAL_SYM)
@@ -130,7 +140,8 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
     LASSERT(
         a,
         (syms->count == a->count - 1),
-        "Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
+        "Error in procedure %s. Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
+        __FUNCTION__,
         fn,
         syms->count,
         a->count - 1
@@ -150,6 +161,8 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
 }
 
 lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
 
     // Check two arguments, each of which are Q-Expressions
@@ -162,7 +175,8 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
         LASSERT(
             a,
             (a->cell[0]->cell[i]->type == LVAL_SYM),
-            "Cannot define non-symbol. Got %s. Expected %s.",
+            "Error in procedure %s. Cannot define non-symbol. Got %s. Expected %s.",
+            __FUNCTION__,
             ltype_name(a->cell[0]->cell[i]->type),
             ltype_name(LVAL_SYM)
         );
@@ -170,71 +184,102 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
     // Pop first two arguments and pass them to lval_lambda
     lval_t* formals = lval_pop(a, 0);
     lval_t* body = lval_pop(a, 0);
+
+    assert(formals != NULL);
+    assert(body != NULL);
+
     lval_del(a);
     return lval_lambda(formals, body);
 }
 
 lval_t* builtin_def(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_var(e, a, "def");
 }
 
 lval_t* builtin_put(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_var(e, a, "=");
 }
 
 //==== List functions ==========================================================
 lval_t* builtin_list(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
+
     a->type = LVAL_QEXPR;
     return a;
 }
 
 lval_t* builtin_head(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM("head", a, 1);
-    LASSERT_TYPE("head", a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY("head", a, 0);
+    LASSERT_NUM(__FUNCTION__, a, 1);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY(__FUNCTION__, a, 0);
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
 
     // Delete all elements that are not head and return
     while (v->count > 1) {
-        lval_del(lval_pop(v, 1));
+        lval_t* y = lval_pop(v, 1);
+        assert(y != NULL);
+        lval_del(y);
     }
     return v;
 }
 
 lval_t* builtin_tail(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM("tail", a, 1);
-    LASSERT_TYPE("tail", a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY("tail", a, 0);
+    LASSERT_NUM(__FUNCTION__, a, 1);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY(__FUNCTION__, a, 0);
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
 
     // Delete first element and return
-    lval_del(lval_pop(v, 0));
+    lval_t* y = lval_pop(v, 0);
+    assert(y != NULL);
+    lval_del(y);
     return v;
 }
 
 lval_t* builtin_eval(lenv_t* e, lval_t* a) {
-    LASSERT_NUM("eval", a, 1);
-    LASSERT_TYPE("eval", a, 0, LVAL_QEXPR);
+    assert(e != NULL);
+    assert(a != NULL);
+    UNUSED(e);
+    LASSERT_NUM(__FUNCTION__, a, 1);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
+
     lval_t* x = lval_take(a, 0);
     x->type = LVAL_SEXPR;
     return lval_eval(e, x);
 }
 
 lval_t* builtin_join(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
+
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE("join", a, i, LVAL_QEXPR);
+        LASSERT_TYPE(__FUNCTION__, a, i, LVAL_QEXPR);
     }
     lval_t* x = lval_pop(a, 0);
+    assert(x != NULL);
     while (a->count) {
-        x = lval_join(x, lval_pop(a, 0));
+        lval_t* y = lval_pop(a, 0);
+        assert(y != NULL);
+        x = lval_join(x, y);
     }
     lval_del(a);
     return x;
@@ -242,6 +287,9 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
 
 //==== Mathematical functions ==================================================
 lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
+    assert(e != NULL);
+    assert(a != NULL);
+    assert(op != NULL);
     UNUSED(e);
     LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
 
@@ -252,6 +300,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
 
     // Pop the first element
     lval_t* x = lval_pop(a, 0);
+    assert(x != NULL);
 
     // If no arguments and sub then perform unary negation
     if ((strcmp(op, "-") == 0) && a->count == 0) {
@@ -262,6 +311,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     while (a->count > 0) {
         // Pop the next element
         lval_t* y = lval_pop(a, 0);
+        assert(y != NULL);
         switch (op_from_string(op)) {
             case LOP_ADD: {
                 switch (x->type) {
@@ -372,35 +422,56 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
 }
 
 lval_t* builtin_add(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "+");
 }
 
 lval_t* builtin_sub(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "-");
 }
 
 lval_t* builtin_mul(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "*");
 }
 
 lval_t* builtin_div(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "/");
 }
 
 lval_t* builtin_mod(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "%");
 }
 
 lval_t* builtin_pow(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_op(e, a, "^");
 }
 
 //==== Comparison functions ====================================================
 lval_t* builtin_if(lenv_t* e, lval_t* a) {
-    LASSERT_NUM("if", a, 3);
-    LASSERT_TYPE("if", a, 0, LVAL_NUM);
-    LASSERT_TYPE("if", a, 1, LVAL_QEXPR);
-    LASSERT_TYPE("if", a, 2, LVAL_QEXPR);
+    assert(e != NULL);
+    assert(a != NULL);
+    UNUSED(e);
+    LASSERT_NUM(__FUNCTION__, a, 3);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_NUM);
+    LASSERT_TYPE(__FUNCTION__, a, 1, LVAL_QEXPR);
+    LASSERT_TYPE(__FUNCTION__, a, 2, LVAL_QEXPR);
 
     // Mark both expressions as evaluable
     lval_t* x;
@@ -409,10 +480,14 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
 
     if (a->cell[0]->num) {
         // If condition is true evaluate first expression
-        x = lval_eval(e, lval_pop(a, 1));
+        lval_t* y = lval_pop(a, 1);
+        assert(y != NULL);
+        x = lval_eval(e, y);
     } else {
         // Otherwise evaluate second expression
-        x = lval_eval(e, lval_pop(a, 2));
+        lval_t* y = lval_pop(a, 2);
+        assert(y != NULL);
+        x = lval_eval(e, y);
     }
     // Delete argument list and return
     lval_del(a);
@@ -421,10 +496,14 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
 
 //---- Magnitude comparison functions ------------------------------------------
 lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
+    assert(e != NULL);
+    assert(a != NULL);
+    assert(op != NULL);
     UNUSED(e);
     LASSERT_NUM(op, a, 2);
     LASSERT_TYPE(op, a, 0, LVAL_NUM);
     LASSERT_TYPE(op, a, 1, LVAL_NUM);
+
     int r;
     if (strcmp(op, ">") == 0) {
         r = (a->cell[0]->num > a->cell[1]->num);
@@ -444,29 +523,41 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
 }
 
 lval_t* builtin_gt(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_ord(e, a, ">");
 }
 
 lval_t* builtin_lt(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_ord(e, a, "<");
 }
 
 lval_t* builtin_ge(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_ord(e, a, ">=");
 }
 
 lval_t* builtin_le(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_ord(e, a, "<=");
 }
 
 //---- Equality comparison functions -------------------------------------------
-lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op);
-lval_t* builtin_eq(lenv_t* e, lval_t* a);
-lval_t* builtin_ne(lenv_t* e, lval_t* a);
-
 lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
+    assert(e != NULL);
+    assert(a != NULL);
+    assert(op != NULL);
     UNUSED(e);
     LASSERT_NUM(op, a, 2);
+
     int r;
     if (strcmp(op, "==") == 0) {
         r = lval_eq(a->cell[0], a->cell[1]);
@@ -479,29 +570,41 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
 }
 
 lval_t* builtin_eq(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_cmp(e, a, "==");
 }
 
 lval_t* builtin_ne(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
     return builtin_cmp(e, a, "!=");
 }
 
 //==== String functions ========================================================
 lval_t* builtin_load(lenv_t* e, lval_t* a) {
-    LASSERT_NUM("load", a, 1);
-    LASSERT_TYPE("load", a, 0, LVAL_STR);
+    assert(e != NULL);
+    assert(a != NULL);
+    LASSERT_NUM(__FUNCTION__, a, 1);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_STR);
 
     // Parse file given by string name
     mpc_result_t r;
     mpc_parser_t* lispy = get_lispy_parser();
     if (mpc_parse_contents(a->cell[0]->str, lispy, &r)) {
         // Read contents
+        assert(r.output != NULL);
         lval_t* expr = lval_read(r.output);
+        assert(expr != NULL);
         mpc_ast_delete(r.output);
 
         // Evaluate each expression
         while (expr->count) {
-            lval_t* x = lval_eval(e, lval_pop(expr, 0));
+            lval_t* y = lval_pop(expr, 0);
+            assert(y != NULL);
+            lval_t* x = lval_eval(e, y);
 
             // If evaluation leads to error print it
             if (x->type == LVAL_ERR) {
@@ -531,6 +634,8 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
 
     // Print each argument followed by a space
@@ -545,9 +650,11 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_error(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM("error", a, 1);
-    LASSERT_TYPE("error", a, 0, LVAL_STR);
+    LASSERT_NUM(__FUNCTION__, a, 1);
+    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_STR);
 
     // Construct error from first argument
     lval_t* err = lval_err(a->cell[0]->str);
