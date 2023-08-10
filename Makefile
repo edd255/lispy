@@ -1,66 +1,11 @@
-#==== DEFINITIONS ==============================================================
-#---- TARGET -------------------------------------------------------------------
-
-NAME    := lispy
-VERSION := 0.1
-
-#---- COLORS -------------------------------------------------------------------
-
-BOLD   := \x1b[1m
-NOBOLD := \x1b[0m
-
-#---- TOOLS --------------------------------------------------------------------
-
-CCACHE := ccache
-CC     := $(CCACHE) clang
-LD     := $(CCACHE) clang
-RM     := rm --force
-MKDIR  := mkdir --parents
-Q      ?= @
-
-#---- DIRECTORIES --------------------------------------------------------------
-
-SRC_DIR   := src
-SRC_DIRS  := $(SRC_DIR) $(wildcard ./deps/*)
-BUILD_DIR := build
-BIN_DIR   := bin
-INC_DIRS  := $(shell find $(SRC_DIRS) -type d)
-
-#---- FILES --------------------------------------------------------------------
-
-BIN  := $(BIN_DIR)/$(NAME)
-SRCS := $(shell find $(SRC_DIRS) -name '*.c')
-OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.o)
-DEPS := $(OBJS:.o=.d)
-
-#---- FLAGS --------------------------------------------------------------------
-
-LDFLAGS   += -ledit -lm
-CFLAGS    := $(INC_FLAGS) -MMD -MP
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
-MAKEFLAGS := --jobs=$(shell nproc)
-
-ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
-OPT := -Ofast -DNDEBUG
-DBG := -Og -g 
-SAN := -fsanitize=address \
-	   -fsanitize=pointer-compare \
-	   -fsanitize=pointer-subtract \
-	   -fsanitize=shadow-call-stack \
-	   -fsanitize=leak \
-	   -fsanitize=undefined \
-	   -fsanitize-address-use-after-scope
-
-RELEASE   := ${ERR} ${OPT}
-DEBUGGING := ${ERR} ${DBG}
-MEMCHECK  := ${ERR} ${DBG} ${SAN}
+include config.mk
 
 #==== RULES ====================================================================
 #---- RELEASE ------------------------------------------------------------------
 
 $(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
+	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: src/%.c
@@ -74,7 +19,7 @@ release: $(BIN)_release
 
 $(BIN)_debugging: $(patsubst src/%.c, build/%.dbg.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
+	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.dbg.o: src/%.c
@@ -88,7 +33,7 @@ debugging: $(BIN)_debugging
 
 $(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
-	$(Q)echo -e "${BOLD}====> LD $@${NOBOLD}"
+	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(MEMCHECK) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: src/%.c
@@ -101,6 +46,7 @@ memcheck: $(BIN)_sanitized
 #---- CLEANING -----------------------------------------------------------------
 
 clean:
+	$(Q)echo "====> Cleaning..."
 	$(Q)$(RM) --recursive $(BUILD_DIR)
 
 #---- STYLE --------------------------------------------------------------------
@@ -109,10 +55,22 @@ style:
 	$(Q)echo "====> Formatting..."
 	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i
 
+#---- INSTALLING ---------------------------------------------------------------
+
+install: release
+	$(Q)echo "====> Installing the binary..."
+	$(Q)cp $(BIN)_release $(PREFIX)/bin/$(NAME)
+	$(Q)echo "====> Finished!"
+	
+uninstall:
+	$(Q)echo "====> Removing the binary..."
+	$(Q)$(RM) $(INSTALL_BIN_DIR)/$(NAME)
+	$(Q)echo "====> Finished!"
+
 #==== EPILOGUE =================================================================
 
 all: style release debugging memcheck
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all clean style
+.PHONY: all release debugging memcheck style install uninstall

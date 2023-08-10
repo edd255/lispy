@@ -1,0 +1,3 @@
+[submodule "assets/vim"]
+	path = assets/vim
+	url = https://github.com/sentientmonkey/vim-lispy
