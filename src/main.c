@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
         cli_interpreter(e);
     }
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
+    lenv_del(e);
     return 0;
 }
 
