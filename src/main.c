@@ -55,12 +55,17 @@ int main(int argc, char** argv) {
     );
     lenv_t* e = lenv_new();
     lenv_add_builtins(e);
+    lval_t* stdlib_str =
+        lval_str("/home/edd/code/lispy/assets/stdlib/stdlib.lspy");
+    lval_t* standard = lval_add(lval_sexpr(), stdlib_str);
+    lval_t* std = builtin_load(e, standard);
     if (argc >= 2) {
         file_interpreter(e, argc, argv);
     } else {
         cli_interpreter(e);
     }
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
+    lval_del(std);
     lenv_del(e);
     return 0;
 }
@@ -77,7 +82,9 @@ void cli_interpreter(lenv_t* e) {
         }
         mpc_result_t r;
         if (mpc_parse("<stdin>", input, lispy, &r)) {
-            lval_t* result = lval_eval(e, lval_read(r.output));
+            lval_t* y = lval_read(r.output);
+            assert(y != NULL);
+            lval_t* result = lval_eval(e, y);
             lval_println(result);
             lval_del(result);
             mpc_ast_delete(r.output);
@@ -94,7 +101,8 @@ void file_interpreter(lenv_t* e, int argc, char** argv) {
     // loop over each supplied filename, starting from 1
     for (int i = 1; i < argc; i++) {
         // Argument list with a single argument, the filename
-        lval_t* args = lval_add(lval_sexpr(), lval_str(argv[i]));
+        lval_t* argv_str = lval_str(argv[i]);
+        lval_t* args = lval_add(lval_sexpr(), argv_str);
 
         // Pass to builtin load and get the result
         lval_t* x = builtin_load(e, args);
