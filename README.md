@@ -12,15 +12,15 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Including an (optional) standard library
 - [X] Improving the macros to support printing the C function name
 - [X] Using a sane argument parser
+- [X] Using a logger
 
 ## TODO
 However, I'm far from finished.
+- [ ] Documenting the code
 - [ ] Fixing memory bugs
 - [ ] Adding more tests
-- [ ] Using a logger
 - [ ] Writing a function that prints all out named values in an environment
 - [ ] Adding builtin logical operators
 - [ ] Adapt some builtin functions to work on strings
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
-- [ ] Documenting the code
