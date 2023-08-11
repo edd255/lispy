@@ -55,6 +55,12 @@ style:
 	$(Q)echo "====> Formatting..."
 	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i
 
+#---- ANALYSIS -----------------------------------------------------------------
+
+analyze:
+	scan-build make all
+	cppcheck src/ --enable=all 2> cppcheck.log
+
 #---- INSTALLING ---------------------------------------------------------------
 
 install: release
