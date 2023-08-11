@@ -69,11 +69,6 @@ install: release
 	$(Q)echo "====> Installing the library..."
 	$(Q)$(MKDIR) $(PREFIX)/lib/lispy
 	$(Q)cp $(ASSETS)/stdlib/stdlib.lspy $(PREFIX)/lib/lispy/
-	$(Q)echo "====> Installing the vim assets..."
-	$(Q)cp $(ASSETS)/vim/ftdetect/lispy.vim /usr/share/vim/vimfiles/ftdetect/
-	$(Q)cp $(ASSETS)/vim/syntax/lispy.vim /usr/share/vim/vimfiles/syntax/
-	$(Q)cp $(ASSETS)/vim/syntax/lispy.vim /usr/share/vim/vim90/syntax/
-	$(Q)cp $(ASSETS)/vim/syntax/lispy.vim /usr/share/nvim/runtime/syntax/
 	$(Q)echo "====> Finished!"
 	
 uninstall:
@@ -82,11 +77,6 @@ uninstall:
 	$(Q)echo "====> Removing the library..."
 	$(Q)$(RM) $(PREFIX)/lib/lispy/stdlib.lspy
 	$(Q)rmdir $(PREFIX)/lib/lispy/
-	$(Q)echo "====> Removing the vim assets..."
-	$(Q)$(RM) /usr/share/vim/vim90/syntax/lispy.vim
-	$(Q)$(RM) /usr/share/vim/vimfiles/ftdetect/lispy.vim
-	$(Q)$(RM) /usr/share/vim/vimfiles/syntax/lispy.vim
-	$(Q)$(RM) /usr/share/nvim/runtime/syntax/lispy.vim
 	$(Q)echo "====> Finished!"
 
 #==== EPILOGUE =================================================================
