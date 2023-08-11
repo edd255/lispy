@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../deps/log/log.h"
 #include "../deps/mpc/mpc.h"
-#include "../deps/ulog/logger.h"
 
 //=== DECLARATIONS =============================================================
 //--- Macros -------------------------------------------------------------------
