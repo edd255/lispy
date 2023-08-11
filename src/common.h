@@ -88,7 +88,7 @@ lval_t* lval_sexpr(void);
 lval_t* lval_qexpr(void);
 lval_t* lval_fn(lbuiltin_t fn);
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
-lval_t* lval_str(char* s);
+lval_t* lval_str(const char* s);
 void lval_del(lval_t* v);
 
 //--- Environment --------------------------------------------------------------

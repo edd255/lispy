@@ -1,3 +1,4 @@
+#include "../deps/argparse/argparse.h"
 #include "builtins.h"
 #include "common.h"
 #include "eval.h"
@@ -8,7 +9,12 @@
 //=== DECLARATIONS =============================================================
 //--- Functions ----------------------------------------------------------------
 void cli_interpreter(lenv_t* e);
-void file_interpreter(lenv_t* e, int argc, char** argv);
+void file_interpreter(lenv_t* e, const char* file);
+void setup_parser(void);
+lenv_t* set_env(void);
+void cleanup(lval_t* std, lenv_t* e);
+lval_t* get_stdlib(lenv_t* e);
+void parse_args(int argc, const char** argv);
 
 //--- Variables ----------------------------------------------------------------
 mpc_parser_t* number;
@@ -20,9 +26,107 @@ mpc_parser_t* comment;
 mpc_parser_t* expr;
 mpc_parser_t* lispy;
 
+//--- Command-line argument parsing --------------------------------------------
+char* file = NULL;
+int no_stdlib = 0;
+
+static const char* const usages[] = {
+    "basic [options] [[--] args]",
+    "basic [options]",
+    NULL,
+};
+
 //=== MAIN METHOD ==============================================================
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
+    setup_parser();
+    lenv_t* e = set_env();
+    lval_t* std = NULL;
+    parse_args(argc, argv);
+    if (no_stdlib == 0) {
+        std = get_stdlib(e);
+    }
+    if (file != NULL) {
+        file_interpreter(e, file);
+    } else {
+        cli_interpreter(e);
+    }
+    cleanup(std, e);
+    return 0;
+}
+
+void parse_args(int argc, const char** argv) {
+    // Command-line parsing
+    struct argparse_option options[] = {
+        OPT_HELP(),
+        OPT_GROUP("Basic options"),
+        OPT_STRING('f', "filename", &file, "lispy file to run", NULL, 0, 0),
+        OPT_BOOLEAN('n', "nostdlib", &no_stdlib, "exclude stdlib", NULL, 0, 0),
+        OPT_END()};
+    struct argparse argparse;
+    argparse_init(&argparse, options, usages, 0);
+    argparse_describe(&argparse, "\nLispy Interpreter.", "");
+    argc = argparse_parse(&argparse, argc, argv);
+}
+
+void cleanup(lval_t* std, lenv_t* e) {
+    mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
+    if (NULL != std) {
+        lval_del(std);
+    }
+    lenv_del(e);
+}
+
+lval_t* get_stdlib(lenv_t* e) {
+    lval_t* standard =
+        lval_add(lval_sexpr(), lval_str("/usr/local/lib/lispy/stdlib.lspy"));
+    lval_t* std = builtin_load(e, standard);
+    return std;
+}
+
+void cli_interpreter(lenv_t* e) {
+    printf("Lispy 1.0\n");
+    printf("Press Ctrl+c to exit.\n");
+    while (true) {
+        char* input = readline(">>> ");
+        add_history(input);
+        if (strcmp(input, "exit") == 0) {
+            free(input);
+            break;
+        }
+        mpc_result_t r;
+        if (mpc_parse("<stdin>", input, lispy, &r)) {
+            lval_t* y = lval_read(r.output);
+            assert(y != NULL);
+            lval_t* result = lval_eval(e, y);
+            lval_println(result);
+            lval_del(result);
+            mpc_ast_delete(r.output);
+        } else {
+            mpc_err_print(r.error);
+            mpc_err_delete(r.error);
+        }
+        free(input);
+    }
+    return;
+}
+
+void file_interpreter(lenv_t* e, const char* file) {
+    // Argument list with a single argument, the filename
+    lval_t* argv_str = lval_str(file);
+    lval_t* args = lval_add(lval_sexpr(), argv_str);
+
+    // Pass to builtin load and get the result
+    lval_t* x = builtin_load(e, args);
+
+    // If the result is an error, be sure to print it
+    if (x->type == LVAL_ERR) {
+        lval_println(x);
+    }
+    lval_del(x);
+}
+
+void setup_parser(void) {
     number = mpc_new("number");
     symbol = mpc_new("symbol");
     sexpr = mpc_new("sexpr");
@@ -53,65 +157,12 @@ int main(int argc, char** argv) {
         expr,
         lispy
     );
+}
+
+lenv_t* set_env(void) {
     lenv_t* e = lenv_new();
     lenv_add_builtins(e);
-    lval_t* stdlib_str = lval_str("/usr/local/lib/lispy/stdlib.lspy");
-    lval_t* standard = lval_add(lval_sexpr(), stdlib_str);
-    lval_t* std = builtin_load(e, standard);
-    if (argc >= 2) {
-        file_interpreter(e, argc, argv);
-    } else {
-        cli_interpreter(e);
-    }
-    mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
-    lval_del(std);
-    lenv_del(e);
-    return 0;
-}
-
-void cli_interpreter(lenv_t* e) {
-    printf("Lispy 1.0\n");
-    printf("Press Ctrl+c to exit.\n");
-    while (true) {
-        char* input = readline(">>> ");
-        add_history(input);
-        if (strcmp(input, "exit") == 0) {
-            free(input);
-            break;
-        }
-        mpc_result_t r;
-        if (mpc_parse("<stdin>", input, lispy, &r)) {
-            lval_t* y = lval_read(r.output);
-            assert(y != NULL);
-            lval_t* result = lval_eval(e, y);
-            lval_println(result);
-            lval_del(result);
-            mpc_ast_delete(r.output);
-        } else {
-            mpc_err_print(r.error);
-            mpc_err_delete(r.error);
-        }
-        free(input);
-    }
-    return;
-}
-
-void file_interpreter(lenv_t* e, int argc, char** argv) {
-    // loop over each supplied filename, starting from 1
-    for (int i = 1; i < argc; i++) {
-        // Argument list with a single argument, the filename
-        lval_t* argv_str = lval_str(argv[i]);
-        lval_t* args = lval_add(lval_sexpr(), argv_str);
-
-        // Pass to builtin load and get the result
-        lval_t* x = builtin_load(e, args);
-
-        // If the result is an error, be sure to print it
-        if (x->type == LVAL_ERR) {
-            lval_println(x);
-        }
-        lval_del(x);
-    }
+    return e;
 }
 
 mpc_parser_t* get_lispy_parser(void) {
