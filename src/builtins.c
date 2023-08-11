@@ -119,7 +119,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
     assert(e != NULL);
     assert(a != NULL);
     assert(fn != NULL);
-    LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
+    LASSERT_TYPE(fn, a, 0, LVAL_QEXPR)
 
     // First argument is symbol list
     lval_t* syms = a->cell[0];
@@ -134,7 +134,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
             fn,
             ltype_name(syms->cell[i]->type),
             ltype_name(LVAL_SYM)
-        );
+        )
     }
     // Check correct number of symbols and values
     LASSERT(
@@ -145,7 +145,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
         fn,
         syms->count,
         a->count - 1
-    );
+    )
     // Assign copies of values to symbols
     for (int i = 0; i < syms->count; i++) {
         // If 'def' define in globally. If 'put' define in locally.
@@ -166,9 +166,9 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
     UNUSED(e);
 
     // Check two arguments, each of which are Q-Expressions
-    LASSERT_NUM("\\", a, 2);
-    LASSERT_TYPE("\\", a, 0, LVAL_QEXPR);
-    LASSERT_TYPE("\\", a, 1, LVAL_QEXPR);
+    LASSERT_NUM("\\", a, 2)
+    LASSERT_TYPE("\\", a, 0, LVAL_QEXPR)
+    LASSERT_TYPE("\\", a, 1, LVAL_QEXPR)
 
     // Check first Q-Expression contains only Symbols
     for (int i = 0; i < a->cell[0]->count; i++) {
@@ -179,7 +179,7 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
             __func__,
             ltype_name(a->cell[0]->cell[i]->type),
             ltype_name(LVAL_SYM)
-        );
+        )
     }
     // Pop first two arguments and pass them to lval_lambda
     lval_t* formals = lval_pop(a, 0);
@@ -220,9 +220,9 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1);
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__func__, a, 0);
+    LASSERT_NUM(__func__, a, 1)
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
+    LASSERT_NOT_EMPTY(__func__, a, 0)
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
@@ -240,9 +240,9 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1);
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__func__, a, 0);
+    LASSERT_NUM(__func__, a, 1)
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
+    LASSERT_NOT_EMPTY(__func__, a, 0)
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
@@ -258,8 +258,8 @@ lval_t* builtin_eval(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1);
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
+    LASSERT_NUM(__func__, a, 1)
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
 
     lval_t* x = lval_take(a, 0);
     x->type = LVAL_SEXPR;
@@ -272,7 +272,7 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     UNUSED(e);
 
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(__func__, a, i, LVAL_QEXPR);
+        LASSERT_TYPE(__func__, a, i, LVAL_QEXPR)
     }
     lval_t* x = lval_pop(a, 0);
     assert(x != NULL);
@@ -291,11 +291,11 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     assert(a != NULL);
     assert(op != NULL);
     UNUSED(e);
-    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
+    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC)
 
     // Ensure all arguments are numbers
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(op, a, i, a->cell[0]->type);
+        LASSERT_TYPE(op, a, i, a->cell[0]->type)
     }
 
     // Pop the first element
@@ -468,10 +468,10 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 3);
-    LASSERT_TYPE(__func__, a, 0, LVAL_NUM);
-    LASSERT_TYPE(__func__, a, 1, LVAL_QEXPR);
-    LASSERT_TYPE(__func__, a, 2, LVAL_QEXPR);
+    LASSERT_NUM(__func__, a, 3)
+    LASSERT_TYPE(__func__, a, 0, LVAL_NUM)
+    LASSERT_TYPE(__func__, a, 1, LVAL_QEXPR)
+    LASSERT_TYPE(__func__, a, 2, LVAL_QEXPR)
 
     // Mark both expressions as evaluable
     lval_t* x;
@@ -500,9 +500,9 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     assert(a != NULL);
     assert(op != NULL);
     UNUSED(e);
-    LASSERT_NUM(op, a, 2);
-    LASSERT_TYPE(op, a, 0, LVAL_NUM);
-    LASSERT_TYPE(op, a, 1, LVAL_NUM);
+    LASSERT_NUM(op, a, 2)
+    LASSERT_TYPE(op, a, 0, LVAL_NUM)
+    LASSERT_TYPE(op, a, 1, LVAL_NUM)
 
     int r;
     if (strcmp(op, ">") == 0) {
@@ -557,7 +557,7 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
     assert(a != NULL);
     assert(op != NULL);
     UNUSED(e);
-    LASSERT_NUM(op, a, 2);
+    LASSERT_NUM(op, a, 2)
 
     int r;
     if (strcmp(op, "==") == 0) {
@@ -589,8 +589,8 @@ lval_t* builtin_ne(lenv_t* e, lval_t* a) {
 lval_t* builtin_load(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
-    LASSERT_NUM(__func__, a, 1);
-    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
+    LASSERT_NUM(__func__, a, 1)
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR)
 
     // Parse file given by string name
     mpc_result_t r;
@@ -655,8 +655,8 @@ lval_t* builtin_error(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1);
-    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
+    LASSERT_NUM(__func__, a, 1)
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR)
 
     // Construct error from first argument
     lval_t* err = lval_err(a->cell[0]->str);
