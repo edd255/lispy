@@ -69,7 +69,7 @@ void lval_print_expr(lval_t* v, char open, char close) {
     putchar(close);
 }
 
-/* Print an lval_t followed by a newline */
+/* Print a lval_t followed by a newline */
 void lval_println(lval_t* v) {
     assert(v != NULL);
 
