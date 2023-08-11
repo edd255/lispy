@@ -7,6 +7,7 @@
 /* Create a new number type lval_t */
 lval_t* lval_num(long x) {
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p, x: %ld", v, x);
     v->type = LVAL_NUM;
     v->num = x;
     return v;
@@ -14,6 +15,7 @@ lval_t* lval_num(long x) {
 
 lval_t* lval_dec(double x) {
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p, x: %d", v, x);
     v->type = LVAL_DEC;
     v->dec = x;
     return v;
@@ -21,6 +23,7 @@ lval_t* lval_dec(double x) {
 
 lval_t* lval_err(char* fmt, ...) {
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_ERR;
 
     // Create a va list and initialize it
@@ -29,12 +32,14 @@ lval_t* lval_err(char* fmt, ...) {
 
     // Allocate 512 bytes of space
     v->err = malloc(512);
+    log_debug("v->err: %p", v->err);
 
     // printf the error string with a maximum of 511 character
     vsnprintf(v->err, 511, fmt, va);
 
     // Reallocate to number of bytes actually used
     v->err = realloc(v->err, strlen(v->err) + 1);
+    log_debug("v->err: %p", v->err);
 
     // Cleanup our va list
     va_end(va);
@@ -44,16 +49,18 @@ lval_t* lval_err(char* fmt, ...) {
 
 lval_t* lval_sym(char* s) {
     assert(s != NULL);
-
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_SYM;
     v->sym = malloc(strlen(s) + 1);
+    log_debug("v->sym: %p", v->sym);
     strcpy(v->sym, s);
     return v;
 }
 
 lval_t* lval_sexpr(void) {
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_SEXPR;
     v->count = 0;
     v->cell = NULL;
@@ -62,6 +69,7 @@ lval_t* lval_sexpr(void) {
 
 lval_t* lval_qexpr(void) {
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_QEXPR;
     v->count = 0;
     v->cell = NULL;
@@ -70,8 +78,8 @@ lval_t* lval_qexpr(void) {
 
 lval_t* lval_fn(lbuiltin_t fn) {
     assert(fn != NULL);
-
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_FN;
     v->builtin = fn;
     return v;
@@ -82,6 +90,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     assert(body != NULL);
 
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_FN;
 
     // Set builtin to NULL
@@ -100,13 +109,16 @@ lval_t* lval_str(const char* s) {
     assert(s != NULL);
 
     lval_t* v = malloc(sizeof(lval_t));
+    log_debug("v: %p", v);
     v->type = LVAL_STR;
     v->str = malloc(strlen(s) + 1);
+    log_debug("v->str: %p", v->str);
     strcpy(v->str, s);
     return v;
 }
 
 void lval_del(lval_t* v) {
+    log_debug("freeing: %p", v);
     assert(v != NULL);
 
     if (v == NULL) {
@@ -163,6 +175,7 @@ void lval_del(lval_t* v) {
 
 lenv_t* lenv_new(void) {
     lenv_t* e = malloc(sizeof(lenv_t));
+    log_debug("e: %p", e);
     e->parent = NULL;
     e->count = 0;
     e->syms = NULL;
@@ -172,6 +185,7 @@ lenv_t* lenv_new(void) {
 
 void lenv_del(lenv_t* e) {
     assert(e != NULL);
+    log_debug("freeing: %p", e);
 
     for (int i = 0; i < e->count; i++) {
         free(e->syms[i]);
@@ -221,11 +235,14 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
     // If no existing entry found allocate space for new entry
     e->count++;
     e->vals = realloc(e->vals, sizeof(lval_t*) * e->count);
+    log_debug("e->vals: %p", e->vals);
     e->syms = realloc(e->syms, sizeof(char*) * e->count);
+    log_debug("e->syms: %p", e->syms);
 
     // Copy contents of lval and symbol string into new location
     e->vals[e->count - 1] = lval_copy(v);
     e->syms[e->count - 1] = malloc(strlen(k->sym) + 1);
+    log_debug("e->syms[e->count - 1]: %p", e->syms[e->count - 1]);
     strcpy(e->syms[e->count - 1], k->sym);
 }
 
@@ -233,12 +250,16 @@ lenv_t* lenv_copy(lenv_t* e) {
     assert(e != NULL);
 
     lenv_t* n = malloc(sizeof(lenv_t));
+    log_debug("n: %p", n);
     n->parent = e->parent;
     n->count = e->count;
     n->syms = malloc(sizeof(char*) * (n->count));
+    log_debug("n->syms: %p", n->syms);
     n->vals = malloc(sizeof(lval_t*) * (n->count));
+    log_debug("n->vals: %p", n->vals);
     for (int i = 0; i < e->count; i++) {
         n->syms[i] = malloc(strlen(e->syms[i]) + 1);
+        log_debug("n->vals[%d]: %p", i, n->vals[i]);
         strcpy(n->syms[i], e->syms[i]);
         n->vals[i] = lval_copy(e->vals[i]);
     }
