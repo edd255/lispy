@@ -202,7 +202,7 @@ lval_t* lenv_get(lenv_t* e, lval_t* k) {
     }
 }
 
-void lenv_put(lenv_t* e, lval_t* k, lval_t* v) {
+void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
     assert(e != NULL);
     assert(k != NULL);
     assert(v != NULL);
@@ -245,7 +245,7 @@ lenv_t* lenv_copy(lenv_t* e) {
     return n;
 }
 
-void lenv_def(lenv_t* e, lval_t* k, lval_t* v) {
+void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
     assert(e != NULL);
     assert(k != NULL);
     assert(v != NULL);

@@ -95,9 +95,9 @@ void lval_del(lval_t* v);
 lenv_t* lenv_new(void);
 void lenv_del(lenv_t* e);
 lval_t* lenv_get(lenv_t* e, lval_t* k);
-void lenv_put(lenv_t* e, lval_t* k, lval_t* v);
+void lenv_put(lenv_t* e, const lval_t* k, lval_t* v);
 lenv_t* lenv_copy(lenv_t* e);
-void lenv_def(lenv_t* e, lval_t* k, lval_t* v);
+void lenv_def(lenv_t* e, const lval_t* k, lval_t* v);
 
 //=== STRUCTS AND ENUMS ========================================================
 
