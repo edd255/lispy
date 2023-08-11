@@ -57,16 +57,15 @@ void add_history(char* unused) {
 
 int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
-    setup_parser();
     FILE* log_file = NULL;
     parse_args(argc, argv);
     if (write_logs != 0) {
         log_file = prepare_logfile();
-        printf("write logs to file %p\n", (void*)log_file);
         log_add_fp(log_file, 0);
     }
 
     // Set up the interpreter
+    setup_parser();
     lenv_t* e = set_env();
     lval_t* std = NULL;
     if (no_stdlib == 0) {
@@ -84,7 +83,6 @@ int main(int argc, const char** argv) {
 
 void parse_args(int argc, const char** argv) {
     // Command-line parsing
-    log_debug("Parsing arguments...");
     struct argparse_option options[] = {
         OPT_HELP(),
         OPT_GROUP("Basic options"),
