@@ -39,6 +39,7 @@ LDFLAGS   += -ledit -lm
 CFLAGS    := $(INC_FLAGS) -MMD -MP
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 MAKEFLAGS := --jobs=$(shell nproc)
+VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
 OPT := -Ofast -DNDEBUG
@@ -52,5 +53,5 @@ SAN := -fsanitize=address \
 
 RELEASE   := ${ERR} ${OPT}
 DEBUGGING := ${ERR} ${DBG}
-MEMCHECK  := ${ERR} ${DBG} ${SAN}
+SANITIZED := ${ERR} ${DBG} ${SAN}
 

@@ -3,7 +3,7 @@ include config.mk
 #==== RULES ====================================================================
 #---- RELEASE ------------------------------------------------------------------
 
-$(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS)) 
+$(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS))
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
@@ -34,14 +34,14 @@ debugging: $(BIN)_debugging
 $(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
-	$(Q)$(CC) $(MEMCHECK) $+ -o $@ $(LDFLAGS)
+	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: src/%.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(MEMCHECK) $(CFLAGS) -c $< -o $@
+	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
 
-memcheck: $(BIN)_sanitized
+sanitized: $(BIN)_sanitized
 
 #---- CLEANING -----------------------------------------------------------------
 
@@ -58,8 +58,16 @@ style:
 #---- ANALYSIS -----------------------------------------------------------------
 
 analyze:
-	scan-build make all
-	cppcheck src/ --enable=all --suppress=missingIncludeSystem 2> cppcheck.log
+	$(Q)echo "====> Running scan-build..."
+	$(Q)scan-build make all
+	$(Q)echo "====> Running cppcheck..."
+	$(Q)cppcheck src/ --enable=all --suppress=missingIncludeSystem 2> cppcheck.log
+
+memcheck: debugging
+	$(Q)echo "====> Running valgrind..."
+	$(Q)valgrind ${VALGRIND_FLAGS} $(BIN)_debugging
+
+
 
 #---- INSTALLING ---------------------------------------------------------------
 
@@ -81,7 +89,8 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging memcheck
+all: style release debugging sanitized
+	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
