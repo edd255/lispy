@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
 
 void cli_interpreter(lenv_t* e) {
     printf("Lispy 1.0\n");
-    printf("Press Ctrcl+c to exit.\n");
+    printf("Press Ctrl+c to exit.\n");
     while (true) {
         char* input = readline(">>> ");
         add_history(input);

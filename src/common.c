@@ -1,6 +1,5 @@
 #include "common.h"
 
-#include "builtins.h"
 #include "values.h"
 
 //=== CONSTRUCTORS =============================================================
@@ -208,7 +207,7 @@ void lenv_put(lenv_t* e, lval_t* k, lval_t* v) {
     assert(k != NULL);
     assert(v != NULL);
 
-    // Iterate over all items in enviroment. This is to see if variable already
+    // Iterate over all items in environment. This is to see if variable already
     // exists.
     for (int i = 0; i < e->count; i++) {
         // If variable is found delete item at that position. And replace with
