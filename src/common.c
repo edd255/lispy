@@ -137,6 +137,7 @@ void lval_del(lval_t* v) {
                 lval_del(v->formals);
                 lval_del(v->body);
             }
+            break;
         }
         case LVAL_STR: {
             if (!(v->str)) {
