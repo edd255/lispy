@@ -54,5 +54,6 @@ Mkfile.old
 dkms.conf
 
 .vscode
+.idea
 cppcheck.log
 .watchdog-*
