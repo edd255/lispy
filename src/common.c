@@ -131,15 +131,17 @@ void lval_del(lval_t* v) {
         }
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
-            if (v->err != NULL) {
-                free(v->err);
+            if (v->err == NULL) {
+                return;
             }
+            free(v->err);
             break;
         }
         case LVAL_SYM: {
-            if (v->sym != NULL) {
-                free(v->sym);
+            if (v->sym == NULL) {
+                return;
             }
+            free(v->sym);
             break;
         }
         case LVAL_FN: {
@@ -151,20 +153,19 @@ void lval_del(lval_t* v) {
             break;
         }
         case LVAL_STR: {
-            if (!(v->str)) {
-                free(v->str);
+            if (v->str == NULL) {
+                return;
             }
+            free(v->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
         case LVAL_QEXPR:
         case LVAL_SEXPR: {
-            if (!(v->cell)) {
-                for (int i = 0; i < v->count; i++) {
-                    lval_del(v->cell[i]);
-                }
-                free(v->cell);
+            for (int i = 0; i < v->count; i++) {
+                lval_del(v->cell[i]);
             }
+            free(v->cell);
             break;
         }
     }
