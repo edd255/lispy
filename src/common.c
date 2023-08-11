@@ -96,7 +96,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     return v;
 }
 
-lval_t* lval_str(char* s) {
+lval_t* lval_str(const char* s) {
     assert(s != NULL);
 
     lval_t* v = malloc(sizeof(lval_t));
