@@ -124,7 +124,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
 
     // While arguments still remain to be processed
     while (a->count) {
-        // If we've ran out of formal arguments to bind
+        // If we've run out of formal arguments to bind
         if (f->formals->count == 0) {
             lval_del(a);
             return lval_err(
@@ -254,9 +254,9 @@ int lval_eq(lval_t* x, lval_t* y) {
                 if (!lval_eq(x->cell[i], y->cell[i])) {
                     return false;
                 }
-                // Otherwise lists must be equal;
-                return true;
             }
+            // Otherwise lists must be equal;
+            return true;
         }
     }
     return false;
