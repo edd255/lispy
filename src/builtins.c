@@ -130,7 +130,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
             a,
             (syms->cell[i]->type == LVAL_SYM),
             "Error in procedure %s. Function '%s' cannot define non-symbol! Got %s. Expected %s.",
-            __FUNCTION__,
+            __func__,
             fn,
             ltype_name(syms->cell[i]->type),
             ltype_name(LVAL_SYM)
@@ -141,7 +141,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
         a,
         (syms->count == a->count - 1),
         "Error in procedure %s. Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
-        __FUNCTION__,
+        __func__,
         fn,
         syms->count,
         a->count - 1
@@ -176,7 +176,7 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
             a,
             (a->cell[0]->cell[i]->type == LVAL_SYM),
             "Error in procedure %s. Cannot define non-symbol. Got %s. Expected %s.",
-            __FUNCTION__,
+            __func__,
             ltype_name(a->cell[0]->cell[i]->type),
             ltype_name(LVAL_SYM)
         );
@@ -220,9 +220,9 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__FUNCTION__, a, 1);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__FUNCTION__, a, 0);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY(__func__, a, 0);
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
@@ -240,9 +240,9 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__FUNCTION__, a, 1);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__FUNCTION__, a, 0);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY(__func__, a, 0);
 
     // Take first argument
     lval_t* v = lval_take(a, 0);
@@ -258,8 +258,8 @@ lval_t* builtin_eval(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__FUNCTION__, a, 1);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_QEXPR);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
 
     lval_t* x = lval_take(a, 0);
     x->type = LVAL_SEXPR;
@@ -272,7 +272,7 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     UNUSED(e);
 
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(__FUNCTION__, a, i, LVAL_QEXPR);
+        LASSERT_TYPE(__func__, a, i, LVAL_QEXPR);
     }
     lval_t* x = lval_pop(a, 0);
     assert(x != NULL);
@@ -468,10 +468,10 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__FUNCTION__, a, 3);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_NUM);
-    LASSERT_TYPE(__FUNCTION__, a, 1, LVAL_QEXPR);
-    LASSERT_TYPE(__FUNCTION__, a, 2, LVAL_QEXPR);
+    LASSERT_NUM(__func__, a, 3);
+    LASSERT_TYPE(__func__, a, 0, LVAL_NUM);
+    LASSERT_TYPE(__func__, a, 1, LVAL_QEXPR);
+    LASSERT_TYPE(__func__, a, 2, LVAL_QEXPR);
 
     // Mark both expressions as evaluable
     lval_t* x;
@@ -507,15 +507,16 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     int r;
     if (strcmp(op, ">") == 0) {
         r = (a->cell[0]->num > a->cell[1]->num);
-    }
-    if (strcmp(op, "<") == 0) {
+    } else if (strcmp(op, "<") == 0) {
         r = (a->cell[0]->num < a->cell[1]->num);
-    }
-    if (strcmp(op, ">=") == 0) {
+    } else if (strcmp(op, ">=") == 0) {
         r = (a->cell[0]->num >= a->cell[1]->num);
-    }
-    if (strcmp(op, "<=") == 0) {
+    } else if (strcmp(op, "<=") == 0) {
         r = (a->cell[0]->num <= a->cell[1]->num);
+    } else {
+        return lval_err(
+            "Error during magnitude comparison: Neither >, <, >=, <= used!"
+        );
     }
 
     lval_del(a);
@@ -561,9 +562,10 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
     int r;
     if (strcmp(op, "==") == 0) {
         r = lval_eq(a->cell[0], a->cell[1]);
-    }
-    if (strcmp(op, "!=") == 0) {
+    } else if (strcmp(op, "!=") == 0) {
         r = !lval_eq(a->cell[0], a->cell[1]);
+    } else {
+        return lval_err("Error during comparison: Neither == nor != used!");
     }
     lval_del(a);
     return lval_num(r);
@@ -587,8 +589,8 @@ lval_t* builtin_ne(lenv_t* e, lval_t* a) {
 lval_t* builtin_load(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
-    LASSERT_NUM(__FUNCTION__, a, 1);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_STR);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
 
     // Parse file given by string name
     mpc_result_t r;
@@ -653,8 +655,8 @@ lval_t* builtin_error(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
-    LASSERT_NUM(__FUNCTION__, a, 1);
-    LASSERT_TYPE(__FUNCTION__, a, 0, LVAL_STR);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
 
     // Construct error from first argument
     lval_t* err = lval_err(a->cell[0]->str);
