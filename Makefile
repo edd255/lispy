@@ -66,11 +66,17 @@ analyze:
 install: release
 	$(Q)echo "====> Installing the binary..."
 	$(Q)cp $(BIN)_release $(PREFIX)/bin/$(NAME)
+	$(Q)echo "====> Installing the library..."
+	$(Q)$(MKDIR) $(PREFIX)/lib/lispy
+	$(Q)cp $(ASSETS)/stdlib/stdlib.lspy $(PREFIX)/lib/lispy/
 	$(Q)echo "====> Finished!"
 	
 uninstall:
 	$(Q)echo "====> Removing the binary..."
-	$(Q)$(RM) $(INSTALL_BIN_DIR)/$(NAME)
+	$(Q)$(RM) $(PREFIX)/bin/$(NAME)
+	$(Q)echo "====> Removing the library..."
+	$(Q)$(RM) $(PREFIX)/lib/lispy/stdlib.lspy
+	$(Q)rmdir $(PREFIX)/lib/lispy/
 	$(Q)echo "====> Finished!"
 
 #==== EPILOGUE =================================================================

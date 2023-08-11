@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     lenv_t* e = lenv_new();
     lenv_add_builtins(e);
     lval_t* stdlib_str =
-        lval_str("/home/edd/code/lispy/assets/stdlib/stdlib.lspy");
+        lval_str("/usr/local/lib/lispy/stdlib.lspy");
     lval_t* standard = lval_add(lval_sexpr(), stdlib_str);
     lval_t* std = builtin_load(e, standard);
     if (argc >= 2) {
