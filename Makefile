@@ -59,7 +59,7 @@ style:
 
 analyze:
 	scan-build make all
-	cppcheck src/ --enable=all 2> cppcheck.log
+	cppcheck src/ --enable=all --suppress=missingIncludeSystem 2> cppcheck.log
 
 #---- INSTALLING ---------------------------------------------------------------
 
