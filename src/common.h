@@ -6,10 +6,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "../deps/mpc/mpc.h"
 #include "../deps/ulog/logger.h"
-#include "../deps/watchdog/watchdog.h"
 
 //=== DECLARATIONS =============================================================
 //--- Macros -------------------------------------------------------------------
