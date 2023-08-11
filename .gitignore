@@ -57,3 +57,4 @@ dkms.conf
 .idea
 cppcheck.log
 .watchdog-*
+lispy.log
