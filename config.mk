@@ -7,7 +7,6 @@ VERSION := 0.1
 #---- TOOLS --------------------------------------------------------------------
 
 CCACHE_EXISTS := $(bash -v ccache 2> /dev/null)
-CC     := $(CCACHE) clang
 ifeq ($(CCACHE_EXISTS),)
 	CC := clang
 else
