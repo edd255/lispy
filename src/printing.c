@@ -77,7 +77,7 @@ void lval_println(lval_t* v) {
     putchar('\n');
 }
 
-void lval_print_str(lval_t* v) {
+void lval_print_str(const lval_t* v) {
     assert(v != NULL);
 
     if (v == NULL) {

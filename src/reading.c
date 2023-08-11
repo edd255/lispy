@@ -4,7 +4,7 @@
 
 //==== READING =================================================================
 
-lval_t* lval_read_num(mpc_ast_t* tree) {
+lval_t* lval_read_num(const mpc_ast_t* tree) {
     assert(tree != NULL);
 
     errno = 0;

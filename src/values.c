@@ -84,7 +84,7 @@ lval_t* lval_join(lval_t* x, lval_t* y) {
     return x;
 }
 
-lval_t* lval_pop(lval_t* v, int i) {
+lval_t* lval_pop(lval_t* v, const int i) {
     assert(v != NULL);
 
     // Find the item at "i"
@@ -101,7 +101,7 @@ lval_t* lval_pop(lval_t* v, int i) {
     return x;
 }
 
-lval_t* lval_take(lval_t* v, int i) {
+lval_t* lval_take(lval_t* v, const int i) {
     assert(v != NULL);
 
     lval_t* x = lval_pop(v, i);
@@ -207,7 +207,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
     }
 }
 
-int lval_eq(lval_t* x, lval_t* y) {
+int lval_eq(const lval_t* x, const lval_t* y) {
     assert(x != NULL);
     assert(y != NULL);
 
