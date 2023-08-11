@@ -78,7 +78,7 @@ install: release
 	
 uninstall:
 	$(Q)echo "====> Removing the binary..."
-	$(Q)$(RM) $(INSTALL_BIN_DIR)/$(NAME)
+	$(Q)$(RM) $(PREFIX)/bin/$(NAME)
 	$(Q)echo "====> Removing the library..."
 	$(Q)$(RM) $(PREFIX)/lib/lispy/stdlib.lspy
 	$(Q)rmdir $(PREFIX)/lib/lispy/
