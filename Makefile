@@ -29,7 +29,7 @@ $(BUILD_DIR)/%.dbg.o: src/%.c
 
 debugging: $(BIN)_debugging
 
-#---- MEMCHECK -----------------------------------------------------------------
+#---- SANITIZED ----------------------------------------------------------------
 
 $(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
@@ -66,8 +66,6 @@ analyze:
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
 	$(Q)valgrind ${VALGRIND_FLAGS} $(BIN)_debugging
-
-
 
 #---- INSTALLING ---------------------------------------------------------------
 
