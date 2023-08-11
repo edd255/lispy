@@ -41,8 +41,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <time.h>
 #include <stdio.h>
 #include <assert.h>
-#include <panic/panic.h>
-#include <process/process.h>
+#include "../panic/panic.h"
+#include "../process/process.h"
 
 /*
  * Global variables

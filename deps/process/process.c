@@ -31,7 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <memory.h>
 #include <assert.h>
 #include <unistd.h>
-#include <panic/panic.h>
+#include "../panic/panic.h"
 #include "process.h"
 
 #define MAGIC_NUMBER    0xdeadbeaf

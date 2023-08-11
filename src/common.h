@@ -5,11 +5,11 @@
 #include <editline/readline.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "../deps/mpc/mpc.h"
 #include "../deps/ulog/logger.h"
+#include "../deps/watchdog/watchdog.h"
 
 //=== DECLARATIONS =============================================================
 //--- Macros -------------------------------------------------------------------

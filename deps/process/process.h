@@ -30,7 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdio.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include <error/error.h>
+#include "../error/error.h"
 
 #if !(defined(__GNUC__) || defined(__clang__))
 __attribute__(...)
