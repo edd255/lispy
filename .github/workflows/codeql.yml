@@ -80,9 +80,3 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
-
-    - name: Upload analysis results to GitHub
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: c-results.sarif
-        wait-for-processing: true
