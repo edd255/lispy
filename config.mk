@@ -46,7 +46,6 @@ DBG := -Og -g
 SAN := -fsanitize=address \
 	   -fsanitize=pointer-compare \
 	   -fsanitize=pointer-subtract \
-	   -fsanitize=shadow-call-stack \
 	   -fsanitize=leak \
 	   -fsanitize=undefined \
 	   -fsanitize-address-use-after-scope
