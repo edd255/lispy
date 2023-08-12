@@ -636,7 +636,7 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {
-    log_debug("%p %p", e, a);
+    log_debug("Address (e): %p. Address (a): %p", e, a);
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
@@ -648,9 +648,9 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
     }
     // Print a newline and delete arguments
     putchar('\n');
-    log_debug("%s", ltype_name(a->type));
+    log_debug("Type: %s", ltype_name(a->type));
     for (int i = 0; i < a->count; i++) {
-        log_debug("%p", a->cell[i]);
+        log_debug("Address (a->cell[%d]): %p", i, a->cell[i]);
     }
     lval_del(a);
     return lval_sexpr();
