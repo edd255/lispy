@@ -77,7 +77,6 @@ int main(int argc, const char** argv) {
         cli_interpreter(e);
     }
     cleanup(std, e);
-    log_debug("Exiting...");
     return 0;
 }
 
@@ -106,7 +105,6 @@ void parse_args(int argc, const char** argv) {
 }
 
 void cleanup(lval_t* std, lenv_t* e) {
-    log_debug("Cleaning up...");
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
     if (NULL != std) {
         lval_del(std);
@@ -115,11 +113,9 @@ void cleanup(lval_t* std, lenv_t* e) {
 }
 
 lval_t* get_stdlib(lenv_t* e) {
-    log_debug("Loading stdlib");
     lval_t* standard =
         lval_add(lval_sexpr(), lval_str("/usr/local/lib/lispy/stdlib.lspy"));
     lval_t* std = builtin_load(e, standard);
-    log_debug("Loaded stdlib");
     return std;
 }
 
