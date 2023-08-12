@@ -23,7 +23,7 @@ lval_t* lval_dec(double x) {
 
 lval_t* lval_err(char* fmt, ...) {
     lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Value (fmt): %s. Address: %p", fmt, v);
+    log_debug("Address: %p", v);
     v->type = LVAL_ERR;
 
     // Create a va list and initialize it
@@ -53,7 +53,7 @@ lval_t* lval_sym(char* s) {
     log_debug("Address (v): %p", v->sym);
     v->type = LVAL_SYM;
     v->sym = malloc(strlen(s) + 1);
-    log_debug("Value (v->sym): %s. Address: %p", s, v->sym);
+    log_debug("Address(v->sym): %p", v->sym);
     strcpy(v->sym, s);
     return v;
 }
@@ -112,7 +112,7 @@ lval_t* lval_str(const char* s) {
     log_debug("Address (v): %p", v);
     v->type = LVAL_STR;
     v->str = malloc(strlen(s) + 1);
-    log_debug("Value (v->str: %s. Address (v->str): %p", s, v->str);
+    log_debug("Address (v->str): %p", v->str);
     strcpy(v->str, s);
     return v;
 }
