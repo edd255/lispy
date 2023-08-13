@@ -6,24 +6,21 @@
 
 /* Create a new number type lval_t */
 lval_t* lval_num(long x) {
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Value (x): %ld. Address: %p", x, v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_NUM;
     v->num = x;
     return v;
 }
 
 lval_t* lval_dec(double x) {
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Value (x): %d. Address: %p", x, v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_DEC;
     v->dec = x;
     return v;
 }
 
 lval_t* lval_err(char* fmt, ...) {
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address: %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_ERR;
 
     // Create a va list and initialize it
@@ -31,15 +28,13 @@ lval_t* lval_err(char* fmt, ...) {
     va_start(va, fmt);
 
     // Allocate 512 bytes of space
-    v->err = malloc(512);
-    log_debug("Address (v->err): %p", v->err);
+    v->err = LOG_MALLOC(512);
 
     // printf the error string with a maximum of 511 character
     vsnprintf(v->err, 511, fmt, va);
 
     // Reallocate to number of bytes actually used
-    v->err = realloc(v->err, strlen(v->err) + 1);
-    log_debug("Address (v->err): %p", v->err);
+    v->err = LOG_REALLOC(v->err, strlen(v->err) + 1);
 
     // Cleanup our va list
     va_end(va);
@@ -49,18 +44,15 @@ lval_t* lval_err(char* fmt, ...) {
 
 lval_t* lval_sym(char* s) {
     assert(s != NULL);
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v->sym);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_SYM;
-    v->sym = malloc(strlen(s) + 1);
-    log_debug("Address(v->sym): %p", v->sym);
+    v->sym = LOG_MALLOC(strlen(s) + 1);
     strcpy(v->sym, s);
     return v;
 }
 
 lval_t* lval_sexpr(void) {
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_SEXPR;
     v->count = 0;
     v->cell = NULL;
@@ -68,8 +60,7 @@ lval_t* lval_sexpr(void) {
 }
 
 lval_t* lval_qexpr(void) {
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_QEXPR;
     v->count = 0;
     v->cell = NULL;
@@ -78,8 +69,7 @@ lval_t* lval_qexpr(void) {
 
 lval_t* lval_fn(lbuiltin_t fn) {
     assert(fn != NULL);
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_FN;
     v->builtin = fn;
     return v;
@@ -89,8 +79,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     assert(formals != NULL);
     assert(body != NULL);
 
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_FN;
 
     // Set builtin to NULL
@@ -107,18 +96,14 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
 
 lval_t* lval_str(const char* s) {
     assert(s != NULL);
-
-    lval_t* v = malloc(sizeof(lval_t));
-    log_debug("Address (v): %p", v);
+    lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_STR;
-    v->str = malloc(strlen(s) + 1);
-    log_debug("Address (v->str): %p", v->str);
+    v->str = LOG_MALLOC(strlen(s) + 1);
     strcpy(v->str, s);
     return v;
 }
 
 void lval_del(lval_t* v) {
-    log_debug("Freeing address: %p", v);
     assert(v != NULL);
 
     if (v == NULL) {
@@ -134,14 +119,14 @@ void lval_del(lval_t* v) {
             if (v->err == NULL) {
                 return;
             }
-            free(v->err);
+            LOG_FREE(v->err);
             break;
         }
         case LVAL_SYM: {
             if (v->sym == NULL) {
                 return;
             }
-            free(v->sym);
+            LOG_FREE(v->sym);
             break;
         }
         case LVAL_FN: {
@@ -156,7 +141,7 @@ void lval_del(lval_t* v) {
             if (v->str == NULL) {
                 return;
             }
-            free(v->str);
+            LOG_FREE(v->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
@@ -165,18 +150,17 @@ void lval_del(lval_t* v) {
             for (int i = 0; i < v->count; i++) {
                 lval_del(v->cell[i]);
             }
-            free(v->cell);
+            LOG_FREE(v->cell);
             break;
         }
     }
-    free(v);
+    LOG_FREE(v);
 }
 
 //=== ENVIRONMENT ==============================================================
 
 lenv_t* lenv_new(void) {
-    lenv_t* e = malloc(sizeof(lenv_t));
-    log_debug("Address (e): %p", e);
+    lenv_t* e = LOG_MALLOC(sizeof(lenv_t));
     e->parent = NULL;
     e->count = 0;
     e->syms = NULL;
@@ -186,15 +170,14 @@ lenv_t* lenv_new(void) {
 
 void lenv_del(lenv_t* e) {
     assert(e != NULL);
-    log_debug("Freeing address: %p", e);
 
     for (int i = 0; i < e->count; i++) {
-        free(e->syms[i]);
+        LOG_FREE(e->syms[i]);
         lval_del(e->vals[i]);
     }
-    free(e->syms);
-    free(e->vals);
-    free(e);
+    LOG_FREE(e->syms);
+    LOG_FREE(e->vals);
+    LOG_FREE(e);
 }
 
 lval_t* lenv_get(lenv_t* e, lval_t* k) {
@@ -235,16 +218,13 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
     }
     // If no existing entry found allocate space for new entry
     e->count++;
-    e->vals = realloc(e->vals, sizeof(lval_t*) * e->count);
-    log_debug("Address (e->vals): %p", e->vals);
+    e->vals = LOG_REALLOC(e->vals, sizeof(lval_t*) * e->count);
 
-    e->syms = realloc(e->syms, sizeof(char*) * e->count);
-    log_debug("Address (e->syms): %p", e->syms);
+    e->syms = LOG_REALLOC(e->syms, sizeof(char*) * e->count);
 
     // Copy contents of lval and symbol string into new location
     e->vals[e->count - 1] = lval_copy(v);
-    e->syms[e->count - 1] = malloc(strlen(k->sym) + 1);
-    log_debug("Address (e->syms[e->count - 1]): %p", e->syms[e->count - 1]);
+    e->syms[e->count - 1] = LOG_MALLOC(strlen(k->sym) + 1);
 
     strcpy(e->syms[e->count - 1], k->sym);
 }
@@ -252,18 +232,13 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
 lenv_t* lenv_copy(lenv_t* e) {
     assert(e != NULL);
 
-    lenv_t* n = malloc(sizeof(lenv_t));
-    log_debug("Address (n): %p", n);
+    lenv_t* n = LOG_MALLOC(sizeof(lenv_t));
     n->parent = e->parent;
     n->count = e->count;
-    n->syms = malloc(sizeof(char*) * (n->count));
-    log_debug("Address (n->syms): %p", n->syms);
-    n->vals = malloc(sizeof(lval_t*) * (n->count));
-    log_debug("n->vals: %p", n->vals);
-    log_debug("Address (n->vals): %p", n->vals);
+    n->syms = LOG_MALLOC(sizeof(char*) * (n->count));
+    n->vals = LOG_MALLOC(sizeof(lval_t*) * (n->count));
     for (int i = 0; i < e->count; i++) {
-        n->syms[i] = malloc(strlen(e->syms[i]) + 1);
-        log_debug("Address (n->vals[%d]): %p", i, n->vals[i]);
+        n->syms[i] = LOG_MALLOC(strlen(e->syms[i]) + 1);
         strcpy(n->syms[i], e->syms[i]);
         n->vals[i] = lval_copy(e->vals[i]);
     }
@@ -281,4 +256,36 @@ void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
     }
     // Put value in e
     lenv_put(e, k, v);
+}
+
+//=== LOGGING MEMORY ALLOCATIONS ===============================================
+void* log_malloc(size_t size, const char* fn, const char* file, int line) {
+    void* ptr = malloc(size);
+    log_log(LOG_DEBUG, fn, file, line, "Address: %p", ptr);
+    return ptr;
+}
+
+void* log_realloc(
+    void* old_ptr,
+    size_t size,
+    const char* fn,
+    const char* file,
+    int line
+) {
+    void* new_ptr = realloc(old_ptr, size);
+    log_log(
+        LOG_DEBUG,
+        fn,
+        file,
+        line,
+        "Old address: %p. New Address: %p",
+        old_ptr,
+        new_ptr
+    );
+    return new_ptr;
+}
+
+void log_free(void* ptr, const char* fn, const char* file, int line) {
+    free(ptr);
+    log_log(LOG_DEBUG, fn, file, line, "Freeing: %p", ptr);
 }

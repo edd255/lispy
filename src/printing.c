@@ -84,7 +84,7 @@ void lval_print_str(const lval_t* v) {
         return;
     }
     // Make a copy of the string
-    char* escaped = malloc(strlen(v->str) + 1);
+    char* escaped = LOG_MALLOC(strlen(v->str) + 1);
     strcpy(escaped, v->str);
 
     // Pass it through the escape function
@@ -94,7 +94,7 @@ void lval_print_str(const lval_t* v) {
     printf("\"%s\"", escaped);
 
     // free copied string
-    free(escaped);
+    LOG_FREE(escaped);
 }
 
 char* ltype_name(int t) {

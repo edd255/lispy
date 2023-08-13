@@ -627,7 +627,7 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 
         // Create new error message using it
         lval_t* err = lval_err("Could not load library %s", err_msg);
-        free(err_msg);
+        LOG_FREE(err_msg);
         lval_del(a);
 
         // Cleanup and return error
@@ -636,7 +636,6 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {
-    log_debug("Address (e): %p. Address (a): %p", e, a);
     assert(e != NULL);
     assert(a != NULL);
     UNUSED(e);
@@ -648,10 +647,6 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
     }
     // Print a newline and delete arguments
     putchar('\n');
-    log_debug("Type: %s", ltype_name(a->type));
-    for (int i = 0; i < a->count; i++) {
-        log_debug("Address (a->cell[%d]): %p", i, a->cell[i]);
-    }
     lval_del(a);
     return lval_sexpr();
 }

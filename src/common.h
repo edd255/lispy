@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include <assert.h>
+#include <malloc.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -101,10 +102,10 @@ void lenv_def(lenv_t* e, const lval_t* k, lval_t* v);
 //=== STRUCTS AND ENUMS ========================================================
 
 /* Create enumeration of possible error types */
-enum { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
+enum LERR { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
 
 /* Create enumeration of possible lval_t types */
-enum {
+enum LVAL {
     LVAL_ERR,
     LVAL_NUM,
     LVAL_DEC,
@@ -143,5 +144,26 @@ struct lenv_t {
     char** syms;
     lval_t** vals;
 };
+
+void* log_malloc(size_t size, const char* fn, const char* file, int line);
+void* log_realloc(
+    void* old_ptr,
+    size_t size,
+    const char* fn,
+    const char* file,
+    int line
+);
+void log_free(void* ptr, const char* fn, const char* file, int line);
+
+#ifdef LOG_ALLOCS
+    #define LOG_MALLOC(size) log_malloc(size, __func__, __FILE__, __LINE__)
+    #define LOG_REALLOC(old_ptr, size) \
+        log_realloc(old_ptr, size, __func__, __FILE__, __LINE__)
+    #define LOG_FREE(ptr) log_free(ptr, __func__, __FILE__, __LINE__)
+#else
+    #define LOG_MALLOC(size)           malloc(size)
+    #define LOG_REALLOC(old_ptr, size) realloc(old_ptr, size)
+    #define LOG_FREE(ptr)              free(ptr)
+#endif
 
 #endif
