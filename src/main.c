@@ -1,4 +1,6 @@
 #include <editline/readline.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "../deps/argparse/argparse.h"
 #include "builtins.h"
@@ -189,9 +191,19 @@ lenv_t* set_env(void) {
 }
 
 FILE* prepare_logfile(void) {
-    FILE* log_file;
-    log_file = fopen("lispy.log", "w");
-    return log_file;
+    FILE* log;
+    char* cache_dir = getenv("XDG_CACHE_HOME");
+    if (cache_dir == NULL) {
+        free(cache_dir);
+        log_debug("XDG_CACHE_HOME not set");
+        return NULL;
+    }
+    char* log_file = malloc(strlen(cache_dir) + strlen("/lispy/lispy.log") + 1);
+    strcpy(log_file, cache_dir);
+    strcat(log_file, "/lispy/lispy.log");
+    log = fopen(log_file, "w");
+    free(log_file);
+    return log;
 }
 
 mpc_parser_t* get_lispy_parser(void) {
