@@ -32,10 +32,10 @@ mpc_parser_t* lispy;
 //--- Command-line argument parsing --------------------------------------------
 char* file = NULL;
 int no_stdlib = 0;
-int write_logs = 0;
+int print_logs = 0;
 
 static const char* const usages[] = {
-    "lispy --filename=<FILENAME> --nostdlib --write_logs ",
+    "lispy --filename=<FILENAME> --nostdlib --print_logs ",
     NULL,
 };
 
@@ -45,7 +45,7 @@ int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
     FILE* log_file = NULL;
     parse_args(argc, argv);
-    if (write_logs != 0) {
+    if (print_logs == 0) {
         log_file = prepare_logfile();
         log_add_fp(log_file, 0);
         log_set_quiet(true);
@@ -76,9 +76,9 @@ void parse_args(int argc, const char** argv) {
         OPT_BOOLEAN('n', "no_stdlib", &no_stdlib, "exclude stdlib", NULL, 0, 0),
         OPT_BOOLEAN(
             'w',
-            "write_logs",
-            &write_logs,
-            "write logs to file",
+            "print_logs",
+            &print_logs,
+            "print logs to stderr",
             NULL,
             0,
             0
