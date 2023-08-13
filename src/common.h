@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../deps/log/log.h"
+#include "../deps/logger/log.h"
 #include "../deps/mpc/mpc.h"
 
 //=== DECLARATIONS =============================================================

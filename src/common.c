@@ -261,7 +261,7 @@ void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
 //=== LOGGING MEMORY ALLOCATIONS ===============================================
 void* log_malloc(size_t size, const char* fn, const char* file, int line) {
     void* ptr = malloc(size);
-    log_log(LOG_DEBUG, fn, file, line, "Address: %p", ptr);
+    log_log(LOGC_DEBUG, fn, file, line, "Address: %p", ptr);
     return ptr;
 }
 
@@ -274,7 +274,7 @@ void* log_realloc(
 ) {
     void* new_ptr = realloc(old_ptr, size);
     log_log(
-        LOG_DEBUG,
+        LOGC_DEBUG,
         fn,
         file,
         line,
@@ -287,5 +287,5 @@ void* log_realloc(
 
 void log_free(void* ptr, const char* fn, const char* file, int line) {
     free(ptr);
-    log_log(LOG_DEBUG, fn, file, line, "Freeing: %p", ptr);
+    log_log(LOGC_DEBUG, fn, file, line, "Freeing: %p", ptr);
 }
