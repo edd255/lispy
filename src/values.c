@@ -8,7 +8,7 @@
 lval_t* lval_copy(lval_t* v) {
     assert(v != NULL);
 
-    lval_t* x = malloc(sizeof(lval_t));
+    lval_t* x = LOG_MALLOC(sizeof(lval_t));
     x->type = v->type;
     switch (v->type) {
         // Copy Functions and Numbers Directly
@@ -33,17 +33,17 @@ lval_t* lval_copy(lval_t* v) {
         }
         // Copy Strings using malloc and strcpy
         case LVAL_ERR: {
-            x->err = malloc(strlen(v->err) + 1);
+            x->err = LOG_MALLOC(strlen(v->err) + 1);
             strcpy(x->err, v->err);
             break;
         }
         case LVAL_SYM: {
-            x->sym = malloc(strlen(v->sym) + 1);
+            x->sym = LOG_MALLOC(strlen(v->sym) + 1);
             strcpy(x->sym, v->sym);
             break;
         }
         case LVAL_STR: {
-            x->str = malloc(strlen(v->str) + 1);
+            x->str = LOG_MALLOC(strlen(v->str) + 1);
             strcpy(x->str, v->str);
             break;
         }
@@ -51,7 +51,7 @@ lval_t* lval_copy(lval_t* v) {
         case LVAL_SEXPR:
         case LVAL_QEXPR:
             x->count = v->count;
-            x->cell = malloc(sizeof(lval_t*) * x->count);
+            x->cell = LOG_MALLOC(sizeof(lval_t*) * x->count);
             for (int i = 0; i < x->count; i++) {
                 x->cell[i] = lval_copy(v->cell[i]);
             }
@@ -65,7 +65,7 @@ lval_t* lval_add(lval_t* v, lval_t* x) {
     assert(x != NULL);
 
     v->count++;
-    v->cell = realloc(v->cell, sizeof(lval_t*) * v->count);
+    v->cell = LOG_REALLOC(v->cell, sizeof(lval_t*) * v->count);
     v->cell[v->count - 1] = x;
     return v;
 }
@@ -97,7 +97,7 @@ lval_t* lval_pop(lval_t* v, const int i) {
     v->count--;
 
     // Reallocate the memory used
-    v->cell = realloc(v->cell, sizeof(lval_t*) * v->count);
+    v->cell = LOG_REALLOC(v->cell, sizeof(lval_t*) * v->count);
     return x;
 }
 

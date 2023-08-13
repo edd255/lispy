@@ -12,6 +12,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Including an (optional) standard library
 - [X] Improving the macros to support printing the C function name
 - [X] Using a sane argument parser
+- [X] Using a logging memory allocator
 - [X] Using a logger
 - [X] Fixing memory bugs
 

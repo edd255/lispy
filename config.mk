@@ -48,7 +48,7 @@ VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
 OPT := -Ofast -DNDEBUG
-DBG := -Og -g 
+DBG := -Og -g -DLOG_ALLOCS
 SAN := -fsanitize=address \
 	   -fsanitize=pointer-compare \
 	   -fsanitize=pointer-subtract \

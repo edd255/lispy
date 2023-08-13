@@ -48,6 +48,7 @@ int main(int argc, const char** argv) {
     if (write_logs != 0) {
         log_file = prepare_logfile();
         log_add_fp(log_file, 0);
+        log_set_quiet(true);
     }
 
     // Set up the interpreter
