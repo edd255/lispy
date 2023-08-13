@@ -40,8 +40,8 @@ DEPS := $(OBJS:.o=.d)
 
 #---- FLAGS --------------------------------------------------------------------
 
-LDFLAGS   += -ledit -lm
-CFLAGS    := $(INC_FLAGS) -MMD -MP
+LDFLAGS   += -ledit -lm -DLOG_USE_COLOR
+CFLAGS    := $(INC_FLAGS) -MMD -MP -DLOG_USE_COLOR
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 MAKEFLAGS := --jobs=$(shell nproc)
 VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
