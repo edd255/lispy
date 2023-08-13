@@ -91,6 +91,12 @@ void parse_args(int argc, const char** argv) {
     argparse_init(&argparse, options, usages, 0);
     argparse_describe(&argparse, "\nLispy Interpreter.", "");
     argc = argparse_parse(&argparse, argc, argv);
+    if (argc != 0) {
+        printf("argc: %d\n", argc);
+        for (int i = 0; i < argc; i++) {
+            printf("argv[%d]: %s\n", i, *(argv + i));
+        }
+    }
 }
 
 void cleanup(lval_t* std, lenv_t* e) {
