@@ -23,7 +23,6 @@
 #include "log.h"
 
 #define MAX_CALLBACKS 32
-#define LOG_USE_COLOR
 
 typedef struct {
     log_logfn_t fn;
