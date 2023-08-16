@@ -6,14 +6,8 @@ VERSION := 0.1
 
 #---- TOOLS --------------------------------------------------------------------
 
-CCACHE_EXISTS := $(bash -v ccache 2> /dev/null)
-ifeq ($(CCACHE_EXISTS),)
-	CC := clang
-	LD := clang
-else
-	CC := ccache clang
-	LD := ccache clang
-endif
+CC     := ccache clang
+LD     := ccache clang -fuse-ld=mold
 RM     := rm
 MKDIR  := mkdir --parents
 Q      ?= @
