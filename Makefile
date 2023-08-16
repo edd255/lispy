@@ -1,4 +1,4 @@
-include config.mk
+include .config/make/config.mk
 
 #==== RULES ====================================================================
 #---- RELEASE ------------------------------------------------------------------
@@ -53,7 +53,7 @@ clean:
 
 style:
 	$(Q)echo "====> Formatting..."
-	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i
+	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i $(FORMAT)
 
 #---- ANALYSIS -----------------------------------------------------------------
 
@@ -61,7 +61,7 @@ analyze:
 	$(Q)echo "====> Running scan-build..."
 	$(Q)scan-build make all
 	$(Q)echo "====> Running cppcheck..."
-	$(Q)cppcheck src/ --enable=all --suppress=missingIncludeSystem 2> cppcheck.log
+	$(Q)cppcheck src/ $(CPPCHECK) 2> cppcheck.log
 
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
