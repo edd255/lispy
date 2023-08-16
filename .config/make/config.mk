@@ -45,6 +45,8 @@ CFLAGS    := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 MAKEFLAGS := --jobs=$(shell nproc)
 VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
+CPPCHECK  := --enable=all --suppress=missingIncludeSystem
+FORMAT    := --Werror --style=file:.config/clang_format/fmt.conf
 
 ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
 OPT := -Ofast -DNDEBUG
