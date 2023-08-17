@@ -80,7 +80,8 @@ lval_t* lval_join(lval_t* x, lval_t* y) {
         x = lval_add(x, y->cell[i]);
     }
     // Delete the empty 'y' and return 'x'
-    lval_del(y);
+    free(y->cell);
+    free(y);
     return x;
 }
 
