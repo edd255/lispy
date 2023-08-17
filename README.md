@@ -18,11 +18,12 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Adding tests
 - [X] Added support for string for join, head, tail
 - [X] Adding builtin logical operators
+- [X] Adding builtin list operators
+- [X] Writing a function that prints all out named values in an environment
+- [X] Adding a fun operator
 
 ## TODO
 However, I'm far from finished.
 - [ ] Documenting the code
-- [ ] Writing a function that prints all out named values in an environment
-- [ ] Adapt some builtin functions to work on strings
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
