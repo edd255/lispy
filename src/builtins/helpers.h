@@ -1,3 +1,6 @@
+#ifndef LISPY_BUILTINS_HELPERS_H
+#define LISPY_BUILTINS_HELPERS_H
+
 #include <stdbool.h>
 #include <string.h>
 
@@ -40,3 +43,5 @@ struct llogic_map_t {
 #define NUMBER_OF_LLOGICS (int)(sizeof(llogic_map) / sizeof(llogic_map_t))
 
 enum LLOGIC llogic_from_string(char* key);
+
+#endif
