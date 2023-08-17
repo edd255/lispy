@@ -80,7 +80,7 @@ lval_t* lval_join(lval_t* x, lval_t* y) {
         x = lval_add(x, y->cell[i]);
     }
     // Delete the empty 'y' and return 'x'
-    lval_del(&y);
+    lval_del(y);
     return x;
 }
 
@@ -105,7 +105,7 @@ lval_t* lval_take(lval_t* v, const int i) {
     assert(v != NULL);
 
     lval_t* x = lval_pop(v, i);
-    lval_del(&v);
+    lval_del(v);
     return x;
 }
 
@@ -126,7 +126,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
     while (a->count) {
         // If we've run out of formal arguments to bind
         if (f->formals->count == 0) {
-            lval_del(&a);
+            lval_del(a);
             return lval_err(
                 "Function passed too many arguments. Got %i. Expected %i.",
                 given,
@@ -140,7 +140,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         if (strcmp(sym->sym, "&") == 0) {
             // Ensure "&" is followed by another symbol
             if (f->formals->count != 1) {
-                lval_del(&a);
+                lval_del(a);
                 return lval_err(
                     "Function format invalid. Symbol '&' not followed by single symbol."
                 );
@@ -149,8 +149,8 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
             // Next formal should be bound to remaining arguments
             lval_t* nsym = lval_pop(f->formals, 0);
             lenv_put(f->env, nsym, builtin_list(e, a));
-            lval_del(&sym);
-            lval_del(&nsym);
+            lval_del(sym);
+            lval_del(nsym);
             break;
         }
 
@@ -161,11 +161,11 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         lenv_put(f->env, sym, val);
 
         // Delete symbol and value
-        lval_del(&sym);
-        lval_del(&val);
+        lval_del(sym);
+        lval_del(val);
     }
     // Argument list is now bound so can be cleaned up
-    lval_del(&a);
+    lval_del(a);
 
     if (f->formals->count > 0 && strcmp(f->formals->cell[0]->sym, "&") == 0) {
         // Check to ensure that & is not passed invalidly
@@ -176,7 +176,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         }
         // Pop and delete '&' symbol
         lval_t* popped = lval_pop(f->formals, 0);
-        lval_del(&popped);
+        lval_del(popped);
 
         // Pop next symbol and create empty list
         lval_t* sym = lval_pop(f->formals, 0);
@@ -184,8 +184,8 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
 
         // Bind to environment and delete
         lenv_put(f->env, sym, val);
-        lval_del(&sym);
-        lval_del(&val);
+        lval_del(sym);
+        lval_del(val);
     }
 
     // If all formals have been bound evaluate

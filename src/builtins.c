@@ -110,8 +110,8 @@ void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
     lval_t* k = lval_sym(name);
     lval_t* v = lval_fn(fn);
     lenv_put(e, k, v);
-    lval_del(&k);
-    lval_del(&v);
+    lval_del(k);
+    lval_del(v);
 }
 
 //==== Variable functions ======================================================
@@ -156,7 +156,7 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
             lenv_put(e, syms->cell[i], a->cell[i + 1]);
         }
     }
-    lval_del(&a);
+    lval_del(a);
     return lval_sexpr();
 }
 
@@ -188,7 +188,7 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
     assert(formals != NULL);
     assert(body != NULL);
 
-    lval_del(&a);
+    lval_del(a);
     return lval_lambda(formals, body);
 }
 
@@ -231,7 +231,7 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     while (v->count > 1) {
         lval_t* y = lval_pop(v, 1);
         assert(y != NULL);
-        lval_del(&y);
+        lval_del(y);
     }
     return v;
 }
@@ -250,7 +250,7 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
     // Delete first element and return
     lval_t* y = lval_pop(v, 0);
     assert(y != NULL);
-    lval_del(&y);
+    lval_del(y);
     return v;
 }
 
@@ -281,7 +281,7 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
         assert(y != NULL);
         x = lval_join(x, y);
     }
-    lval_del(&a);
+    lval_del(a);
     return x;
 }
 
@@ -324,7 +324,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_SUB: {
@@ -338,7 +338,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_MUL: {
@@ -352,13 +352,13 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_DIV: {
                 if (y->num == 0) {
-                    lval_del(&x);
-                    lval_del(&y);
+                    lval_del(x);
+                    lval_del(y);
                     x = lval_err("Division By Zero!");
                     break;
                 }
@@ -372,13 +372,13 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_MOD: {
                 if (y->num == 0) {
-                    lval_del(&x);
-                    lval_del(&y);
+                    lval_del(x);
+                    lval_del(y);
                     x = lval_err("Division By Zero!");
                     break;
                 }
@@ -388,13 +388,13 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                     case LVAL_DEC: {
-                        lval_del(&x);
-                        lval_del(&y);
+                        lval_del(x);
+                        lval_del(y);
                         x = lval_err("Modulo not allowed for decimals!");
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_POW: {
@@ -408,16 +408,16 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
             case LOP_UNKNOWN: {
-                lval_del(&y);
+                lval_del(y);
                 break;
             }
         }
     }
-    lval_del(&a);
+    lval_del(a);
     return x;
 }
 
@@ -490,7 +490,7 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
         x = lval_eval(e, y);
     }
     // Delete argument list and return
-    lval_del(&a);
+    lval_del(a);
     return x;
 }
 
@@ -519,7 +519,7 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
         );
     }
 
-    lval_del(&a);
+    lval_del(a);
     return lval_num(r);
 }
 
@@ -567,7 +567,7 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
     } else {
         return lval_err("Error during comparison: Neither == nor != used!");
     }
-    lval_del(&a);
+    lval_del(a);
     return lval_num(r);
 }
 
@@ -612,11 +612,11 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
             if (x->type == LVAL_ERR) {
                 lval_println(x);
             }
-            lval_del(&x);
+            lval_del(x);
         }
         // Delete expressions and arguments
-        lval_del(&expr);
-        lval_del(&a);
+        lval_del(expr);
+        lval_del(a);
 
         // Return empty list
         return lval_sexpr();
@@ -628,7 +628,7 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
         // Create new error message using it
         lval_t* err = lval_err("Could not load library %s", err_msg);
         LOG_FREE(err_msg);
-        lval_del(&a);
+        lval_del(a);
 
         // Cleanup and return error
         return err;
@@ -647,7 +647,7 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
     }
     // Print a newline and delete arguments
     putchar('\n');
-    lval_del(&a);
+    lval_del(a);
     return lval_sexpr();
 }
 
@@ -662,6 +662,6 @@ lval_t* builtin_error(lenv_t* e, lval_t* a) {
     lval_t* err = lval_err(a->cell[0]->str);
 
     // Delete arguments and return
-    lval_del(&a);
+    lval_del(a);
     return err;
 }
