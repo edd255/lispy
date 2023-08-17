@@ -629,8 +629,8 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
     switch (llogic_from_string(op)) {
         case LLOGIC_AND: {
             LASSERT_NUM(op, a, 2)
+            LASSERT_TYPE(op, a, 0, LVAL_NUM)
             LASSERT_TYPE(op, a, 1, LVAL_NUM)
-            LASSERT_TYPE(op, a, 2, LVAL_NUM)
             if ((a->cell[0]->num == 0) || (a->cell[1]->num == 0)) {
                 result = 0;
             } else {
@@ -640,8 +640,8 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
         }
         case LLOGIC_OR: {
             LASSERT_NUM(op, a, 2)
+            LASSERT_TYPE(op, a, 0, LVAL_NUM)
             LASSERT_TYPE(op, a, 1, LVAL_NUM)
-            LASSERT_TYPE(op, a, 2, LVAL_NUM)
             if ((a->cell[0]->num == 0) && (a->cell[1]->num == 0)) {
                 result = 0;
             } else {
@@ -651,7 +651,7 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
         }
         case LLOGIC_NOT: {
             LASSERT_NUM(op, a, 1)
-            LASSERT_TYPE(op, a, 1, LVAL_NUM)
+            LASSERT_TYPE(op, a, 0, LVAL_NUM)
             if (a->cell[0]->num == 0) {
                 result = 1;
             } else {
