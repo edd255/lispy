@@ -103,62 +103,57 @@ lval_t* lval_str(const char* s) {
     return v;
 }
 
-void lval_del(lval_t** v) {
+void lval_del(lval_t* v) {
     assert(v != NULL);
-    assert(*v != NULL);
-    lval_t* value = *v;
-    if (value == NULL || v == NULL) {
-        *v = NULL;
-        v = NULL;
+    if (v == NULL) {
         return;
     }
-    switch (value->type) {
+    switch (v->type) {
         // Do nothing special for number type
         case LVAL_NUM: {
             break;
         }
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
-            if (value->err == NULL) {
+            if (v->err == NULL) {
                 return;
             }
-            LOG_FREE(value->err);
+            LOG_FREE(v->err);
             break;
         }
         case LVAL_SYM: {
-            if (value->sym == NULL) {
+            if (v->sym == NULL) {
                 return;
             }
-            LOG_FREE(value->sym);
+            LOG_FREE(v->sym);
             break;
         }
         case LVAL_FN: {
-            if (!(value->builtin)) {
-                lenv_del(value->env);
-                lval_del(&(value->formals));
-                lval_del(&(value->body));
+            if (!(v->builtin)) {
+                lenv_del(v->env);
+                lval_del(v->formals);
+                lval_del(v->body);
             }
             break;
         }
         case LVAL_STR: {
-            if (value->str == NULL) {
+            if (v->str == NULL) {
                 return;
             }
-            LOG_FREE(value->str);
+            LOG_FREE(v->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
         case LVAL_QEXPR:
         case LVAL_SEXPR: {
-            for (int i = 0; i < value->count; i++) {
-                lval_del(&(value->cell[i]));
+            for (int i = 0; i < v->count; i++) {
+                lval_del(v->cell[i]);
             }
-            LOG_FREE(value->cell);
+            LOG_FREE(v->cell);
             break;
         }
     }
-    LOG_FREE(value);
-    *v = NULL;
+    LOG_FREE(v);
 }
 
 //=== ENVIRONMENT ==============================================================
@@ -177,7 +172,7 @@ void lenv_del(lenv_t* e) {
 
     for (int i = 0; i < e->count; i++) {
         LOG_FREE(e->syms[i]);
-        lval_del(&(e->vals[i]));
+        lval_del(e->vals[i]);
     }
     LOG_FREE(e->syms);
     LOG_FREE(e->vals);
@@ -215,7 +210,7 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
         // If variable is found delete item at that position. And replace with
         // variable supplied by user.
         if (strcmp(e->syms[i], k->sym) == 0) {
-            lval_del(&(e->vals[i]));
+            lval_del(e->vals[i]);
             e->vals[i] = lval_copy(v);
             return;
         }

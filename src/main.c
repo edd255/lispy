@@ -102,7 +102,7 @@ void parse_args(int argc, const char** argv) {
 void cleanup(lval_t* std, lenv_t* e) {
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
     if (NULL != std) {
-        lval_del(&std);
+        lval_del(std);
     }
     lenv_del(e);
 }
@@ -130,7 +130,7 @@ void cli_interpreter(lenv_t* e) {
             assert(y != NULL);
             lval_t* result = lval_eval(e, y);
             lval_println(result);
-            lval_del(&result);
+            lval_del(result);
             mpc_ast_delete(r.output);
         } else {
             mpc_err_print(r.error);
@@ -153,7 +153,7 @@ void file_interpreter(lenv_t* e, const char* file) {
     if (x->type == LVAL_ERR) {
         lval_println(x);
     }
-    lval_del(&x);
+    lval_del(x);
     return;
 }
 
