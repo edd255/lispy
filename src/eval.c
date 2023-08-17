@@ -42,7 +42,7 @@ lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v) {
     }
     // Single Expression
     if (v->count == 1) {
-        return lval_take(v, 0);
+        return lval_eval(e, lval_take(v, 0));
     }
     // Ensure first element is a function after evaluation
     lval_t* f = lval_pop(v, 0);
