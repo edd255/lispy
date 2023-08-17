@@ -11,7 +11,7 @@ lval_t* lval_eval(lenv_t* e, lval_t* v) {
 
     if (v->type == LVAL_SYM) {
         lval_t* x = lenv_get(e, v);
-        lval_del(v);
+        lval_del(&v);
         return x;
     }
     // Evaluate Sexpressions
@@ -52,12 +52,12 @@ lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v) {
             ltype_name(f->type),
             ltype_name(LVAL_FN)
         );
-        lval_del(f);
-        lval_del(v);
+        lval_del(&f);
+        lval_del(&v);
         return err;
     }
     // Call builtin with operator
     lval_t* result = lval_call(e, f, v);
-    lval_del(f);
+    lval_del(&f);
     return result;
 }

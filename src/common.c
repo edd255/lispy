@@ -103,58 +103,62 @@ lval_t* lval_str(const char* s) {
     return v;
 }
 
-void lval_del(lval_t* v) {
+void lval_del(lval_t** v) {
     assert(v != NULL);
-
-    if (v == NULL) {
+    assert(*v != NULL);
+    lval_t* value = *v;
+    if (value == NULL || v == NULL) {
+        *v = NULL;
+        v = NULL;
         return;
     }
-    switch (v->type) {
+    switch (value->type) {
         // Do nothing special for number type
         case LVAL_NUM: {
             break;
         }
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
-            if (v->err == NULL) {
+            if (value->err == NULL) {
                 return;
             }
-            LOG_FREE(v->err);
+            LOG_FREE(value->err);
             break;
         }
         case LVAL_SYM: {
-            if (v->sym == NULL) {
+            if (value->sym == NULL) {
                 return;
             }
-            LOG_FREE(v->sym);
+            LOG_FREE(value->sym);
             break;
         }
         case LVAL_FN: {
-            if (!(v->builtin)) {
-                lenv_del(v->env);
-                lval_del(v->formals);
-                lval_del(v->body);
+            if (!(value->builtin)) {
+                lenv_del(value->env);
+                lval_del(&(value->formals));
+                lval_del(&(value->body));
             }
             break;
         }
         case LVAL_STR: {
-            if (v->str == NULL) {
+            if (value->str == NULL) {
                 return;
             }
-            LOG_FREE(v->str);
+            LOG_FREE(value->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
         case LVAL_QEXPR:
         case LVAL_SEXPR: {
-            for (int i = 0; i < v->count; i++) {
-                lval_del(v->cell[i]);
+            for (int i = 0; i < value->count; i++) {
+                lval_del(&(value->cell[i]));
             }
-            LOG_FREE(v->cell);
+            LOG_FREE(value->cell);
             break;
         }
     }
-    LOG_FREE(v);
+    LOG_FREE(value);
+    *v = NULL;
 }
 
 //=== ENVIRONMENT ==============================================================
@@ -173,7 +177,7 @@ void lenv_del(lenv_t* e) {
 
     for (int i = 0; i < e->count; i++) {
         LOG_FREE(e->syms[i]);
-        lval_del(e->vals[i]);
+        lval_del(&(e->vals[i]));
     }
     LOG_FREE(e->syms);
     LOG_FREE(e->vals);
@@ -196,7 +200,7 @@ lval_t* lenv_get(lenv_t* e, lval_t* k) {
     if (e->parent) {
         return lenv_get(e->parent, k);
     } else {
-        return lval_err("Unbound symbol '%s", k->sym);
+        return lval_err("Unbound symbol '%s'", k->sym);
     }
 }
 
@@ -211,7 +215,7 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
         // If variable is found delete item at that position. And replace with
         // variable supplied by user.
         if (strcmp(e->syms[i], k->sym) == 0) {
-            lval_del(e->vals[i]);
+            lval_del(&(e->vals[i]));
             e->vals[i] = lval_copy(v);
             return;
         }
@@ -261,7 +265,7 @@ void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
 //=== LOGGING MEMORY ALLOCATIONS ===============================================
 void* log_malloc(size_t size, const char* fn, const char* file, int line) {
     void* ptr = malloc(size);
-    log_log(LOGC_DEBUG, fn, file, line, "Address: %p", ptr);
+    log_log(LOGC_TRACE, fn, file, line, "Address: %p", ptr);
     return ptr;
 }
 
@@ -274,7 +278,7 @@ void* log_realloc(
 ) {
     void* new_ptr = realloc(old_ptr, size);
     log_log(
-        LOGC_DEBUG,
+        LOGC_TRACE,
         fn,
         file,
         line,
@@ -287,5 +291,5 @@ void* log_realloc(
 
 void log_free(void* ptr, const char* fn, const char* file, int line) {
     free(ptr);
-    log_log(LOGC_DEBUG, fn, file, line, "Freeing: %p", ptr);
+    log_log(LOGC_TRACE, fn, file, line, "Freeing: %p", ptr);
 }
