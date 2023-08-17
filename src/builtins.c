@@ -221,19 +221,30 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     assert(a != NULL);
     UNUSED(e);
     LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
+    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR)
     LASSERT_NOT_EMPTY(__func__, a, 0)
 
-    // Take first argument
-    lval_t* v = lval_take(a, 0);
+    switch (a->cell[0]->type) {
+        case LVAL_QEXPR: {
+            // Take the first argument
+            lval_t* v = lval_take(a, 0);
 
-    // Delete all elements that are not head and return
-    while (v->count > 1) {
-        lval_t* y = lval_pop(v, 1);
-        assert(y != NULL);
-        lval_del(y);
+            // Delete all elements that are not head and return
+            while (v->count > 1) {
+                lval_del(lval_pop(v, 1));
+            }
+            return v;
+        }
+        case LVAL_STR: {
+            char letter[2] = {(a->cell[0]->str)[0], '\0'};
+            lval_del(a);
+            return lval_str(letter);
+        }
     }
-    return v;
+    return lval_err(
+        "Function %s expected a string or a q-expression",
+        __func__
+    );
 }
 
 lval_t* builtin_tail(lenv_t* e, lval_t* a) {
@@ -241,17 +252,35 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
     assert(a != NULL);
     UNUSED(e);
     LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
+    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR)
     LASSERT_NOT_EMPTY(__func__, a, 0)
 
-    // Take first argument
-    lval_t* v = lval_take(a, 0);
+    switch (a->cell[0]->type) {
+        case LVAL_QEXPR: {
+            // Take first argument
+            lval_t* v = lval_take(a, 0);
 
-    // Delete first element and return
-    lval_t* y = lval_pop(v, 0);
-    assert(y != NULL);
-    lval_del(y);
-    return v;
+            // Delete first element and return
+            lval_t* y = lval_pop(v, 0);
+            assert(y != NULL);
+            lval_del(y);
+            return v;
+        }
+        case LVAL_STR: {
+            char* str = (a->cell[0]->str);
+            char tail[strlen(str)];
+            for (unsigned long i = 0; i < strlen(str); i++) {
+                tail[i] = str[i + 1];
+            }
+            lval_del(a);
+            return lval_str(tail);
+        }
+    }
+    lval_del(a);
+    return lval_err(
+        "Function '%s' expected a string or a q-expression",
+        __func__
+    );
 }
 
 lval_t* builtin_eval(lenv_t* e, lval_t* a) {
@@ -272,14 +301,12 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     UNUSED(e);
 
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(__func__, a, i, LVAL_QEXPR)
+        LASSERT_TYPES(__func__, a, i, LVAL_QEXPR, LVAL_STR)
     }
     lval_t* x = lval_pop(a, 0);
     assert(x != NULL);
     while (a->count) {
-        lval_t* y = lval_pop(a, 0);
-        assert(y != NULL);
-        x = lval_join(x, y);
+        x = lval_join(x, lval_pop(a, 0));
     }
     lval_del(a);
     return x;
