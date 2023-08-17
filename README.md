@@ -16,11 +16,11 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Using a logger
 - [X] Fixing memory bugs
 - [X] Fixed my implementation of join, map, split, take, unpack
+- [X] Adding tests
 
 ## TODO
 However, I'm far from finished.
 - [ ] Documenting the code
-- [ ] Adding more tests
 - [ ] Writing a function that prints all out named values in an environment
 - [ ] Adding builtin logical operators
 - [ ] Adapt some builtin functions to work on strings
