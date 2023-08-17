@@ -3,6 +3,7 @@
 
 #include "builtins/arithmetic.h"
 #include "builtins/conditional.h"
+#include "builtins/env.h"
 #include "builtins/eq_cmp.h"
 #include "builtins/helpers.h"
 #include "builtins/list.h"
