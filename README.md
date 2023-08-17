@@ -3,8 +3,7 @@ Lispy is a functional language inspired by Lisp. The interpreter is written in C
 
 ## Modifications
 So far, I've completed the following bonus tasks, resp. applied the following modifications:
-- [X] Power function
-- [X] Modulo function
+- [X] Adding power, module, min and max operators
 - [X] Support for decimal numbers
 - [X] Splitted the code into smaller modules
 - [X] Heavily modified the Makefile
@@ -18,12 +17,12 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Fixed my implementation of join, map, split, take, unpack
 - [X] Adding tests
 - [X] Added support for string for join, head, tail
+- [X] Adding builtin logical operators
 
 ## TODO
 However, I'm far from finished.
 - [ ] Documenting the code
 - [ ] Writing a function that prints all out named values in an environment
-- [ ] Adding builtin logical operators
 - [ ] Adapt some builtin functions to work on strings
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
