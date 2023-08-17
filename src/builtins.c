@@ -120,7 +120,6 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "tail", builtin_tail);
     lenv_add_builtin(e, "eval", builtin_eval);
     lenv_add_builtin(e, "join", builtin_join);
-    lenv_add_builtin(e, "nil", builtin_nil);
     lenv_add_builtin(e, "cons", builtin_cons);
     lenv_add_builtin(e, "len", builtin_len);
     lenv_add_builtin(e, "pack", builtin_pack);
@@ -366,15 +365,6 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     }
     lval_del(a);
     return x;
-}
-
-lval_t* builtin_nil(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
-    UNUSED(e);
-    UNUSED(a);
-
-    return lval_qexpr();
 }
 
 lval_t* builtin_cons(lenv_t* e, lval_t* a) {
