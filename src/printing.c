@@ -90,7 +90,7 @@ void lval_print_str(const lval_t* v) {
     escaped = mpcf_escape(escaped);
 
     // Print it between " characters
-    printf("\"%s\"", escaped);
+    printf("%s", escaped);
 
     // free copied string
     LOG_FREE(escaped);
