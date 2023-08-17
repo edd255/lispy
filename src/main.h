@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef LISPY_MAIN_H
+#define LISPY_MAIN_H
 
 #include "common.h"
 

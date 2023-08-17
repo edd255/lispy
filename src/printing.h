@@ -1,5 +1,5 @@
-#ifndef PRINTING_H
-#define PRINTING_H
+#ifndef LISPY_PRINTING_H
+#define LISPY_PRINTING_H
 
 #include "common.h"
 

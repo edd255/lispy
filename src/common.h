@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef LISPY_COMMON_H
+#define LISPY_COMMON_H
 
 #include <assert.h>
 #include <malloc.h>

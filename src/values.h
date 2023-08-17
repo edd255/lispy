@@ -1,5 +1,5 @@
-#ifndef VALUES_H
-#define VALUES_H
+#ifndef LISPY_VALUES_H
+#define LISPY_VALUES_H
 
 #include "common.h"
 
