@@ -95,9 +95,9 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized
+all: style release debugging sanitized tests
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all release debugging memcheck style install uninstall
+.PHONY: all release debugging memcheck style install uninstall tests
