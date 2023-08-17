@@ -105,8 +105,8 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "/", builtin_div);
     lenv_add_builtin(e, "%", builtin_mod);
     lenv_add_builtin(e, "^", builtin_pow);
-    // lenv_add_builtin(e, "max", builtin_max);
-    // lenv_add_builtin(e, "min", builtin_min);
+    lenv_add_builtin(e, "max", builtin_max);
+    lenv_add_builtin(e, "min", builtin_min);
 
     // Conditional functions
     lenv_add_builtin(e, "if", builtin_if);
