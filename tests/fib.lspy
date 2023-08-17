@@ -31,7 +31,22 @@
     { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
 })
 
-(if (== (fib 1) 1)
+(fun {test cond} {
+    if (cond)
     { print "PASSED" }
     { print "FAILED" }
-)
+})
+
+(test (== (fib 0) 0))
+(test (== (fib 1) 1))
+(test (== (fib 2) 1))
+(test (== (fib 3) 2))
+(test (== (fib 4) 3))
+(test (== (fib 5) 5))
+(test (== (fib 6) 8))
+(test (== (fib 7) 13))
+(test (== (fib 8) 21))
+(test (== (fib 9) 34))
+(test (== (fib 10) 55))
+(test (== (fib 11) 89))
+(test (== (fib 12) 144))
