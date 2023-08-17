@@ -36,36 +36,6 @@
     {last l}
 })
 
-;---- Logical Definitions ------------------------------------------------------
-
-; Logical Functions
-(fun {not x}   {- 1 x})
-(fun {or x y}  {+ x y})
-(fun {and x y} {* x y})
-
-
-;---- Numeric Functions --------------------------------------------------------
-
-; Minimum of Arguments
-(fun {min & xs} {
-  if (== (tail xs) nil) {fst xs}
-    {do 
-      (= {rest} (unpack min (tail xs)))
-      (= {item} (fst xs))
-      (if (< item rest) {item} {rest})
-    }
-})
-
-; Maximum of Arguments
-(fun {max & xs} {
-  if (== (tail xs) nil) {fst xs}
-    {do 
-      (= {rest} (unpack max (tail xs)))
-      (= {item} (fst xs))
-      (if (> item rest) {item} {rest})
-    }  
-})
-
 ;---- Conditional Functions -----------------------------------------------------
 
 (fun {select & cs} {

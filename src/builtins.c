@@ -10,8 +10,8 @@
 #include "values.h"
 
 //==== HELPER METHODS ==========================================================
-
-enum LOP {
+//---- Arithmetic methods ------------------------------------------------------
+enum LARITHMOP {
     LOP_ADD,
     LOP_SUB,
     LOP_MUL,
@@ -23,13 +23,13 @@ enum LOP {
     LOP_UNKNOWN
 };
 
-typedef struct op_map_t op_map_t;
-struct op_map_t {
+typedef struct larithmop_map_t larithmop_map_t;
+struct larithmop_map_t {
     char* key;
-    enum LOP value;
+    enum LARITHMOP value;
 };
 
-const op_map_t op_map[] = {
+const larithmop_map_t larithmop_map[] = {
     {"+", LOP_ADD},
     {"-", LOP_SUB},
     {"*", LOP_MUL},
@@ -40,13 +40,14 @@ const op_map_t op_map[] = {
     {"min", LOP_MIN},
 };
 
-#define NUMBER_OF_OPS (int)(sizeof(op_map) / sizeof(op_map_t))
+#define NUMBER_OF_LARITHMOPS \
+    (int)(sizeof(larithmop_map) / sizeof(larithmop_map_t))
 
-enum LOP op_from_string(char* key) {
-    for (int i = 0; i < NUMBER_OF_OPS; i++) {
-        op_map_t op = op_map[i];
-        if (strcmp(op.key, key) == 0) {
-            return op.value;
+enum LARITHMOP op_from_string(char* key) {
+    for (int i = 0; i < NUMBER_OF_LARITHMOPS; i++) {
+        larithmop_map_t larithmop = larithmop_map[i];
+        if (strcmp(larithmop.key, key) == 0) {
+            return larithmop.value;
         }
     }
     return LOP_UNKNOWN;
@@ -72,6 +73,32 @@ long power_long(long base, long exponent) {
         exponent /= 2;
     }
     return neg ? 1 / result : result;
+}
+
+//---- Logical methods ---------------------------------------------------------
+enum LLOGIC { LLOGIC_AND, LLOGIC_OR, LLOGIC_NOT, LLOGIC_UNKNOWN };
+
+typedef struct llogic_map_t llogic_map_t;
+struct llogic_map_t {
+    char* key;
+    enum LLOGIC value;
+};
+
+const llogic_map_t llogic_map[] = {
+    {"and", LLOGIC_AND},
+    {"or", LLOGIC_OR},
+    {"not", LLOGIC_NOT}};
+
+#define NUMBER_OF_LLOGICS (int)(sizeof(llogic_map) / sizeof(llogic_map_t))
+
+enum LLOGIC llogic_from_string(char* key) {
+    for (int i = 0; i < NUMBER_OF_LLOGICS; i++) {
+        llogic_map_t llogic = llogic_map[i];
+        if (strcmp(llogic.key, key) == 0) {
+            return llogic.value;
+        }
+    }
+    return LLOGIC_UNKNOWN;
 }
 
 //==== BUILTIN METHODS =========================================================
@@ -112,9 +139,9 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "if", builtin_if);
 
     // Logical functions
-    // lenv_add_builtin(e, "and", builtin_and);
-    // lenv_add_builtin(e, "or", builtin_or);
-    // lenv_add_builtin(e, "not", builtin_not);
+    lenv_add_builtin(e, "and", builtin_and);
+    lenv_add_builtin(e, "or", builtin_or);
+    lenv_add_builtin(e, "not", builtin_not);
 
     // Comparison functions
     lenv_add_builtin(e, "==", builtin_eq);
@@ -564,7 +591,7 @@ lval_t* builtin_min(lenv_t* e, lval_t* a) {
     return builtin_op(e, a, "min");
 }
 
-//==== Comparison functions ====================================================
+//==== Conditional functions ===================================================
 lval_t* builtin_if(lenv_t* e, lval_t* a) {
     assert(e != NULL);
     assert(a != NULL);
@@ -595,6 +622,67 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
     return x;
 }
 
+//==== Logical functions =======================================================
+lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
+    UNUSED(e);
+    int result = 0;
+    switch (llogic_from_string(op)) {
+        case LLOGIC_AND: {
+            LASSERT_NUM(op, a, 2)
+            LASSERT_TYPE(op, a, 1, LVAL_NUM)
+            LASSERT_TYPE(op, a, 2, LVAL_NUM)
+            if ((a->cell[0]->num == 0) || (a->cell[1]->num == 0)) {
+                result = 0;
+            } else {
+                result = 1;
+            }
+            break;
+        }
+        case LLOGIC_OR: {
+            LASSERT_NUM(op, a, 2)
+            LASSERT_TYPE(op, a, 1, LVAL_NUM)
+            LASSERT_TYPE(op, a, 2, LVAL_NUM)
+            if ((a->cell[0]->num == 0) && (a->cell[1]->num == 0)) {
+                result = 0;
+            } else {
+                result = 1;
+            }
+            break;
+        }
+        case LLOGIC_NOT: {
+            LASSERT_NUM(op, a, 1)
+            LASSERT_TYPE(op, a, 1, LVAL_NUM)
+            if (a->cell[0]->num == 0) {
+                result = 1;
+            } else {
+                result = 0;
+            }
+            break;
+        }
+        case LLOGIC_UNKNOWN: {
+            return lval_err(
+                "Function '%s' expected 'not', 'or' or 'and'",
+                __func__
+            );
+        }
+    }
+    lval_del(a);
+    return lval_num(result);
+}
+
+lval_t* builtin_and(lenv_t* e, lval_t* a) {
+    return builtin_logic(e, a, "and");
+}
+
+lval_t* builtin_or(lenv_t* e, lval_t* a) {
+    return builtin_logic(e, a, "or");
+}
+
+lval_t* builtin_not(lenv_t* e, lval_t* a) {
+    return builtin_logic(e, a, "not");
+}
+
+//==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
 lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     assert(e != NULL);

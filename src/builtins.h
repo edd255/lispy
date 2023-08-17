@@ -19,7 +19,7 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a);
 lval_t* builtin_eval(lenv_t* e, lval_t* a);
 lval_t* builtin_join(lenv_t* e, lval_t* a);
 
-//---- Mathematical functions --------------------------------------------------
+//---- Arithmetic functions ----------------------------------------------------
 lval_t* builtin_op(lenv_t* e, lval_t* a, char* op);
 lval_t* builtin_add(lenv_t* e, lval_t* a);
 lval_t* builtin_sub(lenv_t* e, lval_t* a);
@@ -30,8 +30,14 @@ lval_t* builtin_pow(lenv_t* e, lval_t* a);
 lval_t* builtin_max(lenv_t* e, lval_t* a);
 lval_t* builtin_min(lenv_t* e, lval_t* a);
 
-//---- Comparison functions ----------------------------------------------------
+//---- Conditional functions ---------------------------------------------------
 lval_t* builtin_if(lenv_t* e, lval_t* a);
+
+//---- Logical functions -------------------------------------------------------
+lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op);
+lval_t* builtin_and(lenv_t* e, lval_t* a);
+lval_t* builtin_or(lenv_t* e, lval_t* a);
+lval_t* builtin_not(lenv_t* e, lval_t* a);
 
 //---- Magnitude comparison functions ------------------------------------------
 lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op);
