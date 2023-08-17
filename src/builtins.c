@@ -11,7 +11,17 @@
 
 //==== HELPER METHODS ==========================================================
 
-enum LOP { LOP_ADD, LOP_SUB, LOP_MUL, LOP_DIV, LOP_MOD, LOP_POW, LOP_UNKNOWN };
+enum LOP {
+    LOP_ADD,
+    LOP_SUB,
+    LOP_MUL,
+    LOP_DIV,
+    LOP_MOD,
+    LOP_POW,
+    LOP_MAX,
+    LOP_MIN,
+    LOP_UNKNOWN
+};
 
 typedef struct op_map_t op_map_t;
 struct op_map_t {
@@ -26,6 +36,8 @@ const op_map_t op_map[] = {
     {"/", LOP_DIV},
     {"%", LOP_MOD},
     {"^", LOP_POW},
+    {"max", LOP_MAX},
+    {"min", LOP_MIN},
 };
 
 #define NUMBER_OF_OPS (int)(sizeof(op_map) / sizeof(op_map_t))
@@ -71,6 +83,9 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "\\", builtin_lambda);
     lenv_add_builtin(e, "def", builtin_def);
     lenv_add_builtin(e, "=", builtin_put);
+    // lenv_add_builtin(e, "env", builtin_env);
+    // lenv_add_builtin(e, "fun", builtin_fun);
+    // lenv_add_builtin(e, "exit", builtin_exit);
 
     // List functions
     lenv_add_builtin(e, "list", builtin_list);
@@ -78,6 +93,10 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "tail", builtin_tail);
     lenv_add_builtin(e, "eval", builtin_eval);
     lenv_add_builtin(e, "join", builtin_join);
+    // lenv_add_builtin(e, "cons", builtin_cons);
+    // lenv_add_builtin(e, "len", builtin_len);
+    // lenv_add_builtin(e, "pack", builtin_pack);
+    // lenv_add_builtin(e, "unpack", builtin_unpack);
 
     // Mathematical functions
     lenv_add_builtin(e, "+", builtin_add);
@@ -86,9 +105,18 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "/", builtin_div);
     lenv_add_builtin(e, "%", builtin_mod);
     lenv_add_builtin(e, "^", builtin_pow);
+    // lenv_add_builtin(e, "max", builtin_max);
+    // lenv_add_builtin(e, "min", builtin_min);
+
+    // Conditional functions
+    lenv_add_builtin(e, "if", builtin_if);
+
+    // Logical functions
+    // lenv_add_builtin(e, "and", builtin_and);
+    // lenv_add_builtin(e, "or", builtin_or);
+    // lenv_add_builtin(e, "not", builtin_not);
 
     // Comparison functions
-    lenv_add_builtin(e, "if", builtin_if);
     lenv_add_builtin(e, "==", builtin_eq);
     lenv_add_builtin(e, "!=", builtin_ne);
     lenv_add_builtin(e, ">", builtin_gt);
@@ -438,6 +466,38 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                 lval_del(y);
                 break;
             }
+            case LOP_MAX: {
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        if (x->num <= y->num) {
+                            x->num = y->num;
+                        }
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        if (x->dec <= y->dec) {
+                            x->dec = y->dec;
+                        }
+                        break;
+                    }
+                }
+            }
+            case LOP_MIN: {
+                switch (x->type) {
+                    case LVAL_NUM: {
+                        if (x->num >= y->num) {
+                            x->num = y->num;
+                        }
+                        break;
+                    }
+                    case LVAL_DEC: {
+                        if (x->dec >= y->dec) {
+                            x->dec = y->dec;
+                        }
+                        break;
+                    }
+                }
+            }
             case LOP_UNKNOWN: {
                 lval_del(y);
                 break;
@@ -488,6 +548,20 @@ lval_t* builtin_pow(lenv_t* e, lval_t* a) {
     assert(a != NULL);
 
     return builtin_op(e, a, "^");
+}
+
+lval_t* builtin_max(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
+    return builtin_op(e, a, "max");
+}
+
+lval_t* builtin_min(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
+    return builtin_op(e, a, "min");
 }
 
 //==== Comparison functions ====================================================

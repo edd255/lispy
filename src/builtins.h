@@ -27,6 +27,8 @@ lval_t* builtin_mul(lenv_t* e, lval_t* a);
 lval_t* builtin_div(lenv_t* e, lval_t* a);
 lval_t* builtin_mod(lenv_t* e, lval_t* a);
 lval_t* builtin_pow(lenv_t* e, lval_t* a);
+lval_t* builtin_max(lenv_t* e, lval_t* a);
+lval_t* builtin_min(lenv_t* e, lval_t* a);
 
 //---- Comparison functions ----------------------------------------------------
 lval_t* builtin_if(lenv_t* e, lval_t* a);
