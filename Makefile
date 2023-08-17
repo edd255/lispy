@@ -67,6 +67,14 @@ memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
 	$(Q)valgrind ${VALGRIND_FLAGS} $(BIN)_debugging
 
+#---- TESTING ------------------------------------------------------------------
+
+tests: sanitized
+	$(Q)for test in $(TESTS); do \
+		echo "Running $(TESTS)..."; \
+		exec $(BIN)_sanitized --filename=$$test --no_stdlib; \
+	done
+
 #---- INSTALLING ---------------------------------------------------------------
 
 install: release

@@ -20,6 +20,7 @@ BUILD_DIR := build
 BIN_DIR   := bin
 INC_DIRS  := $(shell find $(SRC_DIRS) -type d)
 ASSETS    := assets
+TESTS     := $(wildcard tests/*)
 
 #---- INSTALL DIRECTORIES ------------------------------------------------------
 
