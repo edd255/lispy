@@ -16,14 +16,14 @@
 #define LASSERT(args, cond, fmt, ...) \
     if (!(cond)) { \
         lval_t* err = lval_err(fmt, ##__VA_ARGS__); \
-        lval_del(args); \
+        lval_del(&args); \
         return err; \
     }
 
 #define LASSERTS(args, cond1, cond2, fmt, ...) \
     if (!(cond1 || cond2)) { \
         lval_t* err = lval_err(fmt, ##__VA_ARGS__); \
-        lval_del(args); \
+        lval_del(&args); \
         return err; \
     }
 
@@ -89,7 +89,7 @@ lval_t* lval_qexpr(void);
 lval_t* lval_fn(lbuiltin_t fn);
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
 lval_t* lval_str(const char* s);
-void lval_del(lval_t* v);
+void lval_del(lval_t** v);
 
 //--- Environment --------------------------------------------------------------
 lenv_t* lenv_new(void);

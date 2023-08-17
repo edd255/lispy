@@ -5,7 +5,6 @@
 /* Print an lval_t */
 void lval_print(lval_t* v) {
     assert(v != NULL);
-
     if (v == NULL) {
         return;
     }
