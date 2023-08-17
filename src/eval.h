@@ -1,5 +1,5 @@
-#ifndef EVAL_H
-#define EVAL_H
+#ifndef LISPY_EVAL_H
+#define LISPY_EVAL_H
 
 #include "common.h"
 

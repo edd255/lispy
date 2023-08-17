@@ -1,5 +1,5 @@
-#ifndef READING_H
-#define READING_H
+#ifndef LISPY_READING_H
+#define LISPY_READING_H
 
 #include "common.h"
 
