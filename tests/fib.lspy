@@ -1,0 +1,34 @@
+;==== Fibonacci Test ==========================================================
+
+(def {nil} {})
+(def {true} 1)
+(def {false} 0)
+
+(def {fun} (\ {f b} {
+  def (head f) (\ (tail f) b)
+}))
+
+(fun {unpack f l} {
+  eval (join (list f) l)
+})
+
+(fun {select & cs} {
+  if (== cs nil)
+    {error "No Selection Found"}
+    {if (fst (fst cs)) {snd (fst cs)} {unpack select (tail cs)}}
+})
+
+(def {otherwise} true)
+
+(fun {fst l} { eval (head l) })
+(fun {snd l} { eval (head (tail l)) })
+(fun {trd l} { eval (head (tail (tail l))) })
+
+(fun {fib n} {
+  select
+    { (== n 0) 0 }
+    { (== n 1) 1 }
+    { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
+})
+
+(fib 1)
