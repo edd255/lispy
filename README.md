@@ -15,6 +15,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Using a logging memory allocator
 - [X] Using a logger
 - [X] Fixing memory bugs
+- [X] Fixed my implementation of join, map, split, take, unpack
 
 ## TODO
 However, I'm far from finished.
