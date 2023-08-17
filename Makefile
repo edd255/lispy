@@ -71,8 +71,8 @@ memcheck: debugging
 
 tests: sanitized
 	$(Q)for test in $(TESTS); do \
-		echo "Running $(TESTS)..."; \
-		exec $(BIN)_sanitized --filename=$$test --no_stdlib; \
+		echo "====> Running $$test..."; \
+		$(BIN)_release --filename=$$test; \
 	done
 
 #---- INSTALLING ---------------------------------------------------------------
@@ -95,9 +95,9 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized
+all: style release debugging sanitized tests
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all release debugging memcheck style install uninstall
+.PHONY: all release debugging memcheck style install uninstall tests
