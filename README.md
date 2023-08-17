@@ -17,6 +17,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Fixing memory bugs
 - [X] Fixed my implementation of join, map, split, take, unpack
 - [X] Adding tests
+- [X] Added support for string for join, head, tail
 
 ## TODO
 However, I'm far from finished.
