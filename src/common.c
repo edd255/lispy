@@ -116,14 +116,14 @@ void lval_del(lval_t* v) {
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
             if (v->err == NULL) {
-                return;
+                break;
             }
             LOG_FREE(v->err);
             break;
         }
         case LVAL_SYM: {
             if (v->sym == NULL) {
-                return;
+                break;
             }
             LOG_FREE(v->sym);
             break;
@@ -138,7 +138,7 @@ void lval_del(lval_t* v) {
         }
         case LVAL_STR: {
             if (v->str == NULL) {
-                return;
+                break;
             }
             LOG_FREE(v->str);
             break;
