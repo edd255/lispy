@@ -31,4 +31,7 @@
     { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
 })
 
-(fib 1)
+(if (== (fib 1) 1)
+    { print "PASSED" }
+    { print "FAILED" }
+)
