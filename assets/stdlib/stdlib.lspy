@@ -7,11 +7,6 @@
 
 ;---- Functional Definitions --------------------------------------------------
 
-; Function Definitions
-(def {fun} (\ {f b} {
-  def (head f) (\ (tail f) b)
-}))
-
 ; Open new scope
 (fun {let b} {
   ((\ {_} b) ())
