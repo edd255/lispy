@@ -120,10 +120,11 @@ void lenv_add_builtins(lenv_t* e) {
     lenv_add_builtin(e, "tail", builtin_tail);
     lenv_add_builtin(e, "eval", builtin_eval);
     lenv_add_builtin(e, "join", builtin_join);
-    // lenv_add_builtin(e, "cons", builtin_cons);
-    // lenv_add_builtin(e, "len", builtin_len);
-    // lenv_add_builtin(e, "pack", builtin_pack);
-    // lenv_add_builtin(e, "unpack", builtin_unpack);
+    lenv_add_builtin(e, "nil", builtin_nil);
+    lenv_add_builtin(e, "cons", builtin_cons);
+    lenv_add_builtin(e, "len", builtin_len);
+    lenv_add_builtin(e, "pack", builtin_pack);
+    lenv_add_builtin(e, "unpack", builtin_unpack);
 
     // Mathematical functions
     lenv_add_builtin(e, "+", builtin_add);
@@ -365,6 +366,79 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     }
     lval_del(a);
     return x;
+}
+
+lval_t* builtin_nil(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+    UNUSED(e);
+    UNUSED(a);
+
+    return lval_qexpr();
+}
+
+lval_t* builtin_cons(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+    LASSERT_NUM("cons", a, 2)
+    LASSERT_TYPE("cons", a, 0, LVAL_QEXPR);
+    UNUSED(e);
+
+    lval_t* x = lval_qexpr();
+    if (a->cell[0]->type != LVAL_QEXPR) {
+        x = lval_add(x, lval_pop(a, 0));
+    } else {
+        x = lval_pop(a, 0);
+    }
+    x = lval_join(x, lval_take(a, 0));
+    return x;
+}
+
+lval_t* builtin_len(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
+    UNUSED(e);
+    lval_t* num = lval_num(a->cell[0]->count);
+    lval_del(a);
+    return num;
+}
+
+lval_t* builtin_pack(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
+    LASSERT_TYPE(__func__, a, 0, LVAL_FN);
+    lval_t* eval = lval_sexpr();
+    lval_add(eval, lval_pop(a, 0));
+    lval_t* packed = lval_qexpr();
+    while (a->count) {
+        lval_add(packed, lval_pop(a, 0));
+    }
+    lval_add(eval, packed);
+    lval_del(a);
+    return lval_eval_sexpr(e, eval);
+}
+
+lval_t* builtin_unpack(lenv_t* e, lval_t* a) {
+    assert(e != NULL);
+    assert(a != NULL);
+
+    LASSERT_NUM(__func__, a, 2);
+    LASSERT_TYPE(__func__, a, 0, LVAL_FN);
+    LASSERT_TYPE(__func__, a, 1, LVAL_QEXPR);
+    LASSERT_NOT_EMPTY(__func__, a, 1);
+
+    lval_t* eval = lval_sexpr();
+    lval_add(eval, lval_pop(a, 0));
+    lval_t* x = lval_take(a, 0);
+
+    while (x->count) {
+        lval_add(eval, lval_pop(x, 0));
+    }
+    lval_del(x);
+    return lval_eval_sexpr(e, eval);
 }
 
 //==== Mathematical functions ==================================================
