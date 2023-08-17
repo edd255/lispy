@@ -71,8 +71,8 @@ memcheck: debugging
 
 tests: sanitized
 	$(Q)for test in $(TESTS); do \
-		echo "Running $(TESTS)..."; \
-		exec $(BIN)_sanitized --filename=$$test --no_stdlib; \
+		echo "====> Running $$test..."; \
+		$(BIN)_release --filename=$$test; \
 	done
 
 #---- INSTALLING ---------------------------------------------------------------
