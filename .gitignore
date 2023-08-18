@@ -58,3 +58,4 @@ dkms.conf
 cppcheck.log
 .watchdog-*
 lispy.log
+.cache
