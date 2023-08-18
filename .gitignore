@@ -59,3 +59,4 @@ cppcheck.log
 .watchdog-*
 lispy.log
 .cache
+compile_commands.json
