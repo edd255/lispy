@@ -6,15 +6,15 @@
 
 //==== Arithmetic functions ====================================================
 lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
-    assert(e != NULL);
-    assert(a != NULL);
-    assert(op != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
+    assert(NULL != op);
     UNUSED(e);
-    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC)
+    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
 
     // Ensure all arguments are numbers
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(op, a, i, a->cell[0]->type)
+        LASSERT_TYPE(op, a, i, a->cell[0]->type);
     }
 
     // Pop the first element
@@ -22,7 +22,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     assert(x != NULL);
 
     // If no arguments and sub then perform unary negation
-    if ((strcmp(op, "-") == 0) && a->count == 0) {
+    if ((0 == strcmp(op, "-")) && 0 == a->count) {
         switch (x->type) {
             case LVAL_NUM: {
                 x->num = -x->num;
@@ -86,7 +86,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
             case LOP_DIV: {
                 switch (x->type) {
                     case LVAL_NUM: {
-                        if (y->num == 0) {
+                        if (0 == y->num) {
                             lval_del(x);
                             lval_del(y);
                             x = lval_err("Division By Zero!");
@@ -96,7 +96,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                     case LVAL_DEC: {
-                        if (y->dec == 0.0) {
+                        if (0.0 == y->dec) {
                             lval_del(x);
                             lval_del(y);
                             x = lval_err("Division By Zero!");
@@ -112,7 +112,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
             case LOP_MOD: {
                 switch (x->type) {
                     case LVAL_NUM: {
-                        if (y->num == 0) {
+                        if (0 == y->num) {
                             lval_del(x);
                             lval_del(y);
                             x = lval_err("Division By Zero!");

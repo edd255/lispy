@@ -19,7 +19,7 @@ const larithmop_map_t larithmop_map[] = {
 enum LARITHMOP op_from_string(char* key) {
     for (int i = 0; i < NUMBER_OF_LARITHMOPS; i++) {
         larithmop_map_t larithmop = larithmop_map[i];
-        if (strcmp(larithmop.key, key) == 0) {
+        if (0 == strcmp(larithmop.key, key)) {
             return larithmop.value;
         }
     }
@@ -27,19 +27,19 @@ enum LARITHMOP op_from_string(char* key) {
 }
 
 long power_long(long base, long exponent) {
-    if (exponent == 0) {
+    if (0 == exponent) {
         return 1;
     }
-    if (exponent == 1) {
+    if (1 == exponent) {
         return base;
     }
     long result = 1;
     bool neg = false;
-    if (exponent < 0) {
+    if (0 > exponent) {
         neg = true;
     }
-    while (exponent > 0) {
-        if (exponent % 2 == 1) {
+    while (0 < exponent) {
+        if (1 == exponent % 2) {
             result *= base;
         }
         base *= base;
@@ -52,12 +52,13 @@ long power_long(long base, long exponent) {
 const llogic_map_t llogic_map[] = {
     {"and", LLOGIC_AND},
     {"or", LLOGIC_OR},
-    {"not", LLOGIC_NOT}};
+    {"not", LLOGIC_NOT},
+};
 
 enum LLOGIC llogic_from_string(char* key) {
     for (int i = 0; i < NUMBER_OF_LLOGICS; i++) {
         llogic_map_t llogic = llogic_map[i];
-        if (strcmp(llogic.key, key) == 0) {
+        if (0 == strcmp(llogic.key, key)) {
             return llogic.value;
         }
     }

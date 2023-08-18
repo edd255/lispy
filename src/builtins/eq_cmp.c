@@ -4,16 +4,16 @@
 
 //---- Equality comparison functions -------------------------------------------
 lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
-    assert(e != NULL);
-    assert(a != NULL);
-    assert(op != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
+    assert(NULL != op);
     UNUSED(e);
-    LASSERT_NUM(op, a, 2)
+    LASSERT_NUM(op, a, 2);
 
     int r;
-    if (strcmp(op, "==") == 0) {
+    if (0 == strcmp(op, "==")) {
         r = lval_eq(a->cell[0], a->cell[1]);
-    } else if (strcmp(op, "!=") == 0) {
+    } else if (0 == strcmp(op, "!=")) {
         r = !lval_eq(a->cell[0], a->cell[1]);
     } else {
         return lval_err("Error during comparison: Neither == nor != used!");
@@ -23,15 +23,15 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
 }
 
 lval_t* builtin_eq(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
 
     return builtin_cmp(e, a, "==");
 }
 
 lval_t* builtin_ne(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
 
     return builtin_cmp(e, a, "!=");
 }

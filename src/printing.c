@@ -4,8 +4,8 @@
 
 /* Print an lval_t */
 void lval_print(lval_t* v) {
-    assert(v != NULL);
-    if (v == NULL) {
+    assert(NULL != v);
+    if (NULL == v) {
         return;
     }
     switch (v->type) {
@@ -53,7 +53,7 @@ void lval_print(lval_t* v) {
 }
 
 void lval_print_expr(lval_t* v, char open, char close) {
-    assert(v != NULL);
+    assert(NULL != v);
 
     putchar(open);
     for (int i = 0; i < v->count; i++) {
@@ -70,16 +70,16 @@ void lval_print_expr(lval_t* v, char open, char close) {
 
 /* Print a lval_t followed by a newline */
 void lval_println(lval_t* v) {
-    assert(v != NULL);
+    assert(NULL != v);
 
     lval_print(v);
     putchar('\n');
 }
 
 void lval_print_str(const lval_t* v) {
-    assert(v != NULL);
+    assert(NULL != v);
 
-    if (v == NULL) {
+    if (NULL == v) {
         return;
     }
     // Make a copy of the string

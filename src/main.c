@@ -47,7 +47,7 @@ int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
     FILE* log_file = NULL;
     parse_args(argc, argv);
-    if (print_logs == 0) {
+    if (0 == print_logs) {
         log_file = prepare_logfile();
         log_add_fp(log_file, 0);
         log_set_quiet(true);
@@ -57,10 +57,10 @@ int main(int argc, const char** argv) {
     setup_parser();
     lenv_t* e = set_env();
     lval_t* std = NULL;
-    if (no_stdlib == 0) {
+    if (0 == no_stdlib) {
         std = get_stdlib(e);
     }
-    if (file != NULL) {
+    if (NULL != file) {
         file_interpreter(e, file);
     } else {
         cli_interpreter(e);
@@ -91,7 +91,7 @@ void parse_args(int argc, const char** argv) {
     argparse_init(&argparse, options, usages, 0);
     argparse_describe(&argparse, "\nLispy Interpreter", "");
     argc = argparse_parse(&argparse, argc, argv);
-    if (argc != 0) {
+    if (0 != argc) {
         printf("argc: %d\n", argc);
         for (int i = 0; i < argc; i++) {
             printf("argv[%d]: %s\n", i, argv[i]);
@@ -120,14 +120,14 @@ void cli_interpreter(lenv_t* e) {
     while (true) {
         char* input = readline(">>> ");
         add_history(input);
-        if (strcmp(input, "exit") == 0) {
+        if (0 == strcmp(input, "exit")) {
             free(input);
             break;
         }
         mpc_result_t r;
         if (mpc_parse("<stdin>", input, lispy, &r)) {
             lval_t* y = lval_read(r.output);
-            assert(y != NULL);
+            assert(NULL != y);
             lval_t* result = lval_eval(e, y);
             lval_println(result);
             lval_del(result);
@@ -150,7 +150,7 @@ void file_interpreter(lenv_t* e, const char* file) {
     lval_t* x = builtin_load(e, args);
 
     // If the result is an error, be sure to print it
-    if (x->type == LVAL_ERR) {
+    if (LVAL_ERR == x->type) {
         lval_println(x);
     }
     lval_del(x);
@@ -168,7 +168,7 @@ void setup_parser(void) {
     lispy = mpc_new("lispy");
     mpca_lang(
         MPCA_LANG_DEFAULT,
-        "                                                      \
+        "                                                              \
             number  : /[+-]?(([0-9]*[.])?[0-9]+|[0-9]+([.][0-9]*)?)/ ; \
             symbol  : /[a-zA-Z0-9_+\\-*\\/\\\\=<>!&\\%^]+/ ;           \
             sexpr   : '(' <expr>* ')' ;                                \
@@ -199,7 +199,7 @@ lenv_t* set_env(void) {
 FILE* prepare_logfile(void) {
     FILE* log;
     char* cache_dir = getenv("XDG_CACHE_HOME");
-    if (cache_dir == NULL) {
+    if (NULL == cache_dir) {
         free(cache_dir);
         log_debug("XDG_CACHE_HOME not set");
         return NULL;
