@@ -285,6 +285,6 @@ void* log_realloc(
 }
 
 void log_free(void* ptr, const char* fn, const char* file, int line) {
-    free(ptr);
     log_log(LOGC_TRACE, fn, file, line, "Freeing: %p", ptr);
+    free(ptr);
 }
