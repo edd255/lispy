@@ -23,7 +23,14 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
 
     // If no arguments and sub then perform unary negation
     if ((strcmp(op, "-") == 0) && a->count == 0) {
-        x->num = -x->num;
+        switch (x->type) {
+            case LVAL_NUM: {
+                x->num = -x->num;
+            }
+            case LVAL_DEC: {
+                x->dec = -x->dec;
+            }
+        }
     }
 
     // While there are still elements remaining
