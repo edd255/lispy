@@ -1,5 +1,7 @@
 #include "strings.h"
 
+#include <assert.h>
+
 #include "../eval.h"
 #include "../main.h"
 #include "../printing.h"
@@ -39,19 +41,17 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 
         // Return empty list
         return lval_sexpr();
-    } else {
-        // Get parse error as string
-        char* err_msg = mpc_err_string(r.error);
-        mpc_err_delete(r.error);
+    }  // Get parse error as string
+    char* err_msg = mpc_err_string(r.error);
+    mpc_err_delete(r.error);
 
-        // Create new error message using it
-        lval_t* err = lval_err("Could not load library %s", err_msg);
-        LOG_FREE(err_msg);
-        lval_del(a);
+    // Create new error message using it
+    lval_t* err = lval_err("Could not load library %s", err_msg);
+    LOG_FREE(err_msg);
+    lval_del(a);
 
-        // Cleanup and return error
-        return err;
-    }
+    // Cleanup and return error
+    return err;
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {

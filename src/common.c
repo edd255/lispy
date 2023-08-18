@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include <assert.h>
+
 #include "values.h"
 
 //=== CONSTRUCTORS =============================================================
@@ -194,9 +196,8 @@ lval_t* lenv_get(lenv_t* e, lval_t* k) {
     // If no symbol check in parent otherwise error
     if (e->parent) {
         return lenv_get(e->parent, k);
-    } else {
-        return lval_err("Unbound symbol '%s'", k->sym);
     }
+    return lval_err("Unbound symbol '%s'", k->sym);
 }
 
 void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {

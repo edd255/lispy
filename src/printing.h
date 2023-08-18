@@ -1,5 +1,5 @@
-#ifndef LISPY_PRINTING_H
-#define LISPY_PRINTING_H
+#ifndef HOME_EDD_CODE_LISPY_SRC_PRINTING_H
+#define HOME_EDD_CODE_LISPY_SRC_PRINTING_H
 
 #include "common.h"
 

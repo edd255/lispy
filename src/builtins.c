@@ -1,6 +1,6 @@
 #include "builtins.h"
 
-#include <math.h>
+#include <assert.h>
 
 #include "common.h"
 #include "eval.h"

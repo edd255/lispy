@@ -1,5 +1,7 @@
 #include "list.h"
 
+#include <assert.h>
+
 #include "../eval.h"
 #include "../printing.h"
 #include "../values.h"

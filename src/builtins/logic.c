@@ -1,5 +1,7 @@
 #include "logic.h"
 
+#include <assert.h>
+
 #include "../printing.h"
 #include "helpers.h"
 

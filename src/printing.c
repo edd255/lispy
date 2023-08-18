@@ -1,5 +1,7 @@
 #include "printing.h"
 
+#include <assert.h>
+
 //=== PRINTING =================================================================
 
 /* Print an lval_t */

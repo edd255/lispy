@@ -1,12 +1,7 @@
-#ifndef LISPY_COMMON_H
-#define LISPY_COMMON_H
+#ifndef HOME_EDD_CODE_LISPY_SRC_COMMON_H
+#define HOME_EDD_CODE_LISPY_SRC_COMMON_H
 
-#include <assert.h>
-#include <malloc.h>
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "../deps/logger/log.h"
 #include "../deps/mpc/mpc.h"
@@ -30,23 +25,23 @@
 #define LASSERT_TYPE(fn, args, idx, expect) \
     LASSERT( \
         args, \
-        args->cell[idx]->type == expect, \
+        (args)->cell[idx]->type == (expect), \
         "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s.", \
         fn, \
         idx, \
-        ltype_name(args->cell[idx]->type), \
+        ltype_name((args)->cell[idx]->type), \
         ltype_name(expect) \
     )
 
 #define LASSERT_TYPES(fn, args, idx, expect1, expect2) \
     LASSERTS( \
         args, \
-        args->cell[idx]->type == expect1, \
-        args->cell[idx]->type == expect2, \
+        (args)->cell[idx]->type == (expect1), \
+        (args)->cell[idx]->type == (expect2), \
         "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.", \
         fn, \
         idx, \
-        ltype_name(args->cell[idx]->type), \
+        ltype_name((args)->cell[idx]->type), \
         ltype_name(expect1), \
         ltype_name(expect2) \
     )
@@ -54,17 +49,17 @@
 #define LASSERT_NUM(fn, args, num) \
     LASSERT( \
         args, \
-        args->count == num, \
+        (args)->count == (num), \
         "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
         fn, \
-        args->count, \
+        (args)->count, \
         num \
     )
 
 #define LASSERT_NOT_EMPTY(fn, args, index) \
     LASSERT( \
         args, \
-        args->cell[index]->count != 0, \
+        (args)->cell[index]->count != 0, \
         "Function '%s' passed  for argument %i.", \
         fn, \
         index \
@@ -136,14 +131,14 @@ struct lval_t {
     // Expression
     int count;
     lval_t** cell;
-};
+} __attribute__((packed)) __attribute__((aligned(128)));
 
 struct lenv_t {
     lenv_t* parent;
     int count;
     char** syms;
     lval_t** vals;
-};
+} __attribute__((aligned(32)));
 
 void* log_malloc(size_t size, const char* fn, const char* file, int line);
 void* log_realloc(
