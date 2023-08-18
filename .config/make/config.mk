@@ -43,7 +43,7 @@ VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
 CPPCHECK  := --enable=all --suppress=missingIncludeSystem
 FORMAT    := --Werror --style=file:.config/clang_format/fmt.conf
 
-ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments
+ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments -Wvla
 OPT := -Ofast -DNDEBUG
 DBG := -Og -g -DLOG_ALLOCS
 SAN := -fsanitize=address \
