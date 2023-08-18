@@ -14,6 +14,7 @@ Q      ?= @
 
 #---- CODE DIRECTORIES ---------------------------------------------------------
 
+PROJ_SRCS := $(shell find src -type f -name "*.c" -o -name "*.h")
 SRC_DIR   := src
 SRC_DIRS  := $(SRC_DIR) $(wildcard ./deps/*)
 BUILD_DIR := build
