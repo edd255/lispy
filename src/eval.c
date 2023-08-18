@@ -6,16 +6,16 @@
 //==== EVALUATION METHODS ======================================================
 
 lval_t* lval_eval(lenv_t* e, lval_t* v) {
-    assert(e != NULL);
-    assert(v != NULL);
+    assert(NULL != e);
+    assert(NULL != v);
 
-    if (v->type == LVAL_SYM) {
+    if (LVAL_SYM == v->type) {
         lval_t* x = lenv_get(e, v);
         lval_del(v);
         return x;
     }
     // Evaluate Sexpressions
-    if (v->type == LVAL_SEXPR) {
+    if (LVAL_SEXPR == v->type) {
         return lval_eval_sexpr(e, v);
     }
     // All other lval_t types remain the same
@@ -23,8 +23,8 @@ lval_t* lval_eval(lenv_t* e, lval_t* v) {
 }
 
 lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v) {
-    assert(e != NULL);
-    assert(v != NULL);
+    assert(NULL != e);
+    assert(NULL != v);
 
     // Evaluate Children
     for (int i = 0; i < v->count; i++) {
@@ -32,21 +32,21 @@ lval_t* lval_eval_sexpr(lenv_t* e, lval_t* v) {
     }
     // Error Checking
     for (int i = 0; i < v->count; i++) {
-        if (v->cell[i]->type == LVAL_ERR) {
+        if (LVAL_ERR == v->cell[i]->type) {
             return lval_take(v, i);
         }
     }
     // Empty Expression
-    if (v->count == 0) {
+    if (0 == v->count) {
         return v;
     }
     // Single Expression
-    if (v->count == 1) {
+    if (1 == v->count) {
         return lval_eval(e, lval_take(v, 0));
     }
     // Ensure first element is a function after evaluation
     lval_t* f = lval_pop(v, 0);
-    if (f->type != LVAL_FN) {
+    if (LVAL_FN != f->type) {
         lval_t* err = lval_err(
             "S-Expression starts with incorrect type. Got %s, Expected %s.",
             ltype_name(f->type),

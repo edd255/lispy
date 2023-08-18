@@ -43,7 +43,7 @@ lval_t* lval_err(char* fmt, ...) {
 }
 
 lval_t* lval_sym(char* s) {
-    assert(s != NULL);
+    assert(NULL != s);
     lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_SYM;
     v->sym = LOG_MALLOC(strlen(s) + 1);
@@ -68,7 +68,7 @@ lval_t* lval_qexpr(void) {
 }
 
 lval_t* lval_fn(lbuiltin_t fn) {
-    assert(fn != NULL);
+    assert(NULL != fn);
     lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_FN;
     v->builtin = fn;
@@ -76,8 +76,8 @@ lval_t* lval_fn(lbuiltin_t fn) {
 }
 
 lval_t* lval_lambda(lval_t* formals, lval_t* body) {
-    assert(formals != NULL);
-    assert(body != NULL);
+    assert(NULL != formals);
+    assert(NULL != body);
 
     lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_FN;
@@ -95,7 +95,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
 }
 
 lval_t* lval_str(const char* s) {
-    assert(s != NULL);
+    assert(NULL != s);
     lval_t* v = LOG_MALLOC(sizeof(lval_t));
     v->type = LVAL_STR;
     v->str = LOG_MALLOC(strlen(s) + 1);
@@ -104,8 +104,8 @@ lval_t* lval_str(const char* s) {
 }
 
 void lval_del(lval_t* v) {
-    assert(v != NULL);
-    if (v == NULL) {
+    assert(NULL != v);
+    if (NULL == v) {
         return;
     }
     switch (v->type) {
@@ -115,14 +115,14 @@ void lval_del(lval_t* v) {
         }
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
-            if (v->err == NULL) {
+            if (NULL == v->err) {
                 break;
             }
             LOG_FREE(v->err);
             break;
         }
         case LVAL_SYM: {
-            if (v->sym == NULL) {
+            if (NULL == v->sym) {
                 break;
             }
             LOG_FREE(v->sym);
@@ -137,7 +137,7 @@ void lval_del(lval_t* v) {
             break;
         }
         case LVAL_STR: {
-            if (v->str == NULL) {
+            if (NULL == v->str) {
                 break;
             }
             LOG_FREE(v->str);
@@ -168,7 +168,7 @@ lenv_t* lenv_new(void) {
 }
 
 void lenv_del(lenv_t* e) {
-    assert(e != NULL);
+    assert(NULL != e);
 
     for (int i = 0; i < e->count; i++) {
         LOG_FREE(e->syms[i]);
@@ -180,14 +180,14 @@ void lenv_del(lenv_t* e) {
 }
 
 lval_t* lenv_get(lenv_t* e, lval_t* k) {
-    assert(e != NULL);
-    assert(k != NULL);
+    assert(NULL != e);
+    assert(NULL != k);
 
     // Iterate over all items in environment
     for (int i = 0; i < e->count; i++) {
         // Check if the stored string matches the symbol string. If it does,
         // return a copy of the value
-        if (strcmp(e->syms[i], k->sym) == 0) {
+        if (0 == strcmp(e->syms[i], k->sym)) {
             return lval_copy(e->vals[i]);
         }
     }
@@ -200,16 +200,16 @@ lval_t* lenv_get(lenv_t* e, lval_t* k) {
 }
 
 void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
-    assert(e != NULL);
-    assert(k != NULL);
-    assert(v != NULL);
+    assert(NULL != e);
+    assert(NULL != k);
+    assert(NULL != v);
 
     // Iterate over all items in environment. This is to see if variable already
     // exists.
     for (int i = 0; i < e->count; i++) {
         // If variable is found delete item at that position. And replace with
         // variable supplied by user.
-        if (strcmp(e->syms[i], k->sym) == 0) {
+        if (0 == strcmp(e->syms[i], k->sym)) {
             lval_del(e->vals[i]);
             e->vals[i] = lval_copy(v);
             return;
@@ -218,7 +218,6 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
     // If no existing entry found allocate space for new entry
     e->count++;
     e->vals = LOG_REALLOC(e->vals, sizeof(lval_t*) * e->count);
-
     e->syms = LOG_REALLOC(e->syms, sizeof(char*) * e->count);
 
     // Copy contents of lval and symbol string into new location
@@ -229,7 +228,7 @@ void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
 }
 
 lenv_t* lenv_copy(lenv_t* e) {
-    assert(e != NULL);
+    assert(NULL != e);
 
     lenv_t* n = LOG_MALLOC(sizeof(lenv_t));
     n->parent = e->parent;
@@ -245,9 +244,9 @@ lenv_t* lenv_copy(lenv_t* e) {
 }
 
 void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
-    assert(e != NULL);
-    assert(k != NULL);
-    assert(v != NULL);
+    assert(NULL != e);
+    assert(NULL != k);
+    assert(NULL != v);
 
     // Iterate until e has no parent
     while (e->parent) {

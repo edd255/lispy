@@ -8,29 +8,27 @@
 
 //==== String functions ========================================================
 lval_t* builtin_load(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
-    LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPE(__func__, a, 0, LVAL_STR)
+    assert(NULL != e);
+    assert(NULL != a);
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
 
     // Parse file given by string name
     mpc_result_t r;
     mpc_parser_t* lispy = get_lispy_parser();
     if (mpc_parse_contents(a->cell[0]->str, lispy, &r)) {
         // Read contents
-        assert(r.output != NULL);
+        assert(NULL != r.output);
         lval_t* expr = lval_read(r.output);
         assert(expr != NULL);
         mpc_ast_delete(r.output);
 
         // Evaluate each expression
         while (expr->count) {
-            lval_t* y = lval_pop(expr, 0);
-            assert(y != NULL);
-            lval_t* x = lval_eval(e, y);
+            lval_t* x = lval_eval(e, lval_pop(expr, 0));
 
             // If evaluation leads to error print it
-            if (x->type == LVAL_ERR) {
+            if (LVAL_ERR == x->type) {
                 lval_println(x);
             }
             lval_del(x);
@@ -57,8 +55,8 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_print(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
 
     // Print each argument followed by a space
@@ -73,11 +71,11 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_error(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPE(__func__, a, 0, LVAL_STR)
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_STR);
 
     // Construct error from first argument
     lval_t* err = lval_err(a->cell[0]->str);

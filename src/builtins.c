@@ -12,7 +12,7 @@
 //==== BUILTIN METHODS =========================================================
 
 void lenv_add_builtins(lenv_t* e) {
-    assert(e != NULL);
+    assert(NULL != e);
 
     // Variable functions
     lenv_add_builtin(e, "\\", builtin_lambda);
@@ -67,9 +67,9 @@ void lenv_add_builtins(lenv_t* e) {
 }
 
 void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t fn) {
-    assert(e != NULL);
-    assert(name != NULL);
-    assert(fn != NULL);
+    assert(NULL != e);
+    assert(NULL != name);
+    assert(NULL != fn);
 
     lval_t* k = lval_sym(name);
     lval_t* v = lval_fn(fn);

@@ -5,10 +5,10 @@
 //==== READING =================================================================
 
 lval_t* lval_read_num(const mpc_ast_t* tree) {
-    assert(tree != NULL);
+    assert(NULL != tree);
 
     errno = 0;
-    if (strchr(tree->contents, '.') == NULL) {
+    if (NULL == strchr(tree->contents, '.')) {
         long x = strtol(tree->contents, NULL, 10);
         return errno != ERANGE ? lval_num(x) : lval_err("invalid number");
     } else {
@@ -18,7 +18,7 @@ lval_t* lval_read_num(const mpc_ast_t* tree) {
 }
 
 lval_t* lval_read(mpc_ast_t* tree) {
-    assert(tree != NULL);
+    assert(NULL != tree);
 
     // If Symbol, String or Number return conversion to that type
     if (strstr(tree->tag, "number")) {
@@ -33,7 +33,7 @@ lval_t* lval_read(mpc_ast_t* tree) {
 
     // If root (>) or sexpr then create empty list
     lval_t* x = NULL;
-    if (strcmp(tree->tag, ">") == 0) {
+    if (0 == strcmp(tree->tag, ">")) {
         x = lval_sexpr();
     }
     if (strstr(tree->tag, "sexpr")) {
@@ -45,30 +45,25 @@ lval_t* lval_read(mpc_ast_t* tree) {
 
     // Fill this list with any valid expression contained within
     for (int i = 0; i < tree->children_num; i++) {
-        if (strcmp(tree->children[i]->contents, "(") == 0) {
+        if (0 == strcmp(tree->children[i]->contents, "(")) {
             continue;
         }
-        if (strcmp(tree->children[i]->contents, ")") == 0) {
+        if (0 == strcmp(tree->children[i]->contents, ")")) {
             continue;
         }
-        if (strcmp(tree->children[i]->contents, "{") == 0) {
+        if (0 == strcmp(tree->children[i]->contents, "{")) {
             continue;
         }
-        if (strcmp(tree->children[i]->contents, "}") == 0) {
+        if (0 == strcmp(tree->children[i]->contents, "}")) {
             continue;
         }
-        if (strcmp(tree->children[i]->tag, "regex") == 0) {
+        if (0 == strcmp(tree->children[i]->tag, "regex")) {
             continue;
         }
         if (strstr(tree->children[i]->tag, "comment")) {
             continue;
         }
-        lval_t* y = lval_read(tree->children[i]);
-
-        assert(tree->children[i] != NULL);
-        assert(y != NULL);
-
-        x = lval_add(x, y);
+        x = lval_add(x, lval_read(tree->children[i]));
     }
     return x;
 }

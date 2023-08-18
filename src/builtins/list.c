@@ -6,8 +6,8 @@
 
 //==== List functions ==========================================================
 lval_t* builtin_list(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
 
     a->type = LVAL_QEXPR;
@@ -15,12 +15,12 @@ lval_t* builtin_list(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_head(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR)
-    LASSERT_NOT_EMPTY(__func__, a, 0)
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR);
+    LASSERT_NOT_EMPTY(__func__, a, 0);
 
     switch (a->cell[0]->type) {
         case LVAL_QEXPR: {
@@ -46,12 +46,12 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_tail(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR)
-    LASSERT_NOT_EMPTY(__func__, a, 0)
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR);
+    LASSERT_NOT_EMPTY(__func__, a, 0);
 
     switch (a->cell[0]->type) {
         case LVAL_QEXPR: {
@@ -66,7 +66,7 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
         }
         case LVAL_STR: {
             char* str = (a->cell[0]->str);
-            if (str == NULL || str[0] == '\0' || str[1] == '\0') {
+            if (NULL == str || '\0' == str[0] || '\0' == str[1]) {
                 lval_del(a);
                 return lval_err(
                     "Function '%s' needs a longer string",
@@ -90,11 +90,11 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_eval(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
-    LASSERT_NUM(__func__, a, 1)
-    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR)
+    LASSERT_NUM(__func__, a, 1);
+    LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
 
     lval_t* x = lval_take(a, 0);
     x->type = LVAL_SEXPR;
@@ -102,15 +102,15 @@ lval_t* builtin_eval(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_join(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     UNUSED(e);
 
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPES(__func__, a, i, LVAL_QEXPR, LVAL_STR)
+        LASSERT_TYPES(__func__, a, i, LVAL_QEXPR, LVAL_STR);
     }
     lval_t* x = lval_pop(a, 0);
-    assert(x != NULL);
+    assert(NULL != x);
     while (a->count) {
         x = lval_join(x, lval_pop(a, 0));
     }
@@ -119,14 +119,14 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_cons(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
-    LASSERT_NUM("cons", a, 2)
+    assert(NULL != e);
+    assert(NULL != a);
+    LASSERT_NUM("cons", a, 2);
     LASSERT_TYPE("cons", a, 0, LVAL_QEXPR);
     UNUSED(e);
 
     lval_t* x = lval_qexpr();
-    if (a->cell[0]->type != LVAL_QEXPR) {
+    if (LVAL_QEXPR != a->cell[0]->type) {
         x = lval_add(x, lval_pop(a, 0));
     } else {
         x = lval_pop(a, 0);
@@ -136,8 +136,8 @@ lval_t* builtin_cons(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_len(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
     UNUSED(e);
@@ -147,8 +147,8 @@ lval_t* builtin_len(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_pack(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
 
     LASSERT_TYPE(__func__, a, 0, LVAL_FN);
     lval_t* eval = lval_sexpr();
@@ -163,8 +163,8 @@ lval_t* builtin_pack(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_unpack(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
 
     LASSERT_NUM(__func__, a, 2);
     LASSERT_TYPE(__func__, a, 0, LVAL_FN);

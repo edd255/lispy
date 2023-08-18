@@ -5,8 +5,8 @@
 #include "list.h"
 
 lval_t* builtin_env(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != a);
     lval_t* x = lval_qexpr();
     for (int i = 0; i < e->count; i++) {
         lval_t* y = lval_sym(e->syms[i]);
@@ -17,6 +17,8 @@ lval_t* builtin_env(lenv_t* e, lval_t* a) {
 }
 
 lval_t* builtin_fun(lenv_t* e, lval_t* a) {
+    assert(NULL != e);
+    assert(NULL != a);
     LASSERT_NUM(__func__, a, 2);
     LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
     LASSERT_TYPE(__func__, a, 1, LVAL_QEXPR);

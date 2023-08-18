@@ -6,7 +6,7 @@
 //=== VALUES ===================================================================
 
 lval_t* lval_copy(lval_t* v) {
-    assert(v != NULL);
+    assert(NULL != v);
 
     lval_t* x = LOG_MALLOC(sizeof(lval_t));
     x->type = v->type;
@@ -61,8 +61,8 @@ lval_t* lval_copy(lval_t* v) {
 }
 
 lval_t* lval_add(lval_t* v, lval_t* x) {
-    assert(v != NULL);
-    assert(x != NULL);
+    assert(NULL != v);
+    assert(NULL != x);
 
     v->count++;
     v->cell = LOG_REALLOC(v->cell, sizeof(lval_t*) * v->count);
@@ -71,12 +71,12 @@ lval_t* lval_add(lval_t* v, lval_t* x) {
 }
 
 lval_t* lval_join(lval_t* x, lval_t* y) {
-    assert(x != NULL);
-    assert(y != NULL);
+    assert(NULL != x);
+    assert(NULL != y);
 
     // For each cell in 'y' add it to 'x'
     for (int i = 0; i < y->count; i++) {
-        assert(y->cell[i] != NULL);
+        assert(NULL != y->cell[i]);
         x = lval_add(x, y->cell[i]);
     }
     // Delete the empty 'y' and return 'x'
@@ -86,7 +86,7 @@ lval_t* lval_join(lval_t* x, lval_t* y) {
 }
 
 lval_t* lval_pop(lval_t* v, const int i) {
-    assert(v != NULL);
+    assert(NULL != v);
 
     // Find the item at "i"
     lval_t* x = v->cell[i];
@@ -103,7 +103,7 @@ lval_t* lval_pop(lval_t* v, const int i) {
 }
 
 lval_t* lval_take(lval_t* v, const int i) {
-    assert(v != NULL);
+    assert(NULL != v);
 
     lval_t* x = lval_pop(v, i);
     lval_del(v);
@@ -111,9 +111,9 @@ lval_t* lval_take(lval_t* v, const int i) {
 }
 
 lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
-    assert(e != NULL);
-    assert(f != NULL);
-    assert(a != NULL);
+    assert(NULL != e);
+    assert(NULL != f);
+    assert(NULL != a);
 
     // If Builtin, then simply call that
     if (f->builtin) {
@@ -126,7 +126,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
     // While arguments still remain to be processed
     while (a->count) {
         // If we've run out of formal arguments to bind
-        if (f->formals->count == 0) {
+        if (0 == f->formals->count) {
             lval_del(a);
             return lval_err(
                 "Function passed too many arguments. Got %i. Expected %i.",
@@ -138,9 +138,9 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         lval_t* sym = lval_pop(f->formals, 0);
 
         // Special case to deal with '&'
-        if (strcmp(sym->sym, "&") == 0) {
+        if (0 == strcmp(sym->sym, "&")) {
             // Ensure "&" is followed by another symbol
-            if (f->formals->count != 1) {
+            if (1 != f->formals->count) {
                 lval_del(a);
                 return lval_err(
                     "Function format invalid. Symbol '&' not followed by single symbol."
@@ -168,9 +168,9 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
     // Argument list is now bound so can be cleaned up
     lval_del(a);
 
-    if (f->formals->count > 0 && strcmp(f->formals->cell[0]->sym, "&") == 0) {
+    if (0 < f->formals->count && 0 == strcmp(f->formals->cell[0]->sym, "&")) {
         // Check to ensure that & is not passed invalidly
-        if (f->formals->count != 2) {
+        if (2 != f->formals->count) {
             return lval_err(
                 "Function format invalid. Symbol '&' not followed by single symbol."
             );
@@ -190,7 +190,7 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
     }
 
     // If all formals have been bound evaluate
-    if (f->formals->count == 0) {
+    if (0 == f->formals->count) {
         // Set environment parent to evaluation environment
         f->env->parent = e;
 
@@ -198,9 +198,9 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         lval_t* new_sexpr = lval_sexpr();
         lval_t* body_copy = lval_copy(f->body);
 
-        assert(new_sexpr != NULL);
-        assert(body_copy != NULL);
-        assert(f->env);
+        assert(NULL != new_sexpr);
+        assert(NULL != body_copy);
+        assert(NULL != f->env);
 
         return builtin_eval(f->env, lval_add(new_sexpr, body_copy));
     } else {
@@ -210,8 +210,8 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
 }
 
 int lval_eq(const lval_t* x, const lval_t* y) {
-    assert(x != NULL);
-    assert(y != NULL);
+    assert(NULL != x);
+    assert(NULL != y);
 
     // Different types are always unequal
     if (x->type != y->type) {
@@ -228,10 +228,10 @@ int lval_eq(const lval_t* x, const lval_t* y) {
         }
         // Compare string values
         case LVAL_ERR: {
-            return strcmp(x->err, y->err) == 0;
+            return 0 == strcmp(x->err, y->err);
         }
         case LVAL_SYM: {
-            return strcmp(x->sym, y->sym) == 0;
+            return 0 == strcmp(x->sym, y->sym);
         }
         // If builtin compare, otherwise compare formals and body
         case LVAL_FN: {
@@ -243,7 +243,7 @@ int lval_eq(const lval_t* x, const lval_t* y) {
             }
         }
         case LVAL_STR: {
-            return strcmp(x->str, y->str) == 0;
+            return 0 == strcmp(x->str, y->str);
         }
         // If list compare every individual element
         case LVAL_QEXPR:
