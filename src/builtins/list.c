@@ -66,12 +66,20 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
         }
         case LVAL_STR: {
             char* str = (a->cell[0]->str);
-            char tail[strlen(str)];
-            for (unsigned long i = 0; i < strlen(str); i++) {
-                tail[i] = str[i + 1];
+            if (str == NULL || str[0] == '\0' || str[1] == '\0') {
+                lval_del(a);
+                return lval_err(
+                    "Function '%s' needs a longer string",
+                    __func__
+                );
             }
+            size_t new_length = strlen(str) - 1;
+            char* tail_str = malloc(new_length + 1);
+            strcpy(tail_str, str + 1);
+            lval_t* tail = lval_str(tail_str);
+            free(tail_str);
             lval_del(a);
-            return lval_str(tail);
+            return tail;
         }
     }
     lval_del(a);
