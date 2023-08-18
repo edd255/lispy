@@ -43,17 +43,18 @@ VALGRIND  := --leak-check=full --show-leak-kinds=all --track-origins=yes
 CPPCHECK  := --enable=all --suppress=missingIncludeSystem
 FORMAT    := --Werror --style=file:.config/clang_format/fmt.conf
 
-ERR := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments -Wvla
-OPT := -Ofast -DNDEBUG
-DBG := -Og -g -DLOG_ALLOCS
-SAN := -fsanitize=address \
-	   -fsanitize=pointer-compare \
-	   -fsanitize=pointer-subtract \
-	   -fsanitize=leak \
-	   -fsanitize=undefined \
-	   -fsanitize-address-use-after-scope
+ERR  := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments -Wvla
+OPT  := -Ofast -DNDEBUG
+DBG  := -Og -g -DLOG_ALLOCS
+SAN  := -fsanitize=address \
+	    -fsanitize=pointer-compare \
+	    -fsanitize=pointer-subtract \
+	    -fsanitize=leak \
+	    -fsanitize=undefined \
+	    -fsanitize-address-use-after-scope
+FORT := -D_FORTIFY_SOURCE=2
 
-RELEASE   := ${ERR} ${OPT}
-DEBUGGING := ${ERR} ${DBG}
-SANITIZED := ${ERR} ${DBG} ${SAN}
+RELEASE   := ${FORT} ${ERR} ${OPT}
+DEBUGGING := ${FORT} ${ERR} ${DBG}
+SANITIZED := ${FORT} ${ERR} ${DBG} ${SAN}
 
