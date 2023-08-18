@@ -26,9 +26,11 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
         switch (x->type) {
             case LVAL_NUM: {
                 x->num = -x->num;
+                break;
             }
             case LVAL_DEC: {
                 x->dec = -x->dec;
+                break;
             }
         }
     }
@@ -156,6 +158,8 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
+                lval_del(y);
+                break;
             }
             case LOP_MIN: {
                 switch (x->type) {
@@ -170,6 +174,8 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
                         break;
                     }
                 }
+                lval_del(y);
+                break;
             }
             case LOP_UNKNOWN: {
                 lval_del(y);
