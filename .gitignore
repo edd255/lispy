@@ -58,3 +58,4 @@ dkms.conf
 cppcheck.log
 lispy.log
 .cache
+compile_commands.json
