@@ -1,5 +1,5 @@
-#ifndef HOME_EDD_CODE_LISPY_SRC_EVAL_H
-#define HOME_EDD_CODE_LISPY_SRC_EVAL_H
+#ifndef LISPY_EVAL_H
+#define LISPY_EVAL_H
 
 #include "common.h"
 

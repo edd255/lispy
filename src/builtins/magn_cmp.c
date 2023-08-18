@@ -1,7 +1,5 @@
 #include "magn_cmp.h"
 
-#include <assert.h>
-
 #include "../printing.h"
 
 //==== Comparison functions ====================================================
@@ -15,7 +13,7 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     LASSERT_TYPE(op, a, 0, LVAL_NUM);
     LASSERT_TYPE(op, a, 1, LVAL_NUM);
 
-    int r = 0;
+    int r;
     if (0 == strcmp(op, ">")) {
         r = (a->cell[0]->num > a->cell[1]->num);
     } else if (0 == strcmp(op, "<")) {

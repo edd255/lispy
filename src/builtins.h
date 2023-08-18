@@ -1,5 +1,5 @@
-#ifndef HOME_EDD_CODE_LISPY_SRC_BUILTINS_H
-#define HOME_EDD_CODE_LISPY_SRC_BUILTINS_H
+#ifndef LISPY_BUILTINS_H
+#define LISPY_BUILTINS_H
 
 #include "builtins/arithmetic.h"
 #include "builtins/conditional.h"

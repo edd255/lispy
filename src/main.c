@@ -1,5 +1,6 @@
-#include <assert.h>
 #include <editline/readline.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "../deps/argparse/argparse.h"
 #include "builtins.h"
@@ -137,6 +138,7 @@ void cli_interpreter(lenv_t* e) {
         }
         free(input);
     }
+    return;
 }
 
 void file_interpreter(lenv_t* e, const char* file) {
@@ -152,6 +154,7 @@ void file_interpreter(lenv_t* e, const char* file) {
         lval_println(x);
     }
     lval_del(x);
+    return;
 }
 
 void setup_parser(void) {
@@ -194,7 +197,7 @@ lenv_t* set_env(void) {
 }
 
 FILE* prepare_logfile(void) {
-    FILE* log = NULL;
+    FILE* log;
     char* cache_dir = getenv("XDG_CACHE_HOME");
     if (NULL == cache_dir) {
         free(cache_dir);
@@ -204,7 +207,7 @@ FILE* prepare_logfile(void) {
     char* log_file = malloc(strlen(cache_dir) + strlen("/lispy/lispy.log") + 1);
     strcpy(log_file, cache_dir);
     strcat(log_file, "/lispy/lispy.log");
-    log = fopen(log_file, "we");
+    log = fopen(log_file, "w");
     free(log_file);
     return log;
 }

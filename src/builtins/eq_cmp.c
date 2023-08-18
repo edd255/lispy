@@ -1,7 +1,5 @@
 #include "eq_cmp.h"
 
-#include <assert.h>
-
 #include "../values.h"
 
 //---- Equality comparison functions -------------------------------------------
@@ -12,7 +10,7 @@ lval_t* builtin_cmp(lenv_t* e, lval_t* a, char* op) {
     UNUSED(e);
     LASSERT_NUM(op, a, 2);
 
-    int r = 0;
+    int r;
     if (0 == strcmp(op, "==")) {
         r = lval_eq(a->cell[0], a->cell[1]);
     } else if (0 == strcmp(op, "!=")) {

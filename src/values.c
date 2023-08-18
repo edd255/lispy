@@ -1,7 +1,5 @@
 #include "values.h"
 
-#include <assert.h>
-
 #include "builtins.h"
 #include "common.h"
 
@@ -205,8 +203,10 @@ lval_t* lval_call(lenv_t* e, lval_t* f, lval_t* a) {
         assert(NULL != f->env);
 
         return builtin_eval(f->env, lval_add(new_sexpr, body_copy));
-    }  // Otherwise return partially evaluated function
-    return lval_copy(f);
+    } else {
+        // Otherwise return partially evaluated function
+        return lval_copy(f);
+    }
 }
 
 int lval_eq(const lval_t* x, const lval_t* y) {
@@ -237,8 +237,10 @@ int lval_eq(const lval_t* x, const lval_t* y) {
         case LVAL_FN: {
             if (x->builtin || y->builtin) {
                 return x->builtin == y->builtin;
+            } else {
+                return lval_eq(x->formals, y->formals)
+                    && lval_eq(x->body, y->body);
             }
-            return lval_eq(x->formals, y->formals) && lval_eq(x->body, y->body);
         }
         case LVAL_STR: {
             return 0 == strcmp(x->str, y->str);

@@ -1,7 +1,5 @@
 #include "conditional.h"
 
-#include <assert.h>
-
 #include "../eval.h"
 #include "../printing.h"
 #include "../values.h"
@@ -17,7 +15,7 @@ lval_t* builtin_if(lenv_t* e, lval_t* a) {
     LASSERT_TYPE(__func__, a, 2, LVAL_QEXPR);
 
     // Mark both expressions as evaluable
-    lval_t* x = NULL;
+    lval_t* x;
     a->cell[1]->type = LVAL_SEXPR;
     a->cell[2]->type = LVAL_SEXPR;
 

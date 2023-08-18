@@ -1,7 +1,8 @@
-#ifndef HOME_EDD_CODE_LISPY_SRC_BUILTINS_HELPERS_H
-#define HOME_EDD_CODE_LISPY_SRC_BUILTINS_HELPERS_H
+#ifndef LISPY_BUILTINS_HELPERS_H
+#define LISPY_BUILTINS_HELPERS_H
 
 #include <stdbool.h>
+#include <string.h>
 
 //==== HELPER METHODS ==========================================================
 //---- Arithmetic methods ------------------------------------------------------
@@ -21,7 +22,7 @@ typedef struct larithmop_map_t larithmop_map_t;
 struct larithmop_map_t {
     char* key;
     enum LARITHMOP value;
-} __attribute__((aligned(16)));
+};
 
 #define NUMBER_OF_LARITHMOPS \
     (int)(sizeof(larithmop_map) / sizeof(larithmop_map_t))
@@ -37,7 +38,7 @@ typedef struct llogic_map_t llogic_map_t;
 struct llogic_map_t {
     char* key;
     enum LLOGIC value;
-} __attribute__((aligned(16)));
+};
 
 #define NUMBER_OF_LLOGICS (int)(sizeof(llogic_map) / sizeof(llogic_map_t))
 
