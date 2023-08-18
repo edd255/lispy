@@ -2,7 +2,6 @@
 #define LISPY_BUILTINS_HELPERS_H
 
 #include <stdbool.h>
-#include <string.h>
 
 //==== HELPER METHODS ==========================================================
 //---- Arithmetic methods ------------------------------------------------------

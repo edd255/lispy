@@ -4,8 +4,8 @@
 #include "../values.h"
 
 //==== Variable functions ======================================================
-lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
-    assert(NULL != e);
+lval_t* builtin_var(lenv_t* env, lval_t* a, char* fn) {
+    assert(NULL != env);
     assert(NULL != a);
     assert(NULL != fn);
     LASSERT_TYPE(fn, a, 0, LVAL_QEXPR);
@@ -39,20 +39,20 @@ lval_t* builtin_var(lenv_t* e, lval_t* a, char* fn) {
     for (int i = 0; i < syms->count; i++) {
         // If 'def' define in globally. If 'put' define in locally.
         if (0 == strcmp(fn, "def")) {
-            lenv_def(e, syms->cell[i], a->cell[i + 1]);
+            lenv_def(env, syms->cell[i], a->cell[i + 1]);
         }
         if (0 == strcmp(fn, "=")) {
-            lenv_put(e, syms->cell[i], a->cell[i + 1]);
+            lenv_put(env, syms->cell[i], a->cell[i + 1]);
         }
     }
     lval_del(a);
     return lval_sexpr();
 }
 
-lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_lambda(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
 
     // Check two arguments, each of which are Q-Expressions
     LASSERT_NUM("\\", a, 2);
@@ -81,16 +81,16 @@ lval_t* builtin_lambda(lenv_t* e, lval_t* a) {
     return lval_lambda(formals, body);
 }
 
-lval_t* builtin_def(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_def(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_var(e, a, "def");
+    return builtin_var(env, a, "def");
 }
 
-lval_t* builtin_put(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_put(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_var(e, a, "=");
+    return builtin_var(env, a, "=");
 }

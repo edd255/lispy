@@ -4,8 +4,8 @@
 #include "../common.h"
 
 //---- String functions --------------------------------------------------------
-lval_t* builtin_load(lenv_t* e, lval_t* a);
-lval_t* builtin_print(lenv_t* e, lval_t* a);
-lval_t* builtin_error(lenv_t* e, lval_t* a);
+lval_t* builtin_load(lenv_t* env, lval_t* a);
+lval_t* builtin_print(lenv_t* env, lval_t* a);
+lval_t* builtin_error(lenv_t* env, lval_t* a);
 
 #endif

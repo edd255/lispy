@@ -4,16 +4,16 @@
 #include "helpers.h"
 
 //==== Logical functions =======================================================
-lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
-    assert(NULL != e);
+lval_t* builtin_logic(lenv_t* env, lval_t* a, char* operator) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
     int result = 0;
-    switch (llogic_from_string(op)) {
+    switch (llogic_from_string(operator)) {
         case LLOGIC_AND: {
-            LASSERT_NUM(op, a, 2);
-            LASSERT_TYPE(op, a, 0, LVAL_NUM);
-            LASSERT_TYPE(op, a, 1, LVAL_NUM);
+            LASSERT_NUM(operator, a, 2);
+            LASSERT_TYPE(operator, a, 0, LVAL_NUM);
+            LASSERT_TYPE(operator, a, 1, LVAL_NUM);
             if ((0 == a->cell[0]->num) || (0 == a->cell[1]->num)) {
                 result = 0;
             } else {
@@ -22,9 +22,9 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
             break;
         }
         case LLOGIC_OR: {
-            LASSERT_NUM(op, a, 2);
-            LASSERT_TYPE(op, a, 0, LVAL_NUM);
-            LASSERT_TYPE(op, a, 1, LVAL_NUM);
+            LASSERT_NUM(operator, a, 2);
+            LASSERT_TYPE(operator, a, 0, LVAL_NUM);
+            LASSERT_TYPE(operator, a, 1, LVAL_NUM);
             if ((0 == a->cell[0]->num) && (0 == a->cell[1]->num)) {
                 result = 0;
             } else {
@@ -33,8 +33,8 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
             break;
         }
         case LLOGIC_NOT: {
-            LASSERT_NUM(op, a, 1);
-            LASSERT_TYPE(op, a, 0, LVAL_NUM);
+            LASSERT_NUM(operator, a, 1);
+            LASSERT_TYPE(operator, a, 0, LVAL_NUM);
             if (0 == a->cell[0]->num) {
                 result = 1;
             } else {
@@ -53,14 +53,14 @@ lval_t* builtin_logic(lenv_t* e, lval_t* a, char* op) {
     return lval_num(result);
 }
 
-lval_t* builtin_and(lenv_t* e, lval_t* a) {
-    return builtin_logic(e, a, "and");
+lval_t* builtin_and(lenv_t* env, lval_t* a) {
+    return builtin_logic(env, a, "and");
 }
 
-lval_t* builtin_or(lenv_t* e, lval_t* a) {
-    return builtin_logic(e, a, "or");
+lval_t* builtin_or(lenv_t* env, lval_t* a) {
+    return builtin_logic(env, a, "or");
 }
 
-lval_t* builtin_not(lenv_t* e, lval_t* a) {
-    return builtin_logic(e, a, "not");
+lval_t* builtin_not(lenv_t* env, lval_t* a) {
+    return builtin_logic(env, a, "not");
 }

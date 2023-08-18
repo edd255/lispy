@@ -11,10 +11,9 @@ lval_t* lval_read_num(const mpc_ast_t* tree) {
     if (NULL == strchr(tree->contents, '.')) {
         long x = strtol(tree->contents, NULL, 10);
         return errno != ERANGE ? lval_num(x) : lval_err("invalid number");
-    } else {
-        double x = strtod(tree->contents, NULL);
-        return errno != ERANGE ? lval_dec(x) : lval_err("invalid number");
     }
+    double x = strtod(tree->contents, NULL);
+    return errno != ERANGE ? lval_dec(x) : lval_err("invalid number");
 }
 
 lval_t* lval_read(mpc_ast_t* tree) {
