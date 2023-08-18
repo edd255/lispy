@@ -62,6 +62,9 @@ analyze:
 	$(Q)scan-build make all
 	$(Q)echo "====> Running cppcheck..."
 	$(Q)cppcheck src/ $(CPPCHECK) 2> cppcheck.log
+	$(Q)echo "====> Running clang-tidy..."
+	$(Q)compiledb make all
+	$(Q)clang-tidy.py $(PROJ_SRCS) -checks=* -fix
 
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
