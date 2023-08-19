@@ -43,7 +43,7 @@ MAKEFLAGS         := --jobs=$(shell nproc)
 VALGRIND          := --leak-check=full --show-leak-kinds=all --track-origins=yes
 CPPCHECK          := --enable=all --suppress=missingIncludeSystem
 CLANG_FMT_CONFIG  := --Werror --style=file:.config/clang/fmt.conf
-CLANG_TIDY_CONFIG := --config=.config/clang/tidy.conf
+CLANG_TIDY_CONFIG := -config-file=.config/clang/tidy.conf -quiet
 
 ERR  := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments -Wvla
 OPT  := -Ofast -DNDEBUG
