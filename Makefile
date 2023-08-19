@@ -64,7 +64,7 @@ analyze:
 	$(Q)cppcheck src/ $(CPPCHECK) 2> cppcheck.log
 	$(Q)echo "====> Running clang-tidy..."
 	$(Q)compiledb make all
-	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG) -fix
+	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG)
 
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
