@@ -53,7 +53,7 @@ clean:
 
 style:
 	$(Q)echo "====> Formatting..."
-	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i $(FORMAT)
+	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i $(CLANG_FMT_CONFIG)
 
 #---- ANALYSIS -----------------------------------------------------------------
 
@@ -64,7 +64,7 @@ analyze:
 	$(Q)cppcheck src/ $(CPPCHECK) 2> cppcheck.log
 	$(Q)echo "====> Running clang-tidy..."
 	$(Q)compiledb make all
-	$(Q)clang-tidy.py $(PROJ_SRCS) -checks=* -fix
+	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG)
 
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
