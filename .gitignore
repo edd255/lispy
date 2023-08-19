@@ -60,3 +60,4 @@ cppcheck.log
 lispy.log
 .cache
 compile_commands.json
+logs
