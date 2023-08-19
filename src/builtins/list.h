@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_LIST_H
 #define LISPY_BUILTINS_LIST_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- List functions ----------------------------------------------------------
 lval_t* builtin_list(lenv_t* env, lval_t* a);

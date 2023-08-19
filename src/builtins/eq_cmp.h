@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_EQ_CMP_H
 #define LISPY_BUILTINS_EQ_CMP_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- Equality comparison functions -------------------------------------------
 lval_t* builtin_cmp(lenv_t* env, lval_t* a, char* operator);

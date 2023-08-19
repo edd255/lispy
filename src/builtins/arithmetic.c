@@ -1,8 +1,9 @@
-#include "arithmetic.h"
+#include "builtins/arithmetic.h"
 
-#include "../printing.h"
-#include "../values.h"
-#include "helpers.h"
+#include "printing.h"
+#include "values.h"
+#include "builtins/helpers.h"
+#include <math.h>
 
 //==== Arithmetic functions ====================================================
 lval_t* builtin_op(lenv_t* env, lval_t* a, char* operator) {

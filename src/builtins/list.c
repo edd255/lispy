@@ -1,8 +1,8 @@
-#include "list.h"
+#include "builtins/list.h"
 
-#include "../eval.h"
-#include "../printing.h"
-#include "../values.h"
+#include "eval.h"
+#include "printing.h"
+#include "values.h"
 
 //==== List functions ==========================================================
 lval_t* builtin_list(lenv_t* env, lval_t* a) {

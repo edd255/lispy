@@ -1,6 +1,6 @@
-#include "eq_cmp.h"
+#include "builtins/eq_cmp.h"
 
-#include "../values.h"
+#include "values.h"
 
 //---- Equality comparison functions -------------------------------------------
 lval_t* builtin_cmp(lenv_t* env, lval_t* a, char* operator) {

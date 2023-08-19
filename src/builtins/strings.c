@@ -1,10 +1,10 @@
-#include "strings.h"
+#include "builtins/strings.h"
 
-#include "../eval.h"
-#include "../main.h"
-#include "../printing.h"
-#include "../reading.h"
-#include "../values.h"
+#include "eval.h"
+#include "main.h"
+#include "printing.h"
+#include "reading.h"
+#include "values.h"
 
 //==== String functions ========================================================
 lval_t* builtin_load(lenv_t* env, lval_t* a) {

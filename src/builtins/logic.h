@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_LOGIC_H
 #define LISPY_BUILTINS_LOGIC_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- Logical functions -------------------------------------------------------
 lval_t* builtin_logic(lenv_t* env, lval_t* a, char* operator);

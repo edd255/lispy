@@ -1,7 +1,7 @@
-#include "vars.h"
+#include "builtins/vars.h"
 
-#include "../printing.h"
-#include "../values.h"
+#include "printing.h"
+#include "values.h"
 
 //==== Variable functions ======================================================
 lval_t* builtin_var(lenv_t* env, lval_t* a, char* fn) {

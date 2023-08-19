@@ -36,7 +36,7 @@ DEPS := $(OBJS:.o=.d)
 
 #---- FLAGS --------------------------------------------------------------------
 
-INC_FLAGS         := 
+INC_FLAGS         := -I. -I$(SRC_DIR)
 LDFLAGS           += -ledit -lm -DLOGC_USE_COLOR
 CFLAGS            := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR
 MAKEFLAGS         := --jobs=$(shell nproc)

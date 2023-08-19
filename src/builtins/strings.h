@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_STRINGS_H
 #define LISPY_BUILTINS_STRINGS_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- String functions --------------------------------------------------------
 lval_t* builtin_load(lenv_t* env, lval_t* a);
