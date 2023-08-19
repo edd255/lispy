@@ -34,7 +34,7 @@ lval_t* builtin_head(lenv_t* env, lval_t* a) {
             return v;
         }
         case LVAL_STR: {
-            char letter[2] = {(a->cell[0]->str)[0], '\0'};
+            const char letter[2] = {(a->cell[0]->str)[0], '\0'};
             lval_del(a);
             return lval_str(letter);
         }
