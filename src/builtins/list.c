@@ -5,19 +5,19 @@
 #include "../values.h"
 
 //==== List functions ==========================================================
-lval_t* builtin_list(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_list(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
 
     a->type = LVAL_QEXPR;
     return a;
 }
 
-lval_t* builtin_head(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_head(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR);
     LASSERT_NOT_EMPTY(__func__, a, 0);
@@ -45,10 +45,10 @@ lval_t* builtin_head(lenv_t* e, lval_t* a) {
     );
 }
 
-lval_t* builtin_tail(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_tail(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPES(__func__, a, 0, LVAL_QEXPR, LVAL_STR);
     LASSERT_NOT_EMPTY(__func__, a, 0);
@@ -89,22 +89,22 @@ lval_t* builtin_tail(lenv_t* e, lval_t* a) {
     );
 }
 
-lval_t* builtin_eval(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_eval(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
 
     lval_t* x = lval_take(a, 0);
     x->type = LVAL_SEXPR;
-    return lval_eval(e, x);
+    return lval_eval(env, x);
 }
 
-lval_t* builtin_join(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_join(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
 
     for (int i = 0; i < a->count; i++) {
         LASSERT_TYPES(__func__, a, i, LVAL_QEXPR, LVAL_STR);
@@ -118,12 +118,12 @@ lval_t* builtin_join(lenv_t* e, lval_t* a) {
     return x;
 }
 
-lval_t* builtin_cons(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_cons(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
     LASSERT_NUM("cons", a, 2);
     LASSERT_TYPE("cons", a, 0, LVAL_QEXPR);
-    UNUSED(e);
+    UNUSED(env);
 
     lval_t* x = lval_qexpr();
     if (LVAL_QEXPR != a->cell[0]->type) {
@@ -135,19 +135,19 @@ lval_t* builtin_cons(lenv_t* e, lval_t* a) {
     return x;
 }
 
-lval_t* builtin_len(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_len(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPE(__func__, a, 0, LVAL_QEXPR);
-    UNUSED(e);
+    UNUSED(env);
     lval_t* num = lval_num(a->cell[0]->count);
     lval_del(a);
     return num;
 }
 
-lval_t* builtin_pack(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_pack(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
     LASSERT_TYPE(__func__, a, 0, LVAL_FN);
@@ -159,11 +159,11 @@ lval_t* builtin_pack(lenv_t* e, lval_t* a) {
     }
     lval_add(eval, packed);
     lval_del(a);
-    return lval_eval_sexpr(e, eval);
+    return lval_eval_sexpr(env, eval);
 }
 
-lval_t* builtin_unpack(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_unpack(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
     LASSERT_NUM(__func__, a, 2);
@@ -179,5 +179,5 @@ lval_t* builtin_unpack(lenv_t* e, lval_t* a) {
         lval_add(eval, lval_pop(x, 0));
     }
     lval_del(x);
-    return lval_eval_sexpr(e, eval);
+    return lval_eval_sexpr(env, eval);
 }

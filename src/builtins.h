@@ -13,7 +13,7 @@
 #include "builtins/vars.h"
 #include "common.h"
 
-void lenv_add_builtins(lenv_t* e);
-void lenv_add_builtin(lenv_t* e, char* name, lbuiltin_t func);
+void lenv_add_builtins(lenv_t* env);
+void lenv_add_builtin(lenv_t* env, char* name, lbuiltin_t fn);
 
 #endif

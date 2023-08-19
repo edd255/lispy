@@ -4,23 +4,23 @@
 
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
-lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
-    assert(NULL != e);
+lval_t* builtin_ord(lenv_t* env, lval_t* a, char* operator) {
+    assert(NULL != env);
     assert(NULL != a);
-    assert(NULL != op);
-    UNUSED(e);
-    LASSERT_NUM(op, a, 2);
-    LASSERT_TYPE(op, a, 0, LVAL_NUM);
-    LASSERT_TYPE(op, a, 1, LVAL_NUM);
+    assert(NULL != operator);
+    UNUSED(env);
+    LASSERT_NUM(operator, a, 2);
+    LASSERT_TYPE(operator, a, 0, LVAL_NUM);
+    LASSERT_TYPE(operator, a, 1, LVAL_NUM);
 
-    int r;
-    if (0 == strcmp(op, ">")) {
+    int r = 0;
+    if (0 == strcmp(operator, ">")) {
         r = (a->cell[0]->num > a->cell[1]->num);
-    } else if (0 == strcmp(op, "<")) {
+    } else if (0 == strcmp(operator, "<")) {
         r = (a->cell[0]->num < a->cell[1]->num);
-    } else if (0 == strcmp(op, ">=")) {
+    } else if (0 == strcmp(operator, ">=")) {
         r = (a->cell[0]->num >= a->cell[1]->num);
-    } else if (0 == strcmp(op, "<=")) {
+    } else if (0 == strcmp(operator, "<=")) {
         r = (a->cell[0]->num <= a->cell[1]->num);
     } else {
         return lval_err(
@@ -31,30 +31,30 @@ lval_t* builtin_ord(lenv_t* e, lval_t* a, char* op) {
     return lval_num(r);
 }
 
-lval_t* builtin_gt(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_gt(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_ord(e, a, ">");
+    return builtin_ord(env, a, ">");
 }
 
-lval_t* builtin_lt(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_lt(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_ord(e, a, "<");
+    return builtin_ord(env, a, "<");
 }
 
-lval_t* builtin_ge(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_ge(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_ord(e, a, ">=");
+    return builtin_ord(env, a, ">=");
 }
 
-lval_t* builtin_le(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_le(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
 
-    return builtin_ord(e, a, "<=");
+    return builtin_ord(env, a, "<=");
 }

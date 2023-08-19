@@ -5,16 +5,16 @@
 #include "helpers.h"
 
 //==== Arithmetic functions ====================================================
-lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
-    assert(NULL != e);
+lval_t* builtin_op(lenv_t* env, lval_t* a, char* operator) {
+    assert(NULL != env);
     assert(NULL != a);
-    assert(NULL != op);
-    UNUSED(e);
-    LASSERT_TYPES(op, a, 0, LVAL_NUM, LVAL_DEC);
+    assert(NULL != operator);
+    UNUSED(env);
+    LASSERT_TYPES(operator, a, 0, LVAL_NUM, LVAL_DEC);
 
     // Ensure all arguments are numbers
     for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(op, a, i, a->cell[0]->type);
+        LASSERT_TYPE(operator, a, i, a->cell[0]->type);
     }
 
     // Pop the first element
@@ -22,7 +22,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     assert(x != NULL);
 
     // If no arguments and sub then perform unary negation
-    if ((0 == strcmp(op, "-")) && 0 == a->count) {
+    if ((0 == strcmp(operator, "-")) && 0 == a->count) {
         switch (x->type) {
             case LVAL_NUM: {
                 x->num = -x->num;
@@ -40,7 +40,7 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
         // Pop the next element
         lval_t* y = lval_pop(a, 0);
         assert(y != NULL);
-        switch (op_from_string(op)) {
+        switch (op_from_string(operator)) {
             case LOP_ADD: {
                 switch (x->type) {
                     case LVAL_NUM: {
@@ -187,58 +187,58 @@ lval_t* builtin_op(lenv_t* e, lval_t* a, char* op) {
     return x;
 }
 
-lval_t* builtin_add(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_add(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "+");
+    return builtin_op(env, a, "+");
 }
 
-lval_t* builtin_sub(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_sub(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "-");
+    return builtin_op(env, a, "-");
 }
 
-lval_t* builtin_mul(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_mul(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "*");
+    return builtin_op(env, a, "*");
 }
 
-lval_t* builtin_div(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_div(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "/");
+    return builtin_op(env, a, "/");
 }
 
-lval_t* builtin_mod(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_mod(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "%");
+    return builtin_op(env, a, "%");
 }
 
-lval_t* builtin_pow(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_pow(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "^");
+    return builtin_op(env, a, "^");
 }
 
-lval_t* builtin_max(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_max(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "max");
+    return builtin_op(env, a, "max");
 }
 
-lval_t* builtin_min(lenv_t* e, lval_t* a) {
-    assert(e != NULL);
+lval_t* builtin_min(lenv_t* env, lval_t* a) {
+    assert(env != NULL);
     assert(a != NULL);
 
-    return builtin_op(e, a, "min");
+    return builtin_op(env, a, "min");
 }

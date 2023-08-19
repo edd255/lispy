@@ -7,8 +7,8 @@
 #include "../values.h"
 
 //==== String functions ========================================================
-lval_t* builtin_load(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_load(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPE(__func__, a, 0, LVAL_STR);
@@ -25,7 +25,7 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 
         // Evaluate each expression
         while (expr->count) {
-            lval_t* x = lval_eval(e, lval_pop(expr, 0));
+            lval_t* x = lval_eval(env, lval_pop(expr, 0));
 
             // If evaluation leads to error print it
             if (LVAL_ERR == x->type) {
@@ -39,25 +39,23 @@ lval_t* builtin_load(lenv_t* e, lval_t* a) {
 
         // Return empty list
         return lval_sexpr();
-    } else {
-        // Get parse error as string
-        char* err_msg = mpc_err_string(r.error);
-        mpc_err_delete(r.error);
+    }  // Get parse error as string
+    char* err_msg = mpc_err_string(r.error);
+    mpc_err_delete(r.error);
 
-        // Create new error message using it
-        lval_t* err = lval_err("Could not load library %s", err_msg);
-        LOG_FREE(err_msg);
-        lval_del(a);
+    // Create new error message using it
+    lval_t* err = lval_err("Could not load library %s", err_msg);
+    LOG_FREE(err_msg);
+    lval_del(a);
 
-        // Cleanup and return error
-        return err;
-    }
+    // Cleanup and return error
+    return err;
 }
 
-lval_t* builtin_print(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_print(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
 
     // Print each argument followed by a space
     for (int i = 0; i < a->count; i++) {
@@ -70,10 +68,10 @@ lval_t* builtin_print(lenv_t* e, lval_t* a) {
     return lval_sexpr();
 }
 
-lval_t* builtin_error(lenv_t* e, lval_t* a) {
-    assert(NULL != e);
+lval_t* builtin_error(lenv_t* env, lval_t* a) {
+    assert(NULL != env);
     assert(NULL != a);
-    UNUSED(e);
+    UNUSED(env);
     LASSERT_NUM(__func__, a, 1);
     LASSERT_TYPE(__func__, a, 0, LVAL_STR);
 
