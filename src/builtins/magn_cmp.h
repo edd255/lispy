@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_MAGN_CMP_H
 #define LISPY_BUILTINS_MAGN_CMP_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- Magnitude comparison functions ------------------------------------------
 lval_t* builtin_ord(lenv_t* env, lval_t* a, char* operator);

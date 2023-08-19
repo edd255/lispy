@@ -1,6 +1,6 @@
 #include <editline/readline.h>
 
-#include "../deps/argparse/argparse.h"
+#include "deps/argparse/argparse.h"
 #include "builtins.h"
 #include "common.h"
 #include "eval.h"

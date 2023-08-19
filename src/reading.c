@@ -1,5 +1,5 @@
+#include <errno.h>
 #include "reading.h"
-
 #include "values.h"
 
 //==== READING =================================================================

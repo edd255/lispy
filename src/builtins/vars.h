@@ -1,7 +1,7 @@
 #ifndef LISPY_BUILTINS_VARS_H
 #define LISPY_BUILTINS_VARS_H
 
-#include "../common.h"
+#include "common.h"
 
 //---- Variable functions ------------------------------------------------------
 lval_t* builtin_var(lenv_t* env, lval_t* a, char* fn);

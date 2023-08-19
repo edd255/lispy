@@ -1,8 +1,8 @@
-#include "env.h"
+#include "builtins/env.h"
 
-#include "../printing.h"
-#include "../values.h"
-#include "list.h"
+#include "printing.h"
+#include "values.h"
+#include "builtins/list.h"
 
 lval_t* builtin_env(lenv_t* env, lval_t* a) {
     assert(NULL != env);
