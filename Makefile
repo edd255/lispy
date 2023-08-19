@@ -98,7 +98,7 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized analyze tests
+all: style release debugging sanitized tests
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
