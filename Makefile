@@ -47,7 +47,7 @@ sanitized: $(BIN)_sanitized
 
 clean:
 	$(Q)echo "====> Cleaning..."
-	$(Q)$(RM) --recursive $(BUILD_DIR)
+	$(Q)$(RM) --recursive $(BUILD_DIR) || true
 
 #---- STYLE --------------------------------------------------------------------
 
