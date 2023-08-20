@@ -17,13 +17,18 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Fixed my implementation of join, map, split, take, unpack
 - [X] Adding tests
 - [X] Added support for string for join, head, tail
-- [X] Adding builtin logical operators
-- [X] Adding builtin list operators
+- [X] Adding builtin logical and list operators
+- [X] Adding builtin fun operators
 - [X] Writing a function that prints all out named values in an environment
-- [X] Adding a fun operator
 
 ## TODO
 However, I'm far from finished.
 - [ ] Documenting the code
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
+- [ ] Implementing static typing
+- [ ] Implementing list literals
+- [ ] Implementing operating system interaction
+- [ ] Implementing tail call optimisation
+- [ ] Implementing garbage collection
+- [ ] Enabling user defined types
