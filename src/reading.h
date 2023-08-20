@@ -3,8 +3,8 @@
 
 #include "common.h"
 
-lval_t* lval_read_num(const mpc_ast_t* t);
-lval_t* lval_read(mpc_ast_t* t);
+lval_t* lval_read_num(const mpc_ast_t* tree);
+lval_t* lval_read(mpc_ast_t* tree);
 lval_t* lval_read_str(mpc_ast_t* tree);
 
 #endif

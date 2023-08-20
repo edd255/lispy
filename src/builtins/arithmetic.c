@@ -7,24 +7,24 @@
 #include "values.h"
 
 //==== Arithmetic functions ====================================================
-lval_t* builtin_op(lenv_t* env, lval_t* a, char* operator) {
+lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != env);
-    assert(NULL != a);
-    assert(NULL != operator);
+    assert(NULL != args);
+    assert(NULL != op);
     UNUSED(env);
-    LASSERT_TYPES(operator, a, 0, LVAL_NUM, LVAL_DEC);
+    LASSERT_TYPES(op, args, 0, LVAL_NUM, LVAL_DEC);
 
     // Ensure all arguments are numbers
-    for (int i = 0; i < a->count; i++) {
-        LASSERT_TYPE(operator, a, i, a->cell[0]->type);
+    for (int i = 0; i < args->count; i++) {
+        LASSERT_TYPE(op, args, i, args->cell[0]->type);
     }
 
     // Pop the first element
-    lval_t* x = lval_pop(a, 0);
-    assert(x != NULL);
+    lval_t* x = lval_pop(args, 0);
+    assert(NULL != x);
 
     // If no arguments and sub then perform unary negation
-    if ((0 == strcmp(operator, "-")) && 0 == a->count) {
+    if ((0 == strcmp(op, "-")) && 0 == args->count) {
         switch (x->type) {
             case LVAL_NUM: {
                 x->num = -x->num;
@@ -38,11 +38,11 @@ lval_t* builtin_op(lenv_t* env, lval_t* a, char* operator) {
     }
 
     // While there are still elements remaining
-    while (a->count > 0) {
+    while (args->count > 0) {
         // Pop the next element
-        lval_t* y = lval_pop(a, 0);
-        assert(y != NULL);
-        switch (op_from_string(operator)) {
+        lval_t* y = lval_pop(args, 0);
+        assert(NULL != y);
+        switch (op_from_string(op)) {
             case LOP_ADD: {
                 switch (x->type) {
                     case LVAL_NUM: {
@@ -185,62 +185,62 @@ lval_t* builtin_op(lenv_t* env, lval_t* a, char* operator) {
             }
         }
     }
-    lval_del(a);
+    lval_del(args);
     return x;
 }
 
-lval_t* builtin_add(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_add(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "+");
+    return builtin_op(env, args, "+");
 }
 
-lval_t* builtin_sub(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_sub(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "-");
+    return builtin_op(env, args, "-");
 }
 
-lval_t* builtin_mul(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_mul(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "*");
+    return builtin_op(env, args, "*");
 }
 
-lval_t* builtin_div(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_div(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "/");
+    return builtin_op(env, args, "/");
 }
 
-lval_t* builtin_mod(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_mod(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "%");
+    return builtin_op(env, args, "%");
 }
 
-lval_t* builtin_pow(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_pow(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "^");
+    return builtin_op(env, args, "^");
 }
 
-lval_t* builtin_max(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_max(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "max");
+    return builtin_op(env, args, "max");
 }
 
-lval_t* builtin_min(lenv_t* env, lval_t* a) {
-    assert(env != NULL);
-    assert(a != NULL);
+lval_t* builtin_min(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
 
-    return builtin_op(env, a, "min");
+    return builtin_op(env, args, "min");
 }

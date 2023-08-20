@@ -82,21 +82,21 @@ typedef lval_t* (*lbuiltin_t)(lenv_t*, lval_t*);
 lval_t* lval_num(long x);
 lval_t* lval_dec(double x);
 lval_t* lval_err(char* fmt, ...);
-lval_t* lval_sym(char* s);
+lval_t* lval_sym(char* str);
 lval_t* lval_sexpr(void);
 lval_t* lval_qexpr(void);
 lval_t* lval_fn(lbuiltin_t fn);
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
-lval_t* lval_str(const char* s);
-void lval_del(lval_t* v);
+lval_t* lval_str(const char* str);
+void lval_del(lval_t* val);
 
 //--- Environment --------------------------------------------------------------
 lenv_t* lenv_new(void);
-void lenv_del(lenv_t* e);
-lval_t* lenv_get(lenv_t* e, lval_t* k);
-void lenv_put(lenv_t* e, const lval_t* k, lval_t* v);
-lenv_t* lenv_copy(lenv_t* e);
-void lenv_def(lenv_t* e, const lval_t* k, lval_t* v);
+void lenv_del(lenv_t* env);
+lval_t* lenv_get(lenv_t* env, lval_t* key);
+void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val);
+lenv_t* lenv_copy(lenv_t* env);
+void lenv_def(lenv_t* env, const lval_t* key, lval_t* val);
 
 //=== STRUCTS AND ENUMS ========================================================
 
@@ -155,14 +155,14 @@ void* log_realloc(
 void log_free(void* ptr, const char* fn, const char* file, int line);
 
 #ifdef LOG_ALLOCS
-    #define LOG_MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)
-    #define LOG_REALLOC(old_ptr, size) \
+    #define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)
+    #define REALLOC(old_ptr, size) \
         log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)
-    #define LOG_FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)
+    #define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)
 #else
-    #define LOG_MALLOC(size)           malloc((size))
-    #define LOG_REALLOC(old_ptr, size) realloc((old_ptr), (size))
-    #define LOG_FREE(ptr)              free((ptr))
+    #define MALLOC(size)           malloc((size))
+    #define REALLOC(old_ptr, size) realloc((old_ptr), (size))
+    #define FREE(ptr)              free((ptr))
 #endif
 
 #endif

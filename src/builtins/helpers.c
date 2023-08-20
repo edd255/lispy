@@ -20,7 +20,7 @@ enum LARITHMOP op_from_string(char* key) {
     for (int i = 0; i < NUMBER_OF_LARITHMOPS; i++) {
         larithmop_map_t larithmop = larithmop_map[i];
         if (0 == strcmp(larithmop.key, key)) {
-            return larithmop.value;
+            return larithmop.val;
         }
     }
     return LOP_UNKNOWN;
@@ -59,7 +59,7 @@ enum LLOGIC llogic_from_string(char* key) {
     for (int i = 0; i < NUMBER_OF_LLOGICS; i++) {
         llogic_map_t llogic = llogic_map[i];
         if (0 == strcmp(llogic.key, key)) {
-            return llogic.value;
+            return llogic.val;
         }
     }
     return LLOGIC_UNKNOWN;

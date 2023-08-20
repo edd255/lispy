@@ -20,7 +20,7 @@ enum LARITHMOP {
 typedef struct larithmop_map_t larithmop_map_t;
 struct larithmop_map_t {
     char* key;
-    enum LARITHMOP value;
+    enum LARITHMOP val;
 };
 
 #define NUMBER_OF_LARITHMOPS \
@@ -36,7 +36,7 @@ enum LLOGIC { LLOGIC_AND, LLOGIC_OR, LLOGIC_NOT, LLOGIC_UNKNOWN };
 typedef struct llogic_map_t llogic_map_t;
 struct llogic_map_t {
     char* key;
-    enum LLOGIC value;
+    enum LLOGIC val;
 };
 
 #define NUMBER_OF_LLOGICS (int)(sizeof(llogic_map) / sizeof(llogic_map_t))

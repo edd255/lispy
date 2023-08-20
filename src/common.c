@@ -6,253 +6,253 @@
 
 /* Create a new number type lval_t */
 lval_t* lval_num(long x) {
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_NUM;
-    v->num = x;
-    return v;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_NUM;
+    val->num = x;
+    return val;
 }
 
 lval_t* lval_dec(double x) {
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_DEC;
-    v->dec = x;
-    return v;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_DEC;
+    val->dec = x;
+    return val;
 }
 
 lval_t* lval_err(char* fmt, ...) {
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_ERR;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_ERR;
 
     // Create a va list and initialize it
-    va_list va;
-    va_start(va, fmt);
+    va_list arg_list;
+    va_start(arg_list, fmt);
 
     // Allocate 512 bytes of space
-    v->err = LOG_MALLOC(512);
+    val->err = MALLOC(512);
 
     // printf the error string with a maximum of 511 character
-    vsnprintf(v->err, 511, fmt, va);
+    vsnprintf(val->err, 511, fmt, arg_list);
 
     // Reallocate to number of bytes actually used
-    v->err = LOG_REALLOC(v->err, strlen(v->err) + 1);
+    val->err = REALLOC(val->err, strlen(val->err) + 1);
 
     // Cleanup our va list
-    va_end(va);
+    va_end(arg_list);
 
-    return v;
+    return val;
 }
 
-lval_t* lval_sym(char* s) {
-    assert(NULL != s);
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_SYM;
-    v->sym = LOG_MALLOC(strlen(s) + 1);
-    strcpy(v->sym, s);
-    return v;
+lval_t* lval_sym(char* str) {
+    assert(NULL != str);
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_SYM;
+    val->sym = MALLOC(strlen(str) + 1);
+    strcpy(val->sym, str);
+    return val;
 }
 
 lval_t* lval_sexpr(void) {
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_SEXPR;
-    v->count = 0;
-    v->cell = NULL;
-    return v;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_SEXPR;
+    val->count = 0;
+    val->cell = NULL;
+    return val;
 }
 
 lval_t* lval_qexpr(void) {
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_QEXPR;
-    v->count = 0;
-    v->cell = NULL;
-    return v;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_QEXPR;
+    val->count = 0;
+    val->cell = NULL;
+    return val;
 }
 
 lval_t* lval_fn(lbuiltin_t fn) {
     assert(NULL != fn);
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_FN;
-    v->builtin = fn;
-    return v;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_FN;
+    val->builtin = fn;
+    return val;
 }
 
 lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     assert(NULL != formals);
     assert(NULL != body);
 
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_FN;
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_FN;
 
     // Set builtin to NULL
-    v->builtin = NULL;
+    val->builtin = NULL;
 
     // Build new environment
-    v->env = lenv_new();
+    val->env = lenv_new();
 
     // Set formals and body
-    v->formals = formals;
-    v->body = body;
-    return v;
+    val->formals = formals;
+    val->body = body;
+    return val;
 }
 
-lval_t* lval_str(const char* s) {
-    assert(NULL != s);
-    lval_t* v = LOG_MALLOC(sizeof(lval_t));
-    v->type = LVAL_STR;
-    v->str = LOG_MALLOC(strlen(s) + 1);
-    strcpy(v->str, s);
-    return v;
+lval_t* lval_str(const char* str) {
+    assert(NULL != str);
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_STR;
+    val->str = MALLOC(strlen(str) + 1);
+    strcpy(val->str, str);
+    return val;
 }
 
-void lval_del(lval_t* v) {
-    assert(NULL != v);
-    if (NULL == v) {
+void lval_del(lval_t* val) {
+    assert(NULL != val);
+    if (NULL == val) {
         return;
     }
-    switch (v->type) {
+    switch (val->type) {
         // Do nothing special for number type
         case LVAL_NUM: {
             break;
         }
         // For Errors or Symbols free the string data
         case LVAL_ERR: {
-            if (NULL == v->err) {
+            if (NULL == val->err) {
                 break;
             }
-            LOG_FREE(v->err);
+            FREE(val->err);
             break;
         }
         case LVAL_SYM: {
-            if (NULL == v->sym) {
+            if (NULL == val->sym) {
                 break;
             }
-            LOG_FREE(v->sym);
+            FREE(val->sym);
             break;
         }
         case LVAL_FN: {
-            if (!(v->builtin)) {
-                lenv_del(v->env);
-                lval_del(v->formals);
-                lval_del(v->body);
+            if (!(val->builtin)) {
+                lenv_del(val->env);
+                lval_del(val->formals);
+                lval_del(val->body);
             }
             break;
         }
         case LVAL_STR: {
-            if (NULL == v->str) {
+            if (NULL == val->str) {
                 break;
             }
-            LOG_FREE(v->str);
+            FREE(val->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
         case LVAL_QEXPR:
         case LVAL_SEXPR: {
-            for (int i = 0; i < v->count; i++) {
-                lval_del(v->cell[i]);
+            for (int i = 0; i < val->count; i++) {
+                lval_del(val->cell[i]);
             }
-            LOG_FREE(v->cell);
+            FREE(val->cell);
             break;
         }
     }
-    LOG_FREE(v);
+    FREE(val);
 }
 
 //=== ENVIRONMENT ==============================================================
 
 lenv_t* lenv_new(void) {
-    lenv_t* e = LOG_MALLOC(sizeof(lenv_t));
-    e->parent = NULL;
-    e->count = 0;
-    e->syms = NULL;
-    e->vals = NULL;
-    return e;
+    lenv_t* env = MALLOC(sizeof(lenv_t));
+    env->parent = NULL;
+    env->count = 0;
+    env->syms = NULL;
+    env->vals = NULL;
+    return env;
 }
 
-void lenv_del(lenv_t* e) {
-    assert(NULL != e);
+void lenv_del(lenv_t* env) {
+    assert(NULL != env);
 
-    for (int i = 0; i < e->count; i++) {
-        LOG_FREE(e->syms[i]);
-        lval_del(e->vals[i]);
+    for (int i = 0; i < env->count; i++) {
+        FREE(env->syms[i]);
+        lval_del(env->vals[i]);
     }
-    LOG_FREE(e->syms);
-    LOG_FREE(e->vals);
-    LOG_FREE(e);
+    FREE(env->syms);
+    FREE(env->vals);
+    FREE(env);
 }
 
-lval_t* lenv_get(lenv_t* e, lval_t* k) {
-    assert(NULL != e);
-    assert(NULL != k);
+lval_t* lenv_get(lenv_t* env, lval_t* key) {
+    assert(NULL != env);
+    assert(NULL != key);
 
     // Iterate over all items in environment
-    for (int i = 0; i < e->count; i++) {
+    for (int i = 0; i < env->count; i++) {
         // Check if the stored string matches the symbol string. If it does,
         // return a copy of the value
-        if (0 == strcmp(e->syms[i], k->sym)) {
-            return lval_copy(e->vals[i]);
+        if (0 == strcmp(env->syms[i], key->sym)) {
+            return lval_copy(env->vals[i]);
         }
     }
     // If no symbol check in parent otherwise error
-    if (e->parent) {
-        return lenv_get(e->parent, k);
+    if (env->parent) {
+        return lenv_get(env->parent, key);
     }
-    return lval_err("Unbound symbol '%s'", k->sym);
+    return lval_err("Unbound symbol '%s'", key->sym);
 }
 
-void lenv_put(lenv_t* e, const lval_t* k, lval_t* v) {
-    assert(NULL != e);
-    assert(NULL != k);
-    assert(NULL != v);
+void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val) {
+    assert(NULL != env);
+    assert(NULL != key);
+    assert(NULL != val);
 
     // Iterate over all items in environment. This is to see if variable already
     // exists.
-    for (int i = 0; i < e->count; i++) {
+    for (int i = 0; i < env->count; i++) {
         // If variable is found delete item at that position. And replace with
         // variable supplied by user.
-        if (0 == strcmp(e->syms[i], k->sym)) {
-            lval_del(e->vals[i]);
-            e->vals[i] = lval_copy(v);
+        if (0 == strcmp(env->syms[i], key->sym)) {
+            lval_del(env->vals[i]);
+            env->vals[i] = lval_copy(val);
             return;
         }
     }
     // If no existing entry found allocate space for new entry
-    e->count++;
-    e->vals = LOG_REALLOC(e->vals, sizeof(lval_t*) * e->count);
-    e->syms = LOG_REALLOC(e->syms, sizeof(char*) * e->count);
+    env->count++;
+    env->vals = REALLOC(env->vals, sizeof(lval_t*) * env->count);
+    env->syms = REALLOC(env->syms, sizeof(char*) * env->count);
 
     // Copy contents of lval and symbol string into new location
-    e->vals[e->count - 1] = lval_copy(v);
-    e->syms[e->count - 1] = LOG_MALLOC(strlen(k->sym) + 1);
+    env->vals[env->count - 1] = lval_copy(val);
+    env->syms[env->count - 1] = MALLOC(strlen(key->sym) + 1);
 
-    strcpy(e->syms[e->count - 1], k->sym);
+    strcpy(env->syms[env->count - 1], key->sym);
 }
 
-lenv_t* lenv_copy(lenv_t* e) {
-    assert(NULL != e);
+lenv_t* lenv_copy(lenv_t* env) {
+    assert(NULL != env);
 
-    lenv_t* n = LOG_MALLOC(sizeof(lenv_t));
-    n->parent = e->parent;
-    n->count = e->count;
-    n->syms = LOG_MALLOC(sizeof(char*) * (n->count));
-    n->vals = LOG_MALLOC(sizeof(lval_t*) * (n->count));
-    for (int i = 0; i < e->count; i++) {
-        n->syms[i] = LOG_MALLOC(strlen(e->syms[i]) + 1);
-        strcpy(n->syms[i], e->syms[i]);
-        n->vals[i] = lval_copy(e->vals[i]);
+    lenv_t* n = MALLOC(sizeof(lenv_t));
+    n->parent = env->parent;
+    n->count = env->count;
+    n->syms = MALLOC(sizeof(char*) * (n->count));
+    n->vals = MALLOC(sizeof(lval_t*) * (n->count));
+    for (int i = 0; i < env->count; i++) {
+        n->syms[i] = MALLOC(strlen(env->syms[i]) + 1);
+        strcpy(n->syms[i], env->syms[i]);
+        n->vals[i] = lval_copy(env->vals[i]);
     }
     return n;
 }
 
-void lenv_def(lenv_t* e, const lval_t* k, lval_t* v) {
-    assert(NULL != e);
-    assert(NULL != k);
-    assert(NULL != v);
+void lenv_def(lenv_t* env, const lval_t* key, lval_t* val) {
+    assert(NULL != env);
+    assert(NULL != key);
+    assert(NULL != val);
 
     // Iterate until e has no parent
-    while (e->parent) {
-        e = e->parent;
+    while (env->parent) {
+        env = env->parent;
     }
     // Put value in e
-    lenv_put(e, k, v);
+    lenv_put(env, key, val);
 }
 
 //=== LOGGING MEMORY ALLOCATIONS ===============================================
