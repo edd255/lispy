@@ -45,7 +45,12 @@ CPPCHECK          := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
 CLANG_FMT_CONFIG  := --Werror --style=file:.config/clang/fmt.conf
 CLANG_TIDY_CONFIG := -config-file=.config/clang/tidy.conf -export-fixes=tidy.log -fix
 
-ERR  := -Wall -Wpedantic -Wextra -Werror -Wno-gnu-zero-variadic-macro-arguments -Wvla
+ERR  := -Wall \
+		-Wpedantic \
+		-Wextra \
+		-Werror \
+		-Wvla \
+		-Wno-gnu-zero-variadic-macro-arguments
 OPT  := -Ofast -DNDEBUG
 DBG  := -Og -g -DLOG_ALLOCS
 SAN  := -fsanitize=address \
@@ -55,8 +60,10 @@ SAN  := -fsanitize=address \
 	    -fsanitize=undefined \
 	    -fsanitize-address-use-after-scope
 FORT := -D_FORTIFY_SOURCE=2
+PROF := -pg
 
 RELEASE   := ${FORT} ${ERR} ${OPT}
 DEBUGGING := ${FORT} ${ERR} ${DBG}
 SANITIZED := ${FORT} ${ERR} ${DBG} ${SAN}
+PROFILING := ${FORT} ${ERR} ${OPT} ${PROF}
 
