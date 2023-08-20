@@ -242,7 +242,7 @@ lenv_t* lenv_copy(lenv_t* env) {
     return n;
 }
 
-void lenv_def(lenv_t* env, const lval_t* key, lval_t* val) {
+void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val) {
     assert(NULL != env);
     assert(NULL != key);
     assert(NULL != val);
