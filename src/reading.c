@@ -70,12 +70,13 @@ lval_t* lval_read(mpc_ast_t* tree) {
 }
 
 lval_t* lval_read_str(mpc_ast_t* tree) {
-    assert(tree != NULL);
+    assert(NULL != tree);
 
     // Cut off final quote character
     tree->contents[strlen(tree->contents) - 1] = '\0';
+
     // Copy the string missing out the first quote character
-    char* unescaped = LOG_MALLOC(strlen(tree->contents + 1) + 1);
+    char* unescaped = MALLOC(strlen(tree->contents + 1) + 1);
     strcpy(unescaped, tree->contents + 1);
 
     // Pass through the unescape function
@@ -85,6 +86,6 @@ lval_t* lval_read_str(mpc_ast_t* tree) {
     lval_t* str = lval_str(unescaped);
 
     // Free the string and return
-    LOG_FREE(unescaped);
+    FREE(unescaped);
     return str;
 }

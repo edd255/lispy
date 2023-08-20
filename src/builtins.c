@@ -70,8 +70,8 @@ void lenv_add_builtin(lenv_t* env, char* name, lbuiltin_t fn) {
     assert(NULL != fn);
 
     lval_t* key = lval_sym(name);
-    lval_t* value = lval_fn(fn);
-    lenv_put(env, key, value);
+    lval_t* val = lval_fn(fn);
+    lenv_put(env, key, val);
     lval_del(key);
-    lval_del(value);
+    lval_del(val);
 }

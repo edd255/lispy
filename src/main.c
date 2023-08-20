@@ -20,13 +20,13 @@ void parse_args(int argc, const char** argv);
 FILE* prepare_logfile(void);
 
 //--- Variables ----------------------------------------------------------------
-mpc_parser_t* number;
-mpc_parser_t* symbol;
-mpc_parser_t* sexpr;
-mpc_parser_t* qexpr;
-mpc_parser_t* string;
-mpc_parser_t* comment;
-mpc_parser_t* expr;
+const mpc_parser_t* number;
+const mpc_parser_t* symbol;
+const mpc_parser_t* sexpr;
+const mpc_parser_t* qexpr;
+const mpc_parser_t* string;
+const mpc_parser_t* comment;
+const mpc_parser_t* expr;
 mpc_parser_t* lispy;
 
 //--- Command-line argument parsing --------------------------------------------
@@ -53,17 +53,17 @@ int main(int argc, const char** argv) {
 
     // Set up the interpreter
     setup_parser();
-    lenv_t* e = set_env();
+    lenv_t* env = set_env();
     lval_t* std = NULL;
     if (0 == no_stdlib) {
-        std = get_stdlib(e);
+        std = get_stdlib(env);
     }
     if (NULL != file) {
-        file_interpreter(e, file);
+        file_interpreter(env, file);
     } else {
-        cli_interpreter(e);
+        cli_interpreter(env);
     }
-    cleanup(std, e);
+    cleanup(std, env);
     return 0;
 }
 
@@ -97,18 +97,18 @@ void parse_args(int argc, const char** argv) {
     }
 }
 
-void cleanup(lval_t* std, lenv_t* e) {
+void cleanup(lval_t* std, lenv_t* env) {
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
     if (NULL != std) {
         lval_del(std);
     }
-    lenv_del(e);
+    lenv_del(env);
 }
 
-lval_t* get_stdlib(lenv_t* e) {
+lval_t* get_stdlib(lenv_t* env) {
     lval_t* standard =
         lval_add(lval_sexpr(), lval_str("/usr/local/lib/lispy/stdlib.lspy"));
-    lval_t* std = builtin_load(e, standard);
+    lval_t* std = builtin_load(env, standard);
     return std;
 }
 

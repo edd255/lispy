@@ -3,65 +3,65 @@
 //=== PRINTING =================================================================
 
 /* Print an lval_t */
-void lval_print(lval_t* v) {
-    assert(NULL != v);
-    if (NULL == v) {
+void lval_print(lval_t* val) {
+    assert(NULL != val);
+    if (NULL == val) {
         return;
     }
-    switch (v->type) {
+    switch (val->type) {
         case LVAL_NUM: {
-            printf("%li", v->num);
+            printf("%li", val->num);
             break;
         }
         case LVAL_DEC: {
-            printf("%f", v->dec);
+            printf("%f", val->dec);
             break;
         }
         case LVAL_ERR: {
-            printf("Error: %s", v->err);
+            printf("Error: %s", val->err);
             break;
         }
         case LVAL_SYM: {
-            printf("%s", v->sym);
+            printf("%s", val->sym);
             break;
         }
         case LVAL_FN: {
-            if (v->builtin) {
+            if (val->builtin) {
                 printf("<builtin>");
             } else {
                 printf("(\\ ");
-                lval_print(v->formals);
+                lval_print(val->formals);
                 putchar(' ');
-                lval_print(v->body);
+                lval_print(val->body);
                 putchar(')');
             }
             break;
         }
         case LVAL_STR: {
-            lval_print_str(v);
+            lval_print_str(val);
             break;
         }
         case LVAL_SEXPR: {
-            lval_print_expr(v, '(', ')');
+            lval_print_expr(val, '(', ')');
             break;
         }
         case LVAL_QEXPR: {
-            lval_print_expr(v, '{', '}');
+            lval_print_expr(val, '{', '}');
             break;
         }
     }
 }
 
-void lval_print_expr(lval_t* v, char open, char close) {
-    assert(NULL != v);
+void lval_print_expr(lval_t* val, char open, char close) {
+    assert(NULL != val);
 
     putchar(open);
-    for (int i = 0; i < v->count; i++) {
+    for (int i = 0; i < val->count; i++) {
         // Print Value contained within
-        lval_print(v->cell[i]);
+        lval_print(val->cell[i]);
 
         // Don't print trailing space if last element
-        if (i != (v->count - 1)) {
+        if (i != (val->count - 1)) {
             putchar(' ');
         }
     }
@@ -69,22 +69,22 @@ void lval_print_expr(lval_t* v, char open, char close) {
 }
 
 /* Print a lval_t followed by a newline */
-void lval_println(lval_t* v) {
-    assert(NULL != v);
+void lval_println(lval_t* val) {
+    assert(NULL != val);
 
-    lval_print(v);
+    lval_print(val);
     putchar('\n');
 }
 
-void lval_print_str(const lval_t* v) {
-    assert(NULL != v);
+void lval_print_str(const lval_t* val) {
+    assert(NULL != val);
 
-    if (NULL == v) {
+    if (NULL == val) {
         return;
     }
     // Make a copy of the string
-    char* escaped = LOG_MALLOC(strlen(v->str) + 1);
-    strcpy(escaped, v->str);
+    char* escaped = MALLOC(strlen(val->str) + 1);
+    strcpy(escaped, val->str);
 
     // Pass it through the escape function
     escaped = mpcf_escape(escaped);
@@ -93,11 +93,11 @@ void lval_print_str(const lval_t* v) {
     printf("%s", escaped);
 
     // free copied string
-    LOG_FREE(escaped);
+    FREE(escaped);
 }
 
-char* ltype_name(int t) {
-    switch (t) {
+char* ltype_name(int type) {
+    switch (type) {
         case LVAL_FN:
             return "Function";
         case LVAL_NUM:

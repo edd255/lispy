@@ -4,6 +4,6 @@
 #include "common.h"
 
 //---- Conditional functions ---------------------------------------------------
-lval_t* builtin_if(lenv_t* e, lval_t* a);
+lval_t* builtin_if(lenv_t* env, lval_t* args);
 
 #endif
