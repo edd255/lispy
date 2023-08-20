@@ -43,6 +43,20 @@ $(BUILD_DIR)/%.san.o: src/%.c
 
 sanitized: $(BIN)_sanitized
 
+#---- PROFILING ----------------------------------------------------------------
+
+$(BIN)_profiling: $(patsubst src/%.c, build/%.prof.o, $(SRCS)) 
+	$(Q)$(MKDIR) $(BIN_DIR)
+	$(Q)echo -e "====> LD $@"
+	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS) -pg
+
+$(BUILD_DIR)/%.prof.o: src/%.c
+	$(Q)echo "====> CC $@"
+	$(Q)mkdir -p $(dir $@)
+	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
+
+profiling: $(BIN)_profiling
+
 #---- CLEANING -----------------------------------------------------------------
 
 clean:
@@ -98,9 +112,9 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized tests
+all: style release debugging sanitized profiling tests
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all release debugging memcheck style install uninstall tests
+.PHONY: all release debugging memcheck style install uninstall tests profiling
