@@ -96,7 +96,7 @@ void lenv_del(lenv_t* env);
 lval_t* lenv_get(lenv_t* env, lval_t* key);
 void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val);
 lenv_t* lenv_copy(lenv_t* env);
-void lenv_def(lenv_t* env, const lval_t* key, lval_t* val);
+void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val);
 
 //=== STRUCTS AND ENUMS ========================================================
 
