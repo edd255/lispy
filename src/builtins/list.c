@@ -18,9 +18,9 @@ lval_t* builtin_head(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
-    LASSERT_NOT_EMPTY(__func__, args, 0);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
+    LCHECK_NOT_EMPTY(__func__, args, 0);
 
     switch (args->cell[0]->type) {
         case LVAL_QEXPR: {
@@ -49,9 +49,9 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
-    LASSERT_NOT_EMPTY(__func__, args, 0);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
+    LCHECK_NOT_EMPTY(__func__, args, 0);
 
     switch (args->cell[0]->type) {
         case LVAL_QEXPR: {
@@ -93,8 +93,8 @@ lval_t* builtin_eval(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPE(__func__, args, 0, LVAL_QEXPR);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
 
     lval_t* x = lval_take(args, 0);
     x->type = LVAL_SEXPR;
@@ -107,7 +107,7 @@ lval_t* builtin_join(lenv_t* env, lval_t* args) {
     UNUSED(env);
 
     for (int i = 0; i < args->count; i++) {
-        LASSERT_TYPES(__func__, args, i, LVAL_QEXPR, LVAL_STR);
+        LCHECK_TYPES(__func__, args, i, LVAL_QEXPR, LVAL_STR);
     }
     lval_t* x = lval_pop(args, 0);
     assert(NULL != x);
@@ -121,8 +121,8 @@ lval_t* builtin_join(lenv_t* env, lval_t* args) {
 lval_t* builtin_cons(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
-    LASSERT_NUM("cons", args, 2);
-    LASSERT_TYPE("cons", args, 0, LVAL_QEXPR);
+    LCHECK_NUM("cons", args, 2);
+    LCHECK_TYPE("cons", args, 0, LVAL_QEXPR);
     UNUSED(env);
 
     lval_t* x = lval_qexpr();
@@ -138,8 +138,8 @@ lval_t* builtin_cons(lenv_t* env, lval_t* args) {
 lval_t* builtin_len(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPE(__func__, args, 0, LVAL_QEXPR);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
     UNUSED(env);
     lval_t* num = lval_num(args->cell[0]->count);
     lval_del(args);
@@ -150,7 +150,7 @@ lval_t* builtin_pack(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
 
-    LASSERT_TYPE(__func__, args, 0, LVAL_FN);
+    LCHECK_TYPE(__func__, args, 0, LVAL_FN);
     lval_t* eval = lval_sexpr();
     lval_add(eval, lval_pop(args, 0));
     lval_t* packed = lval_qexpr();
@@ -166,10 +166,10 @@ lval_t* builtin_unpack(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
 
-    LASSERT_NUM(__func__, args, 2);
-    LASSERT_TYPE(__func__, args, 0, LVAL_FN);
-    LASSERT_TYPE(__func__, args, 1, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__func__, args, 1);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LVAL_FN);
+    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
+    LCHECK_NOT_EMPTY(__func__, args, 1);
 
     lval_t* eval = lval_sexpr();
     lval_add(eval, lval_pop(args, 0));

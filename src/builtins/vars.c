@@ -8,14 +8,14 @@ lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != fn);
-    LASSERT_TYPE(fn, args, 0, LVAL_QEXPR);
+    LCHECK_TYPE(fn, args, 0, LVAL_QEXPR);
 
     // First argument is symbol list
     lval_t* syms = args->cell[0];
 
     // Ensure all elements of first list are symbols
     for (int i = 0; i < syms->count; i++) {
-        LASSERT(
+        LCHECK(
             args,
             (LVAL_SYM == syms->cell[i]->type),
             "Error in procedure %s. Function '%s' cannot define non-symbol! Got %s. Expected %s.",
@@ -26,7 +26,7 @@ lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
         );
     }
     // Check correct number of symbols and values
-    LASSERT(
+    LCHECK(
         args,
         (args->count - 1 == syms->count),
         "Error in procedure %s. Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
@@ -55,13 +55,13 @@ lval_t* builtin_lambda(lenv_t* env, lval_t* args) {
     UNUSED(env);
 
     // Check two arguments, each of which are Q-Expressions
-    LASSERT_NUM("\\", args, 2);
-    LASSERT_TYPE("\\", args, 0, LVAL_QEXPR);
-    LASSERT_TYPE("\\", args, 1, LVAL_QEXPR);
+    LCHECK_NUM("\\", args, 2);
+    LCHECK_TYPE("\\", args, 0, LVAL_QEXPR);
+    LCHECK_TYPE("\\", args, 1, LVAL_QEXPR);
 
     // Check first Q-Expression contains only Symbols
     for (int i = 0; i < args->cell[0]->count; i++) {
-        LASSERT(
+        LCHECK(
             args,
             (LVAL_SYM == args->cell[0]->cell[i]->type),
             "Error in procedure %s. Cannot define non-symbol. Got %s. Expected %s.",

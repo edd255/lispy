@@ -8,7 +8,7 @@ lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != args);
     assert(NULL != op);
     UNUSED(env);
-    LASSERT_NUM(op, args, 2);
+    LCHECK_NUM(op, args, 2);
 
     int r = 0;
     if (0 == strcmp(op, "==")) {

@@ -12,22 +12,22 @@
 
 //=== DECLARATIONS =============================================================
 //--- Macros -------------------------------------------------------------------
-#define LASSERT(args, cond, fmt, ...) \
+#define LCHECK(args, cond, fmt, ...) \
     if (!(cond)) { \
         lval_t* err = lval_err(fmt, ##__VA_ARGS__); \
         lval_del(args); \
         return err; \
     }
 
-#define LASSERTS(args, cond1, cond2, fmt, ...) \
+#define LCHECKS(args, cond1, cond2, fmt, ...) \
     if (!((cond1) || (cond2))) { \
         lval_t* err = lval_err((fmt), ##__VA_ARGS__); \
         lval_del(args); \
         return err; \
     }
 
-#define LASSERT_TYPE(fn, args, idx, expect) \
-    LASSERT( \
+#define LCHECK_TYPE(fn, args, idx, expect) \
+    LCHECK( \
         (args), \
         (args)->cell[idx]->type == ((expect)), \
         "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s.", \
@@ -37,8 +37,8 @@
         ltype_name(expect) \
     )
 
-#define LASSERT_TYPES(fn, args, idx, expect1, expect2) \
-    LASSERTS( \
+#define LCHECK_TYPES(fn, args, idx, expect1, expect2) \
+    LCHECKS( \
         (args), \
         (args)->cell[idx]->type == ((expect1)), \
         (args)->cell[idx]->type == ((expect2)), \
@@ -50,8 +50,8 @@
         ltype_name(expect2) \
     )
 
-#define LASSERT_NUM(fn, args, num) \
-    LASSERT( \
+#define LCHECK_NUM(fn, args, num) \
+    LCHECK( \
         (args), \
         (args)->count == ((num)), \
         "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
@@ -60,8 +60,8 @@
         (num) \
     )
 
-#define LASSERT_NOT_EMPTY(fn, args, idx) \
-    LASSERT( \
+#define LCHECK_NOT_EMPTY(fn, args, idx) \
+    LCHECK( \
         (args), \
         (args)->cell[idx]->count != 0, \
         "Function '%s' passed  for argument %i.", \

@@ -10,8 +10,8 @@
 lval_t* builtin_load(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPE(__func__, args, 0, LVAL_STR);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LVAL_STR);
 
     // Parse file given by string name
     mpc_result_t r;
@@ -72,8 +72,8 @@ lval_t* builtin_error(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    LASSERT_NUM(__func__, args, 1);
-    LASSERT_TYPE(__func__, args, 0, LVAL_STR);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LVAL_STR);
 
     // Construct error from first argument
     lval_t* err = lval_err(args->cell[0]->str);

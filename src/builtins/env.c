@@ -19,11 +19,11 @@ lval_t* builtin_env(lenv_t* env, lval_t* a) {
 lval_t* builtin_fun(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
-    LASSERT_NUM(__func__, args, 2);
-    LASSERT_TYPE(__func__, args, 0, LVAL_QEXPR);
-    LASSERT_TYPE(__func__, args, 1, LVAL_QEXPR);
-    LASSERT_NOT_EMPTY(__func__, args, 0);
-    LASSERT_NOT_EMPTY(__func__, args, 1);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
+    LCHECK_NOT_EMPTY(__func__, args, 0);
+    LCHECK_NOT_EMPTY(__func__, args, 1);
 
     lval_t* fn_body = lval_pop(args, 1);
     lval_t* fn_args = builtin_tail(env, lval_copy(args));

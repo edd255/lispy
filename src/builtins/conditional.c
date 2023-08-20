@@ -9,10 +9,10 @@ lval_t* builtin_if(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    LASSERT_NUM(__func__, args, 3);
-    LASSERT_TYPE(__func__, args, 0, LVAL_NUM);
-    LASSERT_TYPE(__func__, args, 1, LVAL_QEXPR);
-    LASSERT_TYPE(__func__, args, 2, LVAL_QEXPR);
+    LCHECK_NUM(__func__, args, 3);
+    LCHECK_TYPE(__func__, args, 0, LVAL_NUM);
+    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 2, LVAL_QEXPR);
 
     // Mark both expressions as evaluable
     lval_t* x = NULL;

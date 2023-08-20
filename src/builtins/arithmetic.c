@@ -12,11 +12,11 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != args);
     assert(NULL != op);
     UNUSED(env);
-    LASSERT_TYPES(op, args, 0, LVAL_NUM, LVAL_DEC);
+    LCHECK_TYPES(op, args, 0, LVAL_NUM, LVAL_DEC);
 
     // Ensure all arguments are numbers
     for (int i = 0; i < args->count; i++) {
-        LASSERT_TYPE(op, args, i, args->cell[0]->type);
+        LCHECK_TYPE(op, args, i, args->cell[0]->type);
     }
 
     // Pop the first element
