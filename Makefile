@@ -48,12 +48,12 @@ sanitized: $(BIN)_sanitized
 $(BIN)_profiling: $(patsubst src/%.c, build/%.prof.o, $(SRCS)) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
-	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS) -pg
+	$(Q)$(CC) $(PROFILING) $+ -o $@ $(LDFLAGS) -pg
 
 $(BUILD_DIR)/%.prof.o: src/%.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
+	$(Q)$(CC) $(PROFILING) $(CFLAGS) -c $< -o $@
 
 profiling: $(BIN)_profiling
 
