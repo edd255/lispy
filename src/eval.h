@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LISPY_EVAL_H
 #define LISPY_EVAL_H
 

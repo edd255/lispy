@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LISPY_COMMON_H
 #define LISPY_COMMON_H
 
@@ -7,78 +9,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "deps/logger/log.h"
-#include "deps/mpc/mpc.h"
+#include "utils/alloc.h"
+#include "utils/errors.h"
 
 //=== DECLARATIONS =============================================================
-//--- Macros -------------------------------------------------------------------
-#define LCHECK(args, cond, fmt, ...) \
-    if (!(cond)) { \
-        lval_t* err = lval_err(fmt, ##__VA_ARGS__); \
-        lval_del(args); \
-        return err; \
-    }
-
-#define LCHECKS(args, cond1, cond2, fmt, ...) \
-    if (!((cond1) || (cond2))) { \
-        lval_t* err = lval_err((fmt), ##__VA_ARGS__); \
-        lval_del(args); \
-        return err; \
-    }
-
-#define LCHECK_TYPE(fn, args, idx, expect) \
-    LCHECK( \
-        (args), \
-        (args)->cell[idx]->type == ((expect)), \
-        "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s.", \
-        (fn), \
-        (idx), \
-        ltype_name((args)->cell[idx]->type), \
-        ltype_name(expect) \
-    )
-
-#define LCHECK_TYPES(fn, args, idx, expect1, expect2) \
-    LCHECKS( \
-        (args), \
-        (args)->cell[idx]->type == ((expect1)), \
-        (args)->cell[idx]->type == ((expect2)), \
-        "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.", \
-        (fn), \
-        (idx), \
-        ltype_name((args)->cell[idx]->type), \
-        ltype_name(expect1), \
-        ltype_name(expect2) \
-    )
-
-#define LCHECK_NUM(fn, args, num) \
-    LCHECK( \
-        (args), \
-        (args)->count == ((num)), \
-        "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
-        (fn), \
-        (args)->count, \
-        (num) \
-    )
-
-#define LCHECK_NOT_EMPTY(fn, args, idx) \
-    LCHECK( \
-        (args), \
-        (args)->cell[idx]->count != 0, \
-        "Function '%s' passed  for argument %i.", \
-        (fn), \
-        (idx) \
-    )
-
-#define UNUSED(x) (void)(x)
-
 //--- Structs ------------------------------------------------------------------
+/* Value Struct */
 struct lval_t;
-struct lenv_t;
 typedef struct lval_t lval_t;
+
+/* Environment Struct */
+struct lenv_t;
 typedef struct lenv_t lenv_t;
+
+/* Builtin Struct */
 typedef lval_t* (*lbuiltin_t)(lenv_t*, lval_t*);
 
-//--- Constructors & Destructors -----------------------------------------------
+//--- Constructors & Destructors for Values ------------------------------------
 lval_t* lval_num(long x);
 lval_t* lval_dec(double x);
 lval_t* lval_err(char* fmt, ...);
@@ -88,33 +35,28 @@ lval_t* lval_qexpr(void);
 lval_t* lval_fn(lbuiltin_t fn);
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
 lval_t* lval_str(const char* str);
+
+//--- Methods for Values -------------------------------------------------------
+lval_t* lval_copy(const lval_t* val);
+lval_t* lval_add(lval_t* val, lval_t* x);
+lval_t* lval_join(lval_t* x, lval_t* y);
+lval_t* lval_pop(lval_t* val, int idx);
+lval_t* lval_take(lval_t* val, int idx);
+lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* a);
+int lval_eq(const lval_t* x, const lval_t* y);
 void lval_del(lval_t* val);
 
-//--- Environment --------------------------------------------------------------
+//--- Constructors & Destructors for Environments ------------------------------
 lenv_t* lenv_new(void);
 void lenv_del(lenv_t* env);
+
+//--- Methods for Environments -------------------------------------------------
 lval_t* lenv_get(lenv_t* env, lval_t* key);
 void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val);
 lenv_t* lenv_copy(lenv_t* env);
 void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val);
 
-//=== STRUCTS AND ENUMS ========================================================
-
-/* Create enumeration of possible error types */
-enum LERR { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
-
-/* Create enumeration of possible lval_t types */
-enum LVAL {
-    LVAL_ERR,
-    LVAL_NUM,
-    LVAL_DEC,
-    LVAL_SYM,
-    LVAL_STR,
-    LVAL_SEXPR,
-    LVAL_QEXPR,
-    LVAL_FN
-};
-
+//=== STRUCTS ==================================================================
 struct lval_t {
     // Type
     int type;
@@ -144,6 +86,23 @@ struct lenv_t {
     lval_t** vals;
 };
 
+//=== ENUMS ====================================================================
+/* Create enumeration of possible error types */
+enum LERR { LERR_DIV_ZERO, LERR_BAD_OP, LERR_BAD_NUM };
+
+/* Create enumeration of possible lval_t types */
+enum LVAL {
+    LVAL_ERR,
+    LVAL_NUM,
+    LVAL_DEC,
+    LVAL_SYM,
+    LVAL_STR,
+    LVAL_SEXPR,
+    LVAL_QEXPR,
+    LVAL_FN
+};
+
+
 void* log_malloc(size_t size, const char* fn, const char* file, int line);
 void* log_realloc(
     void* old_ptr,
@@ -155,14 +114,14 @@ void* log_realloc(
 void log_free(void* ptr, const char* fn, const char* file, int line);
 
 #ifdef LOG_ALLOCS
-    #define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)
-    #define REALLOC(old_ptr, size) \
-        log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)
-    #define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)
+#define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)
+#define REALLOC(old_ptr, size) \
+    log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)
+#define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)
 #else
-    #define MALLOC(size)           malloc((size))
-    #define REALLOC(old_ptr, size) realloc((old_ptr), (size))
-    #define FREE(ptr)              free((ptr))
+#define MALLOC(size)           malloc((size))
+#define REALLOC(old_ptr, size) realloc((old_ptr), (size))
+#define FREE(ptr)              free((ptr))
 #endif
 
 #endif

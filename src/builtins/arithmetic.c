@@ -3,8 +3,7 @@
 #include <math.h>
 
 #include "builtins/helpers.h"
-#include "printing.h"
-#include "values.h"
+#include "io.h"
 
 //==== Arithmetic functions ====================================================
 lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {

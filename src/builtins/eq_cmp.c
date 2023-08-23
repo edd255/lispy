@@ -1,7 +1,5 @@
 #include "builtins/eq_cmp.h"
 
-#include "values.h"
-
 //---- Equality comparison functions -------------------------------------------
 lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != env);

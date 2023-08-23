@@ -1,8 +1,7 @@
 #include "builtins/conditional.h"
 
 #include "eval.h"
-#include "printing.h"
-#include "values.h"
+#include "io.h"
 
 //==== Conditional functions ===================================================
 lval_t* builtin_if(lenv_t* env, lval_t* args) {
