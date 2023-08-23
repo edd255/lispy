@@ -1,6 +1,6 @@
 #include "builtins/magn_cmp.h"
 
-#include "printing.h"
+#include "io.h"
 
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------

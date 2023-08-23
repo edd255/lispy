@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LISPY_BUILTINS_ENV_H
 #define LISPY_BUILTINS_ENV_H
 

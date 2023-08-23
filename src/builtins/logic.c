@@ -1,7 +1,7 @@
 #include "builtins/logic.h"
 
 #include "builtins/helpers.h"
-#include "printing.h"
+#include "io.h"
 
 //==== Logical functions =======================================================
 lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {

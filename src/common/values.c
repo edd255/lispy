@@ -1,9 +1,107 @@
-#include "values.h"
-
 #include "builtins.h"
 #include "common.h"
 
-//=== VALUES ===================================================================
+//=== CONSTRUCTORS =============================================================
+/* Create a new number type lval_t */
+lval_t* lval_num(long x) {
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_NUM;
+    val->num = x;
+    return val;
+}
+
+lval_t* lval_dec(double x) {
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_DEC;
+    val->dec = x;
+    return val;
+}
+
+lval_t* lval_err(char* fmt, ...) {
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_ERR;
+
+    // Create a va list and initialize it
+    va_list arg_list;
+    va_start(arg_list, fmt);
+
+    // Allocate 512 bytes of space
+    val->err = MALLOC(512);
+
+    // printf the error string with a maximum of 511 character
+    vsnprintf(val->err, 511, fmt, arg_list);
+
+    // Reallocate to number of bytes actually used
+    val->err = REALLOC(val->err, strlen(val->err) + 1);
+
+    // Cleanup our va list
+    va_end(arg_list);
+
+    return val;
+}
+
+lval_t* lval_sym(char* str) {
+    assert(NULL != str);
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_SYM;
+    val->sym = MALLOC(strlen(str) + 1);
+    strcpy(val->sym, str);
+    return val;
+}
+
+lval_t* lval_sexpr(void) {
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_SEXPR;
+    val->count = 0;
+    val->cell = NULL;
+    return val;
+}
+
+lval_t* lval_qexpr(void) {
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_QEXPR;
+    val->count = 0;
+    val->cell = NULL;
+    return val;
+}
+
+lval_t* lval_fn(lbuiltin_t fn) {
+    assert(NULL != fn);
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_FN;
+    val->builtin = fn;
+    return val;
+}
+
+lval_t* lval_lambda(lval_t* formals, lval_t* body) {
+    assert(NULL != formals);
+    assert(NULL != body);
+
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_FN;
+
+    // Set builtin to NULL
+    val->builtin = NULL;
+
+    // Build new environment
+    val->env = lenv_new();
+
+    // Set formals and body
+    val->formals = formals;
+    val->body = body;
+    return val;
+}
+
+lval_t* lval_str(const char* str) {
+    assert(NULL != str);
+    lval_t* val = MALLOC(sizeof(lval_t));
+    val->type = LVAL_STR;
+    val->str = MALLOC(strlen(str) + 1);
+    strcpy(val->str, str);
+    return val;
+}
+
+//=== METHODS ==================================================================
 
 lval_t* lval_copy(const lval_t* val) {
     assert(NULL != val);
@@ -60,57 +158,57 @@ lval_t* lval_copy(const lval_t* val) {
     return x;
 }
 
-lval_t* lval_add(lval_t* val, lval_t* x) {
-    assert(NULL != val);
+lval_t* lval_add(lval_t* self, lval_t* x) {
+    assert(NULL != self);
     assert(NULL != x);
 
-    val->count++;
-    val->cell = REALLOC(val->cell, sizeof(lval_t*) * val->count);
-    val->cell[val->count - 1] = x;
-    return val;
+    self->count++;
+    self->cell = REALLOC(self->cell, sizeof(lval_t*) * self->count);
+    self->cell[self->count - 1] = x;
+    return self;
 }
 
-lval_t* lval_join(lval_t* x, lval_t* y) {
-    assert(NULL != x);
+lval_t* lval_join(lval_t* self, lval_t* y) {
+    assert(NULL != self);
     assert(NULL != y);
 
     // For each cell in 'y' add it to 'x'
     for (int i = 0; i < y->count; i++) {
         assert(NULL != y->cell[i]);
-        x = lval_add(x, y->cell[i]);
+        self = lval_add(self, y->cell[i]);
     }
     // Delete the empty 'y' and return 'x'
     free(y->cell);
     free(y);
-    return x;
+    return self;
 }
 
-lval_t* lval_pop(lval_t* val, const int idx) {
-    assert(NULL != val);
+lval_t* lval_pop(lval_t* self, const int idx) {
+    assert(NULL != self);
 
     // Find the item at "i"
-    lval_t* x = val->cell[idx];
+    lval_t* x = self->cell[idx];
 
     // Shift memory after the item at "i" over the top
     memmove(
-        &val->cell[idx],
-        &val->cell[idx + 1],
-        sizeof(lval_t*) * (val->count - idx - 1)
+        &self->cell[idx],
+        &self->cell[idx + 1],
+        sizeof(lval_t*) * (self->count - idx - 1)
     );
 
     // Decrease the count of items in the list
-    val->count--;
+    self->count--;
 
     // Reallocate the memory used
-    val->cell = REALLOC(val->cell, sizeof(lval_t*) * val->count);
+    self->cell = REALLOC(self->cell, sizeof(lval_t*) * self->count);
     return x;
 }
 
-lval_t* lval_take(lval_t* val, const int idx) {
-    assert(NULL != val);
+lval_t* lval_take(lval_t* self, const int idx) {
+    assert(NULL != self);
 
-    lval_t* x = lval_pop(val, idx);
-    lval_del(val);
+    lval_t* x = lval_pop(self, idx);
+    lval_del(self);
     return x;
 }
 
@@ -263,4 +361,57 @@ int lval_eq(const lval_t* x, const lval_t* y) {
         }
     }
     return false;
+}
+
+void lval_del(lval_t* val) {
+    assert(NULL != val);
+    if (NULL == val) {
+        return;
+    }
+    switch (val->type) {
+        // Do nothing special for number type
+        case LVAL_NUM: {
+            break;
+        }
+        // For Errors or Symbols free the string data
+        case LVAL_ERR: {
+            if (NULL == val->err) {
+                break;
+            }
+            FREE(val->err);
+            break;
+        }
+        case LVAL_SYM: {
+            if (NULL == val->sym) {
+                break;
+            }
+            FREE(val->sym);
+            break;
+        }
+        case LVAL_FN: {
+            if (!(val->builtin)) {
+                lenv_del(val->env);
+                lval_del(val->formals);
+                lval_del(val->body);
+            }
+            break;
+        }
+        case LVAL_STR: {
+            if (NULL == val->str) {
+                break;
+            }
+            FREE(val->str);
+            break;
+        }
+        // If S-Expression or Q-Expression, then delete all elements inside
+        case LVAL_QEXPR:
+        case LVAL_SEXPR: {
+            for (int i = 0; i < val->count; i++) {
+                lval_del(val->cell[i]);
+            }
+            FREE(val->cell);
+            break;
+        }
+    }
+    FREE(val);
 }
