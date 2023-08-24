@@ -1,0 +1,132 @@
+\doxysection{common.\+h}
+\hypertarget{common_8h_source}{}\label{common_8h_source}\index{src/common.h@{src/common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ LISPY\_COMMON\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ LISPY\_COMMON\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}utils/alloc.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}utils/errors.h"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//===\ DECLARATIONS\ =============================================================}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//-\/-\/-\/\ Structs\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00017\ \textcolor{comment}{/*\ Value\ Struct\ */}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \mbox{\hyperlink{structlval__t}{lval\_t}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ Environment\ Struct\ */}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \mbox{\hyperlink{structlenv__t}{lenv\_t}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{/*\ Builtin\ Struct\ */}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ (*lbuiltin\_t)(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00029\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_num(\textcolor{keywordtype}{long}\ x);}
+\DoxyCodeLine{00030\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_dec(\textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00031\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_err(\textcolor{keywordtype}{char}*\ fmt,\ ...);}
+\DoxyCodeLine{00032\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_sym(\textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00033\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_sexpr(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00034\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_qexpr(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00035\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_fn(lbuiltin\_t\ fn);}
+\DoxyCodeLine{00036\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_lambda(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ formals,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ body);}
+\DoxyCodeLine{00037\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_str(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00040\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_copy(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00041\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_add(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ x);}
+\DoxyCodeLine{00042\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_join(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ x,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ y);}
+\DoxyCodeLine{00043\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_pop(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{int}\ idx);}
+\DoxyCodeLine{00044\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_take(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{int}\ idx);}
+\DoxyCodeLine{00045\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_call(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ fn,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ a);}
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{int}\ lval\_eq(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ y);}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ lval\_del(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00050\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ lenv\_new(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ lenv\_del(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00054\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lenv\_get(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key);}
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ lenv\_put(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00056\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ lenv\_copy(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ lenv\_def(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//===\ STRUCTS\ ==================================================================}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Type}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{int}\ type;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ Basic}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{long}\ num;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ dec;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{char}*\ err;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{char}*\ sym;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{char}*\ str;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ Function}}
+\DoxyCodeLine{00072\ \ \ \ \ lbuiltin\_t\ builtin;}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env;}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ formals;}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ body;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Expression}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ cell;}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ parent;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{char}**\ syms;}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ vals;}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{comment}{//===\ ENUMS\ ====================================================================}}
+\DoxyCodeLine{00090\ \textcolor{comment}{/*\ Create\ enumeration\ of\ possible\ error\ types\ */}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{enum}\ LERR\ \{\ LERR\_DIV\_ZERO,\ LERR\_BAD\_OP,\ LERR\_BAD\_NUM\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{comment}{/*\ Create\ enumeration\ of\ possible\ lval\_t\ types\ */}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{enum}\ LVAL\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ LVAL\_ERR,}
+\DoxyCodeLine{00096\ \ \ \ \ LVAL\_NUM,}
+\DoxyCodeLine{00097\ \ \ \ \ LVAL\_DEC,}
+\DoxyCodeLine{00098\ \ \ \ \ LVAL\_SYM,}
+\DoxyCodeLine{00099\ \ \ \ \ LVAL\_STR,}
+\DoxyCodeLine{00100\ \ \ \ \ LVAL\_SEXPR,}
+\DoxyCodeLine{00101\ \ \ \ \ LVAL\_QEXPR,}
+\DoxyCodeLine{00102\ \ \ \ \ LVAL\_FN}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}*\ log\_malloc(\textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line);}
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}*\ log\_realloc(}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}*\ old\_ptr,}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size,}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{int}\ line}
+\DoxyCodeLine{00112\ );}
+\DoxyCodeLine{00113\ \textcolor{keywordtype}{void}\ log\_free(\textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#ifdef\ LOG\_ALLOCS}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ log\_malloc((size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ \(\backslash\)}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\ \ \ \ log\_realloc((old\_ptr),\ (size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ log\_free((ptr),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ \ \ \ \ \ \ \ \ \ \ malloc((size))}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ realloc((old\_ptr),\ (size))}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ free((ptr))}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

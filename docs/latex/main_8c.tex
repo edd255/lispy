@@ -1,0 +1,89 @@
+\doxysection{src/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{src/main.c@{src/main.c}}
+
+
+This file contains the main function which sets up the logger and the parser and sets up the command line arguments.  
+
+
+{\ttfamily \#include $<$editline/readline.\+h$>$}\newline
+{\ttfamily \#include \"{}builtins.\+h\"{}}\newline
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+{\ttfamily \#include \"{}deps/argparse/argparse.\+h\"{}}\newline
+{\ttfamily \#include \"{}deps/logger/log.\+h\"{}}\newline
+{\ttfamily \#include \"{}deps/mpc/mpc.\+h\"{}}\newline
+{\ttfamily \#include \"{}eval.\+h\"{}}\newline
+{\ttfamily \#include \"{}io.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a74f73094803752e1a03badcb3a521dfc}\label{main_8c_a74f73094803752e1a03badcb3a521dfc} 
+void {\bfseries cli\+\_\+interpreter} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}e)
+\item 
+\Hypertarget{main_8c_aa4a5579d4692d0cbea971fca908af805}\label{main_8c_aa4a5579d4692d0cbea971fca908af805} 
+void {\bfseries file\+\_\+interpreter} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}e, const char \texorpdfstring{$\ast$}{*}file)
+\item 
+\Hypertarget{main_8c_a74926c46a74d5dd4afb62910905e8907}\label{main_8c_a74926c46a74d5dd4afb62910905e8907} 
+void {\bfseries setup\+\_\+parser} (void)
+\item 
+\Hypertarget{main_8c_a6d2345e0990fb4567064efd36ff2197c}\label{main_8c_a6d2345e0990fb4567064efd36ff2197c} 
+\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries set\+\_\+env} (void)
+\item 
+\Hypertarget{main_8c_a19efd3d1a2014983aadcb3c9f6bd32be}\label{main_8c_a19efd3d1a2014983aadcb3c9f6bd32be} 
+void {\bfseries cleanup} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}std, \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}e)
+\item 
+\Hypertarget{main_8c_a1b30e9a1aae4c3a9445e67ac98bd2278}\label{main_8c_a1b30e9a1aae4c3a9445e67ac98bd2278} 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+stdlib} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}e)
+\item 
+\Hypertarget{main_8c_a1265b5fcd95aa90525ccd721723f91c1}\label{main_8c_a1265b5fcd95aa90525ccd721723f91c1} 
+void {\bfseries parse\+\_\+args} (int argc, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+\Hypertarget{main_8c_aadcdb38d3064679ab74180a4629d969c}\label{main_8c_aadcdb38d3064679ab74180a4629d969c} 
+FILE \texorpdfstring{$\ast$}{*} {\bfseries prepare\+\_\+logfile} (void)
+\item 
+\Hypertarget{main_8c_a217dbf8b442f20279ea00b898af96f52}\label{main_8c_a217dbf8b442f20279ea00b898af96f52} 
+int {\bfseries main} (int argc, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+\Hypertarget{main_8c_a33d140882b6f455504ea3f64c726961d}\label{main_8c_a33d140882b6f455504ea3f64c726961d} 
+mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+lispy\+\_\+parser} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_aabf9c9a486893212e85d686799df2932}\label{main_8c_aabf9c9a486893212e85d686799df2932} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries number}
+\item 
+\Hypertarget{main_8c_ae2dfae610b39c49e1c3b37cfd89aa52b}\label{main_8c_ae2dfae610b39c49e1c3b37cfd89aa52b} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries symbol}
+\item 
+\Hypertarget{main_8c_a5666d472de064260323e336eb66e01bd}\label{main_8c_a5666d472de064260323e336eb66e01bd} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries sexpr}
+\item 
+\Hypertarget{main_8c_abbbf17e22963dbf0d2d354b3a9800dbe}\label{main_8c_abbbf17e22963dbf0d2d354b3a9800dbe} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries qexpr}
+\item 
+\Hypertarget{main_8c_a251f2a8cc508ee14808eddf8424e0a07}\label{main_8c_a251f2a8cc508ee14808eddf8424e0a07} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries string}
+\item 
+\Hypertarget{main_8c_a1fe3acfecc3c0b9477f38556ac69a5e2}\label{main_8c_a1fe3acfecc3c0b9477f38556ac69a5e2} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries comment}
+\item 
+\Hypertarget{main_8c_a0f41257e2dc35ef6c4333add43dbdb58}\label{main_8c_a0f41257e2dc35ef6c4333add43dbdb58} 
+const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries expr}
+\item 
+\Hypertarget{main_8c_a065721c05a37f8befd463c37f3d3dfe4}\label{main_8c_a065721c05a37f8befd463c37f3d3dfe4} 
+mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries lispy}
+\item 
+\Hypertarget{main_8c_adf16cd437526a5c5e0e0af87745acbb8}\label{main_8c_adf16cd437526a5c5e0e0af87745acbb8} 
+char \texorpdfstring{$\ast$}{*} {\bfseries file} = NULL
+\item 
+\Hypertarget{main_8c_ac5eb6eef7255a3857a377bb13960165a}\label{main_8c_ac5eb6eef7255a3857a377bb13960165a} 
+int {\bfseries no\+\_\+stdlib} = 0
+\item 
+\Hypertarget{main_8c_acc0e8215964fc15509f3ca72c8d98b6b}\label{main_8c_acc0e8215964fc15509f3ca72c8d98b6b} 
+int {\bfseries print\+\_\+logs} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains the main function which sets up the logger and the parser and sets up the command line arguments. 
+

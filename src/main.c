@@ -1,3 +1,20 @@
+/**
+ * @mainpage Lispy Interpreter
+ *
+ * Lispy is a functional language inspired by Lisp. The interpreter is written
+ * in C and is based on "Build Your Own Lisp" by Daniel Holden and uses his mpc
+ * library.
+ *
+ * @author edd255
+ */
+
+/**
+* @file main.c
+*
+* @brief This file contains the main function which sets up the logger and the
+* parser and sets up the command line arguments.
+**/
+
 #include <editline/readline.h>
 
 #include "builtins.h"

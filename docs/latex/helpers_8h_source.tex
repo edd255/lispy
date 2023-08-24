@@ -1,0 +1,54 @@
+\doxysection{helpers.\+h}
+\hypertarget{helpers_8h_source}{}\label{helpers_8h_source}\index{src/builtins/helpers.h@{src/builtins/helpers.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ LISPY\_BUILTINS\_HELPERS\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ LISPY\_BUILTINS\_HELPERS\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//====\ HELPER\ METHODS\ ==========================================================}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//-\/-\/-\/-\/\ Arithmetic\ methods\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum}\ LARITHMOP\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ LOP\_ADD,}
+\DoxyCodeLine{00012\ \ \ \ \ LOP\_SUB,}
+\DoxyCodeLine{00013\ \ \ \ \ LOP\_MUL,}
+\DoxyCodeLine{00014\ \ \ \ \ LOP\_DIV,}
+\DoxyCodeLine{00015\ \ \ \ \ LOP\_MOD,}
+\DoxyCodeLine{00016\ \ \ \ \ LOP\_POW,}
+\DoxyCodeLine{00017\ \ \ \ \ LOP\_MAX,}
+\DoxyCodeLine{00018\ \ \ \ \ LOP\_MIN,}
+\DoxyCodeLine{00019\ \ \ \ \ LOP\_UNKNOWN}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlarithmop__map__t}{larithmop\_map\_t}}\ \mbox{\hyperlink{structlarithmop__map__t}{larithmop\_map\_t}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlarithmop__map__t}{larithmop\_map\_t}}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{char}*\ key;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{enum}\ LARITHMOP\ val;}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ NUMBER\_OF\_LARITHMOPS\ \(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ (int)(sizeof(larithmop\_map)\ /\ sizeof(larithmop\_map\_t))}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{enum}\ LARITHMOP\ op\_from\_string(\textcolor{keywordtype}{char}*\ key);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{long}\ power\_long(\textcolor{keywordtype}{long}\ base,\ \textcolor{keywordtype}{long}\ exponent);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//-\/-\/-\/-\/\ Logical\ methods\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00036\ \textcolor{keyword}{enum}\ LLOGIC\ \{\ LLOGIC\_AND,\ LLOGIC\_OR,\ LLOGIC\_NOT,\ LLOGIC\_UNKNOWN\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structllogic__map__t}{llogic\_map\_t}}\ \mbox{\hyperlink{structllogic__map__t}{llogic\_map\_t}};}
+\DoxyCodeLine{00039\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structllogic__map__t}{llogic\_map\_t}}\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{char}*\ key;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{enum}\ LLOGIC\ val;}
+\DoxyCodeLine{00042\ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ NUMBER\_OF\_LLOGICS\ (int)(sizeof(llogic\_map)\ /\ sizeof(llogic\_map\_t))}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{enum}\ LLOGIC\ llogic\_from\_string(\textcolor{keywordtype}{char}*\ key);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

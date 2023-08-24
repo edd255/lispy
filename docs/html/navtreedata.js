@@ -25,16 +25,20 @@
 var NAVTREE =
 [
   [ "My Project", "index.html", [
-    [ "Lispy", "md_README.html", [
-      [ "Modifications", "md_README.html#autotoc_md1", null ],
-      [ "TODO", "md_README.html#autotoc_md2", null ]
+    [ "Lispy Interpreter", "index.html", null ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ]
+    ] ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"alloc_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
