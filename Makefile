@@ -59,7 +59,7 @@ profiling: $(BIN)_profiling
 
 #---- DOCUMENTATION ------------------------------------------------------------
 
-documentation:
+docs:
 	$(Q)echo "====> Creating the documentation..."
 	$(Q)doxygen > logs/doxygen.log
 
@@ -118,9 +118,9 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized profiling tests documentation
+all: style release debugging sanitized profiling tests docs
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all release debugging memcheck style install uninstall tests profiling
+.PHONY: all release debugging memcheck style install uninstall tests profiling docs
