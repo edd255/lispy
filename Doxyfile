@@ -1,4 +1,6 @@
-OUTPUT_DIRECTORY       = ./docs
+OUTPUT_DIRECTORY       = docs
+INPUT                  = src
+RECURSIVE              = YES
 GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
