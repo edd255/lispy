@@ -57,6 +57,12 @@ $(BUILD_DIR)/%.prof.o: src/%.c
 
 profiling: $(BIN)_profiling
 
+#---- DOCUMENTATION ------------------------------------------------------------
+
+documentation:
+	$(Q)echo "====> Creating the documentation..."
+	$(Q)doxygen > logs/doxygen.log
+
 #---- CLEANING -----------------------------------------------------------------
 
 clean:
@@ -112,7 +118,7 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized profiling tests
+all: style release debugging sanitized profiling tests documentation
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
