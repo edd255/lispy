@@ -102,7 +102,6 @@ enum LVAL {
     LVAL_FN
 };
 
-
 void* log_malloc(size_t size, const char* fn, const char* file, int line);
 void* log_realloc(
     void* old_ptr,

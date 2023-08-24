@@ -1,5 +1,6 @@
-#include "common.h"
 #include "alloc.h"
+
+#include "common.h"
 #include "deps/logger/log.h"
 
 //=== LOGGING MEMORY ALLOCATIONS ===============================================
