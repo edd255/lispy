@@ -7,7 +7,7 @@ lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != fn);
-    LCHECK_TYPE(fn, args, 0, LVAL_QEXPR);
+    LCHECK_TYPE(fn, args, 0, LISPY_VAL_QEXPR);
 
     // First argument is symbol list
     lval_t* syms = args->cell[0];
@@ -16,12 +16,12 @@ lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
     for (int i = 0; i < syms->count; i++) {
         LCHECK(
             args,
-            (LVAL_SYM == syms->cell[i]->type),
+            (LISPY_VAL_SYM == syms->cell[i]->type),
             "Error in procedure %s. Function '%s' cannot define non-symbol! Got %s. Expected %s.",
             __func__,
             fn,
             ltype_name(syms->cell[i]->type),
-            ltype_name(LVAL_SYM)
+            ltype_name(LISPY_VAL_SYM)
         );
     }
     // Check correct number of symbols and values
@@ -55,18 +55,18 @@ lval_t* builtin_lambda(lenv_t* env, lval_t* args) {
 
     // Check two arguments, each of which are Q-Expressions
     LCHECK_NUM("\\", args, 2);
-    LCHECK_TYPE("\\", args, 0, LVAL_QEXPR);
-    LCHECK_TYPE("\\", args, 1, LVAL_QEXPR);
+    LCHECK_TYPE("\\", args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPE("\\", args, 1, LISPY_VAL_QEXPR);
 
     // Check first Q-Expression contains only Symbols
     for (int i = 0; i < args->cell[0]->count; i++) {
         LCHECK(
             args,
-            (LVAL_SYM == args->cell[0]->cell[i]->type),
+            (LISPY_VAL_SYM == args->cell[0]->cell[i]->type),
             "Error in procedure %s. Cannot define non-symbol. Got %s. Expected %s.",
             __func__,
             ltype_name(args->cell[0]->cell[i]->type),
-            ltype_name(LVAL_SYM)
+            ltype_name(LISPY_VAL_SYM)
         );
     }
     // Pop first two arguments and pass them to lval_lambda

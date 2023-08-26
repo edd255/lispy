@@ -9,14 +9,14 @@ lval_t* builtin_if(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
-    LCHECK_TYPE(__func__, args, 0, LVAL_NUM);
-    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
-    LCHECK_TYPE(__func__, args, 2, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 2, LISPY_VAL_QEXPR);
 
     // Mark both expressions as evaluable
     lval_t* x = NULL;
-    args->cell[1]->type = LVAL_SEXPR;
-    args->cell[2]->type = LVAL_SEXPR;
+    args->cell[1]->type = LISPY_VAL_SEXPR;
+    args->cell[2]->type = LISPY_VAL_SEXPR;
 
     if (args->cell[0]->num) {
         // If condition is true evaluate first expression

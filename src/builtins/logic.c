@@ -9,11 +9,11 @@ lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != args);
     UNUSED(env);
     int result = 0;
-    switch (llogic_from_string(op)) {
-        case LLOGIC_AND: {
+    switch (logic_op_from_str(op)) {
+        case LISPY_LOGIC_AND: {
             LCHECK_NUM(op, args, 2);
-            LCHECK_TYPE(op, args, 0, LVAL_NUM);
-            LCHECK_TYPE(op, args, 1, LVAL_NUM);
+            LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
+            LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
             if ((0 == args->cell[0]->num) || (0 == args->cell[1]->num)) {
                 result = 0;
             } else {
@@ -21,10 +21,10 @@ lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
             }
             break;
         }
-        case LLOGIC_OR: {
+        case LISPY_LOGIC_OR: {
             LCHECK_NUM(op, args, 2);
-            LCHECK_TYPE(op, args, 0, LVAL_NUM);
-            LCHECK_TYPE(op, args, 1, LVAL_NUM);
+            LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
+            LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
             if ((0 == args->cell[0]->num) && (0 == args->cell[1]->num)) {
                 result = 0;
             } else {
@@ -32,9 +32,9 @@ lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
             }
             break;
         }
-        case LLOGIC_NOT: {
+        case LISPY_LOGIC_NOT: {
             LCHECK_NUM(op, args, 1);
-            LCHECK_TYPE(op, args, 0, LVAL_NUM);
+            LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
             if (0 == args->cell[0]->num) {
                 result = 1;
             } else {
@@ -42,7 +42,7 @@ lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
             }
             break;
         }
-        case LLOGIC_UNKNOWN: {
+        case LISPY_LOGIC_UNKNOWN: {
             return lval_err(
                 "Function '%s' expected 'not', 'or' or 'and'",
                 __func__

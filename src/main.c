@@ -226,7 +226,7 @@ void file_interpreter(lenv_t* env, const char* file) {
     lval_t* x = builtin_load(env, args);
 
     // If the result is an error, be sure to print it
-    if (LVAL_ERR == x->type) {
+    if (LISPY_VAL_ERR == x->type) {
         lval_println(x);
     }
     lval_del(x);
