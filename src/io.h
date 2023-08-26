@@ -27,23 +27,23 @@ void lval_print_str(const lval_t* val);
 
 /// @brief Returns the string representation of the given type
 /// @param type The requested type
-/// @returns The string representation of the given type
-char* ltype_name(enum LVAL type);
+/// @return The string representation of the given type
+char* ltype_name(enum LISPY_VAL type);
 
 //=== READING ==================================================================
 /// @brief Reads an integer/decimal value from the abstract syntax tree.
 /// @param tree The abstract syntax tree
-/// @returns The Lispy value that contains the numerical value or an error
+/// @return The Lispy value that contains the numerical value or an error
 lval_t* lval_read_num(const mpc_ast_t* tree);
 
 /// @brief Turns the given abstract syntax tree into an symbolic expression.
 /// @param tree The abstract syntax tree
-/// @returns An symbolic expression which represents the abstract syntax tree
+/// @return An symbolic expression which represents the abstract syntax tree
 lval_t* lval_read(mpc_ast_t* tree);
 
 /// @brief Turns the given abstract syntax tree into a Lispy string
 /// @param tree The abstract syntax tree
-/// @returns The Lispy value that contains the string
+/// @return The Lispy value that contains the string
 lval_t* lval_read_str(mpc_ast_t* tree);
 
 #endif
