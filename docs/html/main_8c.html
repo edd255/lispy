@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/main.c File Reference</title>
+<title>lispy: src/main.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">My Project
+   <div id="projectname">lispy
    </div>
   </td>
  </tr>
@@ -111,82 +111,368 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a74f73094803752e1a03badcb3a521dfc"><td class="memItemLeft" align="right" valign="top"><a id="a74f73094803752e1a03badcb3a521dfc" name="a74f73094803752e1a03badcb3a521dfc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cli_interpreter</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *e)</td></tr>
-<tr class="separator:a74f73094803752e1a03badcb3a521dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4a5579d4692d0cbea971fca908af805"><td class="memItemLeft" align="right" valign="top"><a id="aa4a5579d4692d0cbea971fca908af805" name="aa4a5579d4692d0cbea971fca908af805"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>file_interpreter</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *e, const char *file)</td></tr>
-<tr class="separator:aa4a5579d4692d0cbea971fca908af805"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74926c46a74d5dd4afb62910905e8907"><td class="memItemLeft" align="right" valign="top"><a id="a74926c46a74d5dd4afb62910905e8907" name="a74926c46a74d5dd4afb62910905e8907"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setup_parser</b> (void)</td></tr>
+<tr class="memitem:ab4bcf6908817f7fb2303080122c2c5e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ab4bcf6908817f7fb2303080122c2c5e0">cli_interpreter</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env)</td></tr>
+<tr class="memdesc:ab4bcf6908817f7fb2303080122c2c5e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A REPL for Lispy.  <br /></td></tr>
+<tr class="separator:ab4bcf6908817f7fb2303080122c2c5e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99b844445b71a66fe9186921fb96272d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a99b844445b71a66fe9186921fb96272d">file_interpreter</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, const char *file)</td></tr>
+<tr class="memdesc:a99b844445b71a66fe9186921fb96272d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interprets a given file.  <br /></td></tr>
+<tr class="separator:a99b844445b71a66fe9186921fb96272d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74926c46a74d5dd4afb62910905e8907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a74926c46a74d5dd4afb62910905e8907">setup_parser</a> (void)</td></tr>
+<tr class="memdesc:a74926c46a74d5dd4afb62910905e8907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the mpc parser.  <br /></td></tr>
 <tr class="separator:a74926c46a74d5dd4afb62910905e8907"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d2345e0990fb4567064efd36ff2197c"><td class="memItemLeft" align="right" valign="top"><a id="a6d2345e0990fb4567064efd36ff2197c" name="a6d2345e0990fb4567064efd36ff2197c"></a>
-<a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>set_env</b> (void)</td></tr>
+<tr class="memitem:a6d2345e0990fb4567064efd36ff2197c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6d2345e0990fb4567064efd36ff2197c">set_env</a> (void)</td></tr>
+<tr class="memdesc:a6d2345e0990fb4567064efd36ff2197c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up an environment which contains all builtins.  <br /></td></tr>
 <tr class="separator:a6d2345e0990fb4567064efd36ff2197c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19efd3d1a2014983aadcb3c9f6bd32be"><td class="memItemLeft" align="right" valign="top"><a id="a19efd3d1a2014983aadcb3c9f6bd32be" name="a19efd3d1a2014983aadcb3c9f6bd32be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cleanup</b> (<a class="el" href="structlval__t.html">lval_t</a> *std, <a class="el" href="structlenv__t.html">lenv_t</a> *e)</td></tr>
-<tr class="separator:a19efd3d1a2014983aadcb3c9f6bd32be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b30e9a1aae4c3a9445e67ac98bd2278"><td class="memItemLeft" align="right" valign="top"><a id="a1b30e9a1aae4c3a9445e67ac98bd2278" name="a1b30e9a1aae4c3a9445e67ac98bd2278"></a>
-<a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_stdlib</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *e)</td></tr>
-<tr class="separator:a1b30e9a1aae4c3a9445e67ac98bd2278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1265b5fcd95aa90525ccd721723f91c1"><td class="memItemLeft" align="right" valign="top"><a id="a1265b5fcd95aa90525ccd721723f91c1" name="a1265b5fcd95aa90525ccd721723f91c1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_args</b> (int argc, const char **argv)</td></tr>
+<tr class="memitem:aed182b973ecb166e50c0e4338be146d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aed182b973ecb166e50c0e4338be146d5">cleanup</a> (<a class="el" href="structlval__t.html">lval_t</a> *std, <a class="el" href="structlenv__t.html">lenv_t</a> *env)</td></tr>
+<tr class="memdesc:aed182b973ecb166e50c0e4338be146d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the memory used by the interpreter.  <br /></td></tr>
+<tr class="separator:aed182b973ecb166e50c0e4338be146d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5de7cb8a1360ab29803b862e4ec02711"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a5de7cb8a1360ab29803b862e4ec02711">get_stdlib</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env)</td></tr>
+<tr class="memdesc:a5de7cb8a1360ab29803b862e4ec02711"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the standard library and returns a pointer to it.  <br /></td></tr>
+<tr class="separator:a5de7cb8a1360ab29803b862e4ec02711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1265b5fcd95aa90525ccd721723f91c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a1265b5fcd95aa90525ccd721723f91c1">parse_args</a> (int argc, const char **argv)</td></tr>
+<tr class="memdesc:a1265b5fcd95aa90525ccd721723f91c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the command-line argument parser.  <br /></td></tr>
 <tr class="separator:a1265b5fcd95aa90525ccd721723f91c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadcdb38d3064679ab74180a4629d969c"><td class="memItemLeft" align="right" valign="top"><a id="aadcdb38d3064679ab74180a4629d969c" name="aadcdb38d3064679ab74180a4629d969c"></a>
-FILE *&#160;</td><td class="memItemRight" valign="bottom"><b>prepare_logfile</b> (void)</td></tr>
+<tr class="memitem:aadcdb38d3064679ab74180a4629d969c"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aadcdb38d3064679ab74180a4629d969c">prepare_logfile</a> (void)</td></tr>
+<tr class="memdesc:aadcdb38d3064679ab74180a4629d969c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the log-file in the XDG cache directory.  <br /></td></tr>
 <tr class="separator:aadcdb38d3064679ab74180a4629d969c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a217dbf8b442f20279ea00b898af96f52"><td class="memItemLeft" align="right" valign="top"><a id="a217dbf8b442f20279ea00b898af96f52" name="a217dbf8b442f20279ea00b898af96f52"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, const char **argv)</td></tr>
+<tr class="memitem:a217dbf8b442f20279ea00b898af96f52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a217dbf8b442f20279ea00b898af96f52">main</a> (int argc, const char **argv)</td></tr>
+<tr class="memdesc:a217dbf8b442f20279ea00b898af96f52"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main function of the interpreter.  <br /></td></tr>
 <tr class="separator:a217dbf8b442f20279ea00b898af96f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33d140882b6f455504ea3f64c726961d"><td class="memItemLeft" align="right" valign="top"><a id="a33d140882b6f455504ea3f64c726961d" name="a33d140882b6f455504ea3f64c726961d"></a>
 mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>get_lispy_parser</b> (void)</td></tr>
+<tr class="memdesc:a33d140882b6f455504ea3f64c726961d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the lispy parser. <br /></td></tr>
 <tr class="separator:a33d140882b6f455504ea3f64c726961d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:aabf9c9a486893212e85d686799df2932"><td class="memItemLeft" align="right" valign="top"><a id="aabf9c9a486893212e85d686799df2932" name="aabf9c9a486893212e85d686799df2932"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>number</b></td></tr>
+<tr class="memdesc:aabf9c9a486893212e85d686799df2932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses integer and decimal number. <br /></td></tr>
 <tr class="separator:aabf9c9a486893212e85d686799df2932"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2dfae610b39c49e1c3b37cfd89aa52b"><td class="memItemLeft" align="right" valign="top"><a id="ae2dfae610b39c49e1c3b37cfd89aa52b" name="ae2dfae610b39c49e1c3b37cfd89aa52b"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>symbol</b></td></tr>
+<tr class="memdesc:ae2dfae610b39c49e1c3b37cfd89aa52b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a set of special characters and symbols. <br /></td></tr>
 <tr class="separator:ae2dfae610b39c49e1c3b37cfd89aa52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5666d472de064260323e336eb66e01bd"><td class="memItemLeft" align="right" valign="top"><a id="a5666d472de064260323e336eb66e01bd" name="a5666d472de064260323e336eb66e01bd"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sexpr</b></td></tr>
+<tr class="memdesc:a5666d472de064260323e336eb66e01bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parser symbolic expressions. <br /></td></tr>
 <tr class="separator:a5666d472de064260323e336eb66e01bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbbf17e22963dbf0d2d354b3a9800dbe"><td class="memItemLeft" align="right" valign="top"><a id="abbbf17e22963dbf0d2d354b3a9800dbe" name="abbbf17e22963dbf0d2d354b3a9800dbe"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>qexpr</b></td></tr>
+<tr class="memdesc:abbbf17e22963dbf0d2d354b3a9800dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parser quoted expressions. <br /></td></tr>
 <tr class="separator:abbbf17e22963dbf0d2d354b3a9800dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a251f2a8cc508ee14808eddf8424e0a07"><td class="memItemLeft" align="right" valign="top"><a id="a251f2a8cc508ee14808eddf8424e0a07" name="a251f2a8cc508ee14808eddf8424e0a07"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>string</b></td></tr>
+<tr class="memdesc:a251f2a8cc508ee14808eddf8424e0a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses strings. <br /></td></tr>
 <tr class="separator:a251f2a8cc508ee14808eddf8424e0a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fe3acfecc3c0b9477f38556ac69a5e2"><td class="memItemLeft" align="right" valign="top"><a id="a1fe3acfecc3c0b9477f38556ac69a5e2" name="a1fe3acfecc3c0b9477f38556ac69a5e2"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>comment</b></td></tr>
+<tr class="memdesc:a1fe3acfecc3c0b9477f38556ac69a5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses comments. <br /></td></tr>
 <tr class="separator:a1fe3acfecc3c0b9477f38556ac69a5e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f41257e2dc35ef6c4333add43dbdb58"><td class="memItemLeft" align="right" valign="top"><a id="a0f41257e2dc35ef6c4333add43dbdb58" name="a0f41257e2dc35ef6c4333add43dbdb58"></a>
 const mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>expr</b></td></tr>
+<tr class="memdesc:a0f41257e2dc35ef6c4333add43dbdb58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses expressions (which can be numbers, symbols, strings, comments, s- and q-expressions) <br /></td></tr>
 <tr class="separator:a0f41257e2dc35ef6c4333add43dbdb58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a065721c05a37f8befd463c37f3d3dfe4"><td class="memItemLeft" align="right" valign="top"><a id="a065721c05a37f8befd463c37f3d3dfe4" name="a065721c05a37f8befd463c37f3d3dfe4"></a>
 mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>lispy</b></td></tr>
+<tr class="memdesc:a065721c05a37f8befd463c37f3d3dfe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses lists of expressions. <br /></td></tr>
 <tr class="separator:a065721c05a37f8befd463c37f3d3dfe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf16cd437526a5c5e0e0af87745acbb8"><td class="memItemLeft" align="right" valign="top"><a id="adf16cd437526a5c5e0e0af87745acbb8" name="adf16cd437526a5c5e0e0af87745acbb8"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>file</b> = NULL</td></tr>
-<tr class="separator:adf16cd437526a5c5e0e0af87745acbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeac90097f29f7529968697163cea5c18"><td class="memItemLeft" align="right" valign="top"><a id="aeac90097f29f7529968697163cea5c18" name="aeac90097f29f7529968697163cea5c18"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>filename</b> = NULL</td></tr>
+<tr class="memdesc:aeac90097f29f7529968697163cea5c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the file to interpret. <br /></td></tr>
+<tr class="separator:aeac90097f29f7529968697163cea5c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5eb6eef7255a3857a377bb13960165a"><td class="memItemLeft" align="right" valign="top"><a id="ac5eb6eef7255a3857a377bb13960165a" name="ac5eb6eef7255a3857a377bb13960165a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>no_stdlib</b> = 0</td></tr>
+<tr class="memdesc:ac5eb6eef7255a3857a377bb13960165a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether to use the stdlib or not. <br /></td></tr>
 <tr class="separator:ac5eb6eef7255a3857a377bb13960165a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc0e8215964fc15509f3ca72c8d98b6b"><td class="memItemLeft" align="right" valign="top"><a id="acc0e8215964fc15509f3ca72c8d98b6b" name="acc0e8215964fc15509f3ca72c8d98b6b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>print_logs</b> = 0</td></tr>
+<tr class="memdesc:acc0e8215964fc15509f3ca72c8d98b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether to print logs, or to write them in a file. <br /></td></tr>
 <tr class="separator:acc0e8215964fc15509f3ca72c8d98b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the main function which sets up the logger and the parser and sets up the command line arguments. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aed182b973ecb166e50c0e4338be146d5" name="aed182b973ecb166e50c0e4338be146d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed182b973ecb166e50c0e4338be146d5">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cleanup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>std</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cleans up the memory used by the interpreter. </p>
+<p>This function cleans up the memory used by the parsers, as well as the standard library if loaded, and the environment.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std</td><td>A pointer to the standard-library (if loaded, else NULL) </td></tr>
+    <tr><td class="paramname">env</td><td>A pointer to the used environment </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab4bcf6908817f7fb2303080122c2c5e0" name="ab4bcf6908817f7fb2303080122c2c5e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4bcf6908817f7fb2303080122c2c5e0">&#9670;&#160;</a></span>cli_interpreter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cli_interpreter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A REPL for Lispy. </p>
+<p>This function realizes a REPL for Lispy which first prints out version and exiting information, reads input from the user, evaluates it, prints out the result and continues.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Include a print_info() method that prints out Lispy version and exiting as well as build information (date, time, libc version, compiler version).</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment from which we get and where we store variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a99b844445b71a66fe9186921fb96272d" name="a99b844445b71a66fe9186921fb96272d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99b844445b71a66fe9186921fb96272d">&#9670;&#160;</a></span>file_interpreter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void file_interpreter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interprets a given file. </p>
+<p>This function runs the file interpreter, the second option, next to the command-line interpreter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment which we use for interpreting the file </td></tr>
+    <tr><td class="paramname">file</td><td>The file to interpret </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5de7cb8a1360ab29803b862e4ec02711" name="a5de7cb8a1360ab29803b862e4ec02711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5de7cb8a1360ab29803b862e4ec02711">&#9670;&#160;</a></span>get_stdlib()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * get_stdlib </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the standard library and returns a pointer to it. </p>
+<p>This function loads the standard library and returns a pointer to it. The path to the stdlib is hardcoded.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment into which the standard library should be loaded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the standard library. </dd></dl>
+
+</div>
+</div>
+<a id="a217dbf8b442f20279ea00b898af96f52" name="a217dbf8b442f20279ea00b898af96f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a217dbf8b442f20279ea00b898af96f52">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The main function of the interpreter. </p>
+<p>The main method sets up the logger, the command-line parser and the parser for the interpreter. The user has the option to run specific files, to include the standard library and to just go to the cli interpreter.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>The number of arguments given to the binary, including the binary name. </td></tr>
+    <tr><td class="paramname">argv</td><td>The array containing the command-line arguments. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if everything ran without problems </dd></dl>
+
+</div>
+</div>
+<a id="a1265b5fcd95aa90525ccd721723f91c1" name="a1265b5fcd95aa90525ccd721723f91c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1265b5fcd95aa90525ccd721723f91c1">&#9670;&#160;</a></span>parse_args()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void parse_args </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up the command-line argument parser. </p>
+<p>This function sets up the command-line argument parser. In case, that wrong arguments are given, the usage is repeated. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>The number of arguments </td></tr>
+    <tr><td class="paramname">argv</td><td>The array containing the arguments </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aadcdb38d3064679ab74180a4629d969c" name="aadcdb38d3064679ab74180a4629d969c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadcdb38d3064679ab74180a4629d969c">&#9670;&#160;</a></span>prepare_logfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE * prepare_logfile </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up the log-file in the XDG cache directory. </p>
+<p>This function sets up the log-file in the XDG cache directory if the directory exists.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Make the function portable, and choose an alternative directory in case XDG_CACHE_HOME does not exist.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the log file. </dd></dl>
+
+</div>
+</div>
+<a id="a6d2345e0990fb4567064efd36ff2197c" name="a6d2345e0990fb4567064efd36ff2197c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d2345e0990fb4567064efd36ff2197c">&#9670;&#160;</a></span>set_env()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlenv__t.html">lenv_t</a> * set_env </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up an environment which contains all builtins. </p>
+<dl class="section return"><dt>Returns</dt><dd>An environment which contains all builtin methods </dd></dl>
+
+</div>
+</div>
+<a id="a74926c46a74d5dd4afb62910905e8907" name="a74926c46a74d5dd4afb62910905e8907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74926c46a74d5dd4afb62910905e8907">&#9670;&#160;</a></span>setup_parser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setup_parser </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up the mpc parser. </p>
+<p>This function sets up the parser using the mpc library by Daniel Holden. The variables which contain the rules are documented itself. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Aug 26 2023 13:57:53 for lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

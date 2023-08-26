@@ -6,6 +6,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "common.h", "common_8h_source.html", null ],
     [ "eval.h", "eval_8h_source.html", null ],
     [ "io.h", "io_8h_source.html", null ],
-    [ "main.c", "main_8c.html", null ],
+    [ "main.c", "main_8c.html", "main_8c" ],
     [ "main.h", "main_8h_source.html", null ]
 ];

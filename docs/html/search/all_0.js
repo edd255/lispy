@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['larithmop_5fmap_5ft_0',['larithmop_map_t',['../structlarithmop__map__t.html',1,'']]],
-  ['lenv_5ft_1',['lenv_t',['../structlenv__t.html',1,'']]],
-  ['lispy_20interpreter_2',['Lispy Interpreter',['../index.html',1,'']]],
-  ['llogic_5fmap_5ft_3',['llogic_map_t',['../structllogic__map__t.html',1,'']]],
-  ['lval_5ft_4',['lval_t',['../structlval__t.html',1,'']]]
+  ['cleanup_0',['cleanup',['../main_8c.html#aed182b973ecb166e50c0e4338be146d5',1,'main.c']]],
+  ['cli_5finterpreter_1',['cli_interpreter',['../main_8c.html#ab4bcf6908817f7fb2303080122c2c5e0',1,'main.c']]],
+  ['comment_2',['comment',['../main_8c.html#a1fe3acfecc3c0b9477f38556ac69a5e2',1,'main.c']]]
 ];
