@@ -12,14 +12,14 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 0, LVAL_STR);
 
     // Parse file given by string name
-    mpc_result_t r;
+    mpc_result_t parse_result;
     mpc_parser_t* lispy = get_lispy_parser();
-    if (mpc_parse_contents(args->cell[0]->str, lispy, &r)) {
+    if (mpc_parse_contents(args->cell[0]->str, lispy, &parse_result)) {
         // Read contents
-        assert(NULL != r.output);
-        lval_t* expr = lval_read(r.output);
+        assert(NULL != parse_result.output);
+        lval_t* expr = lval_read(parse_result.output);
         assert(expr != NULL);
-        mpc_ast_delete(r.output);
+        mpc_ast_delete(parse_result.output);
 
         // Evaluate each expression
         while (expr->count) {
@@ -38,8 +38,8 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
         // Return empty list
         return lval_sexpr();
     }  // Get parse error as string
-    char* err_msg = mpc_err_string(r.error);
-    mpc_err_delete(r.error);
+    char* err_msg = mpc_err_string(parse_result.error);
+    mpc_err_delete(parse_result.error);
 
     // Create new error message using it
     lval_t* err = lval_err("Could not load library %s", err_msg);
