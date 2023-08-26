@@ -97,7 +97,7 @@ void lval_print_str(const lval_t* val) {
     FREE(escaped);
 }
 
-char* ltype_name(int type) {
+char* ltype_name(enum LVAL type) {
     switch (type) {
         case LVAL_FN:
             return "Function";
