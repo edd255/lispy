@@ -2,26 +2,23 @@ var common_8h =
 [
     [ "lval_t", "structlval__t.html", "structlval__t" ],
     [ "lenv_t", "structlenv__t.html", "structlenv__t" ],
-    [ "FREE", "common_8h.html#a105949c59c998e38aad80266afac92bf", null ],
-    [ "MALLOC", "common_8h.html#a3078f3c259e2a871314e3e0194896357", null ],
-    [ "REALLOC", "common_8h.html#a4989f763525ffd9d94d7a782d57d99cb", null ],
     [ "lbuiltin_t", "common_8h.html#a9b47e1b04752a06074ffc0740c018d21", null ],
     [ "lenv_t", "common_8h.html#a7fa88502c8f70b507d9a2966e062275f", null ],
     [ "lval_t", "common_8h.html#a63ce590ca5f53ca77ead1e12fd2865b0", null ],
-    [ "LERR", "common_8h.html#aae9c106c458911827e30b5201c853796", [
-      [ "LERR_DIV_ZERO", "common_8h.html#aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3", null ],
-      [ "LERR_BAD_OP", "common_8h.html#aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5", null ],
-      [ "LERR_BAD_NUM", "common_8h.html#aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7", null ]
+    [ "LISPY_ERR", "common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2", [
+      [ "LISPY_ERR_DIV_BY_ZERO", "common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7", null ],
+      [ "LISPY_ERR_BAD_OP", "common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9", null ],
+      [ "LISPY_ERR_BAD_NUM", "common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7", null ]
     ] ],
-    [ "LVAL", "common_8h.html#a584807b84eccc03737c36c4f9ecef987", [
-      [ "LVAL_ERR", "common_8h.html#a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de", null ],
-      [ "LVAL_NUM", "common_8h.html#a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0", null ],
-      [ "LVAL_DEC", "common_8h.html#a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5", null ],
-      [ "LVAL_SYM", "common_8h.html#a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255", null ],
-      [ "LVAL_STR", "common_8h.html#a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2", null ],
-      [ "LVAL_SEXPR", "common_8h.html#a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05", null ],
-      [ "LVAL_QEXPR", "common_8h.html#a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995", null ],
-      [ "LVAL_FN", "common_8h.html#a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e", null ]
+    [ "LISPY_VAL", "common_8h.html#abea235b4767f389601d0d19eaf7069c1", [
+      [ "LISPY_VAL_ERR", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3", null ],
+      [ "LISPY_VAL_NUM", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11", null ],
+      [ "LISPY_VAL_DEC", "common_8h.html#abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba", null ],
+      [ "LISPY_VAL_SYM", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3", null ],
+      [ "LISPY_VAL_STR", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81", null ],
+      [ "LISPY_VAL_SEXPR", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e", null ],
+      [ "LISPY_VAL_QEXPR", "common_8h.html#abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297", null ],
+      [ "LISPY_VAL_FN", "common_8h.html#abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0", null ]
     ] ],
     [ "lenv_copy", "common_8h.html#a453f4c4bad69b5ffa58a346c297a1d64", null ],
     [ "lenv_def", "common_8h.html#a5aed6188f6ab1f859afec97887e005b7", null ],

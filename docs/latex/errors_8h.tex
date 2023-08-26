@@ -1,0 +1,141 @@
+\doxysection{src/utils/errors.h File Reference}
+\hypertarget{errors_8h}{}\label{errors_8h}\index{src/utils/errors.h@{src/utils/errors.h}}
+
+
+This file contains macros to check runtime assertions and do runtime error reporting.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(args,  cond,  fmt, ...)
+\begin{DoxyCompactList}\small\item\em Macro to check an assertion and report errors during runtime. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_a588825eb551fd55402df34d39cfa3540}{LCHECK\+\_\+\+TYPE}}(fn,  args,  idx,  expect)
+\begin{DoxyCompactList}\small\item\em Macro to check types and report errors during runtime. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_aca942d3c7288ff87fb862e5fcb24e2ac}{LCHECK\+\_\+\+TYPES}}(fn,  args,  idx,  expect1,  expect2)
+\begin{DoxyCompactList}\small\item\em Macro to check two assertion and report errors during runtime. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_aebb98724f8837a0839a7cbaa28a85a65}{LCHECK\+\_\+\+NUM}}(fn,  args,  num)
+\begin{DoxyCompactList}\small\item\em Macro to check whether a function passed the correct number of arguments. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}{LCHECK\+\_\+\+NOT\+\_\+\+EMPTY}}(fn,  args,  idx)
+\begin{DoxyCompactList}\small\item\em Macro to check whether an expression is empty and report it as error. \end{DoxyCompactList}\item 
+\Hypertarget{errors_8h_a86d500a34c624c2cae56bc25a31b12f3}\label{errors_8h_a86d500a34c624c2cae56bc25a31b12f3} 
+\#define {\bfseries UNUSED}(x)~(void)(x)
+\begin{DoxyCompactList}\small\item\em Macro to avoid compiler warnings about unused variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains macros to check runtime assertions and do runtime error reporting. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}\label{errors_8h_a7323b7385049bf57fbb1714bf15ceb96} 
+\index{errors.h@{errors.h}!LCHECK@{LCHECK}}
+\index{LCHECK@{LCHECK}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK}{LCHECK}}
+{\footnotesize\ttfamily \#define LCHECK(\begin{DoxyParamCaption}\item[{}]{args,  }\item[{}]{cond,  }\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!(cond))\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ err\ =\ \mbox{\hyperlink{common_8h_a8948ac2f47e6d29894f135aeaead227a}{lval\_err}}(fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ lval\_del(args);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Macro to check an assertion and report errors during runtime. 
+
+\Hypertarget{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}\label{errors_8h_a7cc9f22710b1939d359784fbf1c79bef} 
+\index{errors.h@{errors.h}!LCHECK\_NOT\_EMPTY@{LCHECK\_NOT\_EMPTY}}
+\index{LCHECK\_NOT\_EMPTY@{LCHECK\_NOT\_EMPTY}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_NOT\_EMPTY}{LCHECK\_NOT\_EMPTY}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+NOT\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>cell[idx]-\/>count\ !=\ 0,\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ \ for\ argument\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether an expression is empty and report it as error. 
+
+\Hypertarget{errors_8h_aebb98724f8837a0839a7cbaa28a85a65}\label{errors_8h_aebb98724f8837a0839a7cbaa28a85a65} 
+\index{errors.h@{errors.h}!LCHECK\_NUM@{LCHECK\_NUM}}
+\index{LCHECK\_NUM@{LCHECK\_NUM}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_NUM}{LCHECK\_NUM}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+NUM(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{num }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>count\ ==\ ((num)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ incorrect\ number\ of\ arguments.\ Got\ \%i,\ Expected\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>count,\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (num)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether a function passed the correct number of arguments. 
+
+\Hypertarget{errors_8h_a588825eb551fd55402df34d39cfa3540}\label{errors_8h_a588825eb551fd55402df34d39cfa3540} 
+\index{errors.h@{errors.h}!LCHECK\_TYPE@{LCHECK\_TYPE}}
+\index{LCHECK\_TYPE@{LCHECK\_TYPE}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_TYPE}{LCHECK\_TYPE}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx,  }\item[{}]{expect }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>cell[idx]-\/>type\ ==\ ((expect)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ incorrect\ type\ for\ argument\ \%i.\ Got\ \%s,\ Expected\ \%s."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ltype\_name((args)-\/>cell[idx]-\/>type),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ltype\_name(expect)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check types and report errors during runtime. 
+
+\Hypertarget{errors_8h_aca942d3c7288ff87fb862e5fcb24e2ac}\label{errors_8h_aca942d3c7288ff87fb862e5fcb24e2ac} 
+\index{errors.h@{errors.h}!LCHECK\_TYPES@{LCHECK\_TYPES}}
+\index{LCHECK\_TYPES@{LCHECK\_TYPES}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_TYPES}{LCHECK\_TYPES}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+TYPES(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx,  }\item[{}]{expect1,  }\item[{}]{expect2 }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ((args)-\/>cell[idx]-\/>type\ ==\ ((expect1))\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ||\ (args)-\/>cell[idx]-\/>type\ ==\ ((expect2))),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ incorrect\ type\ for\ argument\ \%i.\ Got\ \%s,\ Expected\ \%s\ or\ \%s."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ltype\_name((args)-\/>cell[idx]-\/>type),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ltype\_name(expect1),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ltype\_name(expect2)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check two assertion and report errors during runtime. 
+

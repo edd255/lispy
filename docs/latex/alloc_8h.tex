@@ -1,0 +1,108 @@
+\doxysection{src/utils/alloc.h File Reference}
+\hypertarget{alloc_8h}{}\label{alloc_8h}\index{src/utils/alloc.h@{src/utils/alloc.h}}
+
+
+This file contains methods to log memory management for debugging purposes.  
+
+
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{alloc_8h_a3078f3c259e2a871314e3e0194896357}\label{alloc_8h_a3078f3c259e2a871314e3e0194896357} 
+\#define {\bfseries MALLOC}(size)~malloc((size))
+\begin{DoxyCompactList}\small\item\em malloc without logging the procedure \end{DoxyCompactList}\item 
+\Hypertarget{alloc_8h_a4989f763525ffd9d94d7a782d57d99cb}\label{alloc_8h_a4989f763525ffd9d94d7a782d57d99cb} 
+\#define {\bfseries REALLOC}(old\+\_\+ptr,  size)~realloc((old\+\_\+ptr), (size))
+\begin{DoxyCompactList}\small\item\em realloc without logging the procedure \end{DoxyCompactList}\item 
+\Hypertarget{alloc_8h_a105949c59c998e38aad80266afac92bf}\label{alloc_8h_a105949c59c998e38aad80266afac92bf} 
+\#define {\bfseries FREE}(ptr)~free((ptr))
+\begin{DoxyCompactList}\small\item\em free without logging the procedure \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{alloc_8h_ab529968717e2efa55dede7cb65e910b0}{log\+\_\+malloc}} (size\+\_\+t size, const char \texorpdfstring{$\ast$}{*}fn, const char \texorpdfstring{$\ast$}{*}file, int line)
+\begin{DoxyCompactList}\small\item\em Allocates memory and logs function, file, line and pointer. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{alloc_8h_a231776ad015097806a481952e2a219dc}{log\+\_\+realloc}} (void \texorpdfstring{$\ast$}{*}old\+\_\+ptr, size\+\_\+t size, const char \texorpdfstring{$\ast$}{*}fn, const char \texorpdfstring{$\ast$}{*}file, int line)
+\begin{DoxyCompactList}\small\item\em Reallocates memory and logs function, file, line, old and new pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{alloc_8h_ad79de2ef5702bbaec5188728119c52c4}{log\+\_\+free}} (void \texorpdfstring{$\ast$}{*}ptr, const char \texorpdfstring{$\ast$}{*}fn, const char \texorpdfstring{$\ast$}{*}file, int line)
+\begin{DoxyCompactList}\small\item\em Frees memory and logs function, file, line, and pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains methods to log memory management for debugging purposes. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{alloc_8h_ad79de2ef5702bbaec5188728119c52c4}\label{alloc_8h_ad79de2ef5702bbaec5188728119c52c4} 
+\index{alloc.h@{alloc.h}!log\_free@{log\_free}}
+\index{log\_free@{log\_free}!alloc.h@{alloc.h}}
+\doxysubsubsection{\texorpdfstring{log\_free()}{log\_free()}}
+{\footnotesize\ttfamily void log\+\_\+free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{fn,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+Frees memory and logs function, file, line, and pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & The pointer that should be freed \\
+\hline
+{\em fn} & The caller of the function \\
+\hline
+{\em file} & The file in which the calling function resides \\
+\hline
+{\em line} & The line in which the calling function resides \\
+\hline
+\end{DoxyParams}
+\Hypertarget{alloc_8h_ab529968717e2efa55dede7cb65e910b0}\label{alloc_8h_ab529968717e2efa55dede7cb65e910b0} 
+\index{alloc.h@{alloc.h}!log\_malloc@{log\_malloc}}
+\index{log\_malloc@{log\_malloc}!alloc.h@{alloc.h}}
+\doxysubsubsection{\texorpdfstring{log\_malloc()}{log\_malloc()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} log\+\_\+malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{fn,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+Allocates memory and logs function, file, line and pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The requested memory size \\
+\hline
+{\em fn} & The caller of the function \\
+\hline
+{\em file} & The file in which the calling function resides \\
+\hline
+{\em line} & The line in which the calling function resides \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the allocated memory region 
+\end{DoxyReturn}
+\Hypertarget{alloc_8h_a231776ad015097806a481952e2a219dc}\label{alloc_8h_a231776ad015097806a481952e2a219dc} 
+\index{alloc.h@{alloc.h}!log\_realloc@{log\_realloc}}
+\index{log\_realloc@{log\_realloc}!alloc.h@{alloc.h}}
+\doxysubsubsection{\texorpdfstring{log\_realloc()}{log\_realloc()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} log\+\_\+realloc (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{old\+\_\+ptr,  }\item[{size\+\_\+t}]{size,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{fn,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+Reallocates memory and logs function, file, line, old and new pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+\_\+ptr} & A pointer to the memory region which should be reallocated \\
+\hline
+{\em size} & The requested memory size \\
+\hline
+{\em fn} & The caller of the function \\
+\hline
+{\em file} & The file in which the calling function resides \\
+\hline
+{\em line} & The line in which the calling function resides \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the allocated memory region 
+\end{DoxyReturn}

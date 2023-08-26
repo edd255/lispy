@@ -103,19 +103,26 @@ $(document).ready(function(){initNavTree('io_8h_source.html',''); initResizable(
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;deps/mpc/mpc.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//=== WRITING ==================================================================</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> lval_print(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">void</span> lval_print_expr(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val, <span class="keywordtype">char</span> open, <span class="keywordtype">char</span> close);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> lval_println(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> lval_print_str(<span class="keyword">const</span> <a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">char</span>* ltype_name(<span class="keywordtype">int</span> type);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//=== READING ==================================================================</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read_num(<span class="keyword">const</span> mpc_ast_t* tree);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read(mpc_ast_t* tree);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read_str(mpc_ast_t* tree);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span><span class="keywordtype">void</span> lval_print(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">void</span> lval_print_expr(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val, <span class="keywordtype">char</span> open, <span class="keywordtype">char</span> close);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> lval_println(<a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> lval_print_str(<span class="keyword">const</span> <a class="code hl_struct" href="structlval__t.html">lval_t</a>* val);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">char</span>* ltype_name(<span class="keyword">enum</span> <a class="code hl_enumeration" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1">LISPY_VAL</a> type);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">//=== READING ==================================================================</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read_num(<span class="keyword">const</span> mpc_ast_t* tree);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read(mpc_ast_t* tree);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* lval_read_str(mpc_ast_t* tree);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div><div class="ttdoc">This file contains the definitions, constructors, destructors and methods for Lispy values and enviro...</div></div>
+<div class="ttc" id="acommon_8h_html_abea235b4767f389601d0d19eaf7069c1"><div class="ttname"><a href="common_8h.html#abea235b4767f389601d0d19eaf7069c1">LISPY_VAL</a></div><div class="ttdeci">LISPY_VAL</div><div class="ttdoc">Enumeration of possible Lispy value types.</div><div class="ttdef"><b>Definition</b> common.h:261</div></div>
 <div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -123,7 +130,7 @@ $(document).ready(function(){initNavTree('io_8h_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>io.h</b></li>
-    <li class="footer">Generated on Sat Aug 26 2023 16:21:21 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Aug 26 2023 19:14:50 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

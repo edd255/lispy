@@ -15,8 +15,8 @@
 \DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string.h>}}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}utils/alloc.h"{}}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}utils/errors.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{alloc_8h}{utils/alloc.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{errors_8h}{utils/errors.h}}"{}}}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \textcolor{comment}{//===\ DECLARATIONS\ =============================================================}}
 \DoxyCodeLine{00021\ \textcolor{comment}{//-\/-\/-\/\ Structs\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
@@ -125,43 +125,32 @@
 \DoxyCodeLine{00245\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{common_8h_a5aed6188f6ab1f859afec97887e005b7}{lenv\_def}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
 \DoxyCodeLine{00246\ }
 \DoxyCodeLine{00247\ \textcolor{comment}{//===\ ENUMS\ ====================================================================}}
-\DoxyCodeLine{00249\ \textcolor{comment}{}\textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796}{LERR}}\ \{}
-\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3}{LERR\_DIV\_ZERO}},}
+\DoxyCodeLine{00249\ \textcolor{comment}{}\textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2}{LISPY\_ERR}}\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7}{LISPY\_ERR\_DIV\_BY\_ZERO}},}
 \DoxyCodeLine{00252\ }
-\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5}{LERR\_BAD\_OP}},}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9}{LISPY\_ERR\_BAD\_OP}},}
 \DoxyCodeLine{00255\ }
-\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7}{LERR\_BAD\_NUM}}}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7}{LISPY\_ERR\_BAD\_NUM}}}
 \DoxyCodeLine{00258\ \};}
 \DoxyCodeLine{00259\ }
-\DoxyCodeLine{00261\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987}{LVAL}}\ \{}
-\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de}{LVAL\_ERR}},}
+\DoxyCodeLine{00261\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\_VAL}}\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3}{LISPY\_VAL\_ERR}},}
 \DoxyCodeLine{00264\ }
-\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0}{LVAL\_NUM}},}
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11}{LISPY\_VAL\_NUM}},}
 \DoxyCodeLine{00267\ }
-\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5}{LVAL\_DEC}},}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba}{LISPY\_VAL\_DEC}},}
 \DoxyCodeLine{00270\ }
-\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255}{LVAL\_SYM}},}
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3}{LISPY\_VAL\_SYM}},}
 \DoxyCodeLine{00273\ }
-\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2}{LVAL\_STR}},}
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81}{LISPY\_VAL\_STR}},}
 \DoxyCodeLine{00276\ }
-\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05}{LVAL\_SEXPR}},}
+\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e}{LISPY\_VAL\_SEXPR}},}
 \DoxyCodeLine{00279\ }
-\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995}{LVAL\_QEXPR}},}
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297}{LISPY\_VAL\_QEXPR}},}
 \DoxyCodeLine{00282\ }
-\DoxyCodeLine{00284\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e}{LVAL\_FN}}}
+\DoxyCodeLine{00284\ \ \ \ \ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0}{LISPY\_VAL\_FN}}}
 \DoxyCodeLine{00285\ \};}
 \DoxyCodeLine{00286\ }
-\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#ifdef\ LOG\_ALLOCS}}
-\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ log\_malloc((size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ \(\backslash\)}}
-\DoxyCodeLine{00292\ \textcolor{preprocessor}{\ \ \ \ log\_realloc((old\_ptr),\ (size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ log\_free((ptr),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ \ \ \ \ \ \ \ \ \ \ malloc((size))}}
-\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ realloc((old\_ptr),\ (size))}}
-\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ free((ptr))}}
-\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00303\ }
-\DoxyCodeLine{00304\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

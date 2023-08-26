@@ -1,0 +1,41 @@
+\doxysection{src/builtins/conditional.h File Reference}
+\hypertarget{conditional_8h}{}\label{conditional_8h}\index{src/builtins/conditional.h@{src/builtins/conditional.h}}
+
+
+This file contains all builtin conditional methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{conditional_8h_a18db2be7f258919cc42365ad98bbf982}{builtin\+\_\+if}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Evaluates if-\/expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin conditional methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{conditional_8h_a18db2be7f258919cc42365ad98bbf982}\label{conditional_8h_a18db2be7f258919cc42365ad98bbf982} 
+\index{conditional.h@{conditional.h}!builtin\_if@{builtin\_if}}
+\index{builtin\_if@{builtin\_if}!conditional.h@{conditional.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_if()}{builtin\_if()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+if (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Evaluates if-\/expressions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the expression is used \\
+\hline
+{\em args} & The condition, and the consequences \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The evaluation of the consequence 
+\end{DoxyReturn}

@@ -1,0 +1,208 @@
+\doxysection{src/builtins/helpers.h File Reference}
+\hypertarget{helpers_8h}{}\label{helpers_8h}\index{src/builtins/helpers.h@{src/builtins/helpers.h}}
+
+
+This file contains all helper methods.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlispy__arithm__op__map__t}{lispy\+\_\+arithm\+\_\+op\+\_\+map\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A data structure that maps string representations of arithmetic operators to their enum representation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structlispy__logic__op__map__t}{lispy\+\_\+logic\+\_\+op\+\_\+map\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A data structure that maps string representations of logic operators to their enum representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{helpers_8h_af96916f3c8cc148711a1bf53b7093a89}\label{helpers_8h_af96916f3c8cc148711a1bf53b7093a89} 
+\#define {\bfseries NUMBER\+\_\+\+OF\+\_\+\+ARITHM\+\_\+\+OPS}~    (int)(sizeof(lispy\+\_\+arithm\+\_\+ops\+\_\+map) / sizeof(\mbox{\hyperlink{structlispy__arithm__op__map__t}{lispy\+\_\+arithm\+\_\+op\+\_\+map\+\_\+t}}))
+\begin{DoxyCompactList}\small\item\em A shorthand to calculate the number of implemented arithmetic operations. \end{DoxyCompactList}\item 
+\Hypertarget{helpers_8h_abde856ee671f91482f5853d3e4f9b4ef}\label{helpers_8h_abde856ee671f91482f5853d3e4f9b4ef} 
+\#define {\bfseries NUMBER\+\_\+\+OF\+\_\+\+LOGIC\+\_\+\+OPS}~    (int)(sizeof(lispy\+\_\+logic\+\_\+ops\+\_\+map) / sizeof(\mbox{\hyperlink{structlispy__logic__op__map__t}{lispy\+\_\+logic\+\_\+op\+\_\+map\+\_\+t}}))
+\begin{DoxyCompactList}\small\item\em A shorthand to calculate the number of implemented logical operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{helpers_8h_a412a154eab6041171a7d863c5e095815}\label{helpers_8h_a412a154eab6041171a7d863c5e095815} 
+typedef struct \mbox{\hyperlink{structlispy__arithm__op__map__t}{lispy\+\_\+arithm\+\_\+op\+\_\+map\+\_\+t}} {\bfseries lispy\+\_\+arithm\+\_\+op\+\_\+map\+\_\+t}
+\begin{DoxyCompactList}\small\item\em A data structure that maps string representations of arithmetic operators to their enum representation. \end{DoxyCompactList}\item 
+\Hypertarget{helpers_8h_a00674620dcb48e616d11514f1a1c275b}\label{helpers_8h_a00674620dcb48e616d11514f1a1c275b} 
+typedef struct \mbox{\hyperlink{structlispy__logic__op__map__t}{lispy\+\_\+logic\+\_\+op\+\_\+map\+\_\+t}} {\bfseries lispy\+\_\+logic\+\_\+op\+\_\+map\+\_\+t}
+\begin{DoxyCompactList}\small\item\em A data structure that maps string representations of logic operators to their enum representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0e}{LISPY\+\_\+\+ARITHM\+\_\+\+OP}} \{ \newline
+\mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea02fa89ef3e72b72f6b9fca46023a0c56}{LISPY\+\_\+\+ARITHM\+\_\+\+ADD}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0eac44187d4d0ed7aab09cc1f2d1deba4d8}{LISPY\+\_\+\+ARITHM\+\_\+\+SUB}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea951963e302fbe126380d94e7deb69ff5}{LISPY\+\_\+\+ARITHM\+\_\+\+MUL}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea27740a450c5e8bcbd184f418da703ab3}{LISPY\+\_\+\+ARITHM\+\_\+\+DIV}}
+, \newline
+\mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea4da4b4ba09a918bc06c5643e352c820c}{LISPY\+\_\+\+ARITHM\+\_\+\+MOD}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea0562dd9ac66a531fcf0fac13916d3682}{LISPY\+\_\+\+ARITHM\+\_\+\+POW}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0eac328628cddbf70453901e58a264b3bbe}{LISPY\+\_\+\+ARITHM\+\_\+\+MAX}}
+, \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0eaca545c611a26d4b0ad78dcfaa4314bce}{LISPY\+\_\+\+ARITHM\+\_\+\+MIN}}
+, \newline
+\mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0ea00b2253baaef8a3529df87259ac7fd76}{LISPY\+\_\+\+ARITHM\+\_\+\+UNKNOWN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representation of all implemented arithmetic operators. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6}{LISPY\+\_\+\+LOGIC\+\_\+\+OP}} \{ \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a8f35ca98d6e13591e067bf009f0cd835}{LISPY\+\_\+\+LOGIC\+\_\+\+AND}}
+, \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6afafb72be68818cfae35aa7e6bb0db565}{LISPY\+\_\+\+LOGIC\+\_\+\+OR}}
+, \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a50b105e3ee5716ebbd4e3cd501afb71a}{LISPY\+\_\+\+LOGIC\+\_\+\+NOT}}
+, \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a083f5c1a3ad5448e14d9c2fc6c35bbce}{LISPY\+\_\+\+LOGIC\+\_\+\+UNKNOWN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representation of all implemented logical operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0e}{LISPY\+\_\+\+ARITHM\+\_\+\+OP}} \mbox{\hyperlink{helpers_8h_a8aabb87bf1f3ccbc2f84d1c9262eccf9}{arithm\+\_\+op\+\_\+from\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}key)
+\begin{DoxyCompactList}\small\item\em Returns the enum representation of the arithmetic operator. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{helpers_8h_a21aabcef9dfc36d3d2305a36b42de5a7}{power\+\_\+long}} (long base, long exponent)
+\begin{DoxyCompactList}\small\item\em Exponentiation method for long values. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6}{LISPY\+\_\+\+LOGIC\+\_\+\+OP}} \mbox{\hyperlink{helpers_8h_a2f4b6ae5422d0e26ae7f88fb5b7326e7}{logic\+\_\+op\+\_\+from\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}key)
+\begin{DoxyCompactList}\small\item\em Returns the enum representation of the logical operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all helper methods. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0e}\label{helpers_8h_a22a977f61b270616483d28e196165a0e} 
+\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_OP@{LISPY\_ARITHM\_OP}}
+\index{LISPY\_ARITHM\_OP@{LISPY\_ARITHM\_OP}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{LISPY\_ARITHM\_OP}{LISPY\_ARITHM\_OP}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0e}{LISPY\+\_\+\+ARITHM\+\_\+\+OP}}}
+
+
+
+Enum representation of all implemented arithmetic operators. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_ADD@{LISPY\_ARITHM\_ADD}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_ADD@{LISPY\_ARITHM\_ADD}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea02fa89ef3e72b72f6b9fca46023a0c56}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea02fa89ef3e72b72f6b9fca46023a0c56} 
+LISPY\+\_\+\+ARITHM\+\_\+\+ADD&Addition. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_SUB@{LISPY\_ARITHM\_SUB}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_SUB@{LISPY\_ARITHM\_SUB}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0eac44187d4d0ed7aab09cc1f2d1deba4d8}\label{helpers_8h_a22a977f61b270616483d28e196165a0eac44187d4d0ed7aab09cc1f2d1deba4d8} 
+LISPY\+\_\+\+ARITHM\+\_\+\+SUB&Subtraction. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_MUL@{LISPY\_ARITHM\_MUL}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_MUL@{LISPY\_ARITHM\_MUL}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea951963e302fbe126380d94e7deb69ff5}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea951963e302fbe126380d94e7deb69ff5} 
+LISPY\+\_\+\+ARITHM\+\_\+\+MUL&Multiplication. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_DIV@{LISPY\_ARITHM\_DIV}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_DIV@{LISPY\_ARITHM\_DIV}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea27740a450c5e8bcbd184f418da703ab3}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea27740a450c5e8bcbd184f418da703ab3} 
+LISPY\+\_\+\+ARITHM\+\_\+\+DIV&Division. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_MOD@{LISPY\_ARITHM\_MOD}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_MOD@{LISPY\_ARITHM\_MOD}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea4da4b4ba09a918bc06c5643e352c820c}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea4da4b4ba09a918bc06c5643e352c820c} 
+LISPY\+\_\+\+ARITHM\+\_\+\+MOD&Modular division. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_POW@{LISPY\_ARITHM\_POW}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_POW@{LISPY\_ARITHM\_POW}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea0562dd9ac66a531fcf0fac13916d3682}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea0562dd9ac66a531fcf0fac13916d3682} 
+LISPY\+\_\+\+ARITHM\+\_\+\+POW&Exponentiation. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_MAX@{LISPY\_ARITHM\_MAX}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_MAX@{LISPY\_ARITHM\_MAX}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0eac328628cddbf70453901e58a264b3bbe}\label{helpers_8h_a22a977f61b270616483d28e196165a0eac328628cddbf70453901e58a264b3bbe} 
+LISPY\+\_\+\+ARITHM\+\_\+\+MAX&Maximum. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_MIN@{LISPY\_ARITHM\_MIN}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_MIN@{LISPY\_ARITHM\_MIN}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0eaca545c611a26d4b0ad78dcfaa4314bce}\label{helpers_8h_a22a977f61b270616483d28e196165a0eaca545c611a26d4b0ad78dcfaa4314bce} 
+LISPY\+\_\+\+ARITHM\+\_\+\+MIN&Minimum. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ARITHM\_UNKNOWN@{LISPY\_ARITHM\_UNKNOWN}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_ARITHM\_UNKNOWN@{LISPY\_ARITHM\_UNKNOWN}}}\Hypertarget{helpers_8h_a22a977f61b270616483d28e196165a0ea00b2253baaef8a3529df87259ac7fd76}\label{helpers_8h_a22a977f61b270616483d28e196165a0ea00b2253baaef8a3529df87259ac7fd76} 
+LISPY\+\_\+\+ARITHM\+\_\+\+UNKNOWN&Unknown operator. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{helpers_8h_a331e90a911ee4821cfde788959ad9ee6}\label{helpers_8h_a331e90a911ee4821cfde788959ad9ee6} 
+\index{helpers.h@{helpers.h}!LISPY\_LOGIC\_OP@{LISPY\_LOGIC\_OP}}
+\index{LISPY\_LOGIC\_OP@{LISPY\_LOGIC\_OP}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{LISPY\_LOGIC\_OP}{LISPY\_LOGIC\_OP}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6}{LISPY\+\_\+\+LOGIC\+\_\+\+OP}}}
+
+
+
+Enum representation of all implemented logical operators. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_LOGIC\_AND@{LISPY\_LOGIC\_AND}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_LOGIC\_AND@{LISPY\_LOGIC\_AND}}}\Hypertarget{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a8f35ca98d6e13591e067bf009f0cd835}\label{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a8f35ca98d6e13591e067bf009f0cd835} 
+LISPY\+\_\+\+LOGIC\+\_\+\+AND&And. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_LOGIC\_OR@{LISPY\_LOGIC\_OR}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_LOGIC\_OR@{LISPY\_LOGIC\_OR}}}\Hypertarget{helpers_8h_a331e90a911ee4821cfde788959ad9ee6afafb72be68818cfae35aa7e6bb0db565}\label{helpers_8h_a331e90a911ee4821cfde788959ad9ee6afafb72be68818cfae35aa7e6bb0db565} 
+LISPY\+\_\+\+LOGIC\+\_\+\+OR&Or. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_LOGIC\_NOT@{LISPY\_LOGIC\_NOT}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_LOGIC\_NOT@{LISPY\_LOGIC\_NOT}}}\Hypertarget{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a50b105e3ee5716ebbd4e3cd501afb71a}\label{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a50b105e3ee5716ebbd4e3cd501afb71a} 
+LISPY\+\_\+\+LOGIC\+\_\+\+NOT&Not. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_LOGIC\_UNKNOWN@{LISPY\_LOGIC\_UNKNOWN}!helpers.h@{helpers.h}}\index{helpers.h@{helpers.h}!LISPY\_LOGIC\_UNKNOWN@{LISPY\_LOGIC\_UNKNOWN}}}\Hypertarget{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a083f5c1a3ad5448e14d9c2fc6c35bbce}\label{helpers_8h_a331e90a911ee4821cfde788959ad9ee6a083f5c1a3ad5448e14d9c2fc6c35bbce} 
+LISPY\+\_\+\+LOGIC\+\_\+\+UNKNOWN&Unknown. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{helpers_8h_a8aabb87bf1f3ccbc2f84d1c9262eccf9}\label{helpers_8h_a8aabb87bf1f3ccbc2f84d1c9262eccf9} 
+\index{helpers.h@{helpers.h}!arithm\_op\_from\_str@{arithm\_op\_from\_str}}
+\index{arithm\_op\_from\_str@{arithm\_op\_from\_str}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{arithm\_op\_from\_str()}{arithm\_op\_from\_str()}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{helpers_8h_a22a977f61b270616483d28e196165a0e}{LISPY\+\_\+\+ARITHM\+\_\+\+OP}} arithm\+\_\+op\+\_\+from\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{key }\end{DoxyParamCaption})}
+
+
+
+Returns the enum representation of the arithmetic operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The string representation of the arithmetic operator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The enum representation of the arithmetic operator 
+\end{DoxyReturn}
+\Hypertarget{helpers_8h_a2f4b6ae5422d0e26ae7f88fb5b7326e7}\label{helpers_8h_a2f4b6ae5422d0e26ae7f88fb5b7326e7} 
+\index{helpers.h@{helpers.h}!logic\_op\_from\_str@{logic\_op\_from\_str}}
+\index{logic\_op\_from\_str@{logic\_op\_from\_str}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{logic\_op\_from\_str()}{logic\_op\_from\_str()}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{helpers_8h_a331e90a911ee4821cfde788959ad9ee6}{LISPY\+\_\+\+LOGIC\+\_\+\+OP}} logic\+\_\+op\+\_\+from\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{key }\end{DoxyParamCaption})}
+
+
+
+Returns the enum representation of the logical operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The string representation of the logical operator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The enum representation of the logical operator 
+\end{DoxyReturn}
+\Hypertarget{helpers_8h_a21aabcef9dfc36d3d2305a36b42de5a7}\label{helpers_8h_a21aabcef9dfc36d3d2305a36b42de5a7} 
+\index{helpers.h@{helpers.h}!power\_long@{power\_long}}
+\index{power\_long@{power\_long}!helpers.h@{helpers.h}}
+\doxysubsubsection{\texorpdfstring{power\_long()}{power\_long()}}
+{\footnotesize\ttfamily long power\+\_\+long (\begin{DoxyParamCaption}\item[{long}]{base,  }\item[{long}]{exponent }\end{DoxyParamCaption})}
+
+
+
+Exponentiation method for long values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & The number to multiply \\
+\hline
+{\em exponent} & The number of times to multiply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting power 
+\end{DoxyReturn}

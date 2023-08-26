@@ -1,0 +1,219 @@
+\doxysection{src/builtins/arithmetic.h File Reference}
+\hypertarget{arithmetic_8h}{}\label{arithmetic_8h}\index{src/builtins/arithmetic.h@{src/builtins/arithmetic.h}}
+
+
+This file contains all builtin arithmetic methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a143e9f2639b1f948e0526e7cb22e6735}{builtin\+\_\+op}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}op)
+\begin{DoxyCompactList}\small\item\em The main function of this module which does the actual computation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a5e7f9d9599251427c4457c1ad79f7161}{builtin\+\_\+add}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Adds all arguments together. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a592b24f93e8751bf0ca52f0d2883cf6d}{builtin\+\_\+sub}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Subtracts all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a1e44ca958d75adee39065f39cc4bdc00}{builtin\+\_\+mul}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Multiplies all arguments together. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a70e39f3e065db23e4570700ab387ac9f}{builtin\+\_\+div}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Divides all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_af1f3bbbc08a5a3485759c5d3b7e20691}{builtin\+\_\+mod}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Applies modular division to all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_aaa52c538a14494a6d1777c44343519b0}{builtin\+\_\+pow}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Exponentiates all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a125e3c60db4df28116d2802143c05786}{builtin\+\_\+max}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Finds the maximum of all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a82157f63f4b8b5a7df5179e9fe2fda45}{builtin\+\_\+min}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Finds the minimum of all arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin arithmetic methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{arithmetic_8h_a5e7f9d9599251427c4457c1ad79f7161}\label{arithmetic_8h_a5e7f9d9599251427c4457c1ad79f7161} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_add@{builtin\_add}}
+\index{builtin\_add@{builtin\_add}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_add()}{builtin\_add()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Adds all arguments together. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are added \\
+\hline
+{\em args} & The arguments to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the sum of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a70e39f3e065db23e4570700ab387ac9f}\label{arithmetic_8h_a70e39f3e065db23e4570700ab387ac9f} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_div@{builtin\_div}}
+\index{builtin\_div@{builtin\_div}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_div()}{builtin\_div()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Divides all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are divided \\
+\hline
+{\em args} & The arguments to divide \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the quotient of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a125e3c60db4df28116d2802143c05786}\label{arithmetic_8h_a125e3c60db4df28116d2802143c05786} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_max@{builtin\_max}}
+\index{builtin\_max@{builtin\_max}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_max()}{builtin\_max()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+max (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Finds the maximum of all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the maximum of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a82157f63f4b8b5a7df5179e9fe2fda45}\label{arithmetic_8h_a82157f63f4b8b5a7df5179e9fe2fda45} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_min@{builtin\_min}}
+\index{builtin\_min@{builtin\_min}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_min()}{builtin\_min()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Finds the minimum of all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the minimum of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_af1f3bbbc08a5a3485759c5d3b7e20691}\label{arithmetic_8h_af1f3bbbc08a5a3485759c5d3b7e20691} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_mod@{builtin\_mod}}
+\index{builtin\_mod@{builtin\_mod}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_mod()}{builtin\_mod()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+mod (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Applies modular division to all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use for modular division \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the return of the modular division of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a1e44ca958d75adee39065f39cc4bdc00}\label{arithmetic_8h_a1e44ca958d75adee39065f39cc4bdc00} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_mul@{builtin\_mul}}
+\index{builtin\_mul@{builtin\_mul}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_mul()}{builtin\_mul()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Multiplies all arguments together. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are multiplied \\
+\hline
+{\em args} & The arguments to multiply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the product of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a143e9f2639b1f948e0526e7cb22e6735}\label{arithmetic_8h_a143e9f2639b1f948e0526e7cb22e6735} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_op@{builtin\_op}}
+\index{builtin\_op@{builtin\_op}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_op()}{builtin\_op()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{op }\end{DoxyParamCaption})}
+
+
+
+The main function of this module which does the actual computation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+{\em op} & The operator to apply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of (op args) 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_aaa52c538a14494a6d1777c44343519b0}\label{arithmetic_8h_aaa52c538a14494a6d1777c44343519b0} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_pow@{builtin\_pow}}
+\index{builtin\_pow@{builtin\_pow}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_pow()}{builtin\_pow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+pow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Exponentiates all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are exponentiated \\
+\hline
+{\em args} & The arguments to exponentiate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the power of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a592b24f93e8751bf0ca52f0d2883cf6d}\label{arithmetic_8h_a592b24f93e8751bf0ca52f0d2883cf6d} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_sub@{builtin\_sub}}
+\index{builtin\_sub@{builtin\_sub}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_sub()}{builtin\_sub()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Subtracts all arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are subtracted \\
+\hline
+{\em args} & The arguments to subtract \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the difference of all arguments 
+\end{DoxyReturn}

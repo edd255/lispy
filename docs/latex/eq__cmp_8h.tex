@@ -1,0 +1,95 @@
+\doxysection{src/builtins/eq\+\_\+cmp.h File Reference}
+\hypertarget{eq__cmp_8h}{}\label{eq__cmp_8h}\index{src/builtins/eq\_cmp.h@{src/builtins/eq\_cmp.h}}
+
+
+This file contains all builtin equality comparison methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eq__cmp_8h_adb409cc444283068e6a6239e0bc3d4dc}{builtin\+\_\+cmp}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}op)
+\begin{DoxyCompactList}\small\item\em The main function of this module which does the actual computation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eq__cmp_8h_a9bc99e2c4d611ee28b72b6abfc584274}{builtin\+\_\+eq}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Compares whether two values are equal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eq__cmp_8h_a6a7ccdb12ad152a473c7001286cc2c50}{builtin\+\_\+ne}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Compares whether two values are unequal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin equality comparison methods. 
+
+This file contains all builtin variable methods.
+
+This file contains all builtin string methods.
+
+This file contains all builtin magnitude comparison methods.
+
+This file contains all builtin logic methods.
+
+This file contains all builtin list methods.
+
+\doxysubsection{Function Documentation}
+\Hypertarget{eq__cmp_8h_adb409cc444283068e6a6239e0bc3d4dc}\label{eq__cmp_8h_adb409cc444283068e6a6239e0bc3d4dc} 
+\index{eq\_cmp.h@{eq\_cmp.h}!builtin\_cmp@{builtin\_cmp}}
+\index{builtin\_cmp@{builtin\_cmp}!eq\_cmp.h@{eq\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_cmp()}{builtin\_cmp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+cmp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{op }\end{DoxyParamCaption})}
+
+
+
+The main function of this module which does the actual computation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+{\em op} & The operator to apply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value containing the result of (op args) 
+\end{DoxyReturn}
+\Hypertarget{eq__cmp_8h_a9bc99e2c4d611ee28b72b6abfc584274}\label{eq__cmp_8h_a9bc99e2c4d611ee28b72b6abfc584274} 
+\index{eq\_cmp.h@{eq\_cmp.h}!builtin\_eq@{builtin\_eq}}
+\index{builtin\_eq@{builtin\_eq}!eq\_cmp.h@{eq\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_eq()}{builtin\_eq()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+eq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Compares whether two values are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments reside \\
+\hline
+{\em args} & A list containing two arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value containg 1 if they are equal, 0 else 
+\end{DoxyReturn}
+\Hypertarget{eq__cmp_8h_a6a7ccdb12ad152a473c7001286cc2c50}\label{eq__cmp_8h_a6a7ccdb12ad152a473c7001286cc2c50} 
+\index{eq\_cmp.h@{eq\_cmp.h}!builtin\_ne@{builtin\_ne}}
+\index{builtin\_ne@{builtin\_ne}!eq\_cmp.h@{eq\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_ne()}{builtin\_ne()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+ne (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Compares whether two values are unequal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments reside \\
+\hline
+{\em args} & A list containing two arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value containg 1 if they are unequal, 0 else 
+\end{DoxyReturn}

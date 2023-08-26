@@ -1,7 +1,7 @@
 var annotated_dup =
 [
-    [ "larithmop_map_t", "structlarithmop__map__t.html", null ],
     [ "lenv_t", "structlenv__t.html", "structlenv__t" ],
-    [ "llogic_map_t", "structllogic__map__t.html", null ],
+    [ "lispy_arithm_op_map_t", "structlispy__arithm__op__map__t.html", "structlispy__arithm__op__map__t" ],
+    [ "lispy_logic_op_map_t", "structlispy__logic__op__map__t.html", "structlispy__logic__op__map__t" ],
     [ "lval_t", "structlval__t.html", "structlval__t" ]
 ];

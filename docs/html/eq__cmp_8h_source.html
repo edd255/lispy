@@ -94,20 +94,27 @@ $(document).ready(function(){initNavTree('eq__cmp_8h_source.html',''); initResiz
   <div class="headertitle"><div class="title">eq_cmp.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifndef LISPY_BUILTINS_EQ_CMP_H</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define LISPY_BUILTINS_EQ_CMP_H</span></div>
+<a href="eq__cmp_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//---- Equality comparison functions -------------------------------------------</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* builtin_cmp(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args, <span class="keywordtype">char</span>* op);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* builtin_eq(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* builtin_ne(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef LISPY_BUILTINS_EQ_CMP_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define LISPY_BUILTINS_EQ_CMP_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//---- Equality comparison functions -------------------------------------------</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* <a class="code hl_function" href="eq__cmp_8h.html#adb409cc444283068e6a6239e0bc3d4dc">builtin_cmp</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args, <span class="keywordtype">char</span>* op);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* <a class="code hl_function" href="eq__cmp_8h.html#a9bc99e2c4d611ee28b72b6abfc584274">builtin_eq</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* <a class="code hl_function" href="eq__cmp_8h.html#a6a7ccdb12ad152a473c7001286cc2c50">builtin_ne</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div><div class="ttdoc">This file contains the definitions, constructors, destructors and methods for Lispy values and enviro...</div></div>
+<div class="ttc" id="aeq__cmp_8h_html_a6a7ccdb12ad152a473c7001286cc2c50"><div class="ttname"><a href="eq__cmp_8h.html#a6a7ccdb12ad152a473c7001286cc2c50">builtin_ne</a></div><div class="ttdeci">lval_t * builtin_ne(lenv_t *env, lval_t *args)</div><div class="ttdoc">Compares whether two values are unequal.</div><div class="ttdef"><b>Definition</b> eq_cmp.c:30</div></div>
+<div class="ttc" id="aeq__cmp_8h_html_a9bc99e2c4d611ee28b72b6abfc584274"><div class="ttname"><a href="eq__cmp_8h.html#a9bc99e2c4d611ee28b72b6abfc584274">builtin_eq</a></div><div class="ttdeci">lval_t * builtin_eq(lenv_t *env, lval_t *args)</div><div class="ttdoc">Compares whether two values are equal.</div><div class="ttdef"><b>Definition</b> eq_cmp.c:23</div></div>
+<div class="ttc" id="aeq__cmp_8h_html_adb409cc444283068e6a6239e0bc3d4dc"><div class="ttname"><a href="eq__cmp_8h.html#adb409cc444283068e6a6239e0bc3d4dc">builtin_cmp</a></div><div class="ttdeci">lval_t * builtin_cmp(lenv_t *env, lval_t *args, char *op)</div><div class="ttdoc">The main function of this module which does the actual computation.</div><div class="ttdef"><b>Definition</b> eq_cmp.c:4</div></div>
 <div class="ttc" id="astructlenv__t_html"><div class="ttname"><a href="structlenv__t.html">lenv_t</a></div><div class="ttdoc">A structure that contains data and metadata about used environments.</div><div class="ttdef"><b>Definition</b> common.h:90</div></div>
 <div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -115,8 +122,8 @@ $(document).ready(function(){initNavTree('eq__cmp_8h_source.html',''); initResiz
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><b>eq_cmp.h</b></li>
-    <li class="footer">Generated on Sat Aug 26 2023 16:21:21 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="eq__cmp_8h.html">eq_cmp.h</a></li>
+    <li class="footer">Generated on Sat Aug 26 2023 19:14:50 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

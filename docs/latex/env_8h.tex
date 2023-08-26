@@ -1,0 +1,63 @@
+\doxysection{src/builtins/env.h File Reference}
+\hypertarget{env_8h}{}\label{env_8h}\index{src/builtins/env.h@{src/builtins/env.h}}
+
+
+This file contains all builtin environment methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{env_8h_af25cd34dfe1ece0a16a31ae5f64bf118}{builtin\+\_\+env}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Prints out all values in the environment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{env_8h_a348b104f45b073c326cf9b8382e392eb}{builtin\+\_\+fun}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em A builtin-\/method to define new functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin environment methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{env_8h_af25cd34dfe1ece0a16a31ae5f64bf118}\label{env_8h_af25cd34dfe1ece0a16a31ae5f64bf118} 
+\index{env.h@{env.h}!builtin\_env@{builtin\_env}}
+\index{builtin\_env@{builtin\_env}!env.h@{env.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_env()}{builtin\_env()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+env (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Prints out all values in the environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment whose values we want to print \\
+\hline
+{\em args} & Necessary but unused arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A quoted expression that contains the names of all values 
+\end{DoxyReturn}
+\Hypertarget{env_8h_a348b104f45b073c326cf9b8382e392eb}\label{env_8h_a348b104f45b073c326cf9b8382e392eb} 
+\index{env.h@{env.h}!builtin\_fun@{builtin\_fun}}
+\index{builtin\_fun@{builtin\_fun}!env.h@{env.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_fun()}{builtin\_fun()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+fun (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+A builtin-\/method to define new functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the function is put \\
+\hline
+{\em args} & Body, arguments, and name of the function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An empty symbolic expression, else runtime errors 
+\end{DoxyReturn}

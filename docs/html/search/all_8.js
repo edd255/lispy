@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['no_5fstdlib_0',['no_stdlib',['../main_8c.html#ac5eb6eef7255a3857a377bb13960165a',1,'main.c']]],
-  ['num_1',['num',['../structlval__t.html#a5c0c66219f00c006607afd3291f389cd',1,'lval_t']]],
-  ['number_2',['number',['../main_8c.html#aabf9c9a486893212e85d686799df2932',1,'main.c']]]
+  ['key_0',['key',['../structlispy__arithm__op__map__t.html#ac49414e563ef31adecfd7c6bf0763985',1,'lispy_arithm_op_map_t::key'],['../structlispy__logic__op__map__t.html#a2913ebf1896cc5f41b00fc21b23ca861',1,'lispy_logic_op_map_t::key']]]
 ];

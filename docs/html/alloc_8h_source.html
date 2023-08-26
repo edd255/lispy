@@ -94,42 +94,49 @@ $(document).ready(function(){initNavTree('alloc_8h_source.html',''); initResizab
   <div class="headertitle"><div class="title">alloc.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifndef LISPY_UTILS_ALLOC_H</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define LISPY_UTILS_ALLOC_H</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span>* log_malloc(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span>* fn, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line);</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">void</span>* log_realloc(</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">void</span>* old_ptr,</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">size_t</span> size,</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* fn,</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* file,</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">int</span> line</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> log_free(<span class="keywordtype">void</span>* ptr, <span class="keyword">const</span> <span class="keywordtype">char</span>* fn, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#ifdef LOG_ALLOCS</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define REALLOC(old_ptr, size) \</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">    log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define MALLOC(size)           malloc((size))</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#define REALLOC(old_ptr, size) realloc((old_ptr), (size))</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define FREE(ptr)              free((ptr))</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
+<a href="alloc_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef LISPY_UTILS_ALLOC_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define LISPY_UTILS_ALLOC_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">void</span>* <a class="code hl_function" href="alloc_8h.html#ab529968717e2efa55dede7cb65e910b0">log_malloc</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span>* fn, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span>* <a class="code hl_function" href="alloc_8h.html#a231776ad015097806a481952e2a219dc">log_realloc</a>(</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span>* old_ptr,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">size_t</span> size,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* fn,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">const</span> <span class="keywordtype">char</span>* file,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">int</span> line</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keywordtype">void</span> <a class="code hl_function" href="alloc_8h.html#ad79de2ef5702bbaec5188728119c52c4">log_free</a>(<span class="keywordtype">void</span>* ptr, <span class="keyword">const</span> <span class="keywordtype">char</span>* fn, <span class="keyword">const</span> <span class="keywordtype">char</span>* file, <span class="keywordtype">int</span> line);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#ifdef LOG_ALLOCS</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#define REALLOC(old_ptr, size) \</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">    log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="alloc_8h.html#a3078f3c259e2a871314e3e0194896357">   52</a></span><span class="preprocessor">#define MALLOC(size)           malloc((size))</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="alloc_8h.html#a4989f763525ffd9d94d7a782d57d99cb">   54</a></span><span class="preprocessor">#define REALLOC(old_ptr, size) realloc((old_ptr), (size))</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="alloc_8h.html#a105949c59c998e38aad80266afac92bf">   56</a></span><span class="preprocessor">#define FREE(ptr)              free((ptr))</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aalloc_8h_html_a231776ad015097806a481952e2a219dc"><div class="ttname"><a href="alloc_8h.html#a231776ad015097806a481952e2a219dc">log_realloc</a></div><div class="ttdeci">void * log_realloc(void *old_ptr, size_t size, const char *fn, const char *file, int line)</div><div class="ttdoc">Reallocates memory and logs function, file, line, old and new pointer.</div><div class="ttdef"><b>Definition</b> alloc.c:13</div></div>
+<div class="ttc" id="aalloc_8h_html_ab529968717e2efa55dede7cb65e910b0"><div class="ttname"><a href="alloc_8h.html#ab529968717e2efa55dede7cb65e910b0">log_malloc</a></div><div class="ttdeci">void * log_malloc(size_t size, const char *fn, const char *file, int line)</div><div class="ttdoc">Allocates memory and logs function, file, line and pointer.</div><div class="ttdef"><b>Definition</b> alloc.c:7</div></div>
+<div class="ttc" id="aalloc_8h_html_ad79de2ef5702bbaec5188728119c52c4"><div class="ttname"><a href="alloc_8h.html#ad79de2ef5702bbaec5188728119c52c4">log_free</a></div><div class="ttdeci">void log_free(void *ptr, const char *fn, const char *file, int line)</div><div class="ttdoc">Frees memory and logs function, file, line, and pointer.</div><div class="ttdef"><b>Definition</b> alloc.c:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><b>alloc.h</b></li>
-    <li class="footer">Generated on Sat Aug 26 2023 16:21:21 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="alloc_8h.html">alloc.h</a></li>
+    <li class="footer">Generated on Sat Aug 26 2023 19:14:50 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

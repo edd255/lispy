@@ -1,0 +1,67 @@
+\doxysection{src/builtins.h File Reference}
+\hypertarget{builtins_8h}{}\label{builtins_8h}\index{src/builtins.h@{src/builtins.h}}
+
+
+All builtin methods are added to the environment which is loaded at start.  
+
+
+{\ttfamily \#include \"{}builtins/arithmetic.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/conditional.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/env.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/eq\+\_\+cmp.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/helpers.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/list.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/logic.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/magn\+\_\+cmp.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/strings.\+h\"{}}\newline
+{\ttfamily \#include \"{}builtins/vars.\+h\"{}}\newline
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{builtins_8h_afdf208cb23050963ae7ef2af4a68442d}{lenv\+\_\+add\+\_\+builtins}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+\begin{DoxyCompactList}\small\item\em Adds all builtin methods to the given environment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{builtins_8h_af4ff73617d7c9a0db83aacb54baa8716}{lenv\+\_\+add\+\_\+builtin}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}} fn)
+\begin{DoxyCompactList}\small\item\em A helper function to add builtin methods to the given environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+All builtin methods are added to the environment which is loaded at start. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{builtins_8h_af4ff73617d7c9a0db83aacb54baa8716}\label{builtins_8h_af4ff73617d7c9a0db83aacb54baa8716} 
+\index{builtins.h@{builtins.h}!lenv\_add\_builtin@{lenv\_add\_builtin}}
+\index{lenv\_add\_builtin@{lenv\_add\_builtin}!builtins.h@{builtins.h}}
+\doxysubsubsection{\texorpdfstring{lenv\_add\_builtin()}{lenv\_add\_builtin()}}
+{\footnotesize\ttfamily void lenv\+\_\+add\+\_\+builtin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}}}]{fn }\end{DoxyParamCaption})}
+
+
+
+A helper function to add builtin methods to the given environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment where the builtin functions are added. \\
+\hline
+{\em name} & The names given to the builtin methods \\
+\hline
+{\em fn} & Pointers to the builtin methods \\
+\hline
+\end{DoxyParams}
+\Hypertarget{builtins_8h_afdf208cb23050963ae7ef2af4a68442d}\label{builtins_8h_afdf208cb23050963ae7ef2af4a68442d} 
+\index{builtins.h@{builtins.h}!lenv\_add\_builtins@{lenv\_add\_builtins}}
+\index{lenv\_add\_builtins@{lenv\_add\_builtins}!builtins.h@{builtins.h}}
+\doxysubsubsection{\texorpdfstring{lenv\_add\_builtins()}{lenv\_add\_builtins()}}
+{\footnotesize\ttfamily void lenv\+\_\+add\+\_\+builtins (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+
+
+
+Adds all builtin methods to the given environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment where the builtins should be added. \\
+\hline
+\end{DoxyParams}

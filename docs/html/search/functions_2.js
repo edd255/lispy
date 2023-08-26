@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['get_5flispy_5fparser_0',['get_lispy_parser',['../main_8c.html#a33d140882b6f455504ea3f64c726961d',1,'main.c']]],
-  ['get_5fstdlib_1',['get_stdlib',['../main_8c.html#a5de7cb8a1360ab29803b862e4ec02711',1,'main.c']]]
+  ['cleanup_0',['cleanup',['../main_8c.html#aed182b973ecb166e50c0e4338be146d5',1,'main.c']]],
+  ['cli_5finterpreter_1',['cli_interpreter',['../main_8c.html#ab4bcf6908817f7fb2303080122c2c5e0',1,'main.c']]]
 ];

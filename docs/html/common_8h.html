@@ -93,7 +93,6 @@ $(document).ready(function(){initNavTree('common_8h.html',''); initResizable(); 
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -108,8 +107,8 @@ $(document).ready(function(){initNavTree('common_8h.html',''); initResizable(); 
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;utils/alloc.h&quot;</code><br />
-<code>#include &quot;utils/errors.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="alloc_8h_source.html">utils/alloc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="errors_8h_source.html">utils/errors.h</a>&quot;</code><br />
 </div>
 <p><a href="common_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,21 +120,6 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlenv__t.html">lenv_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains data and metadata about used environments.  <a href="structlenv__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a3078f3c259e2a871314e3e0194896357"><td class="memItemLeft" align="right" valign="top"><a id="a3078f3c259e2a871314e3e0194896357" name="a3078f3c259e2a871314e3e0194896357"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MALLOC</b>(size)&#160;&#160;&#160;malloc((size))</td></tr>
-<tr class="memdesc:a3078f3c259e2a871314e3e0194896357"><td class="mdescLeft">&#160;</td><td class="mdescRight">malloc without logging the procedure <br /></td></tr>
-<tr class="separator:a3078f3c259e2a871314e3e0194896357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4989f763525ffd9d94d7a782d57d99cb"><td class="memItemLeft" align="right" valign="top"><a id="a4989f763525ffd9d94d7a782d57d99cb" name="a4989f763525ffd9d94d7a782d57d99cb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>REALLOC</b>(old_ptr,  size)&#160;&#160;&#160;realloc((old_ptr), (size))</td></tr>
-<tr class="memdesc:a4989f763525ffd9d94d7a782d57d99cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">realloc without logging the procedure <br /></td></tr>
-<tr class="separator:a4989f763525ffd9d94d7a782d57d99cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a105949c59c998e38aad80266afac92bf"><td class="memItemLeft" align="right" valign="top"><a id="a105949c59c998e38aad80266afac92bf" name="a105949c59c998e38aad80266afac92bf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>FREE</b>(ptr)&#160;&#160;&#160;free((ptr))</td></tr>
-<tr class="memdesc:a105949c59c998e38aad80266afac92bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">free without logging the procedure <br /></td></tr>
-<tr class="separator:a105949c59c998e38aad80266afac92bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -154,26 +138,26 @@ typedef <a class="el" href="structlval__t.html">lval_t</a> *(*&#160;</td><td cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aae9c106c458911827e30b5201c853796"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#aae9c106c458911827e30b5201c853796">LERR</a> { <a class="el" href="common_8h.html#aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3">LERR_DIV_ZERO</a>
-, <a class="el" href="common_8h.html#aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5">LERR_BAD_OP</a>
-, <a class="el" href="common_8h.html#aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7">LERR_BAD_NUM</a>
+<tr class="memitem:a7ce8d2f6dafcceed5949ddcd5e9116b2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2">LISPY_ERR</a> { <a class="el" href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7">LISPY_ERR_DIV_BY_ZERO</a>
+, <a class="el" href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9">LISPY_ERR_BAD_OP</a>
+, <a class="el" href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7">LISPY_ERR_BAD_NUM</a>
  }</td></tr>
-<tr class="memdesc:aae9c106c458911827e30b5201c853796"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enumeration of possible error types.  <a href="common_8h.html#aae9c106c458911827e30b5201c853796">More...</a><br /></td></tr>
-<tr class="separator:aae9c106c458911827e30b5201c853796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a584807b84eccc03737c36c4f9ecef987"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987">LVAL</a> { <br />
-&#160;&#160;<a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de">LVAL_ERR</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0">LVAL_NUM</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5">LVAL_DEC</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255">LVAL_SYM</a>
+<tr class="memdesc:a7ce8d2f6dafcceed5949ddcd5e9116b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">An enumeration of possible error types.  <a href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2">More...</a><br /></td></tr>
+<tr class="separator:a7ce8d2f6dafcceed5949ddcd5e9116b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abea235b4767f389601d0d19eaf7069c1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1">LISPY_VAL</a> { <br />
+&#160;&#160;<a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3">LISPY_VAL_ERR</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11">LISPY_VAL_NUM</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba">LISPY_VAL_DEC</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3">LISPY_VAL_SYM</a>
 , <br />
-&#160;&#160;<a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2">LVAL_STR</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05">LVAL_SEXPR</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995">LVAL_QEXPR</a>
-, <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e">LVAL_FN</a>
+&#160;&#160;<a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81">LISPY_VAL_STR</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e">LISPY_VAL_SEXPR</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297">LISPY_VAL_QEXPR</a>
+, <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0">LISPY_VAL_FN</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a584807b84eccc03737c36c4f9ecef987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of possible Lispy value types.  <a href="common_8h.html#a584807b84eccc03737c36c4f9ecef987">More...</a><br /></td></tr>
-<tr class="separator:a584807b84eccc03737c36c4f9ecef987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:abea235b4767f389601d0d19eaf7069c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of possible Lispy value types.  <a href="common_8h.html#abea235b4767f389601d0d19eaf7069c1">More...</a><br /></td></tr>
+<tr class="separator:abea235b4767f389601d0d19eaf7069c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -250,59 +234,59 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains the definitions, constructors, destructors and methods for Lispy values and environments. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="aae9c106c458911827e30b5201c853796" name="aae9c106c458911827e30b5201c853796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae9c106c458911827e30b5201c853796">&#9670;&#160;</a></span>LERR</h2>
+<a id="a7ce8d2f6dafcceed5949ddcd5e9116b2" name="a7ce8d2f6dafcceed5949ddcd5e9116b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ce8d2f6dafcceed5949ddcd5e9116b2">&#9670;&#160;</a></span>LISPY_ERR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="common_8h.html#aae9c106c458911827e30b5201c853796">LERR</a></td>
+          <td class="memname">enum <a class="el" href="common_8h.html#a7ce8d2f6dafcceed5949ddcd5e9116b2">LISPY_ERR</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>An enumeration of possible error types. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3" name="aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3"></a>LERR_DIV_ZERO&#160;</td><td class="fielddoc"><p>Division by Zero. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7" name="a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7"></a>LISPY_ERR_DIV_BY_ZERO&#160;</td><td class="fielddoc"><p>Division by Zero. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5" name="aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5"></a>LERR_BAD_OP&#160;</td><td class="fielddoc"><p>Bad operator. </p>
+<tr><td class="fieldname"><a id="a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9" name="a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9"></a>LISPY_ERR_BAD_OP&#160;</td><td class="fielddoc"><p>Bad operator. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7" name="aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7"></a>LERR_BAD_NUM&#160;</td><td class="fielddoc"><p>Bad number. </p>
+<tr><td class="fieldname"><a id="a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7" name="a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7"></a>LISPY_ERR_BAD_NUM&#160;</td><td class="fielddoc"><p>Bad number. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
-<a id="a584807b84eccc03737c36c4f9ecef987" name="a584807b84eccc03737c36c4f9ecef987"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a584807b84eccc03737c36c4f9ecef987">&#9670;&#160;</a></span>LVAL</h2>
+<a id="abea235b4767f389601d0d19eaf7069c1" name="abea235b4767f389601d0d19eaf7069c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abea235b4767f389601d0d19eaf7069c1">&#9670;&#160;</a></span>LISPY_VAL</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="common_8h.html#a584807b84eccc03737c36c4f9ecef987">LVAL</a></td>
+          <td class="memname">enum <a class="el" href="common_8h.html#abea235b4767f389601d0d19eaf7069c1">LISPY_VAL</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Enumeration of possible Lispy value types. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de" name="a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de"></a>LVAL_ERR&#160;</td><td class="fielddoc"><p>Error type. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3" name="abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3"></a>LISPY_VAL_ERR&#160;</td><td class="fielddoc"><p>Error type. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0" name="a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0"></a>LVAL_NUM&#160;</td><td class="fielddoc"><p>Integer number. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11" name="abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11"></a>LISPY_VAL_NUM&#160;</td><td class="fielddoc"><p>Integer number. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5" name="a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5"></a>LVAL_DEC&#160;</td><td class="fielddoc"><p>Decimal number. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba" name="abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba"></a>LISPY_VAL_DEC&#160;</td><td class="fielddoc"><p>Decimal number. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255" name="a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255"></a>LVAL_SYM&#160;</td><td class="fielddoc"><p>Symbol. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3" name="abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3"></a>LISPY_VAL_SYM&#160;</td><td class="fielddoc"><p>Symbol. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2" name="a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2"></a>LVAL_STR&#160;</td><td class="fielddoc"><p>String. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81" name="abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81"></a>LISPY_VAL_STR&#160;</td><td class="fielddoc"><p>String. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05" name="a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05"></a>LVAL_SEXPR&#160;</td><td class="fielddoc"><p>Symbol expression. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e" name="abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e"></a>LISPY_VAL_SEXPR&#160;</td><td class="fielddoc"><p>Symbol expression. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995" name="a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995"></a>LVAL_QEXPR&#160;</td><td class="fielddoc"><p>Quoted expression. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297" name="abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297"></a>LISPY_VAL_QEXPR&#160;</td><td class="fielddoc"><p>Quoted expression. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e" name="a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e"></a>LVAL_FN&#160;</td><td class="fielddoc"><p>Function. </p>
+<tr><td class="fieldname"><a id="abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0" name="abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0"></a>LISPY_VAL_FN&#160;</td><td class="fielddoc"><p>Function. </p>
 </td></tr>
 </table>
 
@@ -1059,7 +1043,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="common_8h.html">common.h</a></li>
-    <li class="footer">Generated on Sat Aug 26 2023 16:21:21 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Aug 26 2023 19:14:50 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

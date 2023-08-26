@@ -19,18 +19,6 @@ struct \mbox{\hyperlink{structlval__t}{lval\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{common_8h_a3078f3c259e2a871314e3e0194896357}\label{common_8h_a3078f3c259e2a871314e3e0194896357} 
-\#define {\bfseries MALLOC}(size)~malloc((size))
-\begin{DoxyCompactList}\small\item\em malloc without logging the procedure \end{DoxyCompactList}\item 
-\Hypertarget{common_8h_a4989f763525ffd9d94d7a782d57d99cb}\label{common_8h_a4989f763525ffd9d94d7a782d57d99cb} 
-\#define {\bfseries REALLOC}(old\+\_\+ptr,  size)~realloc((old\+\_\+ptr), (size))
-\begin{DoxyCompactList}\small\item\em realloc without logging the procedure \end{DoxyCompactList}\item 
-\Hypertarget{common_8h_a105949c59c998e38aad80266afac92bf}\label{common_8h_a105949c59c998e38aad80266afac92bf} 
-\#define {\bfseries FREE}(ptr)~free((ptr))
-\begin{DoxyCompactList}\small\item\em free without logging the procedure \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -46,21 +34,21 @@ typedef \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796}{LERR}} \{ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3}{LERR\+\_\+\+DIV\+\_\+\+ZERO}}
-, \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5}{LERR\+\_\+\+BAD\+\_\+\+OP}}
-, \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7}{LERR\+\_\+\+BAD\+\_\+\+NUM}}
+enum \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2}{LISPY\+\_\+\+ERR}} \{ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7}{LISPY\+\_\+\+ERR\+\_\+\+DIV\+\_\+\+BY\+\_\+\+ZERO}}
+, \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9}{LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+OP}}
+, \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7}{LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+NUM}}
  \}
 \begin{DoxyCompactList}\small\item\em An enumeration of possible error types. \end{DoxyCompactList}\item 
-enum \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987}{LVAL}} \{ \newline
-\mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de}{LVAL\+\_\+\+ERR}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0}{LVAL\+\_\+\+NUM}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5}{LVAL\+\_\+\+DEC}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255}{LVAL\+\_\+\+SYM}}
+enum \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\+\_\+\+VAL}} \{ \newline
+\mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3}{LISPY\+\_\+\+VAL\+\_\+\+ERR}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11}{LISPY\+\_\+\+VAL\+\_\+\+NUM}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba}{LISPY\+\_\+\+VAL\+\_\+\+DEC}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3}{LISPY\+\_\+\+VAL\+\_\+\+SYM}}
 , \newline
-\mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2}{LVAL\+\_\+\+STR}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05}{LVAL\+\_\+\+SEXPR}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995}{LVAL\+\_\+\+QEXPR}}
-, \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e}{LVAL\+\_\+\+FN}}
+\mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81}{LISPY\+\_\+\+VAL\+\_\+\+STR}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e}{LISPY\+\_\+\+VAL\+\_\+\+SEXPR}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297}{LISPY\+\_\+\+VAL\+\_\+\+QEXPR}}
+, \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0}{LISPY\+\_\+\+VAL\+\_\+\+FN}}
  \}
 \begin{DoxyCompactList}\small\item\em Enumeration of possible Lispy value types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
@@ -120,71 +108,71 @@ This file contains the definitions, constructors, destructors and methods for Li
 
 
 \doxysubsection{Enumeration Type Documentation}
-\Hypertarget{common_8h_aae9c106c458911827e30b5201c853796}\label{common_8h_aae9c106c458911827e30b5201c853796} 
-\index{common.h@{common.h}!LERR@{LERR}}
-\index{LERR@{LERR}!common.h@{common.h}}
-\doxysubsubsection{\texorpdfstring{LERR}{LERR}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796}{LERR}}}
+\Hypertarget{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2}\label{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2} 
+\index{common.h@{common.h}!LISPY\_ERR@{LISPY\_ERR}}
+\index{LISPY\_ERR@{LISPY\_ERR}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{LISPY\_ERR}{LISPY\_ERR}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2}{LISPY\+\_\+\+ERR}}}
 
 
 
 An enumeration of possible error types. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LERR\_DIV\_ZERO@{LERR\_DIV\_ZERO}!common.h@{common.h}}\index{common.h@{common.h}!LERR\_DIV\_ZERO@{LERR\_DIV\_ZERO}}}\Hypertarget{common_8h_aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3}\label{common_8h_aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3} 
-LERR\+\_\+\+DIV\+\_\+\+ZERO&Division by Zero. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ERR\_DIV\_BY\_ZERO@{LISPY\_ERR\_DIV\_BY\_ZERO}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_ERR\_DIV\_BY\_ZERO@{LISPY\_ERR\_DIV\_BY\_ZERO}}}\Hypertarget{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7}\label{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7} 
+LISPY\+\_\+\+ERR\+\_\+\+DIV\+\_\+\+BY\+\_\+\+ZERO&Division by Zero. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LERR\_BAD\_OP@{LERR\_BAD\_OP}!common.h@{common.h}}\index{common.h@{common.h}!LERR\_BAD\_OP@{LERR\_BAD\_OP}}}\Hypertarget{common_8h_aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5}\label{common_8h_aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5} 
-LERR\+\_\+\+BAD\+\_\+\+OP&Bad operator. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ERR\_BAD\_OP@{LISPY\_ERR\_BAD\_OP}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_ERR\_BAD\_OP@{LISPY\_ERR\_BAD\_OP}}}\Hypertarget{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9}\label{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9} 
+LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+OP&Bad operator. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LERR\_BAD\_NUM@{LERR\_BAD\_NUM}!common.h@{common.h}}\index{common.h@{common.h}!LERR\_BAD\_NUM@{LERR\_BAD\_NUM}}}\Hypertarget{common_8h_aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7}\label{common_8h_aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7} 
-LERR\+\_\+\+BAD\+\_\+\+NUM&Bad number. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_ERR\_BAD\_NUM@{LISPY\_ERR\_BAD\_NUM}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_ERR\_BAD\_NUM@{LISPY\_ERR\_BAD\_NUM}}}\Hypertarget{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7}\label{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7} 
+LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+NUM&Bad number. \\
 \hline
 
 \end{DoxyEnumFields}
-\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987}\label{common_8h_a584807b84eccc03737c36c4f9ecef987} 
-\index{common.h@{common.h}!LVAL@{LVAL}}
-\index{LVAL@{LVAL}!common.h@{common.h}}
-\doxysubsubsection{\texorpdfstring{LVAL}{LVAL}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987}{LVAL}}}
+\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1}\label{common_8h_abea235b4767f389601d0d19eaf7069c1} 
+\index{common.h@{common.h}!LISPY\_VAL@{LISPY\_VAL}}
+\index{LISPY\_VAL@{LISPY\_VAL}!common.h@{common.h}}
+\doxysubsubsection{\texorpdfstring{LISPY\_VAL}{LISPY\_VAL}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\+\_\+\+VAL}}}
 
 
 
 Enumeration of possible Lispy value types. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_ERR@{LVAL\_ERR}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_ERR@{LVAL\_ERR}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de}\label{common_8h_a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de} 
-LVAL\+\_\+\+ERR&Error type. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_ERR@{LISPY\_VAL\_ERR}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_ERR@{LISPY\_VAL\_ERR}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a65a74433fc92d27672693ac58b7bb0d3} 
+LISPY\+\_\+\+VAL\+\_\+\+ERR&Error type. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_NUM@{LVAL\_NUM}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_NUM@{LVAL\_NUM}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0}\label{common_8h_a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0} 
-LVAL\+\_\+\+NUM&Integer number. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_NUM@{LISPY\_VAL\_NUM}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_NUM@{LISPY\_VAL\_NUM}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a6d03559e2464251b9f5c901d502f9a11} 
+LISPY\+\_\+\+VAL\+\_\+\+NUM&Integer number. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_DEC@{LVAL\_DEC}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_DEC@{LVAL\_DEC}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5}\label{common_8h_a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5} 
-LVAL\+\_\+\+DEC&Decimal number. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_DEC@{LISPY\_VAL\_DEC}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_DEC@{LISPY\_VAL\_DEC}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba}\label{common_8h_abea235b4767f389601d0d19eaf7069c1af28f35277f820f7a7de0c37535af9bba} 
+LISPY\+\_\+\+VAL\+\_\+\+DEC&Decimal number. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_SYM@{LVAL\_SYM}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_SYM@{LVAL\_SYM}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255}\label{common_8h_a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255} 
-LVAL\+\_\+\+SYM&Symbol. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_SYM@{LISPY\_VAL\_SYM}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_SYM@{LISPY\_VAL\_SYM}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a3664b883792e33098013a67758b0b1d3} 
+LISPY\+\_\+\+VAL\+\_\+\+SYM&Symbol. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_STR@{LVAL\_STR}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_STR@{LVAL\_STR}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2}\label{common_8h_a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2} 
-LVAL\+\_\+\+STR&String. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_STR@{LISPY\_VAL\_STR}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_STR@{LISPY\_VAL\_STR}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a0a3d3c2bf558dbd51ad6c2f6073c2e81} 
+LISPY\+\_\+\+VAL\+\_\+\+STR&String. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_SEXPR@{LVAL\_SEXPR}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_SEXPR@{LVAL\_SEXPR}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05}\label{common_8h_a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05} 
-LVAL\+\_\+\+SEXPR&Symbol expression. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_SEXPR@{LISPY\_VAL\_SEXPR}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_SEXPR@{LISPY\_VAL\_SEXPR}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a460cdf8fd38e99748df10cccb715238e} 
+LISPY\+\_\+\+VAL\+\_\+\+SEXPR&Symbol expression. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_QEXPR@{LVAL\_QEXPR}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_QEXPR@{LVAL\_QEXPR}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995}\label{common_8h_a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995} 
-LVAL\+\_\+\+QEXPR&Quoted expression. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_QEXPR@{LISPY\_VAL\_QEXPR}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_QEXPR@{LISPY\_VAL\_QEXPR}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297}\label{common_8h_abea235b4767f389601d0d19eaf7069c1af1ddc94cf244ed0a3e402d55bd401297} 
+LISPY\+\_\+\+VAL\+\_\+\+QEXPR&Quoted expression. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LVAL\_FN@{LVAL\_FN}!common.h@{common.h}}\index{common.h@{common.h}!LVAL\_FN@{LVAL\_FN}}}\Hypertarget{common_8h_a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e}\label{common_8h_a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e} 
-LVAL\+\_\+\+FN&Function. \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LISPY\_VAL\_FN@{LISPY\_VAL\_FN}!common.h@{common.h}}\index{common.h@{common.h}!LISPY\_VAL\_FN@{LISPY\_VAL\_FN}}}\Hypertarget{common_8h_abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0}\label{common_8h_abea235b4767f389601d0d19eaf7069c1a4e7180db0c652129685b14d166eca6a0} 
+LISPY\+\_\+\+VAL\+\_\+\+FN&Function. \\
 \hline
 
 \end{DoxyEnumFields}
