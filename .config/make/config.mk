@@ -20,7 +20,7 @@ SRC_DIRS  := $(SRC_DIR) $(wildcard ./deps/*)
 BUILD_DIR := build
 BIN_DIR   := bin
 INC_DIRS  := $(shell find $(SRC_DIRS) -type d)
-ASSETS    := assets
+LIB       := lib
 TESTS     := $(wildcard tests/*)
 
 #---- INSTALL DIRECTORIES ------------------------------------------------------

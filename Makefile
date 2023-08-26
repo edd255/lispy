@@ -105,7 +105,7 @@ install: release
 	$(Q)cp $(BIN)_release $(PREFIX)/bin/$(NAME)
 	$(Q)echo "====> Installing the library..."
 	$(Q)$(MKDIR) $(PREFIX)/lib/lispy
-	$(Q)cp $(ASSETS)/stdlib/stdlib.lspy $(PREFIX)/lib/lispy/
+	$(Q)cp $(LIB)/stdlib.lspy $(PREFIX)/lib/lispy/
 	$(Q)echo "====> Finished!"
 	
 uninstall:
