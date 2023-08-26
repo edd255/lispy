@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5flogs_0',['print_logs',['../main_8c.html#acc0e8215964fc15509f3ca72c8d98b6b',1,'main.c']]]
+  ['lispy_0',['lispy',['../main_8c.html#a065721c05a37f8befd463c37f3d3dfe4',1,'main.c']]]
 ];

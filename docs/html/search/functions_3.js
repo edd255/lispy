@@ -1,4 +1,26 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8c.html#a217dbf8b442f20279ea00b898af96f52',1,'main.c']]]
+  ['lenv_5fcopy_0',['lenv_copy',['../common_8h.html#a453f4c4bad69b5ffa58a346c297a1d64',1,'env.c']]],
+  ['lenv_5fdef_1',['lenv_def',['../common_8h.html#a5aed6188f6ab1f859afec97887e005b7',1,'env.c']]],
+  ['lenv_5fdel_2',['lenv_del',['../common_8h.html#a1070e40e77795793a1ae39226de4b94a',1,'env.c']]],
+  ['lenv_5fget_3',['lenv_get',['../common_8h.html#a4891ab126b7cc84d7190e201e852c687',1,'env.c']]],
+  ['lenv_5fnew_4',['lenv_new',['../common_8h.html#af3e25accaf4d84e9c3d2fa72ccfe5cb3',1,'env.c']]],
+  ['lenv_5fput_5',['lenv_put',['../common_8h.html#a920fddf059168923fb3ee9b2695c1686',1,'env.c']]],
+  ['lval_5fadd_6',['lval_add',['../common_8h.html#a3fa181cb063e603b67eaea243b8f20b3',1,'values.c']]],
+  ['lval_5fcall_7',['lval_call',['../common_8h.html#ac5ca3ce4ead7abbbf133cef22e0e703c',1,'values.c']]],
+  ['lval_5fcopy_8',['lval_copy',['../common_8h.html#a428595b3c81fa24a19d8bb7c9f3a7c63',1,'values.c']]],
+  ['lval_5fdec_9',['lval_dec',['../common_8h.html#ae76b2ad4b671e5a044518d0ba5524616',1,'values.c']]],
+  ['lval_5fdel_10',['lval_del',['../common_8h.html#affcacd53fa4f60cb6132bc34bd3bcc9e',1,'values.c']]],
+  ['lval_5feq_11',['lval_eq',['../common_8h.html#a1548d95541e8d0ca241d3720dd7324cb',1,'values.c']]],
+  ['lval_5ferr_12',['lval_err',['../common_8h.html#a8948ac2f47e6d29894f135aeaead227a',1,'values.c']]],
+  ['lval_5ffn_13',['lval_fn',['../common_8h.html#a9f64cc5fe33b9b9a5f25c4400d33e009',1,'values.c']]],
+  ['lval_5fjoin_14',['lval_join',['../common_8h.html#ab25f0e3236cca2127ded2c89b823893e',1,'values.c']]],
+  ['lval_5flambda_15',['lval_lambda',['../common_8h.html#ab1d3edcfbb6845ae9cb911d8ecdc7fad',1,'values.c']]],
+  ['lval_5fnum_16',['lval_num',['../common_8h.html#ae25dce2491f988d8c2e3e42213a70eda',1,'values.c']]],
+  ['lval_5fpop_17',['lval_pop',['../common_8h.html#a060fb30807a10066bf94bdfc35e9c252',1,'values.c']]],
+  ['lval_5fqexpr_18',['lval_qexpr',['../common_8h.html#af2634a77289fda684f9fc1806418bff0',1,'values.c']]],
+  ['lval_5fsexpr_19',['lval_sexpr',['../common_8h.html#ae0c4b5d63c28689c69636af53a2e4221',1,'values.c']]],
+  ['lval_5fstr_20',['lval_str',['../common_8h.html#ae2467304e919348e4797626133646631',1,'values.c']]],
+  ['lval_5fsym_21',['lval_sym',['../common_8h.html#a13075389187d0c715b972f210026f453',1,'values.c']]],
+  ['lval_5ftake_22',['lval_take',['../common_8h.html#ada9b08d70a9d4f4fa2b67f1d385a8e20',1,'values.c']]]
 ];

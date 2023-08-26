@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['parse_5fargs_0',['parse_args',['../main_8c.html#a1265b5fcd95aa90525ccd721723f91c1',1,'main.c']]],
-  ['prepare_5flogfile_1',['prepare_logfile',['../main_8c.html#aadcdb38d3064679ab74180a4629d969c',1,'main.c']]],
-  ['print_5flogs_2',['print_logs',['../main_8c.html#acc0e8215964fc15509f3ca72c8d98b6b',1,'main.c']]]
+  ['main_0',['main',['../main_8c.html#a217dbf8b442f20279ea00b898af96f52',1,'main.c']]],
+  ['main_2ec_1',['main.c',['../main_8c.html',1,'']]],
+  ['malloc_2',['MALLOC',['../common_8h.html#a3078f3c259e2a871314e3e0194896357',1,'common.h']]]
 ];

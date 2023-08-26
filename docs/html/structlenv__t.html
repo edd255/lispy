@@ -92,28 +92,39 @@ $(document).ready(function(){initNavTree('structlenv__t.html',''); initResizable
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structlenv__t-members.html">List of all members</a>  </div>
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle"><div class="title">lenv_t Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A structure that contains data and metadata about used environments.  
+ <a href="structlenv__t.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="common_8h_source.html">common.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+Data Fields</h2></td></tr>
 <tr class="memitem:aaf49bc5a68bf694faebd339d16c05704"><td class="memItemLeft" align="right" valign="top"><a id="aaf49bc5a68bf694faebd339d16c05704" name="aaf49bc5a68bf694faebd339d16c05704"></a>
 <a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent</b></td></tr>
+<tr class="memdesc:aaf49bc5a68bf694faebd339d16c05704"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the parent environment. <br /></td></tr>
 <tr class="separator:aaf49bc5a68bf694faebd339d16c05704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad85e469cc1649a592b615412103824fe"><td class="memItemLeft" align="right" valign="top"><a id="ad85e469cc1649a592b615412103824fe" name="ad85e469cc1649a592b615412103824fe"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>count</b></td></tr>
+<tr class="memdesc:ad85e469cc1649a592b615412103824fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of symbols in the environment. <br /></td></tr>
 <tr class="separator:ad85e469cc1649a592b615412103824fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6479758a464397574a045b77b41470b3"><td class="memItemLeft" align="right" valign="top"><a id="a6479758a464397574a045b77b41470b3" name="a6479758a464397574a045b77b41470b3"></a>
 char **&#160;</td><td class="memItemRight" valign="bottom"><b>syms</b></td></tr>
+<tr class="memdesc:a6479758a464397574a045b77b41470b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the symbols. <br /></td></tr>
 <tr class="separator:a6479758a464397574a045b77b41470b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa65c2c13055031ec073c85991654f255"><td class="memItemLeft" align="right" valign="top"><a id="aa65c2c13055031ec073c85991654f255" name="aa65c2c13055031ec073c85991654f255"></a>
 <a class="el" href="structlval__t.html">lval_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>vals</b></td></tr>
+<tr class="memdesc:aa65c2c13055031ec073c85991654f255"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the values. <br /></td></tr>
 <tr class="separator:aa65c2c13055031ec073c85991654f255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A structure that contains data and metadata about used environments. </p>
+<p>The env_t struct encodes a list of relationships between symbols (names) and values. This is implemented by using two lists of equal length, where each entry in one list has a corresponding entry in the other list at the same position. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="common_8h_source.html">common.h</a></li>
 </ul>
 </div><!-- contents -->
@@ -122,7 +133,7 @@ char **&#160;</td><td class="memItemRight" valign="bottom"><b>syms</b></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structlenv__t.html">lenv_t</a></li>
-    <li class="footer">Generated on Sat Aug 26 2023 13:57:53 for lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Aug 26 2023 15:53:09 for lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

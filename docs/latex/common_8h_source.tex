@@ -1,132 +1,167 @@
 \doxysection{common.\+h}
 \hypertarget{common_8h_source}{}\label{common_8h_source}\index{src/common.h@{src/common.h}}
-
+\mbox{\hyperlink{common_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ LISPY\_COMMON\_H}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ LISPY\_COMMON\_H}}
+\DoxyCodeLine{00001\ }
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <assert.h>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string.h>}}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}utils/alloc.h"{}}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}utils/errors.h"{}}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{comment}{//===\ DECLARATIONS\ =============================================================}}
-\DoxyCodeLine{00016\ \textcolor{comment}{//-\/-\/-\/\ Structs\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00017\ \textcolor{comment}{/*\ Value\ Struct\ */}}
-\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}};}
-\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \mbox{\hyperlink{structlval__t}{lval\_t}};}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{comment}{/*\ Environment\ Struct\ */}}
-\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}};}
-\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \mbox{\hyperlink{structlenv__t}{lenv\_t}};}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ LISPY\_COMMON\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ LISPY\_COMMON\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}utils/alloc.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}utils/errors.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//===\ DECLARATIONS\ =============================================================}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//-\/-\/-\/\ Structs\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00023\ \textcolor{comment}{}\textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}};}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{comment}{/*\ Builtin\ Struct\ */}}
-\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ (*lbuiltin\_t)(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*);}
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \mbox{\hyperlink{structlval__t}{lval\_t}};}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00029\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_num(\textcolor{keywordtype}{long}\ x);}
-\DoxyCodeLine{00030\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_dec(\textcolor{keywordtype}{double}\ x);}
-\DoxyCodeLine{00031\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_err(\textcolor{keywordtype}{char}*\ fmt,\ ...);}
-\DoxyCodeLine{00032\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_sym(\textcolor{keywordtype}{char}*\ str);}
-\DoxyCodeLine{00033\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_sexpr(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00034\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_qexpr(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00035\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_fn(lbuiltin\_t\ fn);}
-\DoxyCodeLine{00036\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_lambda(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ formals,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ body);}
-\DoxyCodeLine{00037\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_str(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00040\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_copy(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
-\DoxyCodeLine{00041\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_add(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ x);}
-\DoxyCodeLine{00042\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_join(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ x,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ y);}
-\DoxyCodeLine{00043\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_pop(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{int}\ idx);}
-\DoxyCodeLine{00044\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_take(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{int}\ idx);}
-\DoxyCodeLine{00045\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_call(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ fn,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ a);}
-\DoxyCodeLine{00046\ \textcolor{keywordtype}{int}\ lval\_eq(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ y);}
-\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ lval\_del(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00050\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ lenv\_new(\textcolor{keywordtype}{void});}
-\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ lenv\_del(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \mbox{\hyperlink{structlenv__t}{lenv\_t}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ (*lbuiltin\_t)(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/\ Type\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00044\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlval__t_a2c0bd8c005493a4af164a0ba8da3b514}{type}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/\ Basic\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00048\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structlval__t_a5c0c66219f00c006607afd3291f389cd}{num}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structlval__t_ac5ca32de0193fb1cabec4a483db04cf2}{dec}};}
 \DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00054\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lenv\_get(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key);}
-\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ lenv\_put(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
-\DoxyCodeLine{00056\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ lenv\_copy(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
-\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ lenv\_def(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structlval__t_a409c993597657ae29b862c851c30257f}{err}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structlval__t_ab81f6c077b0b5083f8ae2fdc0834c753}{sym}};}
 \DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \textcolor{comment}{//===\ STRUCTS\ ==================================================================}}
-\DoxyCodeLine{00060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlval__t}{lval\_t}}\ \{}
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Type}}
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{int}\ type;}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//\ Basic}}
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{long}\ num;}
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{double}\ dec;}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{char}*\ err;}
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{char}*\ sym;}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{char}*\ str;}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ Function}}
-\DoxyCodeLine{00072\ \ \ \ \ lbuiltin\_t\ builtin;}
-\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env;}
-\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ formals;}
-\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ body;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structlval__t_adfeaf11648b10794aa44bb246c465d0c}{str}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/\ Function\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00064\ \textcolor{comment}{}\ \ \ \ \mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\_t}}\ \mbox{\hyperlink{structlval__t_ac8f1505cbb3177459fdd0f7c9a16ae9e}{builtin}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ \mbox{\hyperlink{structlval__t_af979706beafa540d8e534f4dfdaad6ea}{env}};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{structlval__t_a276d8c0d4a7a004ff2ba1d1c23c1ccdc}{formals}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{structlval__t_a722ca712a3aa2f19044bbdbc06e4fb6a}{body}};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/\ Expression\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
 \DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Expression}}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
-\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ cell;}
-\DoxyCodeLine{00080\ \};}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \{}
-\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ parent;}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ count;}
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{char}**\ syms;}
-\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ vals;}
-\DoxyCodeLine{00087\ \};}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \textcolor{comment}{//===\ ENUMS\ ====================================================================}}
-\DoxyCodeLine{00090\ \textcolor{comment}{/*\ Create\ enumeration\ of\ possible\ error\ types\ */}}
-\DoxyCodeLine{00091\ \textcolor{keyword}{enum}\ LERR\ \{\ LERR\_DIV\_ZERO,\ LERR\_BAD\_OP,\ LERR\_BAD\_NUM\ \};}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \textcolor{comment}{/*\ Create\ enumeration\ of\ possible\ lval\_t\ types\ */}}
-\DoxyCodeLine{00094\ \textcolor{keyword}{enum}\ LVAL\ \{}
-\DoxyCodeLine{00095\ \ \ \ \ LVAL\_ERR,}
-\DoxyCodeLine{00096\ \ \ \ \ LVAL\_NUM,}
-\DoxyCodeLine{00097\ \ \ \ \ LVAL\_DEC,}
-\DoxyCodeLine{00098\ \ \ \ \ LVAL\_SYM,}
-\DoxyCodeLine{00099\ \ \ \ \ LVAL\_STR,}
-\DoxyCodeLine{00100\ \ \ \ \ LVAL\_SEXPR,}
-\DoxyCodeLine{00101\ \ \ \ \ LVAL\_QEXPR,}
-\DoxyCodeLine{00102\ \ \ \ \ LVAL\_FN}
-\DoxyCodeLine{00103\ \};}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00105\ \textcolor{keywordtype}{void}*\ log\_malloc(\textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line);}
-\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}*\ log\_realloc(}
-\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}*\ old\_ptr,}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size,}
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,}
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{int}\ line}
-\DoxyCodeLine{00112\ );}
-\DoxyCodeLine{00113\ \textcolor{keywordtype}{void}\ log\_free(\textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fn,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlval__t_a753aea46633e5436b9672224c7351f4b}{count}};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ \mbox{\hyperlink{structlval__t_aedbf17bf20f5f6596368b83b53801ae6}{cell}};}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlenv__t}{lenv\_t}}\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ \mbox{\hyperlink{structlenv__t_aaf49bc5a68bf694faebd339d16c05704}{parent}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlenv__t_ad85e469cc1649a592b615412103824fe}{count}};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{char}**\ \mbox{\hyperlink{structlenv__t_a6479758a464397574a045b77b41470b3}{syms}};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}**\ \mbox{\hyperlink{structlenv__t_aa65c2c13055031ec073c85991654f255}{vals}};}
+\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00108\ \textcolor{comment}{}\mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ae25dce2491f988d8c2e3e42213a70eda}{lval\_num}}(\textcolor{keywordtype}{long}\ value);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ae76b2ad4b671e5a044518d0ba5524616}{lval\_dec}}(\textcolor{keywordtype}{double}\ value);}
 \DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#ifdef\ LOG\_ALLOCS}}
-\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ log\_malloc((size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ \(\backslash\)}}
-\DoxyCodeLine{00118\ \textcolor{preprocessor}{\ \ \ \ log\_realloc((old\_ptr),\ (size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ log\_free((ptr),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
-\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ \ \ \ \ \ \ \ \ \ \ malloc((size))}}
-\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ realloc((old\_ptr),\ (size))}}
-\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ free((ptr))}}
-\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00119\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a8948ac2f47e6d29894f135aeaead227a}{lval\_err}}(\textcolor{keywordtype}{char}*\ fmt,\ ...);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00124\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a13075389187d0c715b972f210026f453}{lval\_sym}}(\textcolor{keywordtype}{char}*\ str);}
 \DoxyCodeLine{00125\ }
-\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00128\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ae0c4b5d63c28689c69636af53a2e4221}{lval\_sexpr}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00132\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_af2634a77289fda684f9fc1806418bff0}{lval\_qexpr}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a9f64cc5fe33b9b9a5f25c4400d33e009}{lval\_fn}}(\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\_t}}\ fn);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00143\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ab1d3edcfbb6845ae9cb911d8ecdc7fad}{lval\_lambda}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ formals,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ body);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00148\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ae2467304e919348e4797626133646631}{lval\_str}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Values\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00156\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a428595b3c81fa24a19d8bb7c9f3a7c63}{lval\_copy}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ self);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00163\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a3fa181cb063e603b67eaea243b8f20b3}{lval\_add}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ self,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ other);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00172\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ab25f0e3236cca2127ded2c89b823893e}{lval\_join}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ self,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ other);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00181\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a060fb30807a10066bf94bdfc35e9c252}{lval\_pop}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ self,\ \textcolor{keywordtype}{int}\ idx);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00188\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ada9b08d70a9d4f4fa2b67f1d385a8e20}{lval\_take}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ self,\ \textcolor{keywordtype}{int}\ idx);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00196\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_ac5ca3ce4ead7abbbf133cef22e0e703c}{lval\_call}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ fn,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ args);}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00202\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{common_8h_a1548d95541e8d0ca241d3720dd7324cb}{lval\_eq}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ self,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ other);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{common_8h_affcacd53fa4f60cb6132bc34bd3bcc9e}{lval\_del}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ self);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \textcolor{comment}{//-\/-\/-\/\ Constructors\ \&\ Destructors\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00212\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ \mbox{\hyperlink{common_8h_af3e25accaf4d84e9c3d2fa72ccfe5cb3}{lenv\_new}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00216\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{common_8h_a1070e40e77795793a1ae39226de4b94a}{lenv\_del}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{comment}{//-\/-\/-\/\ Methods\ for\ Environments\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00224\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{common_8h_a4891ab126b7cc84d7190e201e852c687}{lenv\_get}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00230\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{common_8h_a920fddf059168923fb3ee9b2695c1686}{lenv\_put}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00235\ \mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ \mbox{\hyperlink{common_8h_a453f4c4bad69b5ffa58a346c297a1d64}{lenv\_copy}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env);}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00245\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{common_8h_a5aed6188f6ab1f859afec97887e005b7}{lenv\_def}}(\mbox{\hyperlink{structlenv__t}{lenv\_t}}*\ env,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \textcolor{comment}{//===\ ENUMS\ ====================================================================}}
+\DoxyCodeLine{00249\ \textcolor{comment}{}\textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796}{LERR}}\ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796a6f2c94413559c57850dff1acbb4658a3}{LERR\_DIV\_ZERO}},}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796acbcee93d8d1cf874109b55afb6051bf5}{LERR\_BAD\_OP}},}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{common_8h_aae9c106c458911827e30b5201c853796af775561c8c50e3604b92a7eaf83a0ca7}{LERR\_BAD\_NUM}}}
+\DoxyCodeLine{00258\ \};}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00261\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987}{LVAL}}\ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ac49d9d90346db367a5cc7d41fc3e96de}{LVAL\_ERR}},}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ab35c0943cdcccef1d462ab32805312f0}{LVAL\_NUM}},}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa141a0d8d67b3d3f6fb457f2aa62c5f5}{LVAL\_DEC}},}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987ad0fa5fcc75ab7f7d2b4c6c56f99f0255}{LVAL\_SYM}},}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a958df1f92c8383ea80adf71cb927f7c2}{LVAL\_STR}},}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987af2f7103b35ede0874e71ce1ce7a08b05}{LVAL\_SEXPR}},}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987aa5378ae131d88f9c6c624ac6db45d995}{LVAL\_QEXPR}},}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00284\ \ \ \ \ \mbox{\hyperlink{common_8h_a584807b84eccc03737c36c4f9ecef987a141072b9fba1ef30a411348b8ec10e0e}{LVAL\_FN}}}
+\DoxyCodeLine{00285\ \};}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#ifdef\ LOG\_ALLOCS}}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ log\_malloc((size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ \(\backslash\)}}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\ \ \ \ log\_realloc((old\_ptr),\ (size),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ log\_free((ptr),\ \_\_func\_\_,\ \_\_FILE\_\_,\ \_\_LINE\_\_)}}
+\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#define\ MALLOC(size)\ \ \ \ \ \ \ \ \ \ \ malloc((size))}}
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#define\ REALLOC(old\_ptr,\ size)\ realloc((old\_ptr),\ (size))}}
+\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#define\ FREE(ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ free((ptr))}}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

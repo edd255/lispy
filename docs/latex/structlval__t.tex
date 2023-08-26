@@ -1,46 +1,60 @@
 \doxysection{lval\+\_\+t Struct Reference}
 \hypertarget{structlval__t}{}\label{structlval__t}\index{lval\_t@{lval\_t}}
-\doxysubsubsection*{Public Attributes}
+
+
+A data structure that contains Lispy values.  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{structlval__t_a2c0bd8c005493a4af164a0ba8da3b514}\label{structlval__t_a2c0bd8c005493a4af164a0ba8da3b514} 
 int {\bfseries type}
-\item 
+\begin{DoxyCompactList}\small\item\em The type of the value. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_a5c0c66219f00c006607afd3291f389cd}\label{structlval__t_a5c0c66219f00c006607afd3291f389cd} 
 long {\bfseries num}
-\item 
+\begin{DoxyCompactList}\small\item\em The integer value, stored as long. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_ac5ca32de0193fb1cabec4a483db04cf2}\label{structlval__t_ac5ca32de0193fb1cabec4a483db04cf2} 
 double {\bfseries dec}
-\item 
+\begin{DoxyCompactList}\small\item\em The decimal value, stored as double. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_a409c993597657ae29b862c851c30257f}\label{structlval__t_a409c993597657ae29b862c851c30257f} 
 char \texorpdfstring{$\ast$}{*} {\bfseries err}
-\item 
+\begin{DoxyCompactList}\small\item\em The string for Lispy errors. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_ab81f6c077b0b5083f8ae2fdc0834c753}\label{structlval__t_ab81f6c077b0b5083f8ae2fdc0834c753} 
 char \texorpdfstring{$\ast$}{*} {\bfseries sym}
-\item 
+\begin{DoxyCompactList}\small\item\em Symbol types have somge string data, too. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_adfeaf11648b10794aa44bb246c465d0c}\label{structlval__t_adfeaf11648b10794aa44bb246c465d0c} 
 char \texorpdfstring{$\ast$}{*} {\bfseries str}
-\item 
+\begin{DoxyCompactList}\small\item\em The string value for Lispy strings. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_ac8f1505cbb3177459fdd0f7c9a16ae9e}\label{structlval__t_ac8f1505cbb3177459fdd0f7c9a16ae9e} 
-lbuiltin\+\_\+t {\bfseries builtin}
-\item 
+\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}} {\bfseries builtin}
+\begin{DoxyCompactList}\small\item\em A pointer to the function. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_af979706beafa540d8e534f4dfdaad6ea}\label{structlval__t_af979706beafa540d8e534f4dfdaad6ea} 
 \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries env}
-\item 
+\begin{DoxyCompactList}\small\item\em The environment of the function. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_a276d8c0d4a7a004ff2ba1d1c23c1ccdc}\label{structlval__t_a276d8c0d4a7a004ff2ba1d1c23c1ccdc} 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries formals}
-\item 
+\begin{DoxyCompactList}\small\item\em The formal arguments. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_a722ca712a3aa2f19044bbdbc06e4fb6a}\label{structlval__t_a722ca712a3aa2f19044bbdbc06e4fb6a} 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} {\bfseries body}
-\item 
+\begin{DoxyCompactList}\small\item\em The body of the function. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_a753aea46633e5436b9672224c7351f4b}\label{structlval__t_a753aea46633e5436b9672224c7351f4b} 
 int {\bfseries count}
-\item 
+\begin{DoxyCompactList}\small\item\em The number of values in the list. \end{DoxyCompactList}\item 
 \Hypertarget{structlval__t_aedbf17bf20f5f6596368b83b53801ae6}\label{structlval__t_aedbf17bf20f5f6596368b83b53801ae6} 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries cell}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A pointer to the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+A data structure that contains Lispy values. 
+
+The data structure contains the type and the associated numeric, string, functional or expressional value. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/common.\+h\end{DoxyCompactItemize}
+src/\mbox{\hyperlink{common_8h}{common.\+h}}\end{DoxyCompactItemize}
