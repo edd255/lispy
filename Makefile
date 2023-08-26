@@ -57,17 +57,17 @@ $(BUILD_DIR)/%.prof.o: src/%.c
 
 profiling: $(BIN)_profiling
 
-#---- DOCUMENTATION ------------------------------------------------------------
-
-docs:
-	$(Q)echo "====> Creating the documentation..."
-	$(Q)doxygen > logs/doxygen.log
-
 #---- CLEANING -----------------------------------------------------------------
 
 clean:
 	$(Q)echo "====> Cleaning..."
 	$(Q)$(RM) --recursive $(BUILD_DIR) || true
+
+#---- DOCUMENTATION ------------------------------------------------------------
+
+docs:
+	$(Q)echo "====> Creating the documentation..."
+	$(Q)doxygen > logs/doxygen.log
 
 #---- STYLE --------------------------------------------------------------------
 
