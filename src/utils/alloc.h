@@ -14,6 +14,7 @@
 /// @param fn The caller of the function
 /// @param file The file in which the calling function resides
 /// @param line The line in which the calling function resides
+/// @return A pointer to the allocated memory region
 void* log_malloc(size_t size, const char* fn, const char* file, int line);
 
 /// @brief Reallocates memory and logs function, file, line, old and new pointer.
@@ -22,6 +23,7 @@ void* log_malloc(size_t size, const char* fn, const char* file, int line);
 /// @param fn The caller of the function
 /// @param file The file in which the calling function resides
 /// @param line The line in which the calling function resides
+/// @return A pointer to the allocated memory region
 void* log_realloc(
     void* old_ptr,
     size_t size,
