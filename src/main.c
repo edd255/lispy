@@ -282,17 +282,20 @@ lenv_t* set_env(void) {
 /// This function sets up the log-file in the XDG cache directory if the
 /// directory exists.
 ///
-/// \todo Make the function portable, and choose an alternative directory in
-/// case XDG_CACHE_HOME does not exist.
+/// \todo Make the function portable.
 ///
 /// @return A pointer to the log file.
 FILE* prepare_logfile(void) {
     FILE* log = NULL;
     char* cache_dir = getenv("XDG_CACHE_HOME");
     if (NULL == cache_dir) {
-        free(cache_dir);
-        log_debug("XDG_CACHE_HOME not set");
-        return NULL;
+        char* tmp_dir = "/tmp/";
+        char* log_file = malloc(strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1);
+        strcpy(log_file, tmp_dir);
+        strcat(log_file, "/lispy/lispy.log");
+        log = fopen(log_file, "we");
+        free(log_file);
+        return log;
     }
     char* log_file = malloc(strlen(cache_dir) + strlen("/lispy/lispy.log") + 1);
     strcpy(log_file, cache_dir);
