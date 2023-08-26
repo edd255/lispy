@@ -290,7 +290,8 @@ FILE* prepare_logfile(void) {
     char* cache_dir = getenv("XDG_CACHE_HOME");
     if (NULL == cache_dir) {
         char* tmp_dir = "/tmp";
-        char* log_file = malloc(strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1);
+        char* log_file =
+            malloc(strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1);
         strcpy(log_file, tmp_dir);
         strcat(log_file, "/lispy/lispy.log");
         log = fopen(log_file, "we");

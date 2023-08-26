@@ -1,7 +1,6 @@
 /// @file eval.h
-/// 
+///
 /// @brief This file contains the methods which evaluate values in environments.
-
 
 #pragma once
 
