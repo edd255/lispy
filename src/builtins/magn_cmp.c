@@ -10,8 +10,8 @@ lval_t* builtin_ord(lenv_t* env, lval_t* args, char* op) {
     assert(NULL != op);
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
-    LCHECK_TYPE(op, args, 0, LVAL_NUM);
-    LCHECK_TYPE(op, args, 1, LVAL_NUM);
+    LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
 
     int r = 0;
     if (0 == strcmp(op, ">")) {

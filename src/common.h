@@ -246,42 +246,42 @@ void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val);
 
 //=== ENUMS ====================================================================
 /// An enumeration of possible error types
-enum LERR {
+enum LISPY_ERR {
     /// Division by Zero
-    LERR_DIV_ZERO,
+    LISPY_ERR_DIV_BY_ZERO,
 
     /// Bad operator
-    LERR_BAD_OP,
+    LISPY_ERR_BAD_OP,
 
     /// Bad number
-    LERR_BAD_NUM
+    LISPY_ERR_BAD_NUM
 };
 
 /// Enumeration of possible Lispy value types
-enum LVAL {
+enum LISPY_VAL {
     /// Error type
-    LVAL_ERR,
+    LISPY_VAL_ERR,
 
     /// Integer number
-    LVAL_NUM,
+    LISPY_VAL_NUM,
 
     /// Decimal number
-    LVAL_DEC,
+    LISPY_VAL_DEC,
 
     /// Symbol
-    LVAL_SYM,
+    LISPY_VAL_SYM,
 
     /// String
-    LVAL_STR,
+    LISPY_VAL_STR,
 
     /// Symbol expression
-    LVAL_SEXPR,
+    LISPY_VAL_SEXPR,
 
     /// Quoted expression
-    LVAL_QEXPR,
+    LISPY_VAL_QEXPR,
 
     /// Function
-    LVAL_FN
+    LISPY_VAL_FN
 };
 
 #endif

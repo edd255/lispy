@@ -9,7 +9,7 @@ lval_t* builtin_list(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
 
-    args->type = LVAL_QEXPR;
+    args->type = LISPY_VAL_QEXPR;
     return args;
 }
 
@@ -18,11 +18,11 @@ lval_t* builtin_head(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     LCHECK_NOT_EMPTY(__func__, args, 0);
 
     switch (args->cell[0]->type) {
-        case LVAL_QEXPR: {
+        case LISPY_VAL_QEXPR: {
             // Take the first argument
             lval_t* v = lval_take(args, 0);
 
@@ -32,7 +32,7 @@ lval_t* builtin_head(lenv_t* env, lval_t* args) {
             }
             return v;
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             const char letter[2] = {(args->cell[0]->str)[0], '\0'};
             lval_del(args);
             return lval_str(letter);
@@ -49,11 +49,11 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPES(__func__, args, 0, LVAL_QEXPR, LVAL_STR);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     LCHECK_NOT_EMPTY(__func__, args, 0);
 
     switch (args->cell[0]->type) {
-        case LVAL_QEXPR: {
+        case LISPY_VAL_QEXPR: {
             // Take first argument
             lval_t* v = lval_take(args, 0);
 
@@ -63,7 +63,7 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
             lval_del(y);
             return v;
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             char* str = (args->cell[0]->str);
             if (NULL == str || '\0' == str[0] || '\0' == str[1]) {
                 lval_del(args);
@@ -93,10 +93,10 @@ lval_t* builtin_eval(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
 
     lval_t* x = lval_take(args, 0);
-    x->type = LVAL_SEXPR;
+    x->type = LISPY_VAL_SEXPR;
     return lval_eval(env, x);
 }
 
@@ -106,7 +106,7 @@ lval_t* builtin_join(lenv_t* env, lval_t* args) {
     UNUSED(env);
 
     for (int i = 0; i < args->count; i++) {
-        LCHECK_TYPES(__func__, args, i, LVAL_QEXPR, LVAL_STR);
+        LCHECK_TYPES(__func__, args, i, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     }
     lval_t* x = lval_pop(args, 0);
     assert(NULL != x);
@@ -121,11 +121,11 @@ lval_t* builtin_cons(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM("cons", args, 2);
-    LCHECK_TYPE("cons", args, 0, LVAL_QEXPR);
+    LCHECK_TYPE("cons", args, 0, LISPY_VAL_QEXPR);
     UNUSED(env);
 
     lval_t* x = lval_qexpr();
-    if (LVAL_QEXPR != args->cell[0]->type) {
+    if (LISPY_VAL_QEXPR != args->cell[0]->type) {
         x = lval_add(x, lval_pop(args, 0));
     } else {
         x = lval_pop(args, 0);
@@ -138,7 +138,7 @@ lval_t* builtin_len(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     UNUSED(env);
     lval_t* num = lval_num(args->cell[0]->count);
     lval_del(args);
@@ -149,7 +149,7 @@ lval_t* builtin_pack(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
 
-    LCHECK_TYPE(__func__, args, 0, LVAL_FN);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     lval_t* eval = lval_sexpr();
     lval_add(eval, lval_pop(args, 0));
     lval_t* packed = lval_qexpr();
@@ -166,8 +166,8 @@ lval_t* builtin_unpack(lenv_t* env, lval_t* args) {
     assert(NULL != args);
 
     LCHECK_NUM(__func__, args, 2);
-    LCHECK_TYPE(__func__, args, 0, LVAL_FN);
-    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     LCHECK_NOT_EMPTY(__func__, args, 1);
 
     lval_t* eval = lval_sexpr();

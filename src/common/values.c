@@ -7,21 +7,21 @@
 /* Create a new number type lval_t */
 lval_t* lval_num(long value) {
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_NUM;
+    self->type = LISPY_VAL_NUM;
     self->num = value;
     return self;
 }
 
 lval_t* lval_dec(double value) {
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_DEC;
+    self->type = LISPY_VAL_DEC;
     self->dec = value;
     return self;
 }
 
 lval_t* lval_err(char* fmt, ...) {
     lval_t* val = MALLOC(sizeof(lval_t));
-    val->type = LVAL_ERR;
+    val->type = LISPY_VAL_ERR;
 
     // Create a va list and initialize it
     va_list arg_list;
@@ -45,7 +45,7 @@ lval_t* lval_err(char* fmt, ...) {
 lval_t* lval_sym(char* str) {
     assert(NULL != str);
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_SYM;
+    self->type = LISPY_VAL_SYM;
     self->sym = MALLOC(strlen(str) + 1);
     strcpy(self->sym, str);
     return self;
@@ -53,7 +53,7 @@ lval_t* lval_sym(char* str) {
 
 lval_t* lval_sexpr(void) {
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_SEXPR;
+    self->type = LISPY_VAL_SEXPR;
     self->count = 0;
     self->cell = NULL;
     return self;
@@ -61,7 +61,7 @@ lval_t* lval_sexpr(void) {
 
 lval_t* lval_qexpr(void) {
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_QEXPR;
+    self->type = LISPY_VAL_QEXPR;
     self->count = 0;
     self->cell = NULL;
     return self;
@@ -70,7 +70,7 @@ lval_t* lval_qexpr(void) {
 lval_t* lval_fn(lbuiltin_t fn) {
     assert(NULL != fn);
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_FN;
+    self->type = LISPY_VAL_FN;
     self->builtin = fn;
     return self;
 }
@@ -80,7 +80,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     assert(NULL != body);
 
     lval_t* val = MALLOC(sizeof(lval_t));
-    val->type = LVAL_FN;
+    val->type = LISPY_VAL_FN;
 
     // Set builtin to NULL
     val->builtin = NULL;
@@ -97,7 +97,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
 lval_t* lval_str(const char* str) {
     assert(NULL != str);
     lval_t* self = MALLOC(sizeof(lval_t));
-    self->type = LVAL_STR;
+    self->type = LISPY_VAL_STR;
     self->str = MALLOC(strlen(str) + 1);
     strcpy(self->str, str);
     return self;
@@ -112,7 +112,7 @@ lval_t* lval_copy(const lval_t* self) {
     x->type = self->type;
     switch (self->type) {
         // Copy Functions and Numbers Directly
-        case LVAL_FN: {
+        case LISPY_VAL_FN: {
             if (self->builtin) {
                 x->builtin = self->builtin;
             } else {
@@ -123,33 +123,33 @@ lval_t* lval_copy(const lval_t* self) {
             }
             break;
         }
-        case LVAL_NUM: {
+        case LISPY_VAL_NUM: {
             x->num = self->num;
             break;
         }
-        case LVAL_DEC: {
+        case LISPY_VAL_DEC: {
             x->dec = self->dec;
             break;
         }
         // Copy Strings using malloc and strcpy
-        case LVAL_ERR: {
+        case LISPY_VAL_ERR: {
             x->err = MALLOC(strlen(self->err) + 1);
             strcpy(x->err, self->err);
             break;
         }
-        case LVAL_SYM: {
+        case LISPY_VAL_SYM: {
             x->sym = MALLOC(strlen(self->sym) + 1);
             strcpy(x->sym, self->sym);
             break;
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             x->str = MALLOC(strlen(self->str) + 1);
             strcpy(x->str, self->str);
             break;
         }
         // Copy Lists by copying each sub-expression
-        case LVAL_SEXPR:
-        case LVAL_QEXPR:
+        case LISPY_VAL_SEXPR:
+        case LISPY_VAL_QEXPR:
             x->count = self->count;
             x->cell = MALLOC(sizeof(lval_t*) * x->count);
             for (int i = 0; i < x->count; i++) {
@@ -323,33 +323,33 @@ int lval_eq(const lval_t* self, const lval_t* other) {
     // Compare based upon type
     switch (self->type) {
         // Compare number value
-        case LVAL_NUM: {
+        case LISPY_VAL_NUM: {
             return (self->num == other->num);
         }
-        case LVAL_DEC: {
+        case LISPY_VAL_DEC: {
             return (self->dec == other->dec);
         }
         // Compare string values
-        case LVAL_ERR: {
+        case LISPY_VAL_ERR: {
             return 0 == strcmp(self->err, other->err);
         }
-        case LVAL_SYM: {
+        case LISPY_VAL_SYM: {
             return 0 == strcmp(self->sym, other->sym);
         }
         // If builtin compare, otherwise compare formals and body
-        case LVAL_FN: {
+        case LISPY_VAL_FN: {
             if (self->builtin || other->builtin) {
                 return self->builtin == other->builtin;
             }
             return lval_eq(self->formals, other->formals)
                 && lval_eq(self->body, other->body);
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             return 0 == strcmp(self->str, other->str);
         }
         // If list compare every individual element
-        case LVAL_QEXPR:
-        case LVAL_SEXPR: {
+        case LISPY_VAL_QEXPR:
+        case LISPY_VAL_SEXPR: {
             if (self->count != other->count) {
                 return 0;
             }
@@ -373,25 +373,25 @@ void lval_del(lval_t* self) {
     }
     switch (self->type) {
         // Do nothing special for number type
-        case LVAL_NUM: {
+        case LISPY_VAL_NUM: {
             break;
         }
         // For Errors or Symbols free the string data
-        case LVAL_ERR: {
+        case LISPY_VAL_ERR: {
             if (NULL == self->err) {
                 break;
             }
             FREE(self->err);
             break;
         }
-        case LVAL_SYM: {
+        case LISPY_VAL_SYM: {
             if (NULL == self->sym) {
                 break;
             }
             FREE(self->sym);
             break;
         }
-        case LVAL_FN: {
+        case LISPY_VAL_FN: {
             if (!(self->builtin)) {
                 lenv_del(self->env);
                 lval_del(self->formals);
@@ -399,7 +399,7 @@ void lval_del(lval_t* self) {
             }
             break;
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             if (NULL == self->str) {
                 break;
             }
@@ -407,8 +407,8 @@ void lval_del(lval_t* self) {
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
-        case LVAL_QEXPR:
-        case LVAL_SEXPR: {
+        case LISPY_VAL_QEXPR:
+        case LISPY_VAL_SEXPR: {
             for (int i = 0; i < self->count; i++) {
                 lval_del(self->cell[i]);
             }

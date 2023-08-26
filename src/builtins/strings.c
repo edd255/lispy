@@ -9,7 +9,7 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPE(__func__, args, 0, LVAL_STR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
 
     // Parse file given by string name
     mpc_result_t parse_result;
@@ -26,7 +26,7 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
             lval_t* x = lval_eval(env, lval_pop(expr, 0));
 
             // If evaluation leads to error print it
-            if (LVAL_ERR == x->type) {
+            if (LISPY_VAL_ERR == x->type) {
                 lval_println(x);
             }
             lval_del(x);
@@ -71,7 +71,7 @@ lval_t* builtin_error(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPE(__func__, args, 0, LVAL_STR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
 
     // Construct error from first argument
     lval_t* err = lval_err(args->cell[0]->str);

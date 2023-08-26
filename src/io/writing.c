@@ -10,23 +10,23 @@ void lval_print(lval_t* val) {
         return;
     }
     switch (val->type) {
-        case LVAL_NUM: {
+        case LISPY_VAL_NUM: {
             printf("%li", val->num);
             break;
         }
-        case LVAL_DEC: {
+        case LISPY_VAL_DEC: {
             printf("%f", val->dec);
             break;
         }
-        case LVAL_ERR: {
+        case LISPY_VAL_ERR: {
             printf("Error: %s", val->err);
             break;
         }
-        case LVAL_SYM: {
+        case LISPY_VAL_SYM: {
             printf("%s", val->sym);
             break;
         }
-        case LVAL_FN: {
+        case LISPY_VAL_FN: {
             if (val->builtin) {
                 printf("<builtin>");
             } else {
@@ -38,15 +38,15 @@ void lval_print(lval_t* val) {
             }
             break;
         }
-        case LVAL_STR: {
+        case LISPY_VAL_STR: {
             lval_print_str(val);
             break;
         }
-        case LVAL_SEXPR: {
+        case LISPY_VAL_SEXPR: {
             lval_print_expr(val, '(', ')');
             break;
         }
-        case LVAL_QEXPR: {
+        case LISPY_VAL_QEXPR: {
             lval_print_expr(val, '{', '}');
             break;
         }
@@ -97,23 +97,23 @@ void lval_print_str(const lval_t* val) {
     FREE(escaped);
 }
 
-char* ltype_name(enum LVAL type) {
+char* ltype_name(enum LISPY_VAL type) {
     switch (type) {
-        case LVAL_FN:
+        case LISPY_VAL_FN:
             return "Function";
-        case LVAL_NUM:
+        case LISPY_VAL_NUM:
             return "Number";
-        case LVAL_DEC:
+        case LISPY_VAL_DEC:
             return "Decimal";
-        case LVAL_ERR:
+        case LISPY_VAL_ERR:
             return "Error";
-        case LVAL_SYM:
+        case LISPY_VAL_SYM:
             return "Symbol";
-        case LVAL_STR:
+        case LISPY_VAL_STR:
             return "String";
-        case LVAL_SEXPR:
+        case LISPY_VAL_SEXPR:
             return "S-Expression";
-        case LVAL_QEXPR:
+        case LISPY_VAL_QEXPR:
             return "Q-Expression";
         default:
             return "Unknown";

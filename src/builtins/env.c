@@ -3,15 +3,16 @@
 #include "builtins/list.h"
 #include "io.h"
 
-lval_t* builtin_env(lenv_t* env, lval_t* a) {
+lval_t* builtin_env(lenv_t* env, lval_t* args) {
     assert(NULL != env);
-    assert(NULL != a);
+    assert(NULL != args);
     lval_t* x = lval_qexpr();
     for (int i = 0; i < env->count; i++) {
         lval_t* y = lval_sym(env->syms[i]);
+        assert(NULL != y);
         x = lval_add(x, y);
     }
-    lval_del(a);
+    lval_del(args);
     return x;
 }
 
@@ -19,8 +20,8 @@ lval_t* builtin_fun(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 2);
-    LCHECK_TYPE(__func__, args, 0, LVAL_QEXPR);
-    LCHECK_TYPE(__func__, args, 1, LVAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     LCHECK_NOT_EMPTY(__func__, args, 0);
     LCHECK_NOT_EMPTY(__func__, args, 1);
 
