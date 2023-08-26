@@ -1,9 +1,14 @@
+/// @file errors.h
+/// @brief This file contains macros to check runtime assertions and do runtime
+/// error reporting
+
 #pragma once
 
 #ifndef LISPY_UTILS_ERRORS_H
 #define LISPY_UTILS_ERRORS_H
 
 //=== ERRORS ===================================================================
+/// @brief Macro to check an assertion and report errors during runtime
 #define LCHECK(args, cond, fmt, ...) \
     if (!(cond)) { \
         lval_t* err = lval_err(fmt, ##__VA_ARGS__); \
@@ -11,13 +16,7 @@
         return err; \
     }
 
-#define LCHECKS(args, cond1, cond2, fmt, ...) \
-    if (!((cond1) || (cond2))) { \
-        lval_t* err = lval_err((fmt), ##__VA_ARGS__); \
-        lval_del(args); \
-        return err; \
-    }
-
+/// @brief Macro to check types and report errors during runtime
 #define LCHECK_TYPE(fn, args, idx, expect) \
     LCHECK( \
         (args), \
@@ -29,11 +28,12 @@
         ltype_name(expect) \
     )
 
+/// @brief Macro to check two assertion and report errors during runtime
 #define LCHECK_TYPES(fn, args, idx, expect1, expect2) \
-    LCHECKS( \
+    LCHECK( \
         (args), \
-        (args)->cell[idx]->type == ((expect1)), \
-        (args)->cell[idx]->type == ((expect2)), \
+        ((args)->cell[idx]->type == ((expect1)) \
+         || (args)->cell[idx]->type == ((expect2))), \
         "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.", \
         (fn), \
         (idx), \
@@ -42,6 +42,8 @@
         ltype_name(expect2) \
     )
 
+/// @brief Macro to check whether a function passed the correct number of
+/// arguments
 #define LCHECK_NUM(fn, args, num) \
     LCHECK( \
         (args), \
@@ -52,6 +54,7 @@
         (num) \
     )
 
+/// @brief Macro to check whether an expression is empty and report it as error
 #define LCHECK_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
@@ -61,6 +64,7 @@
         (idx) \
     )
 
+/// @brief Macro to avoid compiler warnings about unused variables
 #define UNUSED(x) (void)(x)
 
 #endif
