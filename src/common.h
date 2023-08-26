@@ -284,21 +284,4 @@ enum LVAL {
     LVAL_FN
 };
 
-#ifdef LOG_ALLOCS
-/// malloc with additional debug logging
-#define MALLOC(size) log_malloc((size), __func__, __FILE__, __LINE__)
-/// realloc with additional debug logging
-#define REALLOC(old_ptr, size) \
-    log_realloc((old_ptr), (size), __func__, __FILE__, __LINE__)
-/// free with additional debug logging
-#define FREE(ptr) log_free((ptr), __func__, __FILE__, __LINE__)
-#else
-/// malloc without logging the procedure
-#define MALLOC(size)           malloc((size))
-/// realloc without logging the procedure
-#define REALLOC(old_ptr, size) realloc((old_ptr), (size))
-/// free without logging the procedure
-#define FREE(ptr)              free((ptr))
-#endif
-
 #endif
