@@ -1,3 +1,8 @@
+/// @file eval.h
+/// 
+/// @brief This file contains the methods which evaluate values in environments.
+
+
 #pragma once
 
 #ifndef LISPY_EVAL_H
