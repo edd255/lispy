@@ -1,14 +1,28 @@
+#--- PROJECT INFO --------------------------------------------------------------
 PROJECT_NAME           = lispy
-OUTPUT_DIRECTORY       = docs
+
+#--- INPUT & OUTPUT ------------------------------------------------------------
 INPUT                  = src
+OUTPUT_DIRECTORY       = docs
 RECURSIVE              = YES
+
+#--- TEMPLATE ------------------------------------------------------------------
 GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
 HTML_EXTRA_STYLESHEET  = /usr/local/share/doxygen-awesome-css/doxygen-awesome.css \
                          /usr/local/share/doxygen-awesome-css/doxygen-awesome-sidebar-only.css
 HTML_COLORSTYLE        = LIGHT
-OPTIMIZE_OUTPUT_C      = YES
 TIMESTAMP              = DATETIME
+
+#--- LANGUAGE SETTINGS ---------------------------------------------------------
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXCLUDE_SYMBOLS        = *_H
+EXTENSION_MAPPING      = h=C
+
+#--- WARNINGS ------------------------------------------------------------------
+QUIET                  = YES
 WARN_NO_PARAMDOC       = YES
 WARN_IF_UNDOC_ENUM_VAL = YES
+WARN_LOGFILE           = logs/doxygen.log
+WARN_IF_UNDOCUMENTED   = YES
