@@ -67,7 +67,7 @@ clean:
 
 docs:
 	$(Q)echo "====> Creating the documentation..."
-	$(Q)doxygen > logs/doxygen.log
+	$(Q)doxygen
 
 #---- STYLE --------------------------------------------------------------------
 

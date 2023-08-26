@@ -8,16 +8,17 @@ lval_t* lval_eval(lenv_t* env, lval_t* val) {
     assert(NULL != env);
     assert(NULL != val);
 
+    // Evaluate symbols
     if (LVAL_SYM == val->type) {
         lval_t* x = lenv_get(env, val);
         lval_del(val);
         return x;
     }
-    // Evaluate Sexpressions
+    // Evaluate symbolic expressions
     if (LVAL_SEXPR == val->type) {
         return lval_eval_sexpr(env, val);
     }
-    // All other lval_t types remain the same
+    // All other types remain the same
     return val;
 }
 
