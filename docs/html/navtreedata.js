@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "lispy", "index.html", [
+  [ "Lispy", "index.html", [
     [ "Lispy Interpreter", "index.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Data Structures", "annotated.html", [
