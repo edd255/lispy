@@ -105,8 +105,8 @@ int main(int argc, const char** argv) {
     if (0 == no_stdlib) {
         std = get_stdlib(env);
     }
-    if (NULL != file) {
-        file_interpreter(env, file);
+    if (NULL != filename) {
+        file_interpreter(env, filename);
     } else {
         cli_interpreter(env);
     }
