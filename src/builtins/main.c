@@ -64,6 +64,7 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_const(env, "nil", lval_qexpr());
     lenv_add_builtin_const(env, "true", lval_num(1));
     lenv_add_builtin_const(env, "false", lval_num(0));
+    lenv_add_builtin_const(env, "otherwise", lval_num(1));
 }
 
 void lenv_add_builtin_fn(lenv_t* env, char* name, lbuiltin_t fn) {
