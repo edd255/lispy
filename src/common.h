@@ -17,6 +17,8 @@
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
+#define BUFSIZE (512)
+
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------
 /// A data structure that contains Lispy values.
