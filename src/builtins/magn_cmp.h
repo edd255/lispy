@@ -1,4 +1,4 @@
-/// @file eq_cmp.h
+/// @file magn_cmp.h
 /// @brief This file contains all builtin magnitude comparison methods.
 
 #pragma once

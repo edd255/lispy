@@ -1,4 +1,4 @@
-/// @file eq_cmp.h
+/// @file list.h
 /// @brief This file contains all builtin list methods.
 
 #pragma once

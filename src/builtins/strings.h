@@ -1,4 +1,4 @@
-/// @file eq_cmp.h
+/// @file strings.h
 /// @brief This file contains all builtin string methods.
 
 #pragma once
