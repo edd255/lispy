@@ -18,7 +18,7 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
         // Read contents
         assert(NULL != parse_result.output);
         lval_t* expr = lval_read(parse_result.output);
-        assert(expr != NULL);
+        assert(NULL != expr);
         mpc_ast_delete(parse_result.output);
 
         // Evaluate each expression
