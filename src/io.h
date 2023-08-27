@@ -1,3 +1,7 @@
+/// @file io.h
+///
+/// This file contains main methods for reading/parsing and writing Lispy values.
+
 #pragma once
 
 #ifndef LISPY_IO_H
