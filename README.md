@@ -15,15 +15,15 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Using a logger
 - [X] Fixing memory bugs
 - [X] Fixed my implementation of join, map, split, take, unpack
-- [X] Adding tests
+- [X] Adding tests (to some extent)
 - [X] Added support for string for join, head, tail
 - [X] Adding builtin logical and list operators
 - [X] Adding builtin fun operators
 - [X] Writing a function that prints all out named values in an environment
+- [X] Documenting the code (to some extent)
 
 ## TODO
 However, I'm far from finished.
-- [ ] Documenting the code
 - [ ] Implementing a builtin function read that reads in and converts a string to a Q-expression
 - [ ] Adding functions to wrap all of C's file handling functions such as fopen and fgets
 - [ ] Creating a builtin function show that can print the contents of strings as it is (unescaped)
