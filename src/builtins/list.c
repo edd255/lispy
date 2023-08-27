@@ -131,8 +131,8 @@ lval_t* builtin_join(lenv_t* env, lval_t* args) {
 lval_t* builtin_cons(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
-    LCHECK_NUM("cons", args, 2);
-    LCHECK_TYPE("cons", args, 0, LISPY_VAL_QEXPR);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     UNUSED(env);
 
     lval_t* x = lval_qexpr();
