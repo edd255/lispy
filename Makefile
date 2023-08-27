@@ -3,12 +3,12 @@ include .config/make/config.mk
 #==== RULES ====================================================================
 #---- RELEASE ------------------------------------------------------------------
 
-$(BIN)_release: $(patsubst src/%.c, build/%.opt.o, $(SRCS))
+$(BIN)_release: $(OPT_OBJS)
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.opt.o: src/%.c
+$(BUILD_DIR)/%.opt.o: %.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
@@ -17,12 +17,12 @@ release: $(BIN)_release
 
 #---- DEBUGGING ----------------------------------------------------------------
 
-$(BIN)_debugging: $(patsubst src/%.c, build/%.dbg.o, $(SRCS)) 
+$(BIN)_debugging: $(DBG_OBJS) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.dbg.o: src/%.c
+$(BUILD_DIR)/%.dbg.o: %.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
@@ -31,12 +31,12 @@ debugging: $(BIN)_debugging
 
 #---- SANITIZED ----------------------------------------------------------------
 
-$(BIN)_sanitized: $(patsubst src/%.c, build/%.san.o, $(SRCS)) 
+$(BIN)_sanitized: $(SAN_OBJS) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.san.o: src/%.c
+$(BUILD_DIR)/%.san.o: %.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
@@ -45,12 +45,12 @@ sanitized: $(BIN)_sanitized
 
 #---- PROFILING ----------------------------------------------------------------
 
-$(BIN)_profiling: $(patsubst src/%.c, build/%.prof.o, $(SRCS)) 
+$(BIN)_profiling: $(PROF_OBJS) 
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(PROFILING) $+ -o $@ $(LDFLAGS) -pg
 
-$(BUILD_DIR)/%.prof.o: src/%.c
+$(BUILD_DIR)/%.prof.o: %.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(PROFILING) $(CFLAGS) -c $< -o $@
