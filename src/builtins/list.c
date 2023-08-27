@@ -73,7 +73,7 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
                 );
             }
             size_t new_length = strlen(str) - 1;
-            char* tail_str = malloc(new_length + 1);
+            char* tail_str = MALLOC(new_length + 1);
             strcpy(tail_str, str + 1);
             lval_t* tail = lval_str(tail_str);
             free(tail_str);
@@ -135,14 +135,15 @@ lval_t* builtin_cons(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     UNUSED(env);
 
-    lval_t* x = lval_qexpr();
     if (LISPY_VAL_QEXPR != args->cell[0]->type) {
-        x = lval_add(x, lval_pop(args, 0));
+        lval_t* x = lval_add(lval_qexpr(), lval_pop(args, 0));
+        x = lval_join(x, lval_take(args, 0));
+        return x;
     } else {
-        x = lval_pop(args, 0);
+        lval_t* x = lval_pop(args, 0);
+        x = lval_join(x, lval_take(args, 0));
+        return x;
     }
-    x = lval_join(x, lval_take(args, 0));
-    return x;
 }
 
 lval_t* builtin_len(lenv_t* env, lval_t* args) {
