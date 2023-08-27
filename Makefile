@@ -61,7 +61,7 @@ profiling: $(BIN)_profiling
 
 clean:
 	$(Q)echo "====> Cleaning..."
-	$(Q)$(RM) --recursive $(BUILD_DIR) || true
+	$(Q)$(RM) --recursive --force $(BUILD_DIR)/$(SRC_DIR)
 
 #---- DOCUMENTATION ------------------------------------------------------------
 
