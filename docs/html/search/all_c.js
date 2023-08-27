@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['parent_0',['parent',['../structlenv__t.html#aaf49bc5a68bf694faebd339d16c05704',1,'lenv_t']]],
-  ['parse_5fargs_1',['parse_args',['../main_8c.html#a1265b5fcd95aa90525ccd721723f91c1',1,'main.c']]],
-  ['power_5flong_2',['power_long',['../helpers_8h.html#a21aabcef9dfc36d3d2305a36b42de5a7',1,'helpers.c']]],
-  ['prepare_5flogfile_3',['prepare_logfile',['../main_8c.html#aadcdb38d3064679ab74180a4629d969c',1,'main.c']]],
-  ['print_5flogs_4',['print_logs',['../main_8c.html#acc0e8215964fc15509f3ca72c8d98b6b',1,'main.c']]]
+  ['no_5fstdlib_0',['no_stdlib',['../main_8c.html#ac5eb6eef7255a3857a377bb13960165a',1,'main.c']]],
+  ['num_1',['num',['../structlval__t.html#a5c0c66219f00c006607afd3291f389cd',1,'lval_t']]],
+  ['number_2',['number',['../main_8c.html#aabf9c9a486893212e85d686799df2932',1,'main.c']]],
+  ['number_5fof_5farithm_5fops_3',['NUMBER_OF_ARITHM_OPS',['../helpers_8h.html#af96916f3c8cc148711a1bf53b7093a89',1,'helpers.h']]],
+  ['number_5fof_5flogic_5fops_4',['NUMBER_OF_LOGIC_OPS',['../helpers_8h.html#abde856ee671f91482f5853d3e4f9b4ef',1,'helpers.h']]]
 ];

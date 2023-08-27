@@ -1,33 +1,35 @@
 \doxysection{io.\+h}
 \hypertarget{io_8h_source}{}\label{io_8h_source}\index{src/io.h@{src/io.h}}
-
+\mbox{\hyperlink{io_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ LISPY\_IO\_H}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ LISPY\_IO\_H}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}deps/mpc/mpc.h"{}}}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{comment}{//===\ WRITING\ ==================================================================}}
-\DoxyCodeLine{00012\ \textcolor{comment}{}\textcolor{keywordtype}{void}\ lval\_print(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ lval\_print\_expr(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{char}\ open,\ \textcolor{keywordtype}{char}\ close);}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ lval\_println(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ LISPY\_IO\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ LISPY\_IO\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}deps/mpc/mpc.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//===\ WRITING\ ==================================================================}}
+\DoxyCodeLine{00016\ \textcolor{comment}{}\textcolor{keywordtype}{void}\ \mbox{\hyperlink{io_8h_a0209ced65626403d8c97a10296c88c35}{lval\_print}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{io_8h_acead0b76ec6c9c4e16eb98405eb8936b}{lval\_print\_expr}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val,\ \textcolor{keywordtype}{char}\ open,\ \textcolor{keywordtype}{char}\ close);}
 \DoxyCodeLine{00023\ }
-\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ lval\_print\_str(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{io_8h_aa5040fd173ed9aefdb4bec0ffeb05f7b}{lval\_println}}(\mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00031\ \textcolor{keywordtype}{char}*\ ltype\_name(\textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\_VAL}}\ type);}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{comment}{//===\ READING\ ==================================================================}}
-\DoxyCodeLine{00037\ \textcolor{comment}{}\mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_read\_num(\textcolor{keyword}{const}\ mpc\_ast\_t*\ tree);}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00042\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_read(mpc\_ast\_t*\ tree);}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00047\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ lval\_read\_str(mpc\_ast\_t*\ tree);}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{io_8h_adfa12182db8340ee1988c9bdf8534d21}{lval\_print\_str}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ val);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{io_8h_a636418c06a046f467cd1c1cc461ad19d}{ltype\_name}}(\textcolor{keyword}{enum}\ \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\_VAL}}\ type);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{comment}{//===\ READING\ ==================================================================}}
+\DoxyCodeLine{00041\ \textcolor{comment}{}\mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{io_8h_adec12d8a0815dc77fa0a8780b8c3ef55}{lval\_read\_num}}(\textcolor{keyword}{const}\ mpc\_ast\_t*\ tree);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{io_8h_a7bb3b8f14fd37ca17fd71820dc153cc6}{lval\_read}}(mpc\_ast\_t*\ tree);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ \mbox{\hyperlink{io_8h_a9c1b3c7224b6b546ac64a55b2279ac7b}{lval\_read\_str}}(mpc\_ast\_t*\ tree);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
