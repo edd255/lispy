@@ -1,0 +1,85 @@
+\doxysection{src/builtins/strings.h File Reference}
+\hypertarget{strings_8h}{}\label{strings_8h}\index{src/builtins/strings.h@{src/builtins/strings.h}}
+
+
+This file contains all builtin string methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{strings_8h_a47d7c5b57a206e4308048df3360636eb}{builtin\+\_\+load}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Loads the content of a file when given the name of the file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{strings_8h_aaafa7a1cbe46465a3114338a7167b8be}{builtin\+\_\+print}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Prints a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{strings_8h_afc79cd4f6adf2e392579252f5a33a61f}{builtin\+\_\+error}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Constructs an error from the first argument. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin string methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{strings_8h_afc79cd4f6adf2e392579252f5a33a61f}\label{strings_8h_afc79cd4f6adf2e392579252f5a33a61f} 
+\index{strings.h@{strings.h}!builtin\_error@{builtin\_error}}
+\index{builtin\_error@{builtin\_error}!strings.h@{strings.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_error()}{builtin\_error()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Constructs an error from the first argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The used environment \\
+\hline
+{\em args} & The error to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An Lispy value that represents the error 
+\end{DoxyReturn}
+\Hypertarget{strings_8h_a47d7c5b57a206e4308048df3360636eb}\label{strings_8h_a47d7c5b57a206e4308048df3360636eb} 
+\index{strings.h@{strings.h}!builtin\_load@{builtin\_load}}
+\index{builtin\_load@{builtin\_load}!strings.h@{strings.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_load()}{builtin\_load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Loads the content of a file when given the name of the file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment to load the content in \\
+\hline
+{\em args} & The file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An empty list or an error if it fails 
+\end{DoxyReturn}
+\Hypertarget{strings_8h_aaafa7a1cbe46465a3114338a7167b8be}\label{strings_8h_aaafa7a1cbe46465a3114338a7167b8be} 
+\index{strings.h@{strings.h}!builtin\_print@{builtin\_print}}
+\index{builtin\_print@{builtin\_print}!strings.h@{strings.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_print()}{builtin\_print()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Prints a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The used environment \\
+\hline
+{\em args} & The arguments to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An empty symbolic expression 
+\end{DoxyReturn}

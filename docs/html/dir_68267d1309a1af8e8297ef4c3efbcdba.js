@@ -7,5 +7,5 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "eval.h", "eval_8h.html", "eval_8h" ],
     [ "io.h", "io_8h.html", "io_8h" ],
     [ "main.c", "main_8c.html", "main_8c" ],
-    [ "main.h", "main_8h_source.html", null ]
+    [ "main.h", "main_8h.html", "main_8h" ]
 ];

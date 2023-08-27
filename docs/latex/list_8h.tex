@@ -1,0 +1,223 @@
+\doxysection{src/builtins/list.h File Reference}
+\hypertarget{list_8h}{}\label{list_8h}\index{src/builtins/list.h@{src/builtins/list.h}}
+
+
+This file contains all builtin list methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad84560815b65cb42f45f3ab8615252dd}{builtin\+\_\+list}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes a quoted expression containing the arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a15737f64eba6006e7e636c1d2c1c69ed}{builtin\+\_\+head}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes the head of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a0c718446878069eb87cef4208d032e50}{builtin\+\_\+tail}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes the tail of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a917b114e551a2a650f24b283b0d3d0ab}{builtin\+\_\+eval}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Evaluates a quoted expression. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ab73a5212ed790048ee4311b191376173}{builtin\+\_\+join}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Joins two quoted expressions/two strings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_aa1c7a9f0d82393536ba9404cc12c93be}{builtin\+\_\+cons}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Appends a value to the front of a quoted expression. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a812c1dd7c6785868671eab5e465cc7d8}{builtin\+\_\+len}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes the length of the quoted expression/string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a82fbe755c307f2454755b4dcce1de673}{builtin\+\_\+pack}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Applies a function to a variable number of arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_af693588e2c80ae046141d7d778085956}{builtin\+\_\+unpack}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Applies a function to a list of arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin list methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{list_8h_aa1c7a9f0d82393536ba9404cc12c93be}\label{list_8h_aa1c7a9f0d82393536ba9404cc12c93be} 
+\index{list.h@{list.h}!builtin\_cons@{builtin\_cons}}
+\index{builtin\_cons@{builtin\_cons}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_cons()}{builtin\_cons()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+cons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Appends a value to the front of a quoted expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting quoted expression 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a917b114e551a2a650f24b283b0d3d0ab}\label{list_8h_a917b114e551a2a650f24b283b0d3d0ab} 
+\index{list.h@{list.h}!builtin\_eval@{builtin\_eval}}
+\index{builtin\_eval@{builtin\_eval}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_eval()}{builtin\_eval()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Evaluates a quoted expression. 
+
+Expects that the first argument of the quoted expression is a function, and the residuals are arguments to this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the evaluation 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a15737f64eba6006e7e636c1d2c1c69ed}\label{list_8h_a15737f64eba6006e7e636c1d2c1c69ed} 
+\index{list.h@{list.h}!builtin\_head@{builtin\_head}}
+\index{builtin\_head@{builtin\_head}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_head()}{builtin\_head()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+head (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes the head of a list or string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The list/string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Head of the list/string 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ab73a5212ed790048ee4311b191376173}\label{list_8h_ab73a5212ed790048ee4311b191376173} 
+\index{list.h@{list.h}!builtin\_join@{builtin\_join}}
+\index{builtin\_join@{builtin\_join}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_join()}{builtin\_join()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Joins two quoted expressions/two strings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A quoted expression/string that represents the join 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a812c1dd7c6785868671eab5e465cc7d8}\label{list_8h_a812c1dd7c6785868671eab5e465cc7d8} 
+\index{list.h@{list.h}!builtin\_len@{builtin\_len}}
+\index{builtin\_len@{builtin\_len}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_len()}{builtin\_len()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+len (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes the length of the quoted expression/string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The length of the quoted expression/string 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ad84560815b65cb42f45f3ab8615252dd}\label{list_8h_ad84560815b65cb42f45f3ab8615252dd} 
+\index{list.h@{list.h}!builtin\_list@{builtin\_list}}
+\index{builtin\_list@{builtin\_list}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_list()}{builtin\_list()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+list (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes a quoted expression containing the arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a quoted expression which contains the arguments 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a82fbe755c307f2454755b4dcce1de673}\label{list_8h_a82fbe755c307f2454755b4dcce1de673} 
+\index{list.h@{list.h}!builtin\_pack@{builtin\_pack}}
+\index{builtin\_pack@{builtin\_pack}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_pack()}{builtin\_pack()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+pack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Applies a function to a variable number of arguments. 
+
+Expects that the first argument is a function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the evaluation. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a0c718446878069eb87cef4208d032e50}\label{list_8h_a0c718446878069eb87cef4208d032e50} 
+\index{list.h@{list.h}!builtin\_tail@{builtin\_tail}}
+\index{builtin\_tail@{builtin\_tail}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_tail()}{builtin\_tail()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+tail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes the tail of a list or string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The list/string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tail of the list/string 
+\end{DoxyReturn}
+\Hypertarget{list_8h_af693588e2c80ae046141d7d778085956}\label{list_8h_af693588e2c80ae046141d7d778085956} 
+\index{list.h@{list.h}!builtin\_unpack@{builtin\_unpack}}
+\index{builtin\_unpack@{builtin\_unpack}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_unpack()}{builtin\_unpack()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+unpack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Applies a function to a list of arguments. 
+
+Expects that the first argument is a function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the evaluation. 
+\end{DoxyReturn}

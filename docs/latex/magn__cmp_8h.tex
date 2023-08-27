@@ -1,0 +1,119 @@
+\doxysection{src/builtins/magn\+\_\+cmp.h File Reference}
+\hypertarget{magn__cmp_8h}{}\label{magn__cmp_8h}\index{src/builtins/magn\_cmp.h@{src/builtins/magn\_cmp.h}}
+
+
+This file contains all builtin magnitude comparison methods.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{magn__cmp_8h_a22d6901cb75c2910806c49ed7ed9da46}{builtin\+\_\+ord}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}op)
+\begin{DoxyCompactList}\small\item\em The main function of this module which does the actual computation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{magn__cmp_8h_ad4d9508f3ac9d6d438e5787a9f21cd98}{builtin\+\_\+gt}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Compares two argument using greater-\/than. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{magn__cmp_8h_ab70fab0879fe251068d0fabea063af58}{builtin\+\_\+lt}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{magn__cmp_8h_a549e6e59ebe57fd36a981a26a2b6d866}{builtin\+\_\+ge}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{magn__cmp_8h_a0fec5a9667d4b1ff7367bf3ba8348de5}{builtin\+\_\+le}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all builtin magnitude comparison methods. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{magn__cmp_8h_a549e6e59ebe57fd36a981a26a2b6d866}\label{magn__cmp_8h_a549e6e59ebe57fd36a981a26a2b6d866} 
+\index{magn\_cmp.h@{magn\_cmp.h}!builtin\_ge@{builtin\_ge}}
+\index{builtin\_ge@{builtin\_ge}!magn\_cmp.h@{magn\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_ge()}{builtin\_ge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+ge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment to use \\
+\hline
+{\em args} & The arguments to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a if a \texorpdfstring{$>$}{>} b else b 
+\end{DoxyReturn}
+\Hypertarget{magn__cmp_8h_ad4d9508f3ac9d6d438e5787a9f21cd98}\label{magn__cmp_8h_ad4d9508f3ac9d6d438e5787a9f21cd98} 
+\index{magn\_cmp.h@{magn\_cmp.h}!builtin\_gt@{builtin\_gt}}
+\index{builtin\_gt@{builtin\_gt}!magn\_cmp.h@{magn\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_gt()}{builtin\_gt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+gt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Compares two argument using greater-\/than. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment to use \\
+\hline
+{\em args} & The arguments to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a if a \texorpdfstring{$>$}{>}= b else b 
+\end{DoxyReturn}
+\Hypertarget{magn__cmp_8h_a0fec5a9667d4b1ff7367bf3ba8348de5}\label{magn__cmp_8h_a0fec5a9667d4b1ff7367bf3ba8348de5} 
+\index{magn\_cmp.h@{magn\_cmp.h}!builtin\_le@{builtin\_le}}
+\index{builtin\_le@{builtin\_le}!magn\_cmp.h@{magn\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_le()}{builtin\_le()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+le (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment to use \\
+\hline
+{\em args} & The arguments to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a if a \texorpdfstring{$<$}{<} b else b 
+\end{DoxyReturn}
+\Hypertarget{magn__cmp_8h_ab70fab0879fe251068d0fabea063af58}\label{magn__cmp_8h_ab70fab0879fe251068d0fabea063af58} 
+\index{magn\_cmp.h@{magn\_cmp.h}!builtin\_lt@{builtin\_lt}}
+\index{builtin\_lt@{builtin\_lt}!magn\_cmp.h@{magn\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_lt()}{builtin\_lt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+lt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment to use \\
+\hline
+{\em args} & The arguments to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a if a \texorpdfstring{$<$}{<}= b else b 
+\end{DoxyReturn}
+\Hypertarget{magn__cmp_8h_a22d6901cb75c2910806c49ed7ed9da46}\label{magn__cmp_8h_a22d6901cb75c2910806c49ed7ed9da46} 
+\index{magn\_cmp.h@{magn\_cmp.h}!builtin\_ord@{builtin\_ord}}
+\index{builtin\_ord@{builtin\_ord}!magn\_cmp.h@{magn\_cmp.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_ord()}{builtin\_ord()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+ord (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{op }\end{DoxyParamCaption})}
+
+
+
+The main function of this module which does the actual computation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+{\em op} & The operator to apply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of (op args) 
+\end{DoxyReturn}
