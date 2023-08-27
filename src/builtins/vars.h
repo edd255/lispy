@@ -9,28 +9,31 @@
 #include "common.h"
 
 //---- Variable functions ------------------------------------------------------
-/// @brief
-/// @param env
-/// @param args
-/// @return
+/// @brief Defines a function in the local or global environment
+/// @param env The environment to use
+/// @param args The function to define
+/// @return An empty symbolic expression or an error
 lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn);
 
-/// @brief
-/// @param env
-/// @param args
-/// @return
+/// @brief Define a lambda function
+/// @param env The used environment
+/// @param args The formal arguments and the body of the lambda function
+/// @return The specified lambda function
 lval_t* builtin_lambda(lenv_t* env, lval_t* args);
 
-/// @brief
-/// @param env
-/// @param args
-/// @return
+/// @brief Defines a key-value pair globally.
+///
+/// This method calls builtin_var, and then lenv_def internally.
+///
+/// @param env The current environment
+/// @param args The function to define
+/// @return An empty symbolic expression or an error
 lval_t* builtin_def(lenv_t* env, lval_t* args);
 
-/// @brief
-/// @param env
-/// @param args
-/// @return
+/// @brief Define a key-value in an environment
+/// @param env The environment in which we define key and value.
+/// @param args The function to define
+/// @return An empty symbolic expression or an error
 lval_t* builtin_put(lenv_t* env, lval_t* args);
 
 #endif
