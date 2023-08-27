@@ -59,7 +59,7 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
 
             // Delete first element and return
             lval_t* y = lval_pop(v, 0);
-            assert(y != NULL);
+            assert(NULL != y);
             lval_del(y);
             return v;
         }
