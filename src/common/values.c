@@ -2,6 +2,7 @@
 
 #include "builtins.h"
 #include "common.h"
+#include "io.h"
 
 //=== CONSTRUCTORS =============================================================
 /* Create a new number type lval_t */
@@ -173,13 +174,51 @@ lval_t* lval_add(lval_t* self, lval_t* other) {
 lval_t* lval_join(lval_t* self, lval_t* other) {
     assert(NULL != self);
     assert(NULL != other);
-
-    // For each cell in 'x' add it to 'self'
+    assert(NULL != other->cell);
+    LCHECK(
+        self,
+        (self->type == LISPY_VAL_QEXPR || self->type == LISPY_VAL_STR),
+        "%s expected quoted expression or string but got %s",
+        __func__,
+        ltype_name(self->type)
+    );
+    switch (self->type) {
+        case LISPY_VAL_QEXPR: {
+            LCHECK(
+                self,
+                other->type == LISPY_VAL_QEXPR,
+                "%s expected quoted expression but got %s",
+                __func__,
+                ltype_name(other->type)
+            );
+            break;
+        }
+        case LISPY_VAL_STR: {
+            LCHECK(
+                self,
+                other->type == LISPY_VAL_STR,
+                "%s expected string but got %s",
+                __func__,
+                ltype_name(other->type)
+            );
+            break;
+        }
+    }
+    // For strings
+    if ((self->type == LISPY_VAL_STR) && (other->type == LISPY_VAL_STR)) {
+        char str[BUFSIZE];
+        strcpy(str, self->str);
+        strcat(str, other->str);
+        lval_del(self);
+        lval_del(other);
+        return lval_str(str);
+    }
+    // For each cell in 'other' add it to 'self'
     for (int i = 0; i < other->count; i++) {
         assert(NULL != other->cell[i]);
         self = lval_add(self, other->cell[i]);
     }
-    // Delete the empty 'x' and return 'self'
+    // Delete the empty 'other' and return 'self'
     free(other->cell);
     free(other);
     return self;
@@ -187,6 +226,14 @@ lval_t* lval_join(lval_t* self, lval_t* other) {
 
 lval_t* lval_pop(lval_t* self, const int idx) {
     assert(NULL != self);
+    LCHECK(
+        self,
+        self->count > idx,
+        "%s passed %d as index but list has a length of %d",
+        __func__,
+        idx,
+        self->count
+    );
 
     // Find the item at "i"
     lval_t* value = self->cell[idx];
