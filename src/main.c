@@ -305,8 +305,6 @@ FILE* prepare_logfile(void) {
     return log;
 }
 
-/// @brief Returns the lispy parser.
-/// @return The lispy parser
 mpc_parser_t* get_lispy_parser(void) {
     return lispy;
 }
