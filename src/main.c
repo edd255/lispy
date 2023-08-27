@@ -23,7 +23,6 @@
 #include "io.h"
 
 //=== DECLARATIONS =============================================================
-//--- Functions ----------------------------------------------------------------
 /// @brief The main function of the interpreter
 ///
 /// The main method sets up the logger, the command-line parser and the parser
@@ -35,6 +34,21 @@
 /// @param argv The array containing the command-line arguments.
 /// @return 0 if everything ran without problems
 int main(int argc, const char** argv);
+
+/// @brief Sets up the mpc parser
+///
+/// This function sets up the parser using the mpc library by Daniel Holden. The
+/// variables which contain the rules are documented itself.
+void setup_parser(void);
+
+/// @brief Cleans up the memory used by the interpreter.
+///
+/// This function cleans up the memory used by the parsers, as well as the
+/// standard library if loaded, and the environment.
+///
+/// @param std A pointer to the standard-library (if loaded, else NULL)
+/// @param env A pointer to the used environment
+void cleanup(lval_t* std, lenv_t* e);
 
 /// @brief A REPL for Lispy.
 ///
@@ -58,25 +72,6 @@ void cli_interpreter(lenv_t* e);
 /// @param file The file to interpret
 void file_interpreter(lenv_t* e, const char* file);
 
-/// @brief Sets up the mpc parser
-///
-/// This function sets up the parser using the mpc library by Daniel Holden. The
-/// variables which contain the rules are documented itself.
-void setup_parser(void);
-
-/// @brief Sets up an environment which contains all builtins.
-/// @return An environment which contains all builtin methods
-lenv_t* set_env(void);
-
-/// @brief Cleans up the memory used by the interpreter.
-///
-/// This function cleans up the memory used by the parsers, as well as the
-/// standard library if loaded, and the environment.
-///
-/// @param std A pointer to the standard-library (if loaded, else NULL)
-/// @param env A pointer to the used environment
-void cleanup(lval_t* std, lenv_t* e);
-
 /// @brief Loads the standard library and returns a pointer to it.
 ///
 /// This function loads the standard library and returns a pointer to it. The
@@ -84,7 +79,14 @@ void cleanup(lval_t* std, lenv_t* e);
 ///
 /// @param env The environment into which the standard library should be loaded
 /// @return A pointer to the standard library.
-lval_t* get_stdlib(lenv_t* e);
+lval_t* get_stdlib(lenv_t* env);
+
+/// @brief Sets up an environment which contains all builtins.
+/// @return An environment which contains all builtin methods
+lenv_t* set_env(void);
+
+/// @brief Prints the prompt for the command-line interpreter.
+void print_prompt(void);
 
 /// @brief Sets up the command-line argument parser.
 ///
@@ -147,7 +149,6 @@ static const char* const usages[] = {
 };
 
 //=== MAIN METHOD ==============================================================
-
 int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
     FILE* log_file = NULL;
@@ -274,6 +275,10 @@ lenv_t* set_env(void) {
     lenv_t* env = lenv_new();
     lenv_add_builtins(env);
     return env;
+}
+
+void print_prompt(void) {
+
 }
 
 //--- Command-Line Argument Parser ---------------------------------------------
