@@ -26,6 +26,8 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "len", builtin_len);
     lenv_add_builtin_fn(env, "pack", builtin_pack);
     lenv_add_builtin_fn(env, "unpack", builtin_unpack);
+    lenv_add_builtin_fn(env, "curry", builtin_unpack);
+    lenv_add_builtin_fn(env, "uncurry", builtin_pack);
 
     // Mathematical functions
     lenv_add_builtin_fn(env, "+", builtin_add);
