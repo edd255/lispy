@@ -13,6 +13,7 @@
 /// parser and sets up the command line arguments.
 
 #include <editline/readline.h>
+#include <gnu/libc-version.h>
 
 #include "builtins.h"
 #include "common.h"
@@ -84,6 +85,14 @@ lval_t* get_stdlib(lenv_t* env);
 /// @brief Sets up an environment which contains all builtins.
 /// @return An environment which contains all builtin methods
 lenv_t* set_env(void);
+
+/// @brief Returns the truncated git hash
+/// @return The current truncated git hash
+char* get_git_hash(void);
+
+/// @brief Returns the git branch name
+/// @return The current git branch name
+char* get_git_branch_name(void);
 
 /// @brief Prints the prompt for the command-line interpreter.
 void print_prompt(void);
@@ -224,8 +233,7 @@ mpc_parser_t* get_lispy_parser(void) {
 
 //--- Interpreter --------------------------------------------------------------
 void cli_interpreter(lenv_t* env) {
-    printf("Lispy 0.1\n");
-    printf("Press Ctrl+c or type 'exit' to exit.\n");
+    print_prompt();
     while (true) {
         char* input = readline(">>> ");
         add_history(input);
@@ -277,8 +285,87 @@ lenv_t* set_env(void) {
     return env;
 }
 
-void print_prompt(void) {
+char* get_git_branch_name(void) {
+    char* branch_name = malloc(sizeof(char) * BUFSIZE);
+    FILE* cmd_output = popen("git rev-parse --abbrev-ref HEAD", "r");
+    if (NULL == cmd_output) {
+        perror("popen");
+        return NULL;
+    }
+    if (NULL != fgets(branch_name, sizeof(branch_name), cmd_output)) {
+        size_t len = strlen(branch_name);
+        if (0 < len && '\n' == branch_name[len - 1]) {
+            branch_name[len - 1] = '\0';
+        }
+        return branch_name;
+    }
+    pclose(cmd_output);
+    return NULL;
+}
 
+char* get_git_hash(void) {
+    char* git_hash = malloc(sizeof(char) * BUFSIZE);
+    FILE* cmd_output = popen("git rev-parse HEAD", "r");
+    if (NULL == cmd_output) {
+        perror("popen");
+        return NULL;
+    }
+    if (NULL != fgets(git_hash, sizeof(git_hash), cmd_output)) {
+        size_t len = strlen(git_hash);
+        if (0 < len && '\n' == git_hash[len - 1]) {
+            git_hash[len - 1] = '\0';
+        }
+        if (len >= 7) {
+            git_hash[7] = '\0';
+        }
+        return git_hash;
+    }
+    pclose(cmd_output);
+    return NULL;
+}
+
+void print_prompt(void) {
+    char* branch_name = get_git_branch_name();
+    char* git_hash = get_git_hash();
+#if defined(__GNU__)
+    printf(
+        "Lispy %g (%s %s, %s %s) [GCC %d.%d.%d, libc %s]\n",
+        VERSION,
+        branch_name,
+        git_hash,
+        __DATE__,
+        __TIME__,
+        __GNUC__,
+        __GNUC_MINOR__,
+        __GNUC_PATCHLEVEL__,
+        gnu_get_libc_version()
+    );
+#elif defined(__clang__)
+    printf(
+        "Lispy %g (%s %s, %s %s) [clang %d.%d.%d, libc %s]\n",
+        VERSION,
+        branch_name,
+        git_hash,
+        __DATE__,
+        __TIME__,
+        __clang_major__,
+        __clang_minor__,
+        __clang_patchlevel__,
+        gnu_get_libc_version()
+    );
+#else
+    printf(
+        "Lispy %g (%s %s, %s %s)\n",
+        VERSION,
+        branch_name,
+        git_hash,
+        __DATE__,
+        __TIME__
+    );
+#endif
+    printf("Press Ctrl+c or type 'exit' to exit.\n");
+    free(branch_name);
+    free(git_hash);
 }
 
 //--- Command-Line Argument Parser ---------------------------------------------

@@ -37,8 +37,8 @@ DEPS := $(OBJS:.o=.d)
 #---- FLAGS --------------------------------------------------------------------
 
 INC_FLAGS         := -I. -I$(SRC_DIR)
-LDFLAGS           += -ledit -lm -DLOGC_USE_COLOR
-CFLAGS            := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR
+LDFLAGS           += -ledit -lm -DLOGC_USE_COLOR -DVERSION=$(VERSION)
+CFLAGS            := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR -DVERSION=$(VERSION)
 MAKEFLAGS         := --jobs=$(shell nproc)
 VALGRIND          := --leak-check=full --show-leak-kinds=all --track-origins=yes
 CPPCHECK          := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
