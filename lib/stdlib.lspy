@@ -1,20 +1,10 @@
 ;==== Lispy Standard Library ==================================================
-
-;---- Atoms -------------------------------------------------------------------
-(def {nil} {})
-(def {true} 1)
-(def {false} 0)
-
 ;---- Functional Definitions --------------------------------------------------
 
 ; Open new scope
 (fun {let b} {
   ((\ {_} b) ())
 })
-
-; Curried and Uncurried calling
-(def {curry} unpack)
-(def {uncurry} pack)
 
 ; Perform Several things in Sequence
 (fun {do & l} {
