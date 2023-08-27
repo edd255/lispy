@@ -1,6 +1,5 @@
 /// @file builtins.h
-/// @brief All builtin methods are added to the environment which is loaded at
-/// start.
+/// @brief This file bundles access to all builtin methods.
 
 #pragma once
 
@@ -18,15 +17,5 @@
 #include "builtins/strings.h"
 #include "builtins/vars.h"
 #include "common.h"
-
-/// @brief Adds all builtin methods to the given environment.
-/// @param env The environment where the builtins should be added.
-void lenv_add_builtins(lenv_t* env);
-
-/// @brief A helper function to add builtin methods to the given environment.
-/// @param env The environment where the builtin functions are added.
-/// @param name The names given to the builtin methods
-/// @param fn Pointers to the builtin methods
-void lenv_add_builtin(lenv_t* env, char* name, lbuiltin_t fn);
 
 #endif
