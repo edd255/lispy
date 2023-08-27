@@ -7,7 +7,6 @@
 /// @author edd255
 /// @version 0.1
 
-///
 /// @file main.c
 ///
 /// @brief This file contains the main function which sets up the logger and the
