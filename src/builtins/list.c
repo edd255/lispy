@@ -104,9 +104,20 @@ lval_t* builtin_join(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-
-    for (int i = 0; i < args->count; i++) {
-        LCHECK_TYPES(__func__, args, i, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    switch (args->cell[0]->type) {
+        case LISPY_VAL_QEXPR: {
+            for (int i = 0; i < args->count; i++) {
+                LCHECK_TYPE(__func__, args, i, LISPY_VAL_QEXPR);
+            }
+            break;
+        }
+        case LISPY_VAL_STR: {
+            for (int i = 0; i < args->count; i++) {
+                LCHECK_TYPE(__func__, args, i, LISPY_VAL_STR);
+            }
+            break;
+        }
     }
     lval_t* x = lval_pop(args, 0);
     assert(NULL != x);
@@ -138,9 +149,20 @@ lval_t* builtin_len(lenv_t* env, lval_t* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 1);
-    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     UNUSED(env);
-    lval_t* num = lval_num(args->cell[0]->count);
+    lval_t* num = NULL;
+    switch (args->cell[0]->type) {
+        case LISPY_VAL_QEXPR: {
+            num = lval_num(args->cell[0]->count);
+            break;
+        }
+        case LISPY_VAL_STR: {
+            assert(NULL != args->cell[0]->str);
+            num = lval_num(strlen(args->cell[0]->str));
+            break;
+        }
+    }
     lval_del(args);
     return num;
 }
