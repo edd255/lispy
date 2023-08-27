@@ -9,10 +9,10 @@
 #include "common.h"
 
 //---- String functions --------------------------------------------------------
-/// @brief
-/// @param env
-/// @param args
-/// @return
+/// @brief Loads the content of a file when given the name of the file
+/// @param env The environment to load the content in
+/// @param args The file name
+/// @return An empty list or an error if it fails
 lval_t* builtin_load(lenv_t* env, lval_t* args);
 
 /// @brief Prints a string
