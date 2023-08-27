@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lispy: Globals</title>
+<title>Lispy: src/builtins/atoms.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('globals_type.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('atoms_8h.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,20 +90,40 @@ $(document).ready(function(){initNavTree('globals_type.html',''); initResizable(
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">atoms.h File Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented typedefs with links to the documentation:</div><ul>
-<li>lbuiltin_t&#160;:&#160;<a class="el" href="common_8h.html#a9b47e1b04752a06074ffc0740c018d21">common.h</a></li>
-<li>lenv_t&#160;:&#160;<a class="el" href="common_8h.html#a7fa88502c8f70b507d9a2966e062275f">common.h</a></li>
-<li>lispy_arithm_op_map_t&#160;:&#160;<a class="el" href="helpers_8h.html#a412a154eab6041171a7d863c5e095815">helpers.h</a></li>
-<li>lispy_logic_op_map_t&#160;:&#160;<a class="el" href="helpers_8h.html#a00674620dcb48e616d11514f1a1c275b">helpers.h</a></li>
-<li>lval_t&#160;:&#160;<a class="el" href="common_8h.html#a63ce590ca5f53ca77ead1e12fd2865b0">common.h</a></li>
-</ul>
-</div><!-- contents -->
+
+<p>This file contains all builtin atom methods.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="common_8h_source.html">common.h</a>&quot;</code><br />
+</div>
+<p><a href="atoms_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac827a2f5330c76eddf9b32ab02f8ee3f"><td class="memItemLeft" align="right" valign="top"><a id="ac827a2f5330c76eddf9b32ab02f8ee3f" name="ac827a2f5330c76eddf9b32ab02f8ee3f"></a>
+<a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>builtin_nil</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="separator:ac827a2f5330c76eddf9b32ab02f8ee3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b1cbadcd6e3c2e94454286d2d26e23d"><td class="memItemLeft" align="right" valign="top"><a id="a4b1cbadcd6e3c2e94454286d2d26e23d" name="a4b1cbadcd6e3c2e94454286d2d26e23d"></a>
+<a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>builtin_true</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="separator:a4b1cbadcd6e3c2e94454286d2d26e23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdac6db3b37edf920ce21870b6ff0eb4"><td class="memItemLeft" align="right" valign="top"><a id="acdac6db3b37edf920ce21870b6ff0eb4" name="acdac6db3b37edf920ce21870b6ff0eb4"></a>
+<a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>builtin_false</b> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="separator:acdac6db3b37edf920ce21870b6ff0eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This file contains all builtin atom methods. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Aug 27 2023 22:27:11 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="atoms_8h.html">atoms.h</a></li>
+    <li class="footer">Generated on Sun Aug 27 2023 22:15:29 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

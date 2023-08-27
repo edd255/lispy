@@ -1,0 +1,78 @@
+\doxysection{src/builtins/main.h File Reference}
+\hypertarget{builtins_2main_8h}{}\label{builtins_2main_8h}\index{src/builtins/main.h@{src/builtins/main.h}}
+
+
+All builtin methods are added to the environment which is loaded at start.  
+
+
+{\ttfamily \#include \"{}common.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{builtins_2main_8h_afdf208cb23050963ae7ef2af4a68442d}{lenv\+\_\+add\+\_\+builtins}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+\begin{DoxyCompactList}\small\item\em Adds all builtin methods to the given environment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{builtins_2main_8h_a3c4192d677b9ccc0db00ceef157f865f}{lenv\+\_\+add\+\_\+builtin\+\_\+fn}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}} fn)
+\begin{DoxyCompactList}\small\item\em A helper function to add builtin methods to the given environment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{builtins_2main_8h_a0b94b4f4e2a2d86187b645f4312c0b48}{lenv\+\_\+add\+\_\+builtin\+\_\+const}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, char \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em A helper function to add builtin constants to the given environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+All builtin methods are added to the environment which is loaded at start. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{builtins_2main_8h_a0b94b4f4e2a2d86187b645f4312c0b48}\label{builtins_2main_8h_a0b94b4f4e2a2d86187b645f4312c0b48} 
+\index{main.h@{main.h}!lenv\_add\_builtin\_const@{lenv\_add\_builtin\_const}}
+\index{lenv\_add\_builtin\_const@{lenv\_add\_builtin\_const}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{lenv\_add\_builtin\_const()}{lenv\_add\_builtin\_const()}}
+{\footnotesize\ttfamily void lenv\+\_\+add\+\_\+builtin\+\_\+const (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{value }\end{DoxyParamCaption})}
+
+
+
+A helper function to add builtin constants to the given environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment where the builtin functions are added. \\
+\hline
+{\em name} & The names given to the builtin methods \\
+\hline
+{\em fn} & Pointers to the builtin constant \\
+\hline
+\end{DoxyParams}
+\Hypertarget{builtins_2main_8h_a3c4192d677b9ccc0db00ceef157f865f}\label{builtins_2main_8h_a3c4192d677b9ccc0db00ceef157f865f} 
+\index{main.h@{main.h}!lenv\_add\_builtin\_fn@{lenv\_add\_builtin\_fn}}
+\index{lenv\_add\_builtin\_fn@{lenv\_add\_builtin\_fn}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{lenv\_add\_builtin\_fn()}{lenv\_add\_builtin\_fn()}}
+{\footnotesize\ttfamily void lenv\+\_\+add\+\_\+builtin\+\_\+fn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{char \texorpdfstring{$\ast$}{*}}]{name,  }\item[{\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}}}]{fn }\end{DoxyParamCaption})}
+
+
+
+A helper function to add builtin methods to the given environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment where the builtin functions are added. \\
+\hline
+{\em name} & The names given to the builtin methods \\
+\hline
+{\em fn} & Pointers to the builtin methods \\
+\hline
+\end{DoxyParams}
+\Hypertarget{builtins_2main_8h_afdf208cb23050963ae7ef2af4a68442d}\label{builtins_2main_8h_afdf208cb23050963ae7ef2af4a68442d} 
+\index{main.h@{main.h}!lenv\_add\_builtins@{lenv\_add\_builtins}}
+\index{lenv\_add\_builtins@{lenv\_add\_builtins}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{lenv\_add\_builtins()}{lenv\_add\_builtins()}}
+{\footnotesize\ttfamily void lenv\+\_\+add\+\_\+builtins (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+
+
+
+Adds all builtin methods to the given environment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment where the builtins should be added. \\
+\hline
+\end{DoxyParams}

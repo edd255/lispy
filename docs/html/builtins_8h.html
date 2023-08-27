@@ -91,13 +91,11 @@ $(document).ready(function(){initNavTree('builtins_8h.html',''); initResizable()
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">builtins.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>All builtin methods are added to the environment which is loaded at start.  
+<p>This file bundles access to all builtin methods.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="arithmetic_8h_source.html">builtins/arithmetic.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="conditional_8h_source.html">builtins/conditional.h</a>&quot;</code><br />
@@ -112,96 +110,15 @@ $(document).ready(function(){initNavTree('builtins_8h.html',''); initResizable()
 <code>#include &quot;<a class="el" href="common_8h_source.html">common.h</a>&quot;</code><br />
 </div>
 <p><a href="builtins_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:afdf208cb23050963ae7ef2af4a68442d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8h.html#afdf208cb23050963ae7ef2af4a68442d">lenv_add_builtins</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env)</td></tr>
-<tr class="memdesc:afdf208cb23050963ae7ef2af4a68442d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all builtin methods to the given environment.  <br /></td></tr>
-<tr class="separator:afdf208cb23050963ae7ef2af4a68442d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ff73617d7c9a0db83aacb54baa8716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="builtins_8h.html#af4ff73617d7c9a0db83aacb54baa8716">lenv_add_builtin</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, char *name, <a class="el" href="common_8h.html#a9b47e1b04752a06074ffc0740c018d21">lbuiltin_t</a> fn)</td></tr>
-<tr class="memdesc:af4ff73617d7c9a0db83aacb54baa8716"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper function to add builtin methods to the given environment.  <br /></td></tr>
-<tr class="separator:af4ff73617d7c9a0db83aacb54baa8716"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>All builtin methods are added to the environment which is loaded at start. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="af4ff73617d7c9a0db83aacb54baa8716" name="af4ff73617d7c9a0db83aacb54baa8716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4ff73617d7c9a0db83aacb54baa8716">&#9670;&#160;</a></span>lenv_add_builtin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void lenv_add_builtin </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
-          <td class="paramname"><em>env</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a9b47e1b04752a06074ffc0740c018d21">lbuiltin_t</a>&#160;</td>
-          <td class="paramname"><em>fn</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A helper function to add builtin methods to the given environment. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">env</td><td>The environment where the builtin functions are added. </td></tr>
-    <tr><td class="paramname">name</td><td>The names given to the builtin methods </td></tr>
-    <tr><td class="paramname">fn</td><td>Pointers to the builtin methods </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="afdf208cb23050963ae7ef2af4a68442d" name="afdf208cb23050963ae7ef2af4a68442d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdf208cb23050963ae7ef2af4a68442d">&#9670;&#160;</a></span>lenv_add_builtins()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void lenv_add_builtins </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
-          <td class="paramname"><em>env</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Adds all builtin methods to the given environment. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">env</td><td>The environment where the builtins should be added. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<div class="textblock"><p>This file bundles access to all builtin methods. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="builtins_8h.html">builtins.h</a></li>
-    <li class="footer">Generated on Sun Aug 27 2023 17:12:22 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sun Aug 27 2023 22:27:11 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
