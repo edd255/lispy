@@ -24,6 +24,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 
 ## TODO
 However, I'm far from finished.
+- [ ] Implementing all stdlib methods in C
 - [ ] Implementing a builtin function read that reads in and converts a string to a Q-expression
 - [ ] Adding functions to wrap all of C's file handling functions such as fopen and fgets
 - [ ] Creating a builtin function show that can print the contents of strings as it is (unescaped)
