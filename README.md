@@ -8,7 +8,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Splitted the code into smaller modules
 - [X] Heavily modified the Makefile
 - [X] Added an exit function
-- [X] Including an (optional) standard library
+- [X] Including an (optional) standard library at startup
 - [X] Improving the macros to support printing the C function name
 - [X] Using a sane argument parser
 - [X] Using a logging memory allocator
@@ -24,6 +24,10 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 ## TODO
 However, I'm far from finished.
 - [ ] Documenting the code
+- [ ] Implementing a builtin function read that reads in and converts a string to a Q-expression
+- [ ] Adding functions to wrap all of C's file handling functions such as fopen and fgets
+- [ ] Creating a builtin function show that can print the contents of strings as it is (unescaped)
+- [ ] Define a recursive Lisp function that returns 1 if an element is a member of a list, otherwise 0
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
 - [ ] Implementing static typing
