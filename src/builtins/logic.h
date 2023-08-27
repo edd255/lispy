@@ -1,4 +1,4 @@
-/// @file eq_cmp.h
+/// @file logic.h
 /// @brief This file contains all builtin logic methods.
 
 #pragma once

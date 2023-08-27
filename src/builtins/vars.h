@@ -1,4 +1,4 @@
-/// @file eq_cmp.h
+/// @file vars.h
 /// @brief This file contains all builtin variable methods.
 
 #pragma once
