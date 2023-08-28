@@ -41,13 +41,6 @@
 (fun {snd l} { eval (head (tail l)) })
 (fun {trd l} { eval (head (tail (tail l))) })
 
-; Nth item in List
-(fun {nth n l} {
-  if (== n 0)
-    {fst l}
-    {nth (- n 1) (tail l)}
-})
-
 ; Last item in List
 (fun {last l} {nth (- (len l) 1) l})
 
