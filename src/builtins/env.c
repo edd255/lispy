@@ -22,8 +22,8 @@ lval_t* builtin_fun(lenv_t* env, lval_t* args) {
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
-    LCHECK_NOT_EMPTY(__func__, args, 0);
-    LCHECK_NOT_EMPTY(__func__, args, 1);
+    LCHECK_QEXPR_NOT_EMPTY(__func__, args, 0);
+    LCHECK_QEXPR_NOT_EMPTY(__func__, args, 1);
 
     lval_t* fn_body = lval_pop(args, 1);
     lval_t* fn_args = builtin_tail(env, lval_copy(args));
