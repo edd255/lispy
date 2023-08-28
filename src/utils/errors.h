@@ -42,6 +42,28 @@
         ltype_name(expect2) \
     )
 
+/// @brief Macro to check whether an index is smaller than a list size
+#define LCHECK_IDX_QEXPR(fn, args, cell_idx, idx) \
+    LCHECK( \
+        (args), \
+        (idx < (args->cell[cell_idx]->count)), \
+        "Function '%s' passed index %d but argument has size %d.", \
+        (fn), \
+        (idx), \
+        (args->count) \
+    )
+
+/// @brief Macro to check whether an index is smaller than a string length
+#define LCHECK_IDX_STR(fn, args, cell_idx, idx) \
+    LCHECK( \
+        (args), \
+        ((idx) < strlen(args->cell[cell_idx]->str)), \
+        "Function '%s' passed index %d but argument has size %d.", \
+        (fn), \
+        (idx), \
+        (strlen((args)->cell[(cell_idx)]->str)) \
+    )
+
 /// @brief Macro to check whether a function passed the correct number of
 /// arguments
 #define LCHECK_NUM(fn, args, num) \
