@@ -69,19 +69,30 @@
 #define LCHECK_NUM(fn, args, num) \
     LCHECK( \
         (args), \
-        (args)->count == ((num)), \
+        (num) == (args)->count, \
         "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
         (fn), \
         (args)->count, \
         (num) \
     )
 
-/// @brief Macro to check whether an expression is empty and report it as error
-#define LCHECK_NOT_EMPTY(fn, args, idx) \
+/// @brief Macro to check whether a quoted expression is empty and report it as
+/// error
+#define LCHECK_QEXPR_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
-        (args)->cell[idx]->count != 0, \
-        "Function '%s' passed  for argument %i.", \
+        (0 != (args)->cell[idx]->count), \
+        "Function '%s' passed {} for argument %i.", \
+        (fn), \
+        (idx) \
+    )
+
+/// @brief Macro to check whether a string is empty and report it as error
+#define LCHECK_STR_NOT_EMPTY(fn, args, idx) \
+    LCHECK( \
+        (args), \
+        (0 != strlen(args->cell[idx]->str)), \
+        "Function '%s' passed {} for argument %i.", \
         (fn), \
         (idx) \
     )
