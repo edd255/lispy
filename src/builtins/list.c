@@ -227,7 +227,10 @@ lval_t* builtin_nth(lenv_t* env, lval_t* args) {
             return nth_element;
         }
         case LISPY_VAL_STR: {
-            return NULL;
+            LCHECK_IDX_STR(__func__, args, 1, (unsigned long)idx);
+            const char nth_element[2] = {(args->cell[1]->str)[idx], '\0'};
+            lval_del(args);
+            return lval_str(nth_element);
         }
     }
     lval_del(args);
