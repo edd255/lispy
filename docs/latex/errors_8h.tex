@@ -14,6 +14,10 @@ This file contains macros to check runtime assertions and do runtime error repor
 \begin{DoxyCompactList}\small\item\em Macro to check types and report errors during runtime. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{errors_8h_aca942d3c7288ff87fb862e5fcb24e2ac}{LCHECK\+\_\+\+TYPES}}(fn,  args,  idx,  expect1,  expect2)
 \begin{DoxyCompactList}\small\item\em Macro to check two assertion and report errors during runtime. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_a49a8621437d36b36a4e79827e8f1b3f0}{LCHECK\+\_\+\+IDX\+\_\+\+QEXPR}}(fn,  args,  cell\+\_\+idx,  idx)
+\begin{DoxyCompactList}\small\item\em Macro to check whether an index is smaller than a list size. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_aeb37cd3513d482ae27352426b155a8e2}{LCHECK\+\_\+\+IDX\+\_\+\+STR}}(fn,  args,  cell\+\_\+idx,  idx)
+\begin{DoxyCompactList}\small\item\em Macro to check whether an index is smaller than a string length. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{errors_8h_aebb98724f8837a0839a7cbaa28a85a65}{LCHECK\+\_\+\+NUM}}(fn,  args,  num)
 \begin{DoxyCompactList}\small\item\em Macro to check whether a function passed the correct number of arguments. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}{LCHECK\+\_\+\+NOT\+\_\+\+EMPTY}}(fn,  args,  idx)
@@ -47,6 +51,50 @@ This file contains macros to check runtime assertions and do runtime error repor
 
 
 Macro to check an assertion and report errors during runtime. 
+
+\Hypertarget{errors_8h_a49a8621437d36b36a4e79827e8f1b3f0}\label{errors_8h_a49a8621437d36b36a4e79827e8f1b3f0} 
+\index{errors.h@{errors.h}!LCHECK\_IDX\_QEXPR@{LCHECK\_IDX\_QEXPR}}
+\index{LCHECK\_IDX\_QEXPR@{LCHECK\_IDX\_QEXPR}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_IDX\_QEXPR}{LCHECK\_IDX\_QEXPR}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+IDX\+\_\+\+QEXPR(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{cell\+\_\+idx,  }\item[{}]{idx }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx\ <\ (args-\/>cell[cell\_idx]-\/>count)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args-\/>count)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether an index is smaller than a list size. 
+
+\Hypertarget{errors_8h_aeb37cd3513d482ae27352426b155a8e2}\label{errors_8h_aeb37cd3513d482ae27352426b155a8e2} 
+\index{errors.h@{errors.h}!LCHECK\_IDX\_STR@{LCHECK\_IDX\_STR}}
+\index{LCHECK\_IDX\_STR@{LCHECK\_IDX\_STR}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_IDX\_STR}{LCHECK\_IDX\_STR}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+IDX\+\_\+\+STR(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{cell\+\_\+idx,  }\item[{}]{idx }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ((idx)\ <\ strlen(args-\/>cell[cell\_idx]-\/>str)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (strlen((args)-\/>cell[(cell\_idx)]-\/>str))\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether an index is smaller than a string length. 
 
 \Hypertarget{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}\label{errors_8h_a7cc9f22710b1939d359784fbf1c79bef} 
 \index{errors.h@{errors.h}!LCHECK\_NOT\_EMPTY@{LCHECK\_NOT\_EMPTY}}

@@ -113,9 +113,19 @@ $(document).ready(function(){initNavTree('builtins_8h_source.html',''); initResi
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="vars_8h.html">builtins/vars.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="builtins_8h.html#afdf208cb23050963ae7ef2af4a68442d">lenv_add_builtins</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="builtins_8h.html#a3c4192d677b9ccc0db00ceef157f865f">lenv_add_builtin_fn</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <span class="keywordtype">char</span>* name, <a class="code hl_typedef" href="common_8h.html#a9b47e1b04752a06074ffc0740c018d21">lbuiltin_t</a> fn);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">void</span> <a class="code hl_function" href="builtins_8h.html#a0b94b4f4e2a2d86187b645f4312c0b48">lenv_add_builtin_const</a>(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <span class="keywordtype">char</span>* name, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* value);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aarithmetic_8h_html"><div class="ttname"><a href="arithmetic_8h.html">arithmetic.h</a></div><div class="ttdoc">This file contains all builtin arithmetic methods.</div></div>
+<div class="ttc" id="abuiltins_8h_html_a0b94b4f4e2a2d86187b645f4312c0b48"><div class="ttname"><a href="builtins_8h.html#a0b94b4f4e2a2d86187b645f4312c0b48">lenv_add_builtin_const</a></div><div class="ttdeci">void lenv_add_builtin_const(lenv_t *env, char *name, lval_t *value)</div><div class="ttdoc">A helper function to add builtin constants to the given environment.</div><div class="ttdef"><b>Definition</b> builtins.c:81</div></div>
+<div class="ttc" id="abuiltins_8h_html_a3c4192d677b9ccc0db00ceef157f865f"><div class="ttname"><a href="builtins_8h.html#a3c4192d677b9ccc0db00ceef157f865f">lenv_add_builtin_fn</a></div><div class="ttdeci">void lenv_add_builtin_fn(lenv_t *env, char *name, lbuiltin_t fn)</div><div class="ttdoc">A helper function to add builtin methods to the given environment.</div><div class="ttdef"><b>Definition</b> builtins.c:69</div></div>
+<div class="ttc" id="abuiltins_8h_html_afdf208cb23050963ae7ef2af4a68442d"><div class="ttname"><a href="builtins_8h.html#afdf208cb23050963ae7ef2af4a68442d">lenv_add_builtins</a></div><div class="ttdeci">void lenv_add_builtins(lenv_t *env)</div><div class="ttdoc">Adds all builtin methods to the given environment.</div><div class="ttdef"><b>Definition</b> builtins.c:5</div></div>
 <div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div><div class="ttdoc">This file contains the definitions, constructors, destructors and methods for Lispy values and enviro...</div></div>
+<div class="ttc" id="acommon_8h_html_a9b47e1b04752a06074ffc0740c018d21"><div class="ttname"><a href="common_8h.html#a9b47e1b04752a06074ffc0740c018d21">lbuiltin_t</a></div><div class="ttdeci">lval_t *(* lbuiltin_t)(lenv_t *, lval_t *)</div><div class="ttdoc">A function pointer that takes an lenv_t* and a lval_t* and returns a lval_t*, briefly: a pointer to a...</div><div class="ttdef"><b>Definition</b> common.h:37</div></div>
 <div class="ttc" id="aconditional_8h_html"><div class="ttname"><a href="conditional_8h.html">conditional.h</a></div><div class="ttdoc">This file contains all builtin conditional methods.</div></div>
 <div class="ttc" id="aenv_8h_html"><div class="ttname"><a href="env_8h.html">env.h</a></div><div class="ttdoc">This file contains all builtin environment methods.</div></div>
 <div class="ttc" id="aeq__cmp_8h_html"><div class="ttname"><a href="eq__cmp_8h.html">eq_cmp.h</a></div><div class="ttdoc">This file contains all builtin equality comparison methods.</div></div>
@@ -124,6 +134,8 @@ $(document).ready(function(){initNavTree('builtins_8h_source.html',''); initResi
 <div class="ttc" id="alogic_8h_html"><div class="ttname"><a href="logic_8h.html">logic.h</a></div><div class="ttdoc">This file contains all builtin logic methods.</div></div>
 <div class="ttc" id="amagn__cmp_8h_html"><div class="ttname"><a href="magn__cmp_8h.html">magn_cmp.h</a></div><div class="ttdoc">This file contains all builtin magnitude comparison methods.</div></div>
 <div class="ttc" id="astrings_8h_html"><div class="ttname"><a href="strings_8h.html">strings.h</a></div><div class="ttdoc">This file contains all builtin string methods.</div></div>
+<div class="ttc" id="astructlenv__t_html"><div class="ttname"><a href="structlenv__t.html">lenv_t</a></div><div class="ttdoc">A structure that contains data and metadata about used environments.</div><div class="ttdef"><b>Definition</b> common.h:92</div></div>
+<div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:43</div></div>
 <div class="ttc" id="avars_8h_html"><div class="ttname"><a href="vars_8h.html">vars.h</a></div><div class="ttdoc">This file contains all builtin variable methods.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -131,7 +143,7 @@ $(document).ready(function(){initNavTree('builtins_8h_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="builtins_8h.html">builtins.h</a></li>
-    <li class="footer">Generated on Sun Aug 27 2023 22:27:11 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Aug 28 2023 17:10:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

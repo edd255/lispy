@@ -26,7 +26,9 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a82fbe755c307f2454755b4dcce1de673}{builtin\+\_\+pack}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Applies a function to a variable number of arguments. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_af693588e2c80ae046141d7d778085956}{builtin\+\_\+unpack}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Applies a function to a list of arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Applies a function to a list of arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a1c5c6ffaf7af0e8490a8aa4e33b25433}{builtin\+\_\+nth}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns the nth element of a list or string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -156,6 +158,28 @@ Computes a quoted expression containing the arguments.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a quoted expression which contains the arguments 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a1c5c6ffaf7af0e8490a8aa4e33b25433}\label{list_8h_a1c5c6ffaf7af0e8490a8aa4e33b25433} 
+\index{list.h@{list.h}!builtin\_nth@{builtin\_nth}}
+\index{builtin\_nth@{builtin\_nth}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_nth()}{builtin\_nth()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+nth (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns the nth element of a list or string. 
+
+Expects that the first argument is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The nth element of the given list/string. 
 \end{DoxyReturn}
 \Hypertarget{list_8h_a82fbe755c307f2454755b4dcce1de673}\label{list_8h_a82fbe755c307f2454755b4dcce1de673} 
 \index{list.h@{list.h}!builtin\_pack@{builtin\_pack}}

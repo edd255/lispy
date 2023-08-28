@@ -132,6 +132,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af693588e2c80ae046141d7d778085956"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#af693588e2c80ae046141d7d778085956">builtin_unpack</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
 <tr class="memdesc:af693588e2c80ae046141d7d778085956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a function to a list of arguments.  <br /></td></tr>
 <tr class="separator:af693588e2c80ae046141d7d778085956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5c6ffaf7af0e8490a8aa4e33b25433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a1c5c6ffaf7af0e8490a8aa4e33b25433">builtin_nth</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="memdesc:a1c5c6ffaf7af0e8490a8aa4e33b25433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the nth element of a list or string.  <br /></td></tr>
+<tr class="separator:a1c5c6ffaf7af0e8490a8aa4e33b25433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains all builtin list methods. </p>
@@ -365,6 +368,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1c5c6ffaf7af0e8490a8aa4e33b25433" name="a1c5c6ffaf7af0e8490a8aa4e33b25433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c5c6ffaf7af0e8490a8aa4e33b25433">&#9670;&#160;</a></span>builtin_nth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * builtin_nth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the nth element of a list or string. </p>
+<p>Expects that the first argument is a number.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment in which the arguments are used </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments to use </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The nth element of the given list/string. </dd></dl>
+
+</div>
+</div>
 <a id="a82fbe755c307f2454755b4dcce1de673" name="a82fbe755c307f2454755b4dcce1de673"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82fbe755c307f2454755b4dcce1de673">&#9670;&#160;</a></span>builtin_pack()</h2>
 
@@ -487,7 +529,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="list_8h.html">list.h</a></li>
-    <li class="footer">Generated on Sun Aug 27 2023 22:27:11 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Aug 28 2023 17:10:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

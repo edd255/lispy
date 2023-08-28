@@ -1,6 +1,8 @@
 var errors_8h =
 [
     [ "LCHECK", "errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96", null ],
+    [ "LCHECK_IDX_QEXPR", "errors_8h.html#a49a8621437d36b36a4e79827e8f1b3f0", null ],
+    [ "LCHECK_IDX_STR", "errors_8h.html#aeb37cd3513d482ae27352426b155a8e2", null ],
     [ "LCHECK_NOT_EMPTY", "errors_8h.html#a7cc9f22710b1939d359784fbf1c79bef", null ],
     [ "LCHECK_NUM", "errors_8h.html#aebb98724f8837a0839a7cbaa28a85a65", null ],
     [ "LCHECK_TYPE", "errors_8h.html#a588825eb551fd55402df34d39cfa3540", null ],

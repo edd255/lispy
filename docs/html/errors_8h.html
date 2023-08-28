@@ -113,6 +113,12 @@ Macros</h2></td></tr>
 <tr class="memitem:aca942d3c7288ff87fb862e5fcb24e2ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#aca942d3c7288ff87fb862e5fcb24e2ac">LCHECK_TYPES</a>(fn,  args,  idx,  expect1,  expect2)</td></tr>
 <tr class="memdesc:aca942d3c7288ff87fb862e5fcb24e2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check two assertion and report errors during runtime.  <br /></td></tr>
 <tr class="separator:aca942d3c7288ff87fb862e5fcb24e2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a8621437d36b36a4e79827e8f1b3f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a49a8621437d36b36a4e79827e8f1b3f0">LCHECK_IDX_QEXPR</a>(fn,  args,  cell_idx,  idx)</td></tr>
+<tr class="memdesc:a49a8621437d36b36a4e79827e8f1b3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether an index is smaller than a list size.  <br /></td></tr>
+<tr class="separator:a49a8621437d36b36a4e79827e8f1b3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb37cd3513d482ae27352426b155a8e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#aeb37cd3513d482ae27352426b155a8e2">LCHECK_IDX_STR</a>(fn,  args,  cell_idx,  idx)</td></tr>
+<tr class="memdesc:aeb37cd3513d482ae27352426b155a8e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether an index is smaller than a string length.  <br /></td></tr>
+<tr class="separator:aeb37cd3513d482ae27352426b155a8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebb98724f8837a0839a7cbaa28a85a65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#aebb98724f8837a0839a7cbaa28a85a65">LCHECK_NUM</a>(fn,  args,  num)</td></tr>
 <tr class="memdesc:aebb98724f8837a0839a7cbaa28a85a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether a function passed the correct number of arguments.  <br /></td></tr>
 <tr class="separator:aebb98724f8837a0839a7cbaa28a85a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,10 +175,111 @@ Macros</h2></td></tr>
 <div class="line">        lval_del(args); \</div>
 <div class="line">        <span class="keywordflow">return</span> err; \</div>
 <div class="line">    }</div>
-<div class="ttc" id="acommon_8h_html_a8948ac2f47e6d29894f135aeaead227a"><div class="ttname"><a href="common_8h.html#a8948ac2f47e6d29894f135aeaead227a">lval_err</a></div><div class="ttdeci">lval_t * lval_err(char *fmt,...)</div><div class="ttdoc">Constructor for error values.</div><div class="ttdef"><b>Definition</b> values.c:23</div></div>
+<div class="ttc" id="acommon_8h_html_a8948ac2f47e6d29894f135aeaead227a"><div class="ttname"><a href="common_8h.html#a8948ac2f47e6d29894f135aeaead227a">lval_err</a></div><div class="ttdeci">lval_t * lval_err(char *fmt,...)</div><div class="ttdoc">Constructor for error values.</div><div class="ttdef"><b>Definition</b> values.c:40</div></div>
 <div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:43</div></div>
 </div><!-- fragment -->
 <p>Macro to check an assertion and report errors during runtime. </p>
+
+</div>
+</div>
+<a id="a49a8621437d36b36a4e79827e8f1b3f0" name="a49a8621437d36b36a4e79827e8f1b3f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49a8621437d36b36a4e79827e8f1b3f0">&#9670;&#160;</a></span>LCHECK_IDX_QEXPR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCHECK_IDX_QEXPR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fn, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cell_idx, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">idx&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
+<div class="line">        (args), \</div>
+<div class="line">        (idx &lt; (args-&gt;cell[cell_idx]-&gt;count)), \</div>
+<div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
+<div class="line">        (fn), \</div>
+<div class="line">        (idx), \</div>
+<div class="line">        (args-&gt;count) \</div>
+<div class="line">    )</div>
+<div class="ttc" id="aerrors_8h_html_a7323b7385049bf57fbb1714bf15ceb96"><div class="ttname"><a href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a></div><div class="ttdeci">#define LCHECK(args, cond, fmt,...)</div><div class="ttdoc">Macro to check an assertion and report errors during runtime.</div><div class="ttdef"><b>Definition</b> errors.h:12</div></div>
+</div><!-- fragment -->
+<p>Macro to check whether an index is smaller than a list size. </p>
+
+</div>
+</div>
+<a id="aeb37cd3513d482ae27352426b155a8e2" name="aeb37cd3513d482ae27352426b155a8e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb37cd3513d482ae27352426b155a8e2">&#9670;&#160;</a></span>LCHECK_IDX_STR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCHECK_IDX_STR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fn, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">cell_idx, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">idx&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
+<div class="line">        (args), \</div>
+<div class="line">        ((idx) &lt; strlen(args-&gt;cell[cell_idx]-&gt;str)), \</div>
+<div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
+<div class="line">        (fn), \</div>
+<div class="line">        (idx), \</div>
+<div class="line">        (strlen((args)-&gt;cell[(cell_idx)]-&gt;str)) \</div>
+<div class="line">    )</div>
+</div><!-- fragment -->
+<p>Macro to check whether an index is smaller than a string length. </p>
 
 </div>
 </div>
@@ -214,7 +321,6 @@ Macros</h2></td></tr>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx) \</div>
 <div class="line">    )</div>
-<div class="ttc" id="aerrors_8h_html_a7323b7385049bf57fbb1714bf15ceb96"><div class="ttname"><a href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a></div><div class="ttdeci">#define LCHECK(args, cond, fmt,...)</div><div class="ttdoc">Macro to check an assertion and report errors during runtime.</div><div class="ttdef"><b>Definition</b> errors.h:12</div></div>
 </div><!-- fragment -->
 <p>Macro to check whether an expression is empty and report it as error. </p>
 
@@ -381,7 +487,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Sun Aug 27 2023 22:27:11 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Aug 28 2023 17:10:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

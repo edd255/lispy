@@ -41,27 +41,47 @@
 \DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ ltype\_name(expect2)\ \(\backslash\)}
 \DoxyCodeLine{00043\ \ \ \ \ )}
 \DoxyCodeLine{00044\ }
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ LCHECK\_NUM(fn,\ args,\ num)\ \(\backslash\)}}
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
-\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args)-\/>count\ ==\ ((num)),\ \(\backslash\)}}
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ incorrect\ number\ of\ arguments.\ Got\ \%i,\ Expected\ \%i."{}},\ \(\backslash\)}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ (args)-\/>count,\ \(\backslash\)}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ (num)\ \(\backslash\)}
-\DoxyCodeLine{00055\ \ \ \ \ )}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ LCHECK\_NOT\_EMPTY(fn,\ args,\ idx)\ \(\backslash\)}}
-\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
-\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args)-\/>cell[idx]-\/>count\ !=\ 0,\ \(\backslash\)}}
-\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ \ for\ argument\ \%i."{}},\ \(\backslash\)}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ LCHECK\_IDX\_QEXPR(fn,\ args,\ cell\_idx,\ idx)\ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (idx\ <\ (args-\/>cell[cell\_idx]-\/>count)),\ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ (args-\/>count)\ \(\backslash\)}
+\DoxyCodeLine{00054\ \ \ \ \ )}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ LCHECK\_IDX\_STR(fn,\ args,\ cell\_idx,\ idx)\ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ ((idx)\ <\ strlen(args-\/>cell[cell\_idx]-\/>str)),\ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ (strlen((args)-\/>cell[(cell\_idx)]-\/>str))\ \(\backslash\)}
 \DoxyCodeLine{00065\ \ \ \ \ )}
 \DoxyCodeLine{00066\ }
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ UNUSED(x)\ (void)(x)}}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ LCHECK\_NUM(fn,\ args,\ num)\ \(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args)-\/>count\ ==\ ((num)),\ \(\backslash\)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ incorrect\ number\ of\ arguments.\ Got\ \%i,\ Expected\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ (args)-\/>count,\ \(\backslash\)}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ (num)\ \(\backslash\)}
+\DoxyCodeLine{00077\ \ \ \ \ )}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ LCHECK\_NOT\_EMPTY(fn,\ args,\ idx)\ \(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args)-\/>cell[idx]-\/>count\ !=\ 0,\ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ \ for\ argument\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
+\DoxyCodeLine{00087\ \ \ \ \ )}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ UNUSED(x)\ (void)(x)}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
