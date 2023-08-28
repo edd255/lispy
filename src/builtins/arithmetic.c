@@ -94,6 +94,7 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
                             break;
                         }
                         x->num /= y->num;
+                        lval_del(y);
                         break;
                     }
                     case LISPY_VAL_DEC: {
@@ -104,10 +105,10 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
                             break;
                         }
                         x->dec /= y->dec;
+                        lval_del(y);
                         break;
                     }
                 }
-                lval_del(y);
                 break;
             }
             case LISPY_ARITHM_MOD: {
@@ -120,6 +121,7 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
                             break;
                         }
                         x->num %= y->num;
+                        lval_del(y);
                         break;
                     }
                     case LISPY_VAL_DEC: {
@@ -129,7 +131,6 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
                         break;
                     }
                 }
-                lval_del(y);
                 break;
             }
             case LISPY_ARITHM_POW: {
