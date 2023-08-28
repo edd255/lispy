@@ -203,3 +203,37 @@ lval_t* builtin_unpack(lenv_t* env, lval_t* args) {
     lval_del(x);
     return lval_eval_sexpr(env, eval);
 }
+
+lval_t* builtin_nth(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+
+    long idx = args->cell[0]->num;
+    lval_t* arg = args->cell[1];
+    switch (arg->type) {
+        case LISPY_VAL_QEXPR: {
+            LCHECK_IDX_QEXPR(__func__, args, 1, idx);
+            lval_t* nth_element = lval_pop(arg, 0);
+            for (int i = idx; i > 0; i--) {
+                lval_del(nth_element);
+                nth_element = lval_pop(arg, 0);
+            }
+            lval_del(args);
+            return nth_element;
+        }
+        case LISPY_VAL_STR: {
+            return NULL;
+        }
+    }
+    lval_del(args);
+    return lval_err(
+        "'%s' expected Q-Expression or String but got %s",
+        __func__,
+        ltype_name(arg->type)
+    );
+}

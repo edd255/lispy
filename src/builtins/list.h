@@ -73,4 +73,13 @@ lval_t* builtin_pack(lenv_t* env, lval_t* args);
 /// @return The result of the evaluation.
 lval_t* builtin_unpack(lenv_t* env, lval_t* args);
 
+/// @brief Returns the nth element of a list or string.
+///
+/// Expects that the first argument is a number.
+///
+/// @param env The environment in which the arguments are used
+/// @param args The arguments to use
+/// @return The nth element of the given list/string.
+lval_t* builtin_nth(lenv_t* env, lval_t* args);
+
 #endif
