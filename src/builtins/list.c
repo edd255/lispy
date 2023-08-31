@@ -310,13 +310,13 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args) {
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_STR);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
 
-    lval_t* needle = args->cell[0];
+    const lval_t* needle = args->cell[0];
     lval_t* haystack = args->cell[1];
 
     switch (needle->type) {
         case LISPY_VAL_STR: {
             LCHECK_TYPE(__func__, args, 1, LISPY_VAL_STR);
-            char* ptr = strstr(haystack->str, needle->str);
+            const char* ptr = strstr(haystack->str, needle->str);
             lval_del(args);
             return lval_num(NULL != ptr);
         }
