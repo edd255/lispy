@@ -64,9 +64,6 @@
     {f (fst l) (foldr f z (tail l))}
 })
 
-(fun {sum l} {foldl + 0 l})
-(fun {product l} {foldl * 1 l})
-
 ; Take N items
 (fun {take n l} {
   if (== n 0)

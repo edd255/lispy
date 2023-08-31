@@ -244,3 +244,63 @@ lval_t* builtin_min(lenv_t* env, lval_t* args) {
 
     return builtin_op(env, args, "min");
 }
+
+lval_t* builtin_sum(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+
+    lval_t* list = args->cell[0];
+    float dec_sum = 0;
+    long int_sum = 0;
+    bool dec_flag = false;
+    for (int i = 0; i < list->count; i++) {
+        LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
+        switch (list->cell[i]->type) {
+            case LISPY_VAL_NUM: {
+                dec_sum += (float)list->cell[i]->num;
+                int_sum += list->cell[i]->num;
+                break;
+            }
+            case LISPY_VAL_DEC: {
+                dec_sum += list->cell[i]->dec;
+                dec_flag = true;
+                break;
+            }
+        }
+    }
+    lval_del(args);
+    return dec_flag ? lval_dec(dec_sum) : lval_num(int_sum);
+}
+
+lval_t* builtin_prod(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+
+    lval_t* list = args->cell[0];
+    float dec_prod = 1;
+    long int_prod = 1;
+    bool dec_flag = false;
+    for (int i = 0; i < list->count; i++) {
+        LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
+        switch (list->cell[i]->type) {
+            case LISPY_VAL_NUM: {
+                dec_prod *= (float)list->cell[i]->num;
+                int_prod *= list->cell[i]->num;
+                break;
+            }
+            case LISPY_VAL_DEC: {
+                dec_prod *= list->cell[i]->dec;
+                dec_flag = true;
+                break;
+            }
+        }
+    }
+    lval_del(args);
+    return dec_flag ? lval_dec(dec_prod) : lval_num(int_prod);
+}
