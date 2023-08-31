@@ -58,7 +58,7 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
     if (cond->num) {
         color_bgreen("PASSED\n");
     } else {
-        color_bred("FAILED.");
+        color_bred("FAILED. ");
         printf("Expected: ");
         lval_print(expected);
         printf(". Got: ");
