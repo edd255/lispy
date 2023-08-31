@@ -38,7 +38,9 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a7a6d464742d7be6831ada74466a9be80}{builtin\+\_\+last}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad901c77dda41a1b6e3bfe5704acec933}{builtin\+\_\+elem}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Checks whether the first argument is element in the list/string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks whether the first argument is element in the list/string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a739a2bdf3fc56e44dd74b852e62597c8}{builtin\+\_\+init}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns all of list/string but last element. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -150,6 +152,26 @@ Computes the head of a list or string.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Head of the list/string 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a739a2bdf3fc56e44dd74b852e62597c8}\label{list_8h_a739a2bdf3fc56e44dd74b852e62597c8} 
+\index{list.h@{list.h}!builtin\_init@{builtin\_init}}
+\index{builtin\_init@{builtin\_init}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_init()}{builtin\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns all of list/string but last element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The list/string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The list/string but w/o last element 
 \end{DoxyReturn}
 \Hypertarget{list_8h_ab73a5212ed790048ee4311b191376173}\label{list_8h_ab73a5212ed790048ee4311b191376173} 
 \index{list.h@{list.h}!builtin\_join@{builtin\_join}}

@@ -5,6 +5,7 @@ var list_8h =
     [ "builtin_eval", "list_8h.html#a917b114e551a2a650f24b283b0d3d0ab", null ],
     [ "builtin_first", "list_8h.html#a7f611fe2e0b5ad41dfedf784b3bbd25e", null ],
     [ "builtin_head", "list_8h.html#a15737f64eba6006e7e636c1d2c1c69ed", null ],
+    [ "builtin_init", "list_8h.html#a739a2bdf3fc56e44dd74b852e62597c8", null ],
     [ "builtin_join", "list_8h.html#ab73a5212ed790048ee4311b191376173", null ],
     [ "builtin_last", "list_8h.html#a7a6d464742d7be6831ada74466a9be80", null ],
     [ "builtin_len", "list_8h.html#a812c1dd7c6785868671eab5e465cc7d8", null ],
