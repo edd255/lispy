@@ -27,6 +27,10 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "curry", builtin_unpack);
     lenv_add_builtin_fn(env, "uncurry", builtin_pack);
     lenv_add_builtin_fn(env, "nth", builtin_nth);
+    lenv_add_builtin_fn(env, "fst", builtin_first);
+    lenv_add_builtin_fn(env, "snd", builtin_second);
+    lenv_add_builtin_fn(env, "trd", builtin_third);
+    lenv_add_builtin_fn(env, "last", builtin_last);
 
     // Mathematical functions
     lenv_add_builtin_fn(env, "+", builtin_add);
