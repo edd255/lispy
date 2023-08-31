@@ -1,11 +1,9 @@
 ;==== nth Test ================================================================
-(fun {test cond} {
-    if (cond)
-    { print "PASSED" }
-    { print "FAILED" }
+(fun {test exp got} {
+    testhelper (== exp got) exp got
 })
 
-(test (== (tail "Hello, World!") "ello, World!"))
-(test (== (tail "ok") "k"))
-(test (== (head "Hello, World!") "H"))
-(test (== (head "ok") "o"))
+(test (tail "Hello, World!") "ello, World!") "ello, World!" (tail "Hello, World!")
+(test (tail "ok") "k")
+(test (head "Hello, World!") "H")
+(test (head "ok") "o")
