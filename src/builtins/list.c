@@ -307,24 +307,42 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
 
-    lval_t* elem = args->cell[0];
-    lval_t* list = args->cell[1];
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_STR);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
 
-    for (int i = 0; i < list->count; i++) {
-        lval_t* cp_elem = lval_copy(elem);
-        lval_t* list_elem = lval_copy(list->cell[i]);
+    lval_t* needle = args->cell[0];
+    lval_t* haystack = args->cell[1];
 
-        lval_t* eq_args = lval_qexpr();
-        eq_args = lval_add(eq_args, cp_elem);
-        eq_args = lval_add(eq_args, list_elem);
-
-        lval_t* res = builtin_eq(env, eq_args);
-        if (res->num == 1) {
+    switch (needle->type) {
+        case LISPY_VAL_STR: {
+            LCHECK_TYPE(__func__, args, 1, LISPY_VAL_STR);
+            char* ptr = strstr(haystack->str, needle->str);
             lval_del(args);
-            return res;
+            return lval_num(NULL != ptr);
         }
-        lval_del(res);
+        case LISPY_VAL_NUM: {
+            for (int i = 0; i < haystack->count; i++) {
+                lval_t* cp_elem = lval_copy(needle);
+                lval_t* list_elem = lval_copy(haystack->cell[i]);
+
+                lval_t* eq_args = lval_qexpr();
+                eq_args = lval_add(eq_args, cp_elem);
+                eq_args = lval_add(eq_args, list_elem);
+
+                lval_t* res = builtin_eq(env, eq_args);
+                if (res->num == 1) {
+                    lval_del(args);
+                    return res;
+                }
+                lval_del(res);
+            }
+            lval_del(args);
+            return lval_num(0);
+        }
     }
-    lval_del(args);
-    return lval_num(0);
+    return lval_err(
+        "'%s' expected number or string but got %s",
+        __func__,
+        ltype_name(needle->type)
+    );
 }
