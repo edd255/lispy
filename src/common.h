@@ -18,7 +18,8 @@
 #include "utils/errors.h"
 
 /// Generic bufsize definition
-#define BUFSIZE (512)
+enum { BUFSIZE = 512 };
+
 
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------

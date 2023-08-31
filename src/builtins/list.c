@@ -142,11 +142,10 @@ lval_t* builtin_cons(lenv_t* env, lval_t* args) {
         lval_t* x = lval_add(lval_qexpr(), lval_pop(args, 0));
         x = lval_join(x, lval_take(args, 0));
         return x;
-    } else {
-        lval_t* x = lval_pop(args, 0);
-        x = lval_join(x, lval_take(args, 0));
-        return x;
-    }
+    } 
+    lval_t* x = lval_pop(args, 0);
+    x = lval_join(x, lval_take(args, 0));
+    return x;
 }
 
 lval_t* builtin_len(lenv_t* env, lval_t* args) {
