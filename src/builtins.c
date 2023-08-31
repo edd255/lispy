@@ -44,6 +44,7 @@ void lenv_add_builtins(lenv_t* env) {
 
     // Conditional functions
     lenv_add_builtin_fn(env, "if", builtin_if);
+    lenv_add_builtin_fn(env, "testhelper", builtin_testhelper);
 
     // Logical functionvns
     lenv_add_builtin_fn(env, "and", builtin_and);
