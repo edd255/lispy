@@ -14,6 +14,7 @@
 #include "builtins/list.h"
 #include "builtins/logic.h"
 #include "builtins/magn_cmp.h"
+#include "builtins/sequence.h"
 #include "builtins/strings.h"
 #include "builtins/vars.h"
 #include "common.h"
