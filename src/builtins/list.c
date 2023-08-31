@@ -346,3 +346,43 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args) {
         ltype_name(needle->type)
     );
 }
+
+lval_t* builtin_init(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+
+    switch (args->cell[0]->type) {
+        case LISPY_VAL_QEXPR: {
+            LCHECK_QEXPR_NOT_EMPTY(__func__, args, 0);
+            lval_t* value = lval_take(args, 0);
+            lval_del(lval_pop(value, value->count - 1));
+            return value;
+        }
+        case LISPY_VAL_STR: {
+            LCHECK_STR_NOT_EMPTY(__func__, args, 0);
+            char* old_str = args->cell[0]->str;
+            int length = strlen(old_str);
+            if (length < 0) {
+                lval_del(args);
+                return lval_str("");
+            }
+            char* init_str = MALLOC(length);
+            strncpy(init_str, old_str, length - 1);
+            init_str[length - 1] = '\0';
+            lval_del(args);
+            lval_t* init = lval_str(init_str);
+            FREE(init_str);
+            return init;
+        }
+    }
+    lval_del(args);
+    return lval_err(
+        "'%s' expected q-expression or string but got %s",
+        __func__,
+        ltype_name(args->cell[0]->type)
+    );
+}

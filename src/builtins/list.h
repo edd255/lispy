@@ -124,4 +124,10 @@ lval_t* builtin_last(lenv_t* env, lval_t* args);
 /// @return 1 if the argument is in the list/string, else 0
 lval_t* builtin_elem(lenv_t* env, lval_t* args);
 
+/// @brief Returns all of list/string but last element
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+/// @return The list/string but w/o last element
+lval_t* builtin_init(lenv_t* env, lval_t* args);
+
 #endif

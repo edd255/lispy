@@ -50,13 +50,6 @@
     {join (if (f (fst l)) {head l} {nil}) (filter f (tail l))}
 })
 
-; Return all of list but last element
-(fun {init l} {
-  if (== (tail l) nil)
-    {nil}
-    {join (head l) (init (tail l))}
-})
-
 ; Reverse List
 (fun {reverse l} {
   if (== l nil)
