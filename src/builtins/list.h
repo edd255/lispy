@@ -118,4 +118,10 @@ lval_t* builtin_third(lenv_t* env, lval_t* args);
 /// @return The last element of the given list/string.
 lval_t* builtin_last(lenv_t* env, lval_t* args);
 
+/// @brief Checks whether the first argument is element in the list/string
+/// @param env The environment in which the arguments are used
+/// @param args The element to check and the list/string
+/// @return 1 if the argument is in the list/string, else 0
+lval_t* builtin_elem(lenv_t* env, lval_t* args);
+
 #endif
