@@ -289,6 +289,7 @@ char* get_git_branch_name(void) {
     char* branch_name = malloc(sizeof(char) * BUFSIZE);
     FILE* cmd_output = popen("git rev-parse --abbrev-ref HEAD", "r");
     if (NULL == cmd_output) {
+        free(branch_name);
         perror("popen");
         return NULL;
     }
@@ -307,6 +308,7 @@ char* get_git_hash(void) {
     char* git_hash = malloc(sizeof(char) * BUFSIZE);
     FILE* cmd_output = popen("git rev-parse HEAD", "r");
     if (NULL == cmd_output) {
+        free(git_hash);
         perror("popen");
         return NULL;
     }
