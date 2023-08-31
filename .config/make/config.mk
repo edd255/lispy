@@ -58,7 +58,8 @@ ERR  := -Wall \
 		-Wvla \
 		-Wno-gnu-zero-variadic-macro-arguments
 OPT  := -Ofast -DNDEBUG
-DBG  := -Og -g -DLOG_ALLOCS
+DBG  := -Og -g
+LOG  := -DLOG_ALLOCS
 SAN  := -fsanitize=address \
 	    -fsanitize=pointer-compare \
 	    -fsanitize=pointer-subtract \
@@ -69,7 +70,7 @@ FORT := -D_FORTIFY_SOURCE=2
 PROF := -pg
 
 RELEASE   := ${FORT} ${ERR} ${OPT}
-DEBUGGING := ${FORT} ${ERR} ${DBG}
+DEBUGGING := ${FORT} ${ERR} ${DBG} ${LOG}
 SANITIZED := ${FORT} ${ERR} ${DBG} ${SAN}
 PROFILING := ${FORT} ${ERR} ${OPT} ${PROF}
 
