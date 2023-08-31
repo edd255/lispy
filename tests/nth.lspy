@@ -29,3 +29,13 @@
 (test (== (nth 10 "Hello, World!") "l"))
 (test (== (nth 11 "Hello, World!") "d"))
 (test (== (nth 12 "Hello, World!") "!"))
+
+(test (== (fst {0 1 2 3 4 5 6 7 8 9}) 0))
+(test (== (snd {0 1 2 3 4 5 6 7 8 9}) 1))
+(test (== (trd {0 1 2 3 4 5 6 7 8 9}) 2))
+(test (== (last {0 1 2 3 4 5 6 7 8 9}) 9))
+
+(test (== (fst "Hello, World!") "H"))
+(test (== (snd "Hello, World!") "e"))
+(test (== (trd "Hello, World!") "l"))
+(test (== (last "Hello, World!") "!"))
