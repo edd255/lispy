@@ -6,13 +6,6 @@
   ((\ {_} b) ())
 })
 
-; Perform Several things in Sequence
-(fun {do & l} {
-  if (== l nil)
-    {nil}
-    {last l}
-})
-
 ;---- Conditional Functions -----------------------------------------------------
 
 (fun {select & cs} {

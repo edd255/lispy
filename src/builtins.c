@@ -34,6 +34,9 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "elem", builtin_elem);
     lenv_add_builtin_fn(env, "init", builtin_init);
 
+    // Sequence functions
+    lenv_add_builtin_fn(env, "do", builtin_do);
+
     // Mathematical functions
     lenv_add_builtin_fn(env, "+", builtin_add);
     lenv_add_builtin_fn(env, "-", builtin_sub);
