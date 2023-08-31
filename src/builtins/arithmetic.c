@@ -253,14 +253,14 @@ lval_t* builtin_sum(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
 
     lval_t* list = args->cell[0];
-    float dec_sum = 0;
+    double dec_sum = 0;
     long int_sum = 0;
     bool dec_flag = false;
     for (int i = 0; i < list->count; i++) {
         LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
         switch (list->cell[i]->type) {
             case LISPY_VAL_NUM: {
-                dec_sum += (float)list->cell[i]->num;
+                dec_sum += (double)list->cell[i]->num;
                 int_sum += list->cell[i]->num;
                 break;
             }
@@ -283,14 +283,14 @@ lval_t* builtin_prod(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
 
     lval_t* list = args->cell[0];
-    float dec_prod = 1;
+    double dec_prod = 1;
     long int_prod = 1;
     bool dec_flag = false;
     for (int i = 0; i < list->count; i++) {
         LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
         switch (list->cell[i]->type) {
             case LISPY_VAL_NUM: {
-                dec_prod *= (float)list->cell[i]->num;
+                dec_prod *= (double)list->cell[i]->num;
                 int_prod *= list->cell[i]->num;
                 break;
             }

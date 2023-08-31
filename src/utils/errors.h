@@ -50,14 +50,14 @@
         "Function '%s' passed index %d but argument has size %d.", \
         (fn), \
         (idx), \
-        (args->count) \
+        ((args)->count) \
     )
 
 /// @brief Macro to check whether an index is smaller than a string length
 #define LCHECK_IDX_STR(fn, args, cell_idx, idx) \
     LCHECK( \
         (args), \
-        ((idx) < strlen(args->cell[cell_idx]->str)), \
+        ((idx) < strlen((args)->cell[cell_idx]->str)), \
         "Function '%s' passed index %d but argument has size %d.", \
         (fn), \
         (idx), \
@@ -91,7 +91,7 @@
 #define LCHECK_STR_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
-        (0 != strlen(args->cell[idx]->str)), \
+        (0 != strlen((args)->cell[idx]->str)), \
         "Function '%s' passed {} for argument %i.", \
         (fn), \
         (idx) \
