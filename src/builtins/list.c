@@ -242,3 +242,61 @@ lval_t* builtin_nth(lenv_t* env, lval_t* args) {
         ltype_name(arg->type)
     );
 }
+
+lval_t* builtin_first(lenv_t* env, lval_t* args) {
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* nth_args = lval_qexpr();
+    nth_args = lval_add(nth_args, lval_num(0));
+    nth_args = lval_add(nth_args, lval_pop(args, 0));
+    lval_t* fst = builtin_nth(env, nth_args);
+    lval_del(args);
+    return fst;
+}
+
+lval_t* builtin_second(lenv_t* env, lval_t* args) {
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* nth_args = lval_qexpr();
+    nth_args = lval_add(nth_args, lval_num(1));
+    nth_args = lval_add(nth_args, lval_pop(args, 0));
+    lval_t* snd = builtin_nth(env, nth_args);
+    lval_del(args);
+    return snd;
+}
+
+lval_t* builtin_third(lenv_t* env, lval_t* args) {
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* nth_args = lval_qexpr();
+    nth_args = lval_add(nth_args, lval_num(2));
+    nth_args = lval_add(nth_args, lval_pop(args, 0));
+    lval_t* trd = builtin_nth(env, nth_args);
+    lval_del(args);
+    return trd;
+}
+
+lval_t* builtin_last(lenv_t* env, lval_t* args) {
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* nth_args = lval_qexpr();
+    switch (args->cell[0]->type) {
+        case LISPY_VAL_QEXPR: {
+            nth_args = lval_add(nth_args, lval_num(args->cell[0]->count - 1));
+            nth_args = lval_add(nth_args, lval_pop(args, 0));
+            lval_t* last = builtin_nth(env, nth_args);
+            lval_del(args);
+            return last;
+        }
+        case LISPY_VAL_STR: {
+            int len = strlen(args->cell[0]->str);
+            nth_args = lval_add(nth_args, lval_num(len - 1));
+            nth_args = lval_add(nth_args, lval_pop(args, 0));
+            lval_t* last = builtin_nth(env, nth_args);
+            lval_del(args);
+            return last;
+        }
+    }
+    lval_del(args);
+    return lval_err(
+        "'%s' expected Q-Expression or String but got %s",
+        __func__,
+        ltype_name(args->cell[0]->type)
+    );
+}

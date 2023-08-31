@@ -82,4 +82,40 @@ lval_t* builtin_unpack(lenv_t* env, lval_t* args);
 /// @return The nth element of the given list/string.
 lval_t* builtin_nth(lenv_t* env, lval_t* args);
 
+/// @brief Returns the first element of a list or string.
+///
+/// Expects that the first argument is a number.
+///
+/// @param env The environment in which the arguments are used
+/// @param args The arguments to use
+/// @return The first element of the given list/string.
+lval_t* builtin_first(lenv_t* env, lval_t* args);
+
+/// @brief Returns the last element of a list or string.
+///
+/// Expects that the first argument is a number.
+///
+/// @param env The environment in which the arguments are used
+/// @param args The arguments to use
+/// @return The second element of the given list/string.
+lval_t* builtin_second(lenv_t* env, lval_t* args);
+
+/// @brief Returns the last element of a list or string.
+///
+/// Expects that the first argument is a number.
+///
+/// @param env The environment in which the arguments are used
+/// @param args The arguments to use
+/// @return The third element of the given list/string.
+lval_t* builtin_third(lenv_t* env, lval_t* args);
+
+/// @brief Returns the last element of a list or string.
+///
+/// Expects that the first argument is a number.
+///
+/// @param env The environment in which the arguments are used
+/// @param args The arguments to use
+/// @return The last element of the given list/string.
+lval_t* builtin_last(lenv_t* env, lval_t* args);
+
 #endif
