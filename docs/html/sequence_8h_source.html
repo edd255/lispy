@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lispy: lenv_t Struct Reference</title>
+<title>Lispy: src/builtins/sequence.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structlenv__t.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('sequence_8h_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -91,48 +91,30 @@ $(document).ready(function(){initNavTree('structlenv__t.html',''); initResizable
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#pub-attribs">Data Fields</a>  </div>
-  <div class="headertitle"><div class="title">lenv_t Struct Reference</div></div>
+  <div class="headertitle"><div class="title">sequence.h</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>A structure that contains data and metadata about used environments.  
- <a href="structlenv__t.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="common_8h_source.html">common.h</a>&gt;</code></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:aaf49bc5a68bf694faebd339d16c05704"><td class="memItemLeft" align="right" valign="top"><a id="aaf49bc5a68bf694faebd339d16c05704" name="aaf49bc5a68bf694faebd339d16c05704"></a>
-<a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>parent</b></td></tr>
-<tr class="memdesc:aaf49bc5a68bf694faebd339d16c05704"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the parent environment. <br /></td></tr>
-<tr class="separator:aaf49bc5a68bf694faebd339d16c05704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad85e469cc1649a592b615412103824fe"><td class="memItemLeft" align="right" valign="top"><a id="ad85e469cc1649a592b615412103824fe" name="ad85e469cc1649a592b615412103824fe"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>count</b></td></tr>
-<tr class="memdesc:ad85e469cc1649a592b615412103824fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of symbols in the environment. <br /></td></tr>
-<tr class="separator:ad85e469cc1649a592b615412103824fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6479758a464397574a045b77b41470b3"><td class="memItemLeft" align="right" valign="top"><a id="a6479758a464397574a045b77b41470b3" name="a6479758a464397574a045b77b41470b3"></a>
-char **&#160;</td><td class="memItemRight" valign="bottom"><b>syms</b></td></tr>
-<tr class="memdesc:a6479758a464397574a045b77b41470b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the symbols. <br /></td></tr>
-<tr class="separator:a6479758a464397574a045b77b41470b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa65c2c13055031ec073c85991654f255"><td class="memItemLeft" align="right" valign="top"><a id="aa65c2c13055031ec073c85991654f255" name="aa65c2c13055031ec073c85991654f255"></a>
-<a class="el" href="structlval__t.html">lval_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>vals</b></td></tr>
-<tr class="memdesc:aa65c2c13055031ec073c85991654f255"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pointer to the values. <br /></td></tr>
-<tr class="separator:aa65c2c13055031ec073c85991654f255"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A structure that contains data and metadata about used environments. </p>
-<p>The env_t struct encodes a list of relationships between symbols (names) and values. This is implemented by using two lists of equal length, where each entry in one list has a corresponding entry in the other list at the same position. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/<a class="el" href="common_8h_source.html">common.h</a></li>
-</ul>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef LISPY_BUILTINS_SEQUENCE_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define LISPY_BUILTINS_SEQUENCE_H</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="common_8h.html">common.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_struct" href="structlval__t.html">lval_t</a>* builtin_do(<a class="code hl_struct" href="structlenv__t.html">lenv_t</a>* env, <a class="code hl_struct" href="structlval__t.html">lval_t</a>* args);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acommon_8h_html"><div class="ttname"><a href="common_8h.html">common.h</a></div><div class="ttdoc">This file contains the definitions, constructors, destructors and methods for Lispy values and enviro...</div></div>
+<div class="ttc" id="astructlenv__t_html"><div class="ttname"><a href="structlenv__t.html">lenv_t</a></div><div class="ttdoc">A structure that contains data and metadata about used environments.</div><div class="ttdef"><b>Definition</b> common.h:92</div></div>
+<div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:43</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="structlenv__t.html">lenv_t</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><b>sequence.h</b></li>
     <li class="footer">Generated on Thu Aug 31 2023 15:29:08 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>

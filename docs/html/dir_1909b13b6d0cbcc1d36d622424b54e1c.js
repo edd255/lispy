@@ -8,6 +8,7 @@ var dir_1909b13b6d0cbcc1d36d622424b54e1c =
     [ "list.h", "list_8h.html", "list_8h" ],
     [ "logic.h", "logic_8h.html", "logic_8h" ],
     [ "magn_cmp.h", "magn__cmp_8h.html", "magn__cmp_8h" ],
+    [ "sequence.h", "sequence_8h_source.html", null ],
     [ "strings.h", "strings_8h.html", "strings_8h" ],
     [ "vars.h", "vars_8h.html", "vars_8h" ]
 ];
