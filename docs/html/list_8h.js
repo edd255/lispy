@@ -1,6 +1,7 @@
 var list_8h =
 [
     [ "builtin_cons", "list_8h.html#aa1c7a9f0d82393536ba9404cc12c93be", null ],
+    [ "builtin_elem", "list_8h.html#ad901c77dda41a1b6e3bfe5704acec933", null ],
     [ "builtin_eval", "list_8h.html#a917b114e551a2a650f24b283b0d3d0ab", null ],
     [ "builtin_first", "list_8h.html#a7f611fe2e0b5ad41dfedf784b3bbd25e", null ],
     [ "builtin_head", "list_8h.html#a15737f64eba6006e7e636c1d2c1c69ed", null ],

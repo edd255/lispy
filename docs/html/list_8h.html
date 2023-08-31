@@ -147,6 +147,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7a6d464742d7be6831ada74466a9be80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a7a6d464742d7be6831ada74466a9be80">builtin_last</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
 <tr class="memdesc:a7a6d464742d7be6831ada74466a9be80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last element of a list or string.  <br /></td></tr>
 <tr class="separator:a7a6d464742d7be6831ada74466a9be80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad901c77dda41a1b6e3bfe5704acec933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#ad901c77dda41a1b6e3bfe5704acec933">builtin_elem</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="memdesc:ad901c77dda41a1b6e3bfe5704acec933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the first argument is element in the list/string.  <br /></td></tr>
+<tr class="separator:ad901c77dda41a1b6e3bfe5704acec933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains all builtin list methods. </p>
@@ -186,6 +189,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The resulting quoted expression </dd></dl>
+
+</div>
+</div>
+<a id="ad901c77dda41a1b6e3bfe5704acec933" name="ad901c77dda41a1b6e3bfe5704acec933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad901c77dda41a1b6e3bfe5704acec933">&#9670;&#160;</a></span>builtin_elem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * builtin_elem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether the first argument is element in the list/string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment in which the arguments are used </td></tr>
+    <tr><td class="paramname">args</td><td>The element to check and the list/string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if the argument is in the list/string, else 0 </dd></dl>
 
 </div>
 </div>
@@ -697,7 +738,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="list_8h.html">list.h</a></li>
-    <li class="footer">Generated on Thu Aug 31 2023 14:15:24 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Aug 31 2023 14:32:46 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

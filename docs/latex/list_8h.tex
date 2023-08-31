@@ -36,7 +36,9 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a}{builtin\+\_\+third}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a7a6d464742d7be6831ada74466a9be80}{builtin\+\_\+last}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad901c77dda41a1b6e3bfe5704acec933}{builtin\+\_\+elem}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Checks whether the first argument is element in the list/string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -64,6 +66,26 @@ Appends a value to the front of a quoted expression.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The resulting quoted expression 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ad901c77dda41a1b6e3bfe5704acec933}\label{list_8h_ad901c77dda41a1b6e3bfe5704acec933} 
+\index{list.h@{list.h}!builtin\_elem@{builtin\_elem}}
+\index{builtin\_elem@{builtin\_elem}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_elem()}{builtin\_elem()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+elem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Checks whether the first argument is element in the list/string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The element to check and the list/string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the argument is in the list/string, else 0 
 \end{DoxyReturn}
 \Hypertarget{list_8h_a917b114e551a2a650f24b283b0d3d0ab}\label{list_8h_a917b114e551a2a650f24b283b0d3d0ab} 
 \index{list.h@{list.h}!builtin\_eval@{builtin\_eval}}
