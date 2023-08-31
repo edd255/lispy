@@ -44,6 +44,9 @@ lval_t* builtin_eval(lenv_t* env, lval_t* args);
 lval_t* builtin_join(lenv_t* env, lval_t* args);
 
 /// @brief Appends a value to the front of a quoted expression
+///
+/// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L960
+///
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The resulting quoted expression
@@ -59,6 +62,8 @@ lval_t* builtin_len(lenv_t* env, lval_t* args);
 ///
 /// Expects that the first argument is a function.
 ///
+/// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L1038
+///
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The result of the evaluation.
@@ -67,6 +72,8 @@ lval_t* builtin_pack(lenv_t* env, lval_t* args);
 /// @brief Applies a function to a list of arguments.
 ///
 /// Expects that the first argument is a function.
+///
+/// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L1055
 ///
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use

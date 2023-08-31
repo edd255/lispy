@@ -9,12 +9,18 @@
 #include "common.h"
 
 /// @brief Prints out all values in the environment
+///
+/// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L1074
+///
 /// @param env The environment whose values we want to print
 /// @param args Necessary but unused arguments
 /// @return A quoted expression that contains the names of all values
 lval_t* builtin_env(lenv_t* env, lval_t* args);
 
 /// @brief A builtin-method to define new functions
+///
+/// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L1110
+///
 /// @param env The environment in which the function is put
 /// @param args Body, arguments, and name of the function
 /// @return An empty symbolic expression, else runtime errors
