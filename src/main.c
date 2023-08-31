@@ -49,7 +49,7 @@ void setup_parser(void);
 ///
 /// @param std A pointer to the standard-library (if loaded, else NULL)
 /// @param env A pointer to the used environment
-void cleanup(lval_t* std, lenv_t* e);
+void cleanup(lval_t* std, lenv_t* env);
 
 /// @brief A REPL for Lispy.
 ///
@@ -62,7 +62,7 @@ void cleanup(lval_t* std, lenv_t* e);
 /// version).
 ///
 /// @param env The environment from which we get and where we store variables
-void cli_interpreter(lenv_t* e);
+void cli_interpreter(lenv_t* env);
 
 /// @brief Interprets a given file.
 ///
@@ -71,7 +71,7 @@ void cli_interpreter(lenv_t* e);
 ///
 /// @param env The environment which we use for interpreting the file
 /// @param file The file to interpret
-void file_interpreter(lenv_t* e, const char* file);
+void file_interpreter(lenv_t* env, const char* file);
 
 /// @brief Loads the standard library and returns a pointer to it.
 ///

@@ -12,6 +12,7 @@
 /// @brief Defines a function in the local or global environment
 /// @param env The environment to use
 /// @param args The function to define
+/// @param fn "def" or "="
 /// @return An empty symbolic expression or an error
 lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn);
 

@@ -17,6 +17,7 @@
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
+/// Generic bufsize definition
 #define BUFSIZE (512)
 
 //=== DECLARATIONS =============================================================
