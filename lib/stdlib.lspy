@@ -36,14 +36,6 @@
 
 ;---- List Functions -----------------------------------------------------------
 
-; First, Second, or Third Item in List
-(fun {fst l} { eval (head l) })
-(fun {snd l} { eval (head (tail l)) })
-(fun {trd l} { eval (head (tail (tail l))) })
-
-; Last item in List
-(fun {last l} {nth (- (len l) 1) l})
-
 ; Apply Function to List
 (fun {map f l} {
   if (== l nil)
