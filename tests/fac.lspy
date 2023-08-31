@@ -1,0 +1,30 @@
+;==== Fibonacci Test ==========================================================
+(fun {fac n} {
+    if (== n 0)
+    { 1 }
+    { 
+        if (== n 1)
+        { 1 }
+        {
+            (* n (fac (- n 1)))
+        }
+    }
+})
+
+(fun {test exp got} {
+    testhelper (== exp got) exp got
+})
+
+(test (fac 0) 1)
+(test (fac 1) 1)
+(test (fac 2) 2)
+(test (fac 3) 6)
+(test (fac 4) 24)
+(test (fac 5) 120)
+(test (fac 6) 720)
+(test (fac 7) 5040)
+(test (fac 8) 40320)
+(test (fac 9) 362880)
+(test (fac 10) 3628800)
+(test (fac 11) 39916800)
+(test (fac 12) 479001600)
