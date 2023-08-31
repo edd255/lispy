@@ -15,4 +15,14 @@
 /// @return The evaluation of the consequence
 lval_t* builtin_if(lenv_t* env, lval_t* args);
 
+/// @brief Evaluates a condition. On fail, prints expected and actual values.
+///
+/// Hacky solution: To print expected and actual values, the have to be given to
+/// the test function additionally to the condition.
+///
+/// @param env The environment in which the expression is used
+/// @param args The condition, the expected and actual values
+/// @return "PASSED" on success, "FAIL" and expected and actual values else
+lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
+
 #endif
