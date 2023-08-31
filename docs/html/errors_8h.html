@@ -122,9 +122,12 @@ Macros</h2></td></tr>
 <tr class="memitem:aebb98724f8837a0839a7cbaa28a85a65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#aebb98724f8837a0839a7cbaa28a85a65">LCHECK_NUM</a>(fn,  args,  num)</td></tr>
 <tr class="memdesc:aebb98724f8837a0839a7cbaa28a85a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether a function passed the correct number of arguments.  <br /></td></tr>
 <tr class="separator:aebb98724f8837a0839a7cbaa28a85a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cc9f22710b1939d359784fbf1c79bef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a7cc9f22710b1939d359784fbf1c79bef">LCHECK_NOT_EMPTY</a>(fn,  args,  idx)</td></tr>
-<tr class="memdesc:a7cc9f22710b1939d359784fbf1c79bef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether an expression is empty and report it as error.  <br /></td></tr>
-<tr class="separator:a7cc9f22710b1939d359784fbf1c79bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa2840b0e2dcf03ed27b785d8c21e008"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#afa2840b0e2dcf03ed27b785d8c21e008">LCHECK_QEXPR_NOT_EMPTY</a>(fn,  args,  idx)</td></tr>
+<tr class="memdesc:afa2840b0e2dcf03ed27b785d8c21e008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether a quoted expression is empty and report it as error.  <br /></td></tr>
+<tr class="separator:afa2840b0e2dcf03ed27b785d8c21e008"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5159675c8e1af6171eb8ae4abd6a1c23"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="errors_8h.html#a5159675c8e1af6171eb8ae4abd6a1c23">LCHECK_STR_NOT_EMPTY</a>(fn,  args,  idx)</td></tr>
+<tr class="memdesc:a5159675c8e1af6171eb8ae4abd6a1c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to check whether a string is empty and report it as error.  <br /></td></tr>
+<tr class="separator:a5159675c8e1af6171eb8ae4abd6a1c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86d500a34c624c2cae56bc25a31b12f3"><td class="memItemLeft" align="right" valign="top"><a id="a86d500a34c624c2cae56bc25a31b12f3" name="a86d500a34c624c2cae56bc25a31b12f3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UNUSED</b>(x)&#160;&#160;&#160;(void)(x)</td></tr>
 <tr class="memdesc:a86d500a34c624c2cae56bc25a31b12f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to avoid compiler warnings about unused variables. <br /></td></tr>
@@ -283,49 +286,6 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="a7cc9f22710b1939d359784fbf1c79bef" name="a7cc9f22710b1939d359784fbf1c79bef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cc9f22710b1939d359784fbf1c79bef">&#9670;&#160;</a></span>LCHECK_NOT_EMPTY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LCHECK_NOT_EMPTY</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">fn, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">args, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">idx&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
-<div class="line">        (args), \</div>
-<div class="line">        (args)-&gt;cell[idx]-&gt;count != 0, \</div>
-<div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed  for argument %i.&quot;</span>, \</div>
-<div class="line">        (fn), \</div>
-<div class="line">        (idx) \</div>
-<div class="line">    )</div>
-</div><!-- fragment -->
-<p>Macro to check whether an expression is empty and report it as error. </p>
-
-</div>
-</div>
 <a id="aebb98724f8837a0839a7cbaa28a85a65" name="aebb98724f8837a0839a7cbaa28a85a65"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebb98724f8837a0839a7cbaa28a85a65">&#9670;&#160;</a></span>LCHECK_NUM</h2>
 
@@ -359,7 +319,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        (args)-&gt;count == ((num)), \</div>
+<div class="line">        (num) == (args)-&gt;count, \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed incorrect number of arguments. Got %i, Expected %i.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (args)-&gt;count, \</div>
@@ -367,6 +327,92 @@ Macros</h2></td></tr>
 <div class="line">    )</div>
 </div><!-- fragment -->
 <p>Macro to check whether a function passed the correct number of arguments. </p>
+
+</div>
+</div>
+<a id="afa2840b0e2dcf03ed27b785d8c21e008" name="afa2840b0e2dcf03ed27b785d8c21e008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa2840b0e2dcf03ed27b785d8c21e008">&#9670;&#160;</a></span>LCHECK_QEXPR_NOT_EMPTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCHECK_QEXPR_NOT_EMPTY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fn, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">idx&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
+<div class="line">        (args), \</div>
+<div class="line">        (0 != (args)-&gt;cell[idx]-&gt;count), \</div>
+<div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
+<div class="line">        (fn), \</div>
+<div class="line">        (idx) \</div>
+<div class="line">    )</div>
+</div><!-- fragment -->
+<p>Macro to check whether a quoted expression is empty and report it as error. </p>
+
+</div>
+</div>
+<a id="a5159675c8e1af6171eb8ae4abd6a1c23" name="a5159675c8e1af6171eb8ae4abd6a1c23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5159675c8e1af6171eb8ae4abd6a1c23">&#9670;&#160;</a></span>LCHECK_STR_NOT_EMPTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCHECK_STR_NOT_EMPTY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fn, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">args, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">idx&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
+<div class="line">        (args), \</div>
+<div class="line">        (0 != strlen(args-&gt;cell[idx]-&gt;str)), \</div>
+<div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
+<div class="line">        (fn), \</div>
+<div class="line">        (idx) \</div>
+<div class="line">    )</div>
+</div><!-- fragment -->
+<p>Macro to check whether a string is empty and report it as error. </p>
 
 </div>
 </div>
@@ -487,7 +533,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Mon Aug 28 2023 17:10:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Aug 31 2023 11:55:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

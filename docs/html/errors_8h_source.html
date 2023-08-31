@@ -156,32 +156,41 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="errors_8h.html#aebb98724f8837a0839a7cbaa28a85a65">   69</a></span><span class="preprocessor">#define LCHECK_NUM(fn, args, num) \</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">    LCHECK( \</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">        (args), \</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">        (args)-&gt;count == ((num)), \</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">        (num) == (args)-&gt;count, \</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed incorrect number of arguments. Got %i, Expected %i.&quot;</span>, \</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        (fn), \</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        (args)-&gt;count, \</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        (num) \</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    )</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="errors_8h.html#a7cc9f22710b1939d359784fbf1c79bef">   80</a></span><span class="preprocessor">#define LCHECK_NOT_EMPTY(fn, args, idx) \</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">    LCHECK( \</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">        (args), \</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">        (args)-&gt;cell[idx]-&gt;count != 0, \</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed  for argument %i.&quot;</span>, \</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        (fn), \</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        (idx) \</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    )</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="errors_8h.html#a86d500a34c624c2cae56bc25a31b12f3">   90</a></span><span class="preprocessor">#define UNUSED(x) (void)(x)</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="errors_8h.html#afa2840b0e2dcf03ed27b785d8c21e008">   81</a></span><span class="preprocessor">#define LCHECK_QEXPR_NOT_EMPTY(fn, args, idx) \</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">    LCHECK( \</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">        (args), \</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">        (0 != (args)-&gt;cell[idx]-&gt;count), \</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        (fn), \</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        (idx) \</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    )</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="errors_8h.html#a5159675c8e1af6171eb8ae4abd6a1c23">   91</a></span><span class="preprocessor">#define LCHECK_STR_NOT_EMPTY(fn, args, idx) \</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">    LCHECK( \</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">        (args), \</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">        (0 != strlen(args-&gt;cell[idx]-&gt;str)), \</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        (fn), \</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        (idx) \</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    )</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="errors_8h.html#a86d500a34c624c2cae56bc25a31b12f3">  101</a></span><span class="preprocessor">#define UNUSED(x) (void)(x)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Mon Aug 28 2023 17:10:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Aug 31 2023 11:55:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

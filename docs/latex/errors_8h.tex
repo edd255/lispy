@@ -20,8 +20,10 @@ This file contains macros to check runtime assertions and do runtime error repor
 \begin{DoxyCompactList}\small\item\em Macro to check whether an index is smaller than a string length. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{errors_8h_aebb98724f8837a0839a7cbaa28a85a65}{LCHECK\+\_\+\+NUM}}(fn,  args,  num)
 \begin{DoxyCompactList}\small\item\em Macro to check whether a function passed the correct number of arguments. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}{LCHECK\+\_\+\+NOT\+\_\+\+EMPTY}}(fn,  args,  idx)
-\begin{DoxyCompactList}\small\item\em Macro to check whether an expression is empty and report it as error. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_afa2840b0e2dcf03ed27b785d8c21e008}{LCHECK\+\_\+\+QEXPR\+\_\+\+NOT\+\_\+\+EMPTY}}(fn,  args,  idx)
+\begin{DoxyCompactList}\small\item\em Macro to check whether a quoted expression is empty and report it as error. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{errors_8h_a5159675c8e1af6171eb8ae4abd6a1c23}{LCHECK\+\_\+\+STR\+\_\+\+NOT\+\_\+\+EMPTY}}(fn,  args,  idx)
+\begin{DoxyCompactList}\small\item\em Macro to check whether a string is empty and report it as error. \end{DoxyCompactList}\item 
 \Hypertarget{errors_8h_a86d500a34c624c2cae56bc25a31b12f3}\label{errors_8h_a86d500a34c624c2cae56bc25a31b12f3} 
 \#define {\bfseries UNUSED}(x)~(void)(x)
 \begin{DoxyCompactList}\small\item\em Macro to avoid compiler warnings about unused variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -96,27 +98,6 @@ Macro to check whether an index is smaller than a list size.
 
 Macro to check whether an index is smaller than a string length. 
 
-\Hypertarget{errors_8h_a7cc9f22710b1939d359784fbf1c79bef}\label{errors_8h_a7cc9f22710b1939d359784fbf1c79bef} 
-\index{errors.h@{errors.h}!LCHECK\_NOT\_EMPTY@{LCHECK\_NOT\_EMPTY}}
-\index{LCHECK\_NOT\_EMPTY@{LCHECK\_NOT\_EMPTY}!errors.h@{errors.h}}
-\doxysubsubsection{\texorpdfstring{LCHECK\_NOT\_EMPTY}{LCHECK\_NOT\_EMPTY}}
-{\footnotesize\ttfamily \#define LCHECK\+\_\+\+NOT\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx }\end{DoxyParamCaption})}
-
-{\bfseries Value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>cell[idx]-\/>count\ !=\ 0,\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ \ for\ argument\ \%i."{}},\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ )}
-
-\end{DoxyCode}
-
-
-Macro to check whether an expression is empty and report it as error. 
-
 \Hypertarget{errors_8h_aebb98724f8837a0839a7cbaa28a85a65}\label{errors_8h_aebb98724f8837a0839a7cbaa28a85a65} 
 \index{errors.h@{errors.h}!LCHECK\_NUM@{LCHECK\_NUM}}
 \index{LCHECK\_NUM@{LCHECK\_NUM}!errors.h@{errors.h}}
@@ -127,7 +108,7 @@ Macro to check whether an expression is empty and report it as error.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>count\ ==\ ((num)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (num)\ ==\ (args)-\/>count,\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ incorrect\ number\ of\ arguments.\ Got\ \%i,\ Expected\ \%i."{}},\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (args)-\/>count,\ \(\backslash\)}
@@ -138,6 +119,48 @@ Macro to check whether an expression is empty and report it as error.
 
 
 Macro to check whether a function passed the correct number of arguments. 
+
+\Hypertarget{errors_8h_afa2840b0e2dcf03ed27b785d8c21e008}\label{errors_8h_afa2840b0e2dcf03ed27b785d8c21e008} 
+\index{errors.h@{errors.h}!LCHECK\_QEXPR\_NOT\_EMPTY@{LCHECK\_QEXPR\_NOT\_EMPTY}}
+\index{LCHECK\_QEXPR\_NOT\_EMPTY@{LCHECK\_QEXPR\_NOT\_EMPTY}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_QEXPR\_NOT\_EMPTY}{LCHECK\_QEXPR\_NOT\_EMPTY}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+QEXPR\+\_\+\+NOT\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (0\ !=\ (args)-\/>cell[idx]-\/>count),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ \{\}\ for\ argument\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether a quoted expression is empty and report it as error. 
+
+\Hypertarget{errors_8h_a5159675c8e1af6171eb8ae4abd6a1c23}\label{errors_8h_a5159675c8e1af6171eb8ae4abd6a1c23} 
+\index{errors.h@{errors.h}!LCHECK\_STR\_NOT\_EMPTY@{LCHECK\_STR\_NOT\_EMPTY}}
+\index{LCHECK\_STR\_NOT\_EMPTY@{LCHECK\_STR\_NOT\_EMPTY}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{LCHECK\_STR\_NOT\_EMPTY}{LCHECK\_STR\_NOT\_EMPTY}}
+{\footnotesize\ttfamily \#define LCHECK\+\_\+\+STR\+\_\+\+NOT\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{fn,  }\item[{}]{args,  }\item[{}]{idx }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (0\ !=\ strlen(args-\/>cell[idx]-\/>str)),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ \{\}\ for\ argument\ \%i."{}},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Macro to check whether a string is empty and report it as error. 
 
 \Hypertarget{errors_8h_a588825eb551fd55402df34d39cfa3540}\label{errors_8h_a588825eb551fd55402df34d39cfa3540} 
 \index{errors.h@{errors.h}!LCHECK\_TYPE@{LCHECK\_TYPE}}

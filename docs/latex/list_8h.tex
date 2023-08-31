@@ -28,7 +28,15 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_af693588e2c80ae046141d7d778085956}{builtin\+\_\+unpack}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Applies a function to a list of arguments. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a1c5c6ffaf7af0e8490a8aa4e33b25433}{builtin\+\_\+nth}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Returns the nth element of a list or string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the nth element of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a7f611fe2e0b5ad41dfedf784b3bbd25e}{builtin\+\_\+first}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns the first element of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a824eaad8a2cc3a33b68dd03263af22e3}{builtin\+\_\+second}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a}{builtin\+\_\+third}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a7a6d464742d7be6831ada74466a9be80}{builtin\+\_\+last}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Returns the last element of a list or string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -79,6 +87,28 @@ Expects that the first argument of the quoted expression is a function, and the 
 \begin{DoxyReturn}{Returns}
 The result of the evaluation 
 \end{DoxyReturn}
+\Hypertarget{list_8h_a7f611fe2e0b5ad41dfedf784b3bbd25e}\label{list_8h_a7f611fe2e0b5ad41dfedf784b3bbd25e} 
+\index{list.h@{list.h}!builtin\_first@{builtin\_first}}
+\index{builtin\_first@{builtin\_first}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_first()}{builtin\_first()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+first (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns the first element of a list or string. 
+
+Expects that the first argument is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The first element of the given list/string. 
+\end{DoxyReturn}
 \Hypertarget{list_8h_a15737f64eba6006e7e636c1d2c1c69ed}\label{list_8h_a15737f64eba6006e7e636c1d2c1c69ed} 
 \index{list.h@{list.h}!builtin\_head@{builtin\_head}}
 \index{builtin\_head@{builtin\_head}!list.h@{list.h}}
@@ -118,6 +148,28 @@ Joins two quoted expressions/two strings.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A quoted expression/string that represents the join 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a7a6d464742d7be6831ada74466a9be80}\label{list_8h_a7a6d464742d7be6831ada74466a9be80} 
+\index{list.h@{list.h}!builtin\_last@{builtin\_last}}
+\index{builtin\_last@{builtin\_last}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_last()}{builtin\_last()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+last (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns the last element of a list or string. 
+
+Expects that the first argument is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The last element of the given list/string. 
 \end{DoxyReturn}
 \Hypertarget{list_8h_a812c1dd7c6785868671eab5e465cc7d8}\label{list_8h_a812c1dd7c6785868671eab5e465cc7d8} 
 \index{list.h@{list.h}!builtin\_len@{builtin\_len}}
@@ -203,6 +255,28 @@ Expects that the first argument is a function.
 \begin{DoxyReturn}{Returns}
 The result of the evaluation. 
 \end{DoxyReturn}
+\Hypertarget{list_8h_a824eaad8a2cc3a33b68dd03263af22e3}\label{list_8h_a824eaad8a2cc3a33b68dd03263af22e3} 
+\index{list.h@{list.h}!builtin\_second@{builtin\_second}}
+\index{builtin\_second@{builtin\_second}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_second()}{builtin\_second()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+second (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns the last element of a list or string. 
+
+Expects that the first argument is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The second element of the given list/string. 
+\end{DoxyReturn}
 \Hypertarget{list_8h_a0c718446878069eb87cef4208d032e50}\label{list_8h_a0c718446878069eb87cef4208d032e50} 
 \index{list.h@{list.h}!builtin\_tail@{builtin\_tail}}
 \index{builtin\_tail@{builtin\_tail}!list.h@{list.h}}
@@ -222,6 +296,28 @@ Computes the tail of a list or string.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Tail of the list/string 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a}\label{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a} 
+\index{list.h@{list.h}!builtin\_third@{builtin\_third}}
+\index{builtin\_third@{builtin\_third}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_third()}{builtin\_third()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+third (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Returns the last element of a list or string. 
+
+Expects that the first argument is a number.
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The third element of the given list/string. 
 \end{DoxyReturn}
 \Hypertarget{list_8h_af693588e2c80ae046141d7d778085956}\label{list_8h_af693588e2c80ae046141d7d778085956} 
 \index{list.h@{list.h}!builtin\_unpack@{builtin\_unpack}}
