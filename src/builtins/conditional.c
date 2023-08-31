@@ -50,7 +50,7 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
 
-    lval_t* const cond = args->cell[0];
+    const lval_t* cond = args->cell[0];
     lval_t* expected = args->cell[1];
     lval_t* actual = args->cell[2];
 
