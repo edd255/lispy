@@ -20,7 +20,6 @@
 /// Generic bufsize definition
 enum { BUFSIZE = 512 };
 
-
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------
 /// A data structure that contains Lispy values.
