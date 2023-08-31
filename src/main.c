@@ -289,6 +289,7 @@ char* get_git_branch_name(void) {
     char* branch_name = malloc(sizeof(char) * BUFSIZE);
     FILE* cmd_output = popen("git rev-parse --abbrev-ref HEAD", "r");
     if (NULL == cmd_output) {
+        free(branch_name);
         perror("popen");
         return NULL;
     }
@@ -299,14 +300,19 @@ char* get_git_branch_name(void) {
         }
         return branch_name;
     }
+    free(branch_name);
     pclose(cmd_output);
-    return NULL;
+    char* empty = malloc(2 * sizeof(char));
+    empty[0] = ' ';
+    empty[1] = ' ';
+    return empty;
 }
 
 char* get_git_hash(void) {
     char* git_hash = malloc(sizeof(char) * BUFSIZE);
     FILE* cmd_output = popen("git rev-parse HEAD", "r");
     if (NULL == cmd_output) {
+        free(git_hash);
         perror("popen");
         return NULL;
     }
@@ -320,8 +326,12 @@ char* get_git_hash(void) {
         }
         return git_hash;
     }
+    free(git_hash);
+    char* empty = malloc(2 * sizeof(char));
+    empty[0] = ' ';
+    empty[1] = ' ';
     pclose(cmd_output);
-    return NULL;
+    return empty;
 }
 
 void print_prompt(void) {
