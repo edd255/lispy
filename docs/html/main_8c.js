@@ -1,8 +1,8 @@
 var main_8c =
 [
-    [ "cleanup", "main_8c.html#a19efd3d1a2014983aadcb3c9f6bd32be", null ],
-    [ "cli_interpreter", "main_8c.html#a74f73094803752e1a03badcb3a521dfc", null ],
-    [ "file_interpreter", "main_8c.html#aa4a5579d4692d0cbea971fca908af805", null ],
+    [ "cleanup", "main_8c.html#aed182b973ecb166e50c0e4338be146d5", null ],
+    [ "cli_interpreter", "main_8c.html#ab4bcf6908817f7fb2303080122c2c5e0", null ],
+    [ "file_interpreter", "main_8c.html#a99b844445b71a66fe9186921fb96272d", null ],
     [ "get_git_branch_name", "main_8c.html#a46ce6aca187cded7f1a0955c91aa7ce1", null ],
     [ "get_git_hash", "main_8c.html#a63ab71f67fdf5f6372fbca175e9bda3e", null ],
     [ "get_lispy_parser", "main_8c.html#a33d140882b6f455504ea3f64c726961d", null ],

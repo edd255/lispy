@@ -26,7 +26,11 @@ This file contains all builtin arithmetic methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a125e3c60db4df28116d2802143c05786}{builtin\+\_\+max}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Finds the maximum of all arguments. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a82157f63f4b8b5a7df5179e9fe2fda45}{builtin\+\_\+min}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Finds the minimum of all arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Finds the minimum of all arguments. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_a140143bd7ee86d8ca1acb1f7980bddee}{builtin\+\_\+sum}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes the sum of all arguments in the q-\/expr. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{arithmetic_8h_ab75e64076168cc129f44fa59b6dd4829}{builtin\+\_\+prod}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Computes the product of all arguments in the q-\/expr. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -197,6 +201,26 @@ Exponentiates all arguments.
 \begin{DoxyReturn}{Returns}
 A Lispy value which contains the power of all arguments 
 \end{DoxyReturn}
+\Hypertarget{arithmetic_8h_ab75e64076168cc129f44fa59b6dd4829}\label{arithmetic_8h_ab75e64076168cc129f44fa59b6dd4829} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_prod@{builtin\_prod}}
+\index{builtin\_prod@{builtin\_prod}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_prod()}{builtin\_prod()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+prod (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes the product of all arguments in the q-\/expr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the product of all arguments 
+\end{DoxyReturn}
 \Hypertarget{arithmetic_8h_a592b24f93e8751bf0ca52f0d2883cf6d}\label{arithmetic_8h_a592b24f93e8751bf0ca52f0d2883cf6d} 
 \index{arithmetic.h@{arithmetic.h}!builtin\_sub@{builtin\_sub}}
 \index{builtin\_sub@{builtin\_sub}!arithmetic.h@{arithmetic.h}}
@@ -216,4 +240,24 @@ Subtracts all arguments.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A Lispy value which contains the difference of all arguments 
+\end{DoxyReturn}
+\Hypertarget{arithmetic_8h_a140143bd7ee86d8ca1acb1f7980bddee}\label{arithmetic_8h_a140143bd7ee86d8ca1acb1f7980bddee} 
+\index{arithmetic.h@{arithmetic.h}!builtin\_sum@{builtin\_sum}}
+\index{builtin\_sum@{builtin\_sum}!arithmetic.h@{arithmetic.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_sum()}{builtin\_sum()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+sum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Computes the sum of all arguments in the q-\/expr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The arguments to use \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Lispy value which contains the sum of all arguments 
 \end{DoxyReturn}

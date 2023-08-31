@@ -8,5 +8,7 @@ var arithmetic_8h =
     [ "builtin_mul", "arithmetic_8h.html#a1e44ca958d75adee39065f39cc4bdc00", null ],
     [ "builtin_op", "arithmetic_8h.html#a143e9f2639b1f948e0526e7cb22e6735", null ],
     [ "builtin_pow", "arithmetic_8h.html#aaa52c538a14494a6d1777c44343519b0", null ],
-    [ "builtin_sub", "arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d", null ]
+    [ "builtin_prod", "arithmetic_8h.html#ab75e64076168cc129f44fa59b6dd4829", null ],
+    [ "builtin_sub", "arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d", null ],
+    [ "builtin_sum", "arithmetic_8h.html#a140143bd7ee86d8ca1acb1f7980bddee", null ]
 ];
