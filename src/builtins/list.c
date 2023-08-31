@@ -1,5 +1,6 @@
 #include "builtins/list.h"
 
+#include "builtins/eq_cmp.h"
 #include "eval.h"
 #include "io.h"
 
@@ -299,4 +300,31 @@ lval_t* builtin_last(lenv_t* env, lval_t* args) {
         __func__,
         ltype_name(args->cell[0]->type)
     );
+}
+
+lval_t* builtin_elem(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+
+    lval_t* elem = args->cell[0];
+    lval_t* list = args->cell[1];
+
+    for (int i = 0; i < list->count; i++) {
+        lval_t* cp_elem = lval_copy(elem);
+        lval_t* list_elem = lval_copy(list->cell[i]);
+
+        lval_t* eq_args = lval_qexpr();
+        eq_args = lval_add(eq_args, cp_elem);
+        eq_args = lval_add(eq_args, list_elem);
+
+        lval_t* res = builtin_eq(env, eq_args);
+        if (res->num == 1) {
+            lval_del(args);
+            return res;
+        }
+        lval_del(res);
+    }
+    lval_del(args);
+    return lval_num(0);
 }

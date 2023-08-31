@@ -112,13 +112,6 @@
     {drop-while f (tail l)}
 })
 
-; Element of List
-(fun {elem x l} {
-  if (== l nil)
-    {false}
-    {if (== x (fst l)) {true} {elem x (tail l)}}
-})
-
 ; Find element in list of pairs
 (fun {lookup x l} {
   if (== l nil)
