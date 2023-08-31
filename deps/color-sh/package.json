@@ -1,0 +1,9 @@
+{
+  "name": "color-sh",
+  "version": "1.0",
+  "repo": "gioyik/color-sh",
+  "description": "C lib to print colors on your terminal",
+  "keywords": ["terminal", "lib", "color", "sh", "console"],
+  "license": "MIT",
+  "src": ["src/color-sh.c", "src/color-sh.h"]
+}
