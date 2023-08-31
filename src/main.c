@@ -238,7 +238,7 @@ void cli_interpreter(lenv_t* env) {
         char* input = readline(">>> ");
         add_history(input);
         if (0 == strcmp(input, "exit")) {
-            free(input);
+            FREE(input);
             break;
         }
         mpc_result_t parse_result;
@@ -253,7 +253,7 @@ void cli_interpreter(lenv_t* env) {
             mpc_err_print(parse_result.error);
             mpc_err_delete(parse_result.error);
         }
-        free(input);
+        FREE(input);
     }
 }
 
@@ -364,8 +364,8 @@ void print_prompt(void) {
     );
 #endif
     printf("Press Ctrl+c or type 'exit' to exit.\n");
-    free(branch_name);
-    free(git_hash);
+    FREE(branch_name);
+    FREE(git_hash);
 }
 
 //--- Command-Line Argument Parser ---------------------------------------------

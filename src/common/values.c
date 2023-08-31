@@ -242,8 +242,8 @@ lval_t* lval_join(lval_t* self, lval_t* other) {
         self = lval_add(self, other->cell[i]);
     }
     // Delete the empty 'other' and return 'self'
-    free(other->cell);
-    free(other);
+    FREE(other->cell);
+    FREE(other);
     return self;
 }
 
