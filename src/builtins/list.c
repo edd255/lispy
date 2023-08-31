@@ -366,7 +366,7 @@ lval_t* builtin_init(lenv_t* env, lval_t* args) {
             LCHECK_STR_NOT_EMPTY(__func__, args, 0);
             char* old_str = args->cell[0]->str;
             int length = strlen(old_str);
-            if (length < 0) {
+            if (length == 1) {
                 lval_del(args);
                 return lval_str("");
             }
