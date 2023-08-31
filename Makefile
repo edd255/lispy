@@ -78,13 +78,16 @@ style:
 #---- ANALYSIS -----------------------------------------------------------------
 
 analyze:
+	$(Q)$(MKDIR) logs
 	$(Q)echo "====> Running scan-build..."
 	$(Q)scan-build make all
 	$(Q)echo "====> Running cppcheck..."
-	$(Q)cppcheck src/ $(CPPCHECK) 2> cppcheck.log
+	$(Q)cppcheck src/ $(CPPCHECK) 2> logs/cppcheck.log
 	$(Q)echo "====> Running clang-tidy..."
 	$(Q)compiledb make all
-	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG)
+	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG) || true
+	$(Q)yq 'del(.Diagnostics[] | select(.DiagnosticMessage.FilePath | test("deps")))' tidy.log > logs/tidy.log
+	$(Q)$(RM) tidy.log
 
 memcheck: debugging
 	$(Q)echo "====> Running valgrind..."
