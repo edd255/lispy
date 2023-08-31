@@ -46,6 +46,8 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "^", builtin_pow);
     lenv_add_builtin_fn(env, "max", builtin_max);
     lenv_add_builtin_fn(env, "min", builtin_min);
+    lenv_add_builtin_fn(env, "sum", builtin_sum);
+    lenv_add_builtin_fn(env, "prod", builtin_prod);
 
     // Conditional functions
     lenv_add_builtin_fn(env, "if", builtin_if);
