@@ -1,0 +1,23 @@
+;==== Fibonacci Test ==========================================================
+(fun {day-name x} {
+  case x
+    {0 "Monday"}
+    {1 "Tuesday"}
+    {2 "Wednesday"}
+    {3 "Thursday"}
+    {4 "Friday"}
+    {5 "Saturday"}
+    {6 "Sunday"}
+})
+
+(fun {test exp got} {
+    testhelper (== exp got) exp got
+})
+
+(test (day-name 0) "Monday")
+(test (day-name 1) "Tuesday")
+(test (day-name 2) "Wednesday")
+(test (day-name 3) "Thursday")
+(test (day-name 4) "Friday")
+(test (day-name 5) "Saturday")
+(test (day-name 6) "Sunday")
