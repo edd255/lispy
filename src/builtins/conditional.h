@@ -25,4 +25,6 @@ lval_t* builtin_if(lenv_t* env, lval_t* args);
 /// @return "PASSED" on success, "FAIL" and expected and actual values else
 lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
 
+lval_t* builtin_select(lenv_t* env, lval_t* args);
+
 #endif
