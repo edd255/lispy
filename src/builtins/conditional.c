@@ -50,7 +50,7 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
 
-    const lval_t* cond = args->cell[0];
+    const lval_t* cond = lval_eval(env, args->cell[0]);
     lval_t* expected = args->cell[1];
     lval_t* actual = args->cell[2];
 
@@ -67,4 +67,38 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
     }
     lval_del(args);
     return lval_sexpr();
+}
+
+lval_t* builtin_select(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    if (args->count == 0) {
+        return lval_err(
+            "'%s' expected at least one selection but got 0",
+            __func__
+        );
+    }
+    for (int i = 0; i < args->count; i++) {
+        LCHECK_NUM(__func__, args->cell[i], 2);
+        lval_t* args_cond = lval_copy(args->cell[i]->cell[0]);
+        lval_t* body = lval_copy(args->cell[i]->cell[1]);
+        lval_t* cond = lval_eval(env, args_cond);
+        assert(NULL != args_cond);
+        assert(NULL != body);
+        assert(NULL != cond);
+        if (cond->num) {
+            lval_t* res = lval_eval(env, body);
+            lval_del(cond);
+            lval_del(args);
+            return res;
+        }
+        lval_del(cond);
+        lval_del(body);
+    }
+    lval_del(args);
+    return lval_err(
+        "'%s' expected that at least one selection is true but none is",
+        __func__
+    );
 }
