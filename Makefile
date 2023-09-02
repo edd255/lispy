@@ -98,7 +98,7 @@ memcheck: debugging
 tests: sanitized
 	$(Q)for test in $(TESTS); do \
 		echo "====> Running $$test..."; \
-		$(BIN)_release --filename=$$test; \
+		$(BIN)_sanitized --filename=$$test; \
 	done
 
 #---- INSTALLING ---------------------------------------------------------------
