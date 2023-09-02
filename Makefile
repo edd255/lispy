@@ -90,12 +90,20 @@ analyze:
 	$(Q)$(RM) tidy.log
 
 memcheck: debugging
-	$(Q)echo "====> Running valgrind..."
-	$(Q)valgrind ${VALGRIND} --tool=memcheck $(BIN)_debugging
+	$(Q)echo "====> Running memcheck..."
+	$(Q)valgrind ${VALGRIND} $(BIN)_debugging
 
 callgrind: debugging
-	$(Q)echo "====> Running valgrind..."
-	$(Q)valgrind --tool=callgrind $(BIN)_debugging
+	$(Q)echo "====> Running callgrind..."
+	$(Q)valgrind ${CALLGRIND} $(BIN)_debugging
+
+massif: debugging
+	$(Q)echo "====> Running massif..."
+	$(Q)valgrind ${massif} $(BIN)_debugging
+
+dhat: debugging
+	$(Q)echo "====> Running massif..."
+	$(Q)valgrind ${dhat} $(BIN)_debugging
 
 #---- TESTING ------------------------------------------------------------------
 
