@@ -65,8 +65,9 @@ lval_t* lval_sym(char* str) {
     lval_t* self = MALLOC(sizeof(lval_t));
     lval_init(self);
     self->type = LISPY_VAL_SYM;
-    self->sym = MALLOC(strlen(str) + 1);
-    strcpy(self->sym, str);
+    size_t str_len = strlen(str) + 1;
+    self->sym = MALLOC(str_len);
+    strlcpy(self->sym, str, str_len);
     return self;
 }
 
@@ -122,8 +123,9 @@ lval_t* lval_str(const char* str) {
     lval_t* self = MALLOC(sizeof(lval_t));
     lval_init(self);
     self->type = LISPY_VAL_STR;
-    self->str = MALLOC(strlen(str) + 1);
-    strcpy(self->str, str);
+    size_t str_len = strlen(str) + 1;
+    self->str = MALLOC(str_len);
+    strlcpy(self->str, str, str_len);
     return self;
 }
 
@@ -155,20 +157,23 @@ lval_t* lval_copy(const lval_t* self) {
             x->dec = self->dec;
             break;
         }
-        // Copy Strings using malloc and strcpy
+        // Copy Strings using malloc and strlcpy
         case LISPY_VAL_ERR: {
-            x->err = MALLOC(strlen(self->err) + 1);
-            strcpy(x->err, self->err);
+            size_t err_len = strlen(self->err) + 1;
+            x->err = MALLOC(err_len);
+            strlcpy(x->err, self->err, err_len);
             break;
         }
         case LISPY_VAL_SYM: {
-            x->sym = MALLOC(strlen(self->sym) + 1);
-            strcpy(x->sym, self->sym);
+            size_t sym_len = strlen(self->sym) + 1;
+            x->sym = MALLOC(sym_len);
+            strlcpy(x->sym, self->sym, sym_len);
             break;
         }
         case LISPY_VAL_STR: {
-            x->str = MALLOC(strlen(self->str) + 1);
-            strcpy(x->str, self->str);
+            size_t str_len = strlen(self->str) + 1;
+            x->str = MALLOC(str_len);
+            strlcpy(x->str, self->str, str_len);
             break;
         }
         // Copy Lists by copying each sub-expression
@@ -230,8 +235,8 @@ lval_t* lval_join(lval_t* self, lval_t* other) {
     // For strings
     if ((self->type == LISPY_VAL_STR) && (other->type == LISPY_VAL_STR)) {
         char str[BUFSIZE];
-        strcpy(str, self->str);
-        strcat(str, other->str);
+        strlcpy(str, self->str, BUFSIZE);
+        strlcat(str, other->str, BUFSIZE);
         lval_del(self);
         lval_del(other);
         return lval_str(str);

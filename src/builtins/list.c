@@ -77,7 +77,7 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
             }
             size_t new_length = strlen(str) - 1;
             char* tail_str = MALLOC(new_length + 1);
-            strcpy(tail_str, str + 1);
+            strlcpy(tail_str, str + 1, new_length + 1);
             lval_t* tail = lval_str(tail_str);
             FREE(tail_str);
             lval_del(args);

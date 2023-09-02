@@ -64,9 +64,10 @@ void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val) {
 
     // Copy contents of lval and symbol string into new location
     env->vals[env->count - 1] = lval_copy(val);
-    env->syms[env->count - 1] = MALLOC(strlen(key->sym) + 1);
+    size_t env_syms_len = strlen(key->sym) + 1;
+    env->syms[env->count - 1] = MALLOC(env_syms_len);
 
-    strcpy(env->syms[env->count - 1], key->sym);
+    strlcpy(env->syms[env->count - 1], key->sym, env_syms_len);
 }
 
 lenv_t* lenv_copy(lenv_t* env) {
@@ -78,8 +79,9 @@ lenv_t* lenv_copy(lenv_t* env) {
     n->syms = MALLOC(sizeof(char*) * (n->count));
     n->vals = MALLOC(sizeof(lval_t*) * (n->count));
     for (int i = 0; i < env->count; i++) {
-        n->syms[i] = MALLOC(strlen(env->syms[i]) + 1);
-        strcpy(n->syms[i], env->syms[i]);
+        size_t env_syms_len = strlen(env->syms[i] + 1);
+        n->syms[i] = MALLOC(env_syms_len);
+        strlcpy(n->syms[i], env->syms[i], env_syms_len);
         n->vals[i] = lval_copy(env->vals[i]);
     }
     return n;
