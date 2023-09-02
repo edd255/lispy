@@ -46,7 +46,7 @@
 #define LCHECK_IDX_QEXPR(fn, args, cell_idx, idx) \
     LCHECK( \
         (args), \
-        (idx < (args->cell[cell_idx]->count)), \
+        ((idx) < ((args)->cell[cell_idx]->count)), \
         "Function '%s' passed index %d but argument has size %d.", \
         (fn), \
         (idx), \
