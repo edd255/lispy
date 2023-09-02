@@ -33,4 +33,12 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
 /// @return The evaluated body of the true condition
 lval_t* builtin_select(lenv_t* env, lval_t* args);
 
+/// @brief Evaluates switch-case statements
+/// @param env The environment in which the expression is used
+/// @param args The first argument is the argument to match, the residuals
+/// arguments are quoted expression that contain as first element the case, and
+/// as second argument the result
+/// @return The evaluated body of the true condition
+lval_t* builtin_case(lenv_t* env, lval_t* args);
+
 #endif

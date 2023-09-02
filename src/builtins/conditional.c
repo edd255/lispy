@@ -102,3 +102,25 @@ lval_t* builtin_select(lenv_t* env, lval_t* args) {
         __func__
     );
 }
+
+lval_t* builtin_case(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+
+    lval_t* arg = args->cell[0];
+    for (int i = 1; i < args->count; i++) {
+        lval_t* case_stmt = args->cell[i];
+        int cond = lval_eq(arg, case_stmt->cell[0]);
+        if (cond) {
+            lval_t* res = lval_copy(case_stmt->cell[1]);
+            lval_del(args);
+            return res;
+        }
+    }
+    lval_del(args);
+    return lval_err(
+        "'%s' expected that arg matches one case but it doesn't",
+        __func__
+    );
+}

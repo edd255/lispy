@@ -53,6 +53,7 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "if", builtin_if);
     lenv_add_builtin_fn(env, "testhelper", builtin_testhelper);
     lenv_add_builtin_fn(env, "select", builtin_select);
+    lenv_add_builtin_fn(env, "case", builtin_case);
 
     // Logical functionvns
     lenv_add_builtin_fn(env, "and", builtin_and);
