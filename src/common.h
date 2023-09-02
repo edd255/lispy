@@ -19,8 +19,8 @@
 
 /// Bufsize definition
 enum {
-    /// Buffers of size 512 are used
-    BUFSIZE = 512
+    /// Buffers of size 1024 are used
+    BUFSIZE = 1024
 };
 
 //=== DECLARATIONS =============================================================
