@@ -46,7 +46,10 @@ INC_FLAGS         := -I. -I$(SRC_DIR)
 LDFLAGS           += -ledit -lm -DLOGC_USE_COLOR -DVERSION=$(VERSION)
 CFLAGS            := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR -DVERSION=$(VERSION)
 MAKEFLAGS         := --jobs=$(shell nproc)
-VALGRIND          := --leak-check=full --show-leak-kinds=all --track-origins=yes
+VALGRIND          := --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck
+CALLGRIND         := --dump-instr=yes --collect-jumps=yes --tool=callgrind
+MASSIF            := --tool=massif
+DHAT              := --tool=dhat
 CPPCHECK          := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
 CLANG_FMT_CONFIG  := --Werror --style=file:.config/clang/fmt.conf
 CLANG_TIDY_CONFIG := -config-file=.config/clang/tidy.conf -export-fixes=tidy.log -fix
