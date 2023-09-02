@@ -294,7 +294,7 @@ char* get_git_branch_name(void) {
         return NULL;
     }
     if (NULL != fgets(branch_name, sizeof(branch_name), cmd_output)) {
-        size_t len = strlen(branch_name);
+        size_t len = strnlen(branch_name, BUFSIZE);
         if (0 < len && '\n' == branch_name[len - 1]) {
             branch_name[len - 1] = '\0';
         }
@@ -317,7 +317,7 @@ char* get_git_hash(void) {
         return NULL;
     }
     if (NULL != fgets(git_hash, sizeof(git_hash), cmd_output)) {
-        size_t len = strlen(git_hash);
+        size_t len = strnlen(git_hash, BUFSIZE);
         if (0 < len && '\n' == git_hash[len - 1]) {
             git_hash[len - 1] = '\0';
         }
@@ -409,17 +409,20 @@ FILE* prepare_logfile(void) {
     char* cache_dir = getenv("XDG_CACHE_HOME");
     if (NULL == cache_dir) {
         char* tmp_dir = "/tmp";
-        char* log_file =
-            malloc(strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1);
-        strcpy(log_file, tmp_dir);
-        strcat(log_file, "/lispy/lispy.log");
+        size_t log_file_size = strnlen(tmp_dir, BUFSIZE)
+            + strnlen("/lispy/lispy.log", BUFSIZE) + 1;
+        char* log_file = malloc(log_file_size);
+        strlcpy(log_file, tmp_dir, log_file_size);
+        strlcat(log_file, "/lispy/lispy.log", log_file_size);
         log = fopen(log_file, "we");
         free(log_file);
         return log;
     }
-    char* log_file = malloc(strlen(cache_dir) + strlen("/lispy/lispy.log") + 1);
-    strcpy(log_file, cache_dir);
-    strcat(log_file, "/lispy/lispy.log");
+    size_t log_file_size =
+        strnlen(cache_dir, BUFSIZE) + strnlen("/lispy/lispy.log", BUFSIZE) + 1;
+    char* log_file = malloc(log_file_size);
+    strlcpy(log_file, cache_dir, log_file_size);
+    strlcat(log_file, "/lispy/lispy.log", log_file_size);
     log = fopen(log_file, "we");
     free(log_file);
     return log;
