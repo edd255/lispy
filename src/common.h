@@ -17,8 +17,11 @@
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
-/// Generic bufsize definition
-enum { BUFSIZE = 512 };
+/// Bufsize definition
+enum {
+    /// Buffers of size 512 are used
+    BUFSIZE = 512
+};
 
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------
