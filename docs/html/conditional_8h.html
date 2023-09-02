@@ -114,10 +114,51 @@ Functions</h2></td></tr>
 <tr class="memitem:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conditional_8h.html#a143c724c00506fcedeb22f3e5fbc8cbe">builtin_select</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
 <tr class="memdesc:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a series of conditions.  <br /></td></tr>
 <tr class="separator:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae90f8adcbe726ab75b23cb92d0a54dca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conditional_8h.html#ae90f8adcbe726ab75b23cb92d0a54dca">builtin_case</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="memdesc:ae90f8adcbe726ab75b23cb92d0a54dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates switch-case statements.  <br /></td></tr>
+<tr class="separator:ae90f8adcbe726ab75b23cb92d0a54dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains all builtin conditional methods. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="ae90f8adcbe726ab75b23cb92d0a54dca" name="ae90f8adcbe726ab75b23cb92d0a54dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae90f8adcbe726ab75b23cb92d0a54dca">&#9670;&#160;</a></span>builtin_case()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * builtin_case </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluates switch-case statements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment in which the expression is used </td></tr>
+    <tr><td class="paramname">args</td><td>The first argument is the argument to match, the residuals arguments are quoted expression that contain as first element the case, and as second argument the result </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The evaluated body of the true condition </dd></dl>
+
+</div>
+</div>
 <a id="a18db2be7f258919cc42365ad98bbf982" name="a18db2be7f258919cc42365ad98bbf982"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a18db2be7f258919cc42365ad98bbf982">&#9670;&#160;</a></span>builtin_if()</h2>
 
@@ -239,7 +280,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="conditional_8h.html">conditional.h</a></li>
-    <li class="footer">Generated on Sat Sep 2 2023 08:57:14 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Sep 2 2023 11:50:33 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
