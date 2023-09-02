@@ -1,14 +1,8 @@
 ;==== Fibonacci Test ==========================================================
 (fun {fac n} {
-    if (== n 0)
-    { 1 }
-    { 
-        if (== n 1)
-        { 1 }
-        {
-            (* n (fac (- n 1)))
-        }
-    }
+  select
+    { (== n 0) 1 }
+    { otherwise (* n (fac (- n 1))) }
 })
 
 (fun {test exp got} {
