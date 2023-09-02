@@ -25,6 +25,12 @@ lval_t* builtin_if(lenv_t* env, lval_t* args);
 /// @return "PASSED" on success, "FAIL" and expected and actual values else
 lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
 
+/// @brief Evaluates a series of conditions
+/// @param env The environment in which the expression is used
+/// @param args A symbolic expression, that contains quoted expression which
+/// themselves contain one condition and one body that should be executed if the
+/// condition evaluates to true
+/// @return The evaluated body of the true condition
 lval_t* builtin_select(lenv_t* env, lval_t* args);
 
 #endif

@@ -43,11 +43,12 @@ var searchData=
   ['builtin_5fprod_40',['builtin_prod',['../arithmetic_8h.html#ab75e64076168cc129f44fa59b6dd4829',1,'arithmetic.c']]],
   ['builtin_5fput_41',['builtin_put',['../vars_8h.html#ac706e1796bc3cf0162e0effec7518869',1,'vars.c']]],
   ['builtin_5fsecond_42',['builtin_second',['../list_8h.html#a824eaad8a2cc3a33b68dd03263af22e3',1,'list.c']]],
-  ['builtin_5fsub_43',['builtin_sub',['../arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d',1,'arithmetic.c']]],
-  ['builtin_5fsum_44',['builtin_sum',['../arithmetic_8h.html#a140143bd7ee86d8ca1acb1f7980bddee',1,'arithmetic.c']]],
-  ['builtin_5ftail_45',['builtin_tail',['../list_8h.html#a0c718446878069eb87cef4208d032e50',1,'list.c']]],
-  ['builtin_5ftesthelper_46',['builtin_testhelper',['../conditional_8h.html#aa166981db4cdf69decb94bafb2b885df',1,'conditional.c']]],
-  ['builtin_5fthird_47',['builtin_third',['../list_8h.html#ae2465a6323fd0980ed2c3a5435f15b2a',1,'list.c']]],
-  ['builtin_5funpack_48',['builtin_unpack',['../list_8h.html#af693588e2c80ae046141d7d778085956',1,'list.c']]],
-  ['builtin_5fvar_49',['builtin_var',['../vars_8h.html#a14e6227bb642a9aa8200ec59c7bbf77b',1,'vars.c']]]
+  ['builtin_5fselect_43',['builtin_select',['../conditional_8h.html#a143c724c00506fcedeb22f3e5fbc8cbe',1,'conditional.c']]],
+  ['builtin_5fsub_44',['builtin_sub',['../arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d',1,'arithmetic.c']]],
+  ['builtin_5fsum_45',['builtin_sum',['../arithmetic_8h.html#a140143bd7ee86d8ca1acb1f7980bddee',1,'arithmetic.c']]],
+  ['builtin_5ftail_46',['builtin_tail',['../list_8h.html#a0c718446878069eb87cef4208d032e50',1,'list.c']]],
+  ['builtin_5ftesthelper_47',['builtin_testhelper',['../conditional_8h.html#aa166981db4cdf69decb94bafb2b885df',1,'conditional.c']]],
+  ['builtin_5fthird_48',['builtin_third',['../list_8h.html#ae2465a6323fd0980ed2c3a5435f15b2a',1,'list.c']]],
+  ['builtin_5funpack_49',['builtin_unpack',['../list_8h.html#af693588e2c80ae046141d7d778085956',1,'list.c']]],
+  ['builtin_5fvar_50',['builtin_var',['../vars_8h.html#a14e6227bb642a9aa8200ec59c7bbf77b',1,'vars.c']]]
 ];

@@ -111,6 +111,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa166981db4cdf69decb94bafb2b885df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conditional_8h.html#aa166981db4cdf69decb94bafb2b885df">builtin_testhelper</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
 <tr class="memdesc:aa166981db4cdf69decb94bafb2b885df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a condition. On fail, prints expected and actual values.  <br /></td></tr>
 <tr class="separator:aa166981db4cdf69decb94bafb2b885df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conditional_8h.html#a143c724c00506fcedeb22f3e5fbc8cbe">builtin_select</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="memdesc:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a series of conditions.  <br /></td></tr>
+<tr class="separator:a143c724c00506fcedeb22f3e5fbc8cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains all builtin conditional methods. </p>
@@ -150,6 +153,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The evaluation of the consequence </dd></dl>
+
+</div>
+</div>
+<a id="a143c724c00506fcedeb22f3e5fbc8cbe" name="a143c724c00506fcedeb22f3e5fbc8cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a143c724c00506fcedeb22f3e5fbc8cbe">&#9670;&#160;</a></span>builtin_select()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * builtin_select </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluates a series of conditions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment in which the expression is used </td></tr>
+    <tr><td class="paramname">args</td><td>A symbolic expression, that contains quoted expression which themselves contain one condition and one body that should be executed if the condition evaluates to true </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The evaluated body of the true condition </dd></dl>
 
 </div>
 </div>
@@ -198,7 +239,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="conditional_8h.html">conditional.h</a></li>
-    <li class="footer">Generated on Thu Aug 31 2023 16:49:07 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Sep 2 2023 08:57:14 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

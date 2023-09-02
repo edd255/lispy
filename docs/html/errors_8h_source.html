@@ -140,13 +140,13 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        (fn), \</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        (idx), \</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        (args-&gt;count) \</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        ((args)-&gt;count) \</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    )</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="errors_8h.html#aeb37cd3513d482ae27352426b155a8e2">   57</a></span><span class="preprocessor">#define LCHECK_IDX_STR(fn, args, cell_idx, idx) \</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">    LCHECK( \</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">        (args), \</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">        ((idx) &lt; strlen(args-&gt;cell[cell_idx]-&gt;str)), \</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">        ((idx) &lt; strlen((args)-&gt;cell[cell_idx]-&gt;str)), \</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        (fn), \</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        (idx), \</div>
@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="errors_8h.html#a5159675c8e1af6171eb8ae4abd6a1c23">   91</a></span><span class="preprocessor">#define LCHECK_STR_NOT_EMPTY(fn, args, idx) \</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">    LCHECK( \</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">        (args), \</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">        (0 != strlen(args-&gt;cell[idx]-&gt;str)), \</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">        (0 != strlen((args)-&gt;cell[idx]-&gt;str)), \</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">        &quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        (fn), \</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        (idx) \</div>
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('errors_8h_source.html',''); initResiza
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Thu Aug 31 2023 16:49:07 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Sep 2 2023 08:57:14 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

@@ -19,12 +19,6 @@ struct \mbox{\hyperlink{structlval__t}{lval\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{common_8h_aeca034f67218340ecb2261a22c2f3dcd}\label{common_8h_aeca034f67218340ecb2261a22c2f3dcd} 
-\#define {\bfseries BUFSIZE}~(512)
-\begin{DoxyCompactList}\small\item\em Generic bufsize definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,6 +34,10 @@ typedef \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
+\Hypertarget{common_8h_a06fc87d81c62e9abb8790b6e5713c55b}\label{common_8h_a06fc87d81c62e9abb8790b6e5713c55b} 
+enum \{ {\bfseries BUFSIZE} = 512
+ \}
+\begin{DoxyCompactList}\small\item\em Generic bufsize definition. \end{DoxyCompactList}\item 
 enum \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2}{LISPY\+\_\+\+ERR}} \{ \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a1f6166ddfcc39db8efecf3dfcfd308a7}{LISPY\+\_\+\+ERR\+\_\+\+DIV\+\_\+\+BY\+\_\+\+ZERO}}
 , \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4be597098591fb9eb76d365f5d836db9}{LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+OP}}
 , \mbox{\hyperlink{common_8h_a7ce8d2f6dafcceed5949ddcd5e9116b2a4192f32b92facf42933408918f84c7f7}{LISPY\+\_\+\+ERR\+\_\+\+BAD\+\_\+\+NUM}}

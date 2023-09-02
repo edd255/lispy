@@ -228,7 +228,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx), \</div>
-<div class="line">        (args-&gt;count) \</div>
+<div class="line">        ((args)-&gt;count) \</div>
 <div class="line">    )</div>
 <div class="ttc" id="aerrors_8h_html_a7323b7385049bf57fbb1714bf15ceb96"><div class="ttname"><a href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a></div><div class="ttdeci">#define LCHECK(args, cond, fmt,...)</div><div class="ttdoc">Macro to check an assertion and report errors during runtime.</div><div class="ttdef"><b>Definition</b> errors.h:12</div></div>
 </div><!-- fragment -->
@@ -275,7 +275,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        ((idx) &lt; strlen(args-&gt;cell[cell_idx]-&gt;str)), \</div>
+<div class="line">        ((idx) &lt; strlen((args)-&gt;cell[cell_idx]-&gt;str)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx), \</div>
@@ -406,7 +406,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        (0 != strlen(args-&gt;cell[idx]-&gt;str)), \</div>
+<div class="line">        (0 != strlen((args)-&gt;cell[idx]-&gt;str)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx) \</div>
@@ -533,7 +533,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Thu Aug 31 2023 16:49:07 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Sep 2 2023 08:57:14 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

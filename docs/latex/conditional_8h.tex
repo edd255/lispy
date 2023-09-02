@@ -12,7 +12,9 @@ This file contains all builtin conditional methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{conditional_8h_a18db2be7f258919cc42365ad98bbf982}{builtin\+\_\+if}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Evaluates if-\/expressions. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{conditional_8h_aa166981db4cdf69decb94bafb2b885df}{builtin\+\_\+testhelper}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Evaluates a condition. On fail, prints expected and actual values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Evaluates a condition. On fail, prints expected and actual values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{conditional_8h_a143c724c00506fcedeb22f3e5fbc8cbe}{builtin\+\_\+select}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Evaluates a series of conditions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -40,6 +42,26 @@ Evaluates if-\/expressions.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The evaluation of the consequence 
+\end{DoxyReturn}
+\Hypertarget{conditional_8h_a143c724c00506fcedeb22f3e5fbc8cbe}\label{conditional_8h_a143c724c00506fcedeb22f3e5fbc8cbe} 
+\index{conditional.h@{conditional.h}!builtin\_select@{builtin\_select}}
+\index{builtin\_select@{builtin\_select}!conditional.h@{conditional.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_select()}{builtin\_select()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+select (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Evaluates a series of conditions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the expression is used \\
+\hline
+{\em args} & A symbolic expression, that contains quoted expression which themselves contain one condition and one body that should be executed if the condition evaluates to true \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The evaluated body of the true condition 
 \end{DoxyReturn}
 \Hypertarget{conditional_8h_aa166981db4cdf69decb94bafb2b885df}\label{conditional_8h_aa166981db4cdf69decb94bafb2b885df} 
 \index{conditional.h@{conditional.h}!builtin\_testhelper@{builtin\_testhelper}}

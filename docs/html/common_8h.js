@@ -2,7 +2,6 @@ var common_8h =
 [
     [ "lval_t", "structlval__t.html", "structlval__t" ],
     [ "lenv_t", "structlenv__t.html", "structlenv__t" ],
-    [ "BUFSIZE", "common_8h.html#aeca034f67218340ecb2261a22c2f3dcd", null ],
     [ "lbuiltin_t", "common_8h.html#a9b47e1b04752a06074ffc0740c018d21", null ],
     [ "lenv_t", "common_8h.html#a7fa88502c8f70b507d9a2966e062275f", null ],
     [ "lval_t", "common_8h.html#a63ce590ca5f53ca77ead1e12fd2865b0", null ],
