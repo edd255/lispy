@@ -129,6 +129,11 @@ lval_t* lval_err(char* fmt, ...);
 /// @return A Lispy value that contains the symbolic value
 lval_t* lval_sym(char* str);
 
+/// @brief Constructor for string values
+/// @param str String data
+/// @return A Lispy value that contains the given string
+lval_t* lval_str(const char* str);
+
 /// @brief Constructor for symbolic expressions
 /// @return A Lispy value that contains an empty symbolic expression
 lval_t* lval_sexpr(void);
@@ -147,11 +152,6 @@ lval_t* lval_fn(lbuiltin_t fn);
 /// @param body The body of the function
 /// @return A Lispy value that contains the lambda function
 lval_t* lval_lambda(lval_t* formals, lval_t* body);
-
-/// @brief Constructor for string values
-/// @param str String data
-/// @return A Lispy value that contains the given string
-lval_t* lval_str(const char* str);
 
 //--- Methods for Values -------------------------------------------------------
 

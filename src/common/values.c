@@ -5,7 +5,18 @@
 #include "io.h"
 
 //=== CONSTRUCTORS =============================================================
-void lval_init(lval_t* self) {
+
+#define LVAL_INIT() lval_init(__func__, __FILE__, __LINE__)
+
+lval_t* lval_init(const char* fn, const char* file, int line) {
+#ifdef LOG_ALLOCS
+    UNUSED(fn);
+    UNUSED(file);
+    UNUSED(line);
+    lval_t* self = malloc(sizeof(lval_t));
+#else
+    lval_t* self = log_malloc(sizeof(lval_t), fn, file, line);
+#endif
     self->type = 0;
     self->num = 0;
     self->dec = 0.0f;
@@ -18,28 +29,26 @@ void lval_init(lval_t* self) {
     self->body = NULL;
     self->count = 0;
     self->cell = NULL;
+    return self;
 }
 
 /* Create a new number type lval_t */
 lval_t* lval_num(long value) {
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_NUM;
     self->num = value;
     return self;
 }
 
 lval_t* lval_dec(double value) {
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_DEC;
     self->dec = value;
     return self;
 }
 
 lval_t* lval_err(char* fmt, ...) {
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_ERR;
 
     // Create a va list and initialize it
@@ -47,13 +56,14 @@ lval_t* lval_err(char* fmt, ...) {
     va_start(arg_list, fmt);
 
     // Allocate 512 bytes of space
-    self->err = MALLOC(512);
+    self->err = MALLOC(BUFSIZE);
 
     // printf the error string with a maximum of 511 character
-    vsnprintf(self->err, 511, fmt, arg_list);
+    vsnprintf(self->err, BUFSIZE - 1, fmt, arg_list);
 
     // Reallocate to number of bytes actually used
-    self->err = REALLOC(self->err, strlen(self->err) + 1);
+    size_t str_len = strlen(self->err) + 1;
+    self->err = REALLOC(self->err, str_len);
 
     // Cleanup our va list
     va_end(arg_list);
@@ -62,18 +72,26 @@ lval_t* lval_err(char* fmt, ...) {
 
 lval_t* lval_sym(char* str) {
     assert(NULL != str);
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_SYM;
-    size_t str_len = strlen(str) + 1;
-    self->sym = MALLOC(str_len);
-    strlcpy(self->sym, str, str_len);
+    size_t len = strlen(str) + 1;
+    self->sym = MALLOC(len);
+    strlcpy(self->sym, str, len);
+    return self;
+}
+
+lval_t* lval_str(const char* str) {
+    assert(NULL != str);
+    lval_t* self = LVAL_INIT();
+    self->type = LISPY_VAL_STR;
+    size_t len = strlen(str) + 1;
+    self->str = MALLOC(len);
+    strlcpy(self->str, str, len);
     return self;
 }
 
 lval_t* lval_sexpr(void) {
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_SEXPR;
     self->count = 0;
     self->cell = NULL;
@@ -81,8 +99,7 @@ lval_t* lval_sexpr(void) {
 }
 
 lval_t* lval_qexpr(void) {
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_QEXPR;
     self->count = 0;
     self->cell = NULL;
@@ -91,8 +108,7 @@ lval_t* lval_qexpr(void) {
 
 lval_t* lval_fn(lbuiltin_t fn) {
     assert(NULL != fn);
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     self->builtin = fn;
     return self;
@@ -102,8 +118,7 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     assert(NULL != formals);
     assert(NULL != body);
 
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
+    lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
 
     // Set builtin to NULL
@@ -115,17 +130,6 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
     // Set formals and body
     self->formals = formals;
     self->body = body;
-    return self;
-}
-
-lval_t* lval_str(const char* str) {
-    assert(NULL != str);
-    lval_t* self = MALLOC(sizeof(lval_t));
-    lval_init(self);
-    self->type = LISPY_VAL_STR;
-    size_t str_len = strlen(str) + 1;
-    self->str = MALLOC(str_len);
-    strlcpy(self->str, str, str_len);
     return self;
 }
 
