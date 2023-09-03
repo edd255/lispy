@@ -8,7 +8,7 @@
 (test (drop 3 {1 2 3 4 5}) {4 5})
 (test (drop 4 {1 2 3 4 5}) {5})
 
-(test (take 1 {1}) 1
-(test (take 1 {1}) {})
+(test (take 1 {1}) {1})
+(test (take 1 {1}) {1})
 (test (take 3 {1 2 3 4 5}) {1 2 3})
 (test (take 4 {1 2 3 4 5}) {1 2 3 4})
