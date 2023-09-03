@@ -378,10 +378,52 @@ lval_t* builtin_init(lenv_t* env, lval_t* args) {
             return init;
         }
     }
-    lval_del(args);
-    return lval_err(
+    lval_t* err = lval_err(
         "'%s' expected q-expression or string but got %s",
         __func__,
         ltype_name(args->cell[0]->type)
     );
+    lval_del(args);
+    return err;
+}
+
+lval_t* builtin_take(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* num = args->cell[0];
+    lval_t* expr = args->cell[1];
+    switch (expr->type) {
+        case LISPY_VAL_QEXPR: {
+            if (num->num > expr->count) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but qexpr only has %d elements",
+                    __func__,
+                    num->num,
+                    expr->count
+                );
+                lval_del(args);
+                return err;
+            }
+            lval_t* res = lval_qexpr();
+            for (int i = 0; i < num->num; i++) {
+                lval_add(res, lval_copy(expr->cell[i]));
+            }
+            lval_del(args);
+            return res;
+        }
+        case LISPY_VAL_STR: {
+            break;
+        }
+    }
+    lval_t* err = lval_err(
+        "'%s' expected string or quoted expression but got %s",
+        __func__,
+        ltype_name(args->type)
+    );
+    lval_del(args);
+    return err;
 }

@@ -137,4 +137,6 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args);
 /// @return The list/string but w/o last element
 lval_t* builtin_init(lenv_t* env, lval_t* args);
 
+lval_t* builtin_take(lenv_t* env, lval_t* args);
+
 #endif
