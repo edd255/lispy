@@ -1,5 +1,5 @@
 ;==== nth Test ================================================================
-(fun {test exp got} {
+(fun {test got exp} {
     testhelper (== exp got) exp got
 })
 
@@ -7,3 +7,9 @@
 (test (tail "ok") "k")
 (test (head "Hello, World!") "H")
 (test (head "ok") "o")
+
+(test (head {1 2 3 4}) {1})
+(test (tail {1 2 3 4}) {2 3 4})
+
+(test (head {1}) {1})
+(test (tail {1}) {})
