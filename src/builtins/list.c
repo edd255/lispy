@@ -40,10 +40,13 @@ lval_t* builtin_head(lenv_t* env, lval_t* args) {
             return lval_str(letter);
         }
     }
-    return lval_err(
-        "Function %s expected a string or a q-expression",
-        __func__
+    lval_t* err = lval_err(
+        "Function %s expected a string or a q-expression but got %s",
+        __func__,
+        ltype_name(args->cell[1]->type)
     );
+    lval_del(args);
+    return err;
 }
 
 lval_t* builtin_tail(lenv_t* env, lval_t* args) {
@@ -84,11 +87,13 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
             return tail;
         }
     }
-    lval_del(args);
-    return lval_err(
+    lval_t* err = lval_err(
         "Function '%s' expected a string or a q-expression",
-        __func__
+        __func__,
+        ltype_name(args->cell[1]->type)
     );
+    lval_del(args);
+    return err;
 }
 
 lval_t* builtin_eval(lenv_t* env, lval_t* args) {
@@ -235,12 +240,13 @@ lval_t* builtin_nth(lenv_t* env, lval_t* args) {
             return lval_str(nth_element);
         }
     }
-    lval_del(args);
-    return lval_err(
+    lval_t* err = lval_err(
         "'%s' expected Q-Expression or String but got %s",
         __func__,
         ltype_name(arg->type)
     );
+    lval_del(args);
+    return err;
 }
 
 lval_t* builtin_first(lenv_t* env, lval_t* args) {
@@ -293,12 +299,13 @@ lval_t* builtin_last(lenv_t* env, lval_t* args) {
             return last;
         }
     }
-    lval_del(args);
-    return lval_err(
+    lval_t* err = lval_err(
         "'%s' expected Q-Expression or String but got %s",
         __func__,
         ltype_name(args->cell[0]->type)
     );
+    lval_del(args);
+    return err;
 }
 
 lval_t* builtin_elem(lenv_t* env, lval_t* args) {
@@ -339,11 +346,13 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args) {
             return lval_num(0);
         }
     }
-    return lval_err(
+    lval_t* err = lval_err(
         "'%s' expected number or string but got %s",
         __func__,
         ltype_name(needle->type)
     );
+    lval_del(args);
+    return err;
 }
 
 lval_t* builtin_init(lenv_t* env, lval_t* args) {
@@ -416,13 +425,29 @@ lval_t* builtin_take(lenv_t* env, lval_t* args) {
             return res;
         }
         case LISPY_VAL_STR: {
-            break;
+            size_t len = strnlen(expr->str, BUFSIZE);
+            if ((unsigned long)num->num > len) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but string only has %d char",
+                    __func__,
+                    num->num,
+                    len
+                );
+                lval_del(args);
+                return err;
+            }
+            char* taken_str = malloc(sizeof(char) * (num->num + 1));
+            strlcpy(taken_str, expr->str, (num->num + 1));
+            lval_del(args);
+            lval_t* res = lval_str(taken_str);
+            FREE(taken_str);
+            return res;
         }
     }
     lval_t* err = lval_err(
         "'%s' expected string or quoted expression but got %s",
         __func__,
-        ltype_name(args->type)
+        ltype_name(args->cell[1]->type)
     );
     lval_del(args);
     return err;
