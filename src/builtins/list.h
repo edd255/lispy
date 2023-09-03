@@ -140,7 +140,13 @@ lval_t* builtin_init(lenv_t* env, lval_t* args);
 /// @brief Takes n items from list/string
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
-// @return A list/string with the first n items of the given string
+// @return A list/string with the first n items of the given list/string
 lval_t* builtin_take(lenv_t* env, lval_t* args);
+
+/// @brief Drops n items from list/string
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+// @return A list/string without the first n items of the given list/string
+lval_t* builtin_drop(lenv_t* env, lval_t* args);
 
 #endif

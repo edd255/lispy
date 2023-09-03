@@ -452,3 +452,58 @@ lval_t* builtin_take(lenv_t* env, lval_t* args) {
     lval_del(args);
     return err;
 }
+
+lval_t* builtin_drop(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* num = args->cell[0];
+    lval_t* expr = args->cell[1];
+    switch (expr->type) {
+        case LISPY_VAL_QEXPR: {
+            if (num->num > expr->count) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but qexpr only has %d elements",
+                    __func__,
+                    num->num,
+                    expr->count
+                );
+                lval_del(args);
+                return err;
+            }
+            for (int i = 0; i < num->num; i++) {
+                lval_del(lval_pop(expr, 0));
+            }
+            lval_t* res = lval_copy(expr);
+            lval_del(args);
+            return res;
+        }
+        case LISPY_VAL_STR: {
+            size_t len = strnlen(expr->str, BUFSIZE);
+            if ((unsigned long)num->num > len) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but string only has %d char",
+                    __func__,
+                    num->num,
+                    len
+                );
+                lval_del(args);
+                return err;
+            }
+            memmove(expr->str, expr->str + num->num, len - num->num + 1);
+            lval_t* res = lval_copy(expr);
+            lval_del(args);
+            return res;
+        }
+    }
+    lval_t* err = lval_err(
+        "'%s' expected string or quoted expression but got %s",
+        __func__,
+        ltype_name(args->cell[1]->type)
+    );
+    lval_del(args);
+    return err;
+}
