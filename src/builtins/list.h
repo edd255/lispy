@@ -137,6 +137,10 @@ lval_t* builtin_elem(lenv_t* env, lval_t* args);
 /// @return The list/string but w/o last element
 lval_t* builtin_init(lenv_t* env, lval_t* args);
 
+/// @brief Takes n items from list/string
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+// @return A list/string with the first n items of the given string
 lval_t* builtin_take(lenv_t* env, lval_t* args);
 
 #endif
