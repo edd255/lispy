@@ -53,7 +53,7 @@ lval_t* lval_err(char* fmt, ...) {
     vsnprintf(self->err, 511, fmt, arg_list);
 
     // Reallocate to number of bytes actually used
-    self->err = REALLOC(self->err, strnlen(self->err, BUFSIZE) + 1);
+    self->err = REALLOC(self->err, strlen(self->err) + 1);
 
     // Cleanup our va list
     va_end(arg_list);
@@ -65,7 +65,7 @@ lval_t* lval_sym(char* str) {
     lval_t* self = MALLOC(sizeof(lval_t));
     lval_init(self);
     self->type = LISPY_VAL_SYM;
-    size_t str_len = strnlen(str, BUFSIZE) + 1;
+    size_t str_len = strlen(str) + 1;
     self->sym = MALLOC(str_len);
     strlcpy(self->sym, str, str_len);
     return self;
@@ -123,7 +123,7 @@ lval_t* lval_str(const char* str) {
     lval_t* self = MALLOC(sizeof(lval_t));
     lval_init(self);
     self->type = LISPY_VAL_STR;
-    size_t str_len = strnlen(str, BUFSIZE) + 1;
+    size_t str_len = strlen(str) + 1;
     self->str = MALLOC(str_len);
     strlcpy(self->str, str, str_len);
     return self;
@@ -159,19 +159,19 @@ lval_t* lval_copy(const lval_t* self) {
         }
         // Copy Strings using malloc and strlcpy
         case LISPY_VAL_ERR: {
-            size_t err_len = strnlen(self->err, BUFSIZE) + 1;
+            size_t err_len = strlen(self->err) + 1;
             x->err = MALLOC(err_len);
             strlcpy(x->err, self->err, err_len);
             break;
         }
         case LISPY_VAL_SYM: {
-            size_t sym_len = strnlen(self->sym, BUFSIZE) + 1;
+            size_t sym_len = strlen(self->sym) + 1;
             x->sym = MALLOC(sym_len);
             strlcpy(x->sym, self->sym, sym_len);
             break;
         }
         case LISPY_VAL_STR: {
-            size_t str_len = strnlen(self->str, BUFSIZE) + 1;
+            size_t str_len = strlen(self->str) + 1;
             x->str = MALLOC(str_len);
             strlcpy(x->str, self->str, str_len);
             break;

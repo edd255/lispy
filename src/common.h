@@ -56,6 +56,7 @@ struct lval_t {
     /// The decimal value, stored as double
     double dec;
 
+    //--- String ---------------------------------------------------------------
     /// The string for Lispy errors
     char* err;
 
@@ -79,7 +80,6 @@ struct lval_t {
     lval_t* body;
 
     //--- Expression -----------------------------------------------------------
-
     /// The number of values in the list
     int count;
 
