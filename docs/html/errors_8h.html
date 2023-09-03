@@ -224,7 +224,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        (idx &lt; (args-&gt;cell[cell_idx]-&gt;count)), \</div>
+<div class="line">        ((idx) &lt; ((args)-&gt;cell[cell_idx]-&gt;count)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx), \</div>
@@ -275,12 +275,13 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        ((idx) &lt; strlen((args)-&gt;cell[cell_idx]-&gt;str)), \</div>
+<div class="line">        ((idx) &lt; strnlen((args)-&gt;cell[cell_idx]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx), \</div>
-<div class="line">        (strlen((args)-&gt;cell[(cell_idx)]-&gt;str)) \</div>
+<div class="line">        (strnlen((args)-&gt;cell[(cell_idx)]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)) \</div>
 <div class="line">    )</div>
+<div class="ttc" id="acommon_8h_html_a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e"><div class="ttname"><a href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a></div><div class="ttdeci">@ BUFSIZE</div><div class="ttdoc">Buffers of size 1024 are used.</div><div class="ttdef"><b>Definition</b> common.h:23</div></div>
 </div><!-- fragment -->
 <p>Macro to check whether an index is smaller than a string length. </p>
 
@@ -406,7 +407,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        (0 != strlen((args)-&gt;cell[idx]-&gt;str)), \</div>
+<div class="line">        (0 != strnlen((args)-&gt;cell[idx]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx) \</div>
@@ -462,7 +463,7 @@ Macros</h2></td></tr>
 <div class="line">        <a class="code hl_function" href="io_8h.html#a636418c06a046f467cd1c1cc461ad19d">ltype_name</a>((args)-&gt;cell[idx]-&gt;type), \</div>
 <div class="line">        <a class="code hl_function" href="io_8h.html#a636418c06a046f467cd1c1cc461ad19d">ltype_name</a>(expect) \</div>
 <div class="line">    )</div>
-<div class="ttc" id="aio_8h_html_a636418c06a046f467cd1c1cc461ad19d"><div class="ttname"><a href="io_8h.html#a636418c06a046f467cd1c1cc461ad19d">ltype_name</a></div><div class="ttdeci">char * ltype_name(enum LISPY_VAL type)</div><div class="ttdoc">Returns the string representation of the given type.</div><div class="ttdef"><b>Definition</b> writing.c:100</div></div>
+<div class="ttc" id="aio_8h_html_a636418c06a046f467cd1c1cc461ad19d"><div class="ttname"><a href="io_8h.html#a636418c06a046f467cd1c1cc461ad19d">ltype_name</a></div><div class="ttdeci">char * ltype_name(enum LISPY_VAL type)</div><div class="ttdoc">Returns the string representation of the given type.</div><div class="ttdef"><b>Definition</b> writing.c:101</div></div>
 </div><!-- fragment -->
 <p>Macro to check types and report errors during runtime. </p>
 
@@ -533,7 +534,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Sat Sep 2 2023 11:50:33 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sun Sep 3 2023 19:41:20 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

@@ -40,7 +40,9 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad901c77dda41a1b6e3bfe5704acec933}{builtin\+\_\+elem}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Checks whether the first argument is element in the list/string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a739a2bdf3fc56e44dd74b852e62597c8}{builtin\+\_\+init}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Returns all of list/string but last element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns all of list/string but last element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ace75e79165d51da9af0cbfd4d5c18aa0}{builtin\+\_\+take}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Takes n items from list/string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -345,6 +347,23 @@ Computes the tail of a list or string.
 \begin{DoxyReturn}{Returns}
 Tail of the list/string 
 \end{DoxyReturn}
+\Hypertarget{list_8h_ace75e79165d51da9af0cbfd4d5c18aa0}\label{list_8h_ace75e79165d51da9af0cbfd4d5c18aa0} 
+\index{list.h@{list.h}!builtin\_take@{builtin\_take}}
+\index{builtin\_take@{builtin\_take}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_take()}{builtin\_take()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Takes n items from list/string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The list/string \\
+\hline
+\end{DoxyParams}
 \Hypertarget{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a}\label{list_8h_ae2465a6323fd0980ed2c3a5435f15b2a} 
 \index{list.h@{list.h}!builtin\_third@{builtin\_third}}
 \index{builtin\_third@{builtin\_third}!list.h@{list.h}}

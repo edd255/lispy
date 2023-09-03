@@ -14,6 +14,7 @@ var list_8h =
     [ "builtin_pack", "list_8h.html#a82fbe755c307f2454755b4dcce1de673", null ],
     [ "builtin_second", "list_8h.html#a824eaad8a2cc3a33b68dd03263af22e3", null ],
     [ "builtin_tail", "list_8h.html#a0c718446878069eb87cef4208d032e50", null ],
+    [ "builtin_take", "list_8h.html#ace75e79165d51da9af0cbfd4d5c18aa0", null ],
     [ "builtin_third", "list_8h.html#ae2465a6323fd0980ed2c3a5435f15b2a", null ],
     [ "builtin_unpack", "list_8h.html#af693588e2c80ae046141d7d778085956", null ]
 ];
