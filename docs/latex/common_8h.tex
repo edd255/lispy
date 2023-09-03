@@ -65,6 +65,8 @@ enum \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\+\_\+\+
 \begin{DoxyCompactList}\small\item\em Constructor for error values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a13075389187d0c715b972f210026f453}{lval\+\_\+sym}} (char \texorpdfstring{$\ast$}{*}str)
 \begin{DoxyCompactList}\small\item\em Constructor for symbolic values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae2467304e919348e4797626133646631}{lval\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Constructor for string values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae0c4b5d63c28689c69636af53a2e4221}{lval\+\_\+sexpr}} (void)
 \begin{DoxyCompactList}\small\item\em Constructor for symbolic expressions. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_af2634a77289fda684f9fc1806418bff0}{lval\+\_\+qexpr}} (void)
@@ -73,8 +75,6 @@ enum \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\+\_\+\+
 \begin{DoxyCompactList}\small\item\em Constructor for functional values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ab1d3edcfbb6845ae9cb911d8ecdc7fad}{lval\+\_\+lambda}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}formals, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}body)
 \begin{DoxyCompactList}\small\item\em Constructor for lambda expressions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae2467304e919348e4797626133646631}{lval\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str)
-\begin{DoxyCompactList}\small\item\em Constructor for string values. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a428595b3c81fa24a19d8bb7c9f3a7c63}{lval\+\_\+copy}} (const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self)
 \begin{DoxyCompactList}\small\item\em Copies a Lispy value and returns a new one which contains the given value. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a3fa181cb063e603b67eaea243b8f20b3}{lval\+\_\+add}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}other)

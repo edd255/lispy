@@ -86,11 +86,11 @@ Macro to check whether an index is smaller than a list size.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ ((idx)\ <\ strnlen((args)-\/>cell[cell\_idx]-\/>str,\ \mbox{\hyperlink{common_8h_a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e}{BUFSIZE}})),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ((idx)\ <\ strlen((args)-\/>cell[cell\_idx]-\/>str)),\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (strnlen((args)-\/>cell[(cell\_idx)]-\/>str,\ \mbox{\hyperlink{common_8h_a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e}{BUFSIZE}}))\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (strlen((args)-\/>cell[(cell\_idx)]-\/>str))\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ )}
 
 \end{DoxyCode}
@@ -151,7 +151,7 @@ Macro to check whether a quoted expression is empty and report it as error.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{errors_8h_a7323b7385049bf57fbb1714bf15ceb96}{LCHECK}}(\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ (0\ !=\ strnlen((args)-\/>cell[idx]-\/>str,\ \mbox{\hyperlink{common_8h_a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e}{BUFSIZE}})),\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (0\ !=\ strlen((args)-\/>cell[idx]-\/>str)),\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Function\ '\%s'\ passed\ \{\}\ for\ argument\ \%i."{}},\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}

@@ -54,11 +54,11 @@
 \DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ LCHECK\_IDX\_STR(fn,\ args,\ cell\_idx,\ idx)\ \(\backslash\)}}
 \DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
 \DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ ((idx)\ <\ strnlen((args)-\/>cell[cell\_idx]-\/>str,\ BUFSIZE)),\ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ ((idx)\ <\ strlen((args)-\/>cell[cell\_idx]-\/>str)),\ \(\backslash\)}}
 \DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ index\ \%d\ but\ argument\ has\ size\ \%d."{}},\ \(\backslash\)}
 \DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
 \DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ (idx),\ \(\backslash\)}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ (strnlen((args)-\/>cell[(cell\_idx)]-\/>str,\ BUFSIZE))\ \(\backslash\)}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ (strlen((args)-\/>cell[(cell\_idx)]-\/>str))\ \(\backslash\)}
 \DoxyCodeLine{00065\ \ \ \ \ )}
 \DoxyCodeLine{00066\ }
 \DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ LCHECK\_NUM(fn,\ args,\ num)\ \(\backslash\)}}
@@ -83,7 +83,7 @@
 \DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ LCHECK\_STR\_NOT\_EMPTY(fn,\ args,\ idx)\ \(\backslash\)}}
 \DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ LCHECK(\ \(\backslash\)}}
 \DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (args),\ \(\backslash\)}}
-\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (0\ !=\ strnlen((args)-\/>cell[idx]-\/>str,\ BUFSIZE)),\ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (0\ !=\ strlen((args)-\/>cell[idx]-\/>str)),\ \(\backslash\)}}
 \DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ "{}Function\ '\%s'\ passed\ \{\}\ for\ argument\ \%i."{}},\ \(\backslash\)}
 \DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ (fn),\ \(\backslash\)}
 \DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ (idx)\ \(\backslash\)}

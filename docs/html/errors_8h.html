@@ -178,7 +178,7 @@ Macros</h2></td></tr>
 <div class="line">        lval_del(args); \</div>
 <div class="line">        <span class="keywordflow">return</span> err; \</div>
 <div class="line">    }</div>
-<div class="ttc" id="acommon_8h_html_a8948ac2f47e6d29894f135aeaead227a"><div class="ttname"><a href="common_8h.html#a8948ac2f47e6d29894f135aeaead227a">lval_err</a></div><div class="ttdeci">lval_t * lval_err(char *fmt,...)</div><div class="ttdoc">Constructor for error values.</div><div class="ttdef"><b>Definition</b> values.c:40</div></div>
+<div class="ttc" id="acommon_8h_html_a8948ac2f47e6d29894f135aeaead227a"><div class="ttname"><a href="common_8h.html#a8948ac2f47e6d29894f135aeaead227a">lval_err</a></div><div class="ttdeci">lval_t * lval_err(char *fmt,...)</div><div class="ttdoc">Constructor for error values.</div><div class="ttdef"><b>Definition</b> values.c:51</div></div>
 <div class="ttc" id="astructlval__t_html"><div class="ttname"><a href="structlval__t.html">lval_t</a></div><div class="ttdoc">A data structure that contains Lispy values.</div><div class="ttdef"><b>Definition</b> common.h:47</div></div>
 </div><!-- fragment -->
 <p>Macro to check an assertion and report errors during runtime. </p>
@@ -275,13 +275,12 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        ((idx) &lt; strnlen((args)-&gt;cell[cell_idx]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)), \</div>
+<div class="line">        ((idx) &lt; strlen((args)-&gt;cell[cell_idx]-&gt;str)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed index %d but argument has size %d.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx), \</div>
-<div class="line">        (strnlen((args)-&gt;cell[(cell_idx)]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)) \</div>
+<div class="line">        (strlen((args)-&gt;cell[(cell_idx)]-&gt;str)) \</div>
 <div class="line">    )</div>
-<div class="ttc" id="acommon_8h_html_a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e"><div class="ttname"><a href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a></div><div class="ttdeci">@ BUFSIZE</div><div class="ttdoc">Buffers of size 1024 are used.</div><div class="ttdef"><b>Definition</b> common.h:23</div></div>
 </div><!-- fragment -->
 <p>Macro to check whether an index is smaller than a string length. </p>
 
@@ -407,7 +406,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="errors_8h.html#a7323b7385049bf57fbb1714bf15ceb96">LCHECK</a>( \</div>
 <div class="line">        (args), \</div>
-<div class="line">        (0 != strnlen((args)-&gt;cell[idx]-&gt;str, <a class="code hl_enumvalue" href="common_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5b0318f8a2ec7077e296741c78a7407e">BUFSIZE</a>)), \</div>
+<div class="line">        (0 != strlen((args)-&gt;cell[idx]-&gt;str)), \</div>
 <div class="line">        <span class="stringliteral">&quot;Function &#39;%s&#39; passed {} for argument %i.&quot;</span>, \</div>
 <div class="line">        (fn), \</div>
 <div class="line">        (idx) \</div>
@@ -534,7 +533,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="errors_8h.html">errors.h</a></li>
-    <li class="footer">Generated on Sun Sep 3 2023 20:16:50 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sun Sep 3 2023 20:57:44 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
