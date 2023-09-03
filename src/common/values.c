@@ -23,6 +23,7 @@ lval_t* lval_init(const char* fn, const char* file, int line) {
     self->err = NULL;
     self->sym = NULL;
     self->str = NULL;
+    self->len = 0;
     self->builtin = NULL;
     self->env = NULL;
     self->formals = NULL;
@@ -62,8 +63,8 @@ lval_t* lval_err(char* fmt, ...) {
     vsnprintf(self->err, BUFSIZE - 1, fmt, arg_list);
 
     // Reallocate to number of bytes actually used
-    size_t str_len = strlen(self->err) + 1;
-    self->err = REALLOC(self->err, str_len);
+    self->len = strlen(self->err);
+    self->err = REALLOC(self->err, self->len + 1);
 
     // Cleanup our va list
     va_end(arg_list);
@@ -74,9 +75,9 @@ lval_t* lval_sym(char* str) {
     assert(NULL != str);
     lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_SYM;
-    size_t len = strlen(str) + 1;
-    self->sym = MALLOC(len);
-    strlcpy(self->sym, str, len);
+    self->len = strlen(str);
+    self->sym = MALLOC(self->len + 1);
+    strlcpy(self->sym, str, self->len + 1);
     return self;
 }
 
@@ -84,9 +85,9 @@ lval_t* lval_str(const char* str) {
     assert(NULL != str);
     lval_t* self = LVAL_INIT();
     self->type = LISPY_VAL_STR;
-    size_t len = strlen(str) + 1;
-    self->str = MALLOC(len);
-    strlcpy(self->str, str, len);
+    self->len = strlen(str);
+    self->str = MALLOC(self->len + 1);
+    strlcpy(self->str, str, self->len + 1);
     return self;
 }
 

@@ -66,6 +66,9 @@ struct lval_t {
     /// The string value for Lispy strings
     char* str;
 
+    /// The length of the string, without NULL terminator
+    size_t len;
+
     //--- Function -------------------------------------------------------------
     /// A pointer to the function
     lbuiltin_t builtin;
