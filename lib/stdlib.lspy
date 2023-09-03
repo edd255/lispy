@@ -49,13 +49,6 @@
     {f (fst l) (foldr f z (tail l))}
 })
 
-; Drop N items
-(fun {drop n l} {
-  if (== n 0)
-    {l}
-    {drop (- n 1) (tail l)}
-})
-
 ; Split at N
 (fun {split n l} {list (take n l) (drop n l)})
 
