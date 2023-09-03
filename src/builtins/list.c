@@ -78,7 +78,7 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args) {
                     __func__
                 );
             }
-            size_t new_length = strnlen(str, BUFSIZE) - 1;
+            size_t new_length = strlen(str) - 1;
             char* tail_str = MALLOC(new_length + 1);
             strlcpy(tail_str, str + 1, new_length + 1);
             lval_t* tail = lval_str(tail_str);
@@ -167,7 +167,7 @@ lval_t* builtin_len(lenv_t* env, lval_t* args) {
         }
         case LISPY_VAL_STR: {
             assert(NULL != args->cell[0]->str);
-            num = lval_num(strnlen(args->cell[0]->str, BUFSIZE));
+            num = lval_num(strlen(args->cell[0]->str));
             break;
         }
     }
@@ -291,7 +291,7 @@ lval_t* builtin_last(lenv_t* env, lval_t* args) {
             return last;
         }
         case LISPY_VAL_STR: {
-            int len = strnlen(args->cell[0]->str, BUFSIZE);
+            int len = strlen(args->cell[0]->str);
             nth_args = lval_add(nth_args, lval_num(len - 1));
             nth_args = lval_add(nth_args, lval_pop(args, 0));
             lval_t* last = builtin_nth(env, nth_args);
@@ -373,7 +373,7 @@ lval_t* builtin_init(lenv_t* env, lval_t* args) {
         case LISPY_VAL_STR: {
             LCHECK_STR_NOT_EMPTY(__func__, args, 0);
             char* old_str = args->cell[0]->str;
-            int length = strnlen(old_str, BUFSIZE);
+            int length = strlen(old_str);
             if (length == 1) {
                 lval_del(args);
                 return lval_str("");
@@ -425,7 +425,7 @@ lval_t* builtin_take(lenv_t* env, lval_t* args) {
             return res;
         }
         case LISPY_VAL_STR: {
-            size_t len = strnlen(expr->str, BUFSIZE);
+            size_t len = strlen(expr->str);
             if ((unsigned long)num->num > len) {
                 lval_t* err = lval_err(
                     "'%s' passed %d but string only has %d char",
@@ -482,7 +482,7 @@ lval_t* builtin_drop(lenv_t* env, lval_t* args) {
             return res;
         }
         case LISPY_VAL_STR: {
-            size_t len = strnlen(expr->str, BUFSIZE);
+            size_t len = strlen(expr->str);
             if ((unsigned long)num->num > len) {
                 lval_t* err = lval_err(
                     "'%s' passed %d but string only has %d char",

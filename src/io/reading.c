@@ -70,10 +70,10 @@ lval_t* lval_read_str(mpc_ast_t* tree) {
     assert(NULL != tree);
 
     // Cut off final quote character
-    tree->contents[strnlen(tree->contents, BUFSIZE) - 1] = '\0';
+    tree->contents[strlen(tree->contents) - 1] = '\0';
 
     // Copy the string missing out the first quote character
-    size_t unescaped_size = strnlen(tree->contents + 1, BUFSIZE) + 1;
+    size_t unescaped_size = strlen(tree->contents + 1) + 1;
     char* unescaped = MALLOC(unescaped_size);
     strlcpy(unescaped, tree->contents + 1, unescaped_size);
 
