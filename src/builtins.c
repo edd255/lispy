@@ -33,6 +33,7 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "last", builtin_last);
     lenv_add_builtin_fn(env, "elem", builtin_elem);
     lenv_add_builtin_fn(env, "init", builtin_init);
+    lenv_add_builtin_fn(env, "take", builtin_take);
 
     // Sequence functions
     lenv_add_builtin_fn(env, "do", builtin_do);
