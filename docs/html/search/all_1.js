@@ -49,13 +49,14 @@ var searchData=
   ['builtin_5fput_46',['builtin_put',['../vars_8h.html#ac706e1796bc3cf0162e0effec7518869',1,'vars.c']]],
   ['builtin_5fsecond_47',['builtin_second',['../list_8h.html#a824eaad8a2cc3a33b68dd03263af22e3',1,'list.c']]],
   ['builtin_5fselect_48',['builtin_select',['../conditional_8h.html#a143c724c00506fcedeb22f3e5fbc8cbe',1,'conditional.c']]],
-  ['builtin_5fsub_49',['builtin_sub',['../arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d',1,'arithmetic.c']]],
-  ['builtin_5fsum_50',['builtin_sum',['../arithmetic_8h.html#a140143bd7ee86d8ca1acb1f7980bddee',1,'arithmetic.c']]],
-  ['builtin_5ftail_51',['builtin_tail',['../list_8h.html#a0c718446878069eb87cef4208d032e50',1,'list.c']]],
-  ['builtin_5ftake_52',['builtin_take',['../list_8h.html#ace75e79165d51da9af0cbfd4d5c18aa0',1,'list.c']]],
-  ['builtin_5ftesthelper_53',['builtin_testhelper',['../conditional_8h.html#aa166981db4cdf69decb94bafb2b885df',1,'conditional.c']]],
-  ['builtin_5fthird_54',['builtin_third',['../list_8h.html#ae2465a6323fd0980ed2c3a5435f15b2a',1,'list.c']]],
-  ['builtin_5funpack_55',['builtin_unpack',['../list_8h.html#af693588e2c80ae046141d7d778085956',1,'list.c']]],
-  ['builtin_5fvar_56',['builtin_var',['../vars_8h.html#a14e6227bb642a9aa8200ec59c7bbf77b',1,'vars.c']]],
-  ['builtins_2eh_57',['builtins.h',['../builtins_8h.html',1,'']]]
+  ['builtin_5fsplit_49',['builtin_split',['../list_8h.html#aa116502ae3ea5cfba5c807a511524944',1,'list.c']]],
+  ['builtin_5fsub_50',['builtin_sub',['../arithmetic_8h.html#a592b24f93e8751bf0ca52f0d2883cf6d',1,'arithmetic.c']]],
+  ['builtin_5fsum_51',['builtin_sum',['../arithmetic_8h.html#a140143bd7ee86d8ca1acb1f7980bddee',1,'arithmetic.c']]],
+  ['builtin_5ftail_52',['builtin_tail',['../list_8h.html#a0c718446878069eb87cef4208d032e50',1,'list.c']]],
+  ['builtin_5ftake_53',['builtin_take',['../list_8h.html#ace75e79165d51da9af0cbfd4d5c18aa0',1,'list.c']]],
+  ['builtin_5ftesthelper_54',['builtin_testhelper',['../conditional_8h.html#aa166981db4cdf69decb94bafb2b885df',1,'conditional.c']]],
+  ['builtin_5fthird_55',['builtin_third',['../list_8h.html#ae2465a6323fd0980ed2c3a5435f15b2a',1,'list.c']]],
+  ['builtin_5funpack_56',['builtin_unpack',['../list_8h.html#af693588e2c80ae046141d7d778085956',1,'list.c']]],
+  ['builtin_5fvar_57',['builtin_var',['../vars_8h.html#a14e6227bb642a9aa8200ec59c7bbf77b',1,'vars.c']]],
+  ['builtins_2eh_58',['builtins.h',['../builtins_8h.html',1,'']]]
 ];

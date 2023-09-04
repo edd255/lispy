@@ -44,7 +44,9 @@ This file contains all builtin list methods.
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ace75e79165d51da9af0cbfd4d5c18aa0}{builtin\+\_\+take}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Takes n items from list/string. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_a4b5938c82308ea62336328a74f75c76f}{builtin\+\_\+drop}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
-\begin{DoxyCompactList}\small\item\em Drops n items from list/string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Drops n items from list/string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_aa116502ae3ea5cfba5c807a511524944}{builtin\+\_\+split}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\begin{DoxyCompactList}\small\item\em Splits a list/string at n. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -346,6 +348,23 @@ Expects that the first argument is a number.
 \begin{DoxyReturn}{Returns}
 The second element of the given list/string. 
 \end{DoxyReturn}
+\Hypertarget{list_8h_aa116502ae3ea5cfba5c807a511524944}\label{list_8h_aa116502ae3ea5cfba5c807a511524944} 
+\index{list.h@{list.h}!builtin\_split@{builtin\_split}}
+\index{builtin\_split@{builtin\_split}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{builtin\_split()}{builtin\_split()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+
+
+
+Splits a list/string at n. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & The environment in which the arguments are used \\
+\hline
+{\em args} & The list/string \\
+\hline
+\end{DoxyParams}
 \Hypertarget{list_8h_a0c718446878069eb87cef4208d032e50}\label{list_8h_a0c718446878069eb87cef4208d032e50} 
 \index{list.h@{list.h}!builtin\_tail@{builtin\_tail}}
 \index{builtin\_tail@{builtin\_tail}!list.h@{list.h}}

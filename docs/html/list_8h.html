@@ -159,6 +159,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4b5938c82308ea62336328a74f75c76f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#a4b5938c82308ea62336328a74f75c76f">builtin_drop</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
 <tr class="memdesc:a4b5938c82308ea62336328a74f75c76f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Drops n items from list/string.  <br /></td></tr>
 <tr class="separator:a4b5938c82308ea62336328a74f75c76f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa116502ae3ea5cfba5c807a511524944"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="list_8h.html#aa116502ae3ea5cfba5c807a511524944">builtin_split</a> (<a class="el" href="structlenv__t.html">lenv_t</a> *env, <a class="el" href="structlval__t.html">lval_t</a> *args)</td></tr>
+<tr class="memdesc:aa116502ae3ea5cfba5c807a511524944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits a list/string at n.  <br /></td></tr>
+<tr class="separator:aa116502ae3ea5cfba5c807a511524944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains all builtin list methods. </p>
@@ -702,6 +705,43 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aa116502ae3ea5cfba5c807a511524944" name="aa116502ae3ea5cfba5c807a511524944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa116502ae3ea5cfba5c807a511524944">&#9670;&#160;</a></span>builtin_split()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structlval__t.html">lval_t</a> * builtin_split </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structlenv__t.html">lenv_t</a> *&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structlval__t.html">lval_t</a> *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Splits a list/string at n. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>The environment in which the arguments are used </td></tr>
+    <tr><td class="paramname">args</td><td>The list/string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a0c718446878069eb87cef4208d032e50" name="a0c718446878069eb87cef4208d032e50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c718446878069eb87cef4208d032e50">&#9670;&#160;</a></span>builtin_tail()</h2>
 
@@ -862,7 +902,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1909b13b6d0cbcc1d36d622424b54e1c.html">builtins</a></li><li class="navelem"><a class="el" href="list_8h.html">list.h</a></li>
-    <li class="footer">Generated on Sun Sep 3 2023 20:57:44 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Sep 4 2023 10:02:32 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
