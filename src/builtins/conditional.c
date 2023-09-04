@@ -108,7 +108,7 @@ lval_t* builtin_case(lenv_t* env, lval_t* args) {
     assert(NULL != args);
     UNUSED(env);
 
-    lval_t* arg = args->cell[0];
+    const lval_t* arg = args->cell[0];
     for (int i = 1; i < args->count; i++) {
         lval_t* case_stmt = args->cell[i];
         int cond = lval_eq(arg, case_stmt->cell[0]);
