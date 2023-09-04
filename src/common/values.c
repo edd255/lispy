@@ -10,12 +10,12 @@
 
 lval_t* lval_init(const char* fn, const char* file, int line) {
 #ifdef LOG_ALLOCS
+    lval_t* self = log_malloc(sizeof(lval_t), fn, file, line);
+#else
     UNUSED(fn);
     UNUSED(file);
     UNUSED(line);
     lval_t* self = malloc(sizeof(lval_t));
-#else
-    lval_t* self = log_malloc(sizeof(lval_t), fn, file, line);
 #endif
     self->type = 0;
     self->num = 0;

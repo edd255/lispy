@@ -35,6 +35,7 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "init", builtin_init);
     lenv_add_builtin_fn(env, "take", builtin_take);
     lenv_add_builtin_fn(env, "drop", builtin_drop);
+    lenv_add_builtin_fn(env, "split", builtin_split);
 
     // Sequence functions
     lenv_add_builtin_fn(env, "do", builtin_do);
