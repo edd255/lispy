@@ -149,4 +149,11 @@ lval_t* builtin_take(lenv_t* env, lval_t* args);
 // @return A list/string without the first n items of the given list/string
 lval_t* builtin_drop(lenv_t* env, lval_t* args);
 
+/// @brief Splits a list/string at n
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+// @return A qexpr with two elements: The first contains the first n elements of
+// the given list/string, the second contains the rest
+lval_t* builtin_split(lenv_t* env, lval_t* args);
+
 #endif

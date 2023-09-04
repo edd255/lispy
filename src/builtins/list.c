@@ -507,3 +507,78 @@ lval_t* builtin_drop(lenv_t* env, lval_t* args) {
     lval_del(args);
     return err;
 }
+
+lval_t* builtin_split(lenv_t* env, lval_t* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    lval_t* num = args->cell[0];
+    lval_t* expr = args->cell[1];
+    switch (expr->type) {
+        case LISPY_VAL_QEXPR: {
+            if (num->num > expr->count) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but qexpr only has %d elements",
+                    __func__,
+                    num->num,
+                    expr->count
+                );
+                lval_del(args);
+                return err;
+            }
+            lval_t* res = lval_qexpr();
+            res = lval_add(res, lval_qexpr());
+            res = lval_add(res, lval_qexpr());
+            for (int i = 0; i < num->num; i++) {
+                lval_add(res->cell[0], lval_copy(expr->cell[i]));
+            }
+            for (int i = num->num; i < expr->count; i++) {
+                lval_add(res->cell[1], lval_copy(expr->cell[i]));
+            }
+            lval_del(args);
+            return res;
+        }
+        case LISPY_VAL_STR: {
+            size_t len = strlen(expr->str);
+            if ((unsigned long)num->num > len) {
+                lval_t* err = lval_err(
+                    "'%s' passed %d but string only has %d char",
+                    __func__,
+                    num->num,
+                    len
+                );
+                lval_del(args);
+                return err;
+            }
+            // Prepare resulting qexpr
+            lval_t* res = lval_qexpr();
+            res = lval_add(res, lval_qexpr());
+            res = lval_add(res, lval_qexpr());
+            char* str0 = MALLOC(sizeof(char) * (num->num + 1));
+            char* str1 = MALLOC(sizeof(char) * (len - num->num + 1));
+
+            // Copy the strings and add them to the resulting qexpr
+            strlcpy(str0, expr->str, (num->num + 1));
+            strlcpy(str1, expr->str + (num->num), (len - num->num + 1));
+            (void)lval_add(res->cell[0], lval_str(str0));
+            (void)lval_add(res->cell[1], lval_str(str1));
+
+            // Cleanup
+            lval_del(args);
+            FREE(str0);
+            FREE(str1);
+            return res;
+        }
+    }
+    lval_t* err = lval_err(
+        "'%s' expected string or quoted expression but got %s",
+        __func__,
+        ltype_name(args->cell[1]->type)
+    );
+    lval_del(args);
+    return err;
+}
