@@ -379,7 +379,7 @@ lval_t* builtin_init(lenv_t* env, lval_t* args) {
                 return lval_str("");
             }
             char* init_str = MALLOC(length);
-            strncpy(init_str, old_str, length - 1);
+            strlcpy(init_str, old_str, length - 1);
             init_str[length - 1] = '\0';
             lval_del(args);
             lval_t* init = lval_str(init_str);
