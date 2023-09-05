@@ -88,6 +88,7 @@ analyze:
 	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG) || true
 	$(Q)yq 'del(.Diagnostics[] | select(.DiagnosticMessage.FilePath | test("deps")))' tidy.log > logs/tidy.log
 	$(Q)$(RM) tidy.log
+	$(Q)scan-build $(MAKE)
 
 memcheck: debugging
 	$(Q)echo "====> Running memcheck..."
