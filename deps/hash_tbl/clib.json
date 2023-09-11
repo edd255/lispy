@@ -1,0 +1,9 @@
+{
+  "name": "hash_tbl",
+  "version": "1.0",
+  "repo": "edd255/hash_tbl",
+  "description": "Simple hash table implementation",
+  "keywords": ["hash", "tables", "algorithms"],
+  "license": "MIT",
+  "src": ["lib/ht.c", "lib/ht.h"]
+}
