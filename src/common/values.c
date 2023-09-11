@@ -8,14 +8,14 @@
 
 #define LVAL_INIT() lval_init(__func__, __FILE__, __LINE__)
 
-lval_t* lval_init(const char* fn, const char* file, int line) {
+lval* lval_init(const char* fn, const char* file, int line) {
 #ifdef LOG_ALLOCS
-    lval_t* self = log_malloc(sizeof(lval_t), fn, file, line);
+    lval* self = log_malloc(sizeof(lval), fn, file, line);
 #else
     UNUSED(fn);
     UNUSED(file);
     UNUSED(line);
-    lval_t* self = malloc(sizeof(lval_t));
+    lval* self = malloc(sizeof(lval));
 #endif
     self->type = 0;
     self->num = 0;
@@ -33,23 +33,23 @@ lval_t* lval_init(const char* fn, const char* file, int line) {
     return self;
 }
 
-/* Create a new number type lval_t */
-lval_t* lval_num(long value) {
-    lval_t* self = LVAL_INIT();
+/* Create a new number type lval */
+lval* lval_num(long value) {
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_NUM;
     self->num = value;
     return self;
 }
 
-lval_t* lval_dec(double value) {
-    lval_t* self = LVAL_INIT();
+lval* lval_dec(double value) {
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_DEC;
     self->dec = value;
     return self;
 }
 
-lval_t* lval_err(char* fmt, ...) {
-    lval_t* self = LVAL_INIT();
+lval* lval_err(char* fmt, ...) {
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_ERR;
 
     // Create a va list and initialize it
@@ -71,9 +71,9 @@ lval_t* lval_err(char* fmt, ...) {
     return self;
 }
 
-lval_t* lval_sym(char* str) {
+lval* lval_sym(char* str) {
     assert(NULL != str);
-    lval_t* self = LVAL_INIT();
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_SYM;
     self->len = strlen(str);
     self->sym = MALLOC(self->len + 1);
@@ -81,9 +81,9 @@ lval_t* lval_sym(char* str) {
     return self;
 }
 
-lval_t* lval_str(const char* str) {
+lval* lval_str(const char* str) {
     assert(NULL != str);
-    lval_t* self = LVAL_INIT();
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_STR;
     self->len = strlen(str);
     self->str = MALLOC(self->len + 1);
@@ -91,35 +91,35 @@ lval_t* lval_str(const char* str) {
     return self;
 }
 
-lval_t* lval_sexpr(void) {
-    lval_t* self = LVAL_INIT();
+lval* lval_sexpr(void) {
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_SEXPR;
     self->count = 0;
     self->cell = NULL;
     return self;
 }
 
-lval_t* lval_qexpr(void) {
-    lval_t* self = LVAL_INIT();
+lval* lval_qexpr(void) {
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_QEXPR;
     self->count = 0;
     self->cell = NULL;
     return self;
 }
 
-lval_t* lval_fn(lbuiltin_t fn) {
+lval* lval_fn(lbuiltin fn) {
     assert(NULL != fn);
-    lval_t* self = LVAL_INIT();
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     self->builtin = fn;
     return self;
 }
 
-lval_t* lval_lambda(lval_t* formals, lval_t* body) {
+lval* lval_lambda(lval* formals, lval* body) {
     assert(NULL != formals);
     assert(NULL != body);
 
-    lval_t* self = LVAL_INIT();
+    lval* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
 
     // Set builtin to NULL
@@ -136,10 +136,10 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body) {
 
 //=== METHODS ==================================================================
 
-lval_t* lval_copy(const lval_t* self) {
+lval* lval_copy(const lval* self) {
     assert(NULL != self);
 
-    lval_t* x = MALLOC(sizeof(lval_t));
+    lval* x = MALLOC(sizeof(lval));
     x->type = self->type;
     switch (self->type) {
         // Copy Functions and Numbers Directly
@@ -185,7 +185,7 @@ lval_t* lval_copy(const lval_t* self) {
         case LISPY_VAL_SEXPR:
         case LISPY_VAL_QEXPR:
             x->count = self->count;
-            x->cell = MALLOC(sizeof(lval_t*) * x->count);
+            x->cell = MALLOC(sizeof(lval*) * x->count);
             for (int i = 0; i < x->count; i++) {
                 x->cell[i] = lval_copy(self->cell[i]);
             }
@@ -194,17 +194,17 @@ lval_t* lval_copy(const lval_t* self) {
     return x;
 }
 
-lval_t* lval_add(lval_t* self, lval_t* other) {
+lval* lval_add(lval* self, lval* other) {
     assert(NULL != self);
     assert(NULL != other);
 
     self->count++;
-    self->cell = REALLOC(self->cell, sizeof(lval_t*) * self->count);
+    self->cell = REALLOC(self->cell, sizeof(lval*) * self->count);
     self->cell[self->count - 1] = other;
     return self;
 }
 
-lval_t* lval_join(lval_t* self, lval_t* other) {
+lval* lval_join(lval* self, lval* other) {
     assert(NULL != self);
     assert(NULL != other);
     assert(NULL != other->cell);
@@ -257,7 +257,7 @@ lval_t* lval_join(lval_t* self, lval_t* other) {
     return self;
 }
 
-lval_t* lval_pop(lval_t* self, const int idx) {
+lval* lval_pop(lval* self, const int idx) {
     assert(NULL != self);
     LCHECK(
         self,
@@ -269,32 +269,32 @@ lval_t* lval_pop(lval_t* self, const int idx) {
     );
 
     // Find the item at "i"
-    lval_t* value = self->cell[idx];
+    lval* value = self->cell[idx];
 
     // Shift memory after the item at "i" over the top
     memmove(
         &self->cell[idx],
         &self->cell[idx + 1],
-        sizeof(lval_t*) * (self->count - idx - 1)
+        sizeof(lval*) * (self->count - idx - 1)
     );
 
     // Decrease the count of items in the list
     self->count--;
 
     // Reallocate the memory used
-    self->cell = REALLOC(self->cell, sizeof(lval_t*) * self->count);
+    self->cell = REALLOC(self->cell, sizeof(lval*) * self->count);
     return value;
 }
 
-lval_t* lval_take(lval_t* self, const int idx) {
+lval* lval_take(lval* self, const int idx) {
     assert(NULL != self);
 
-    lval_t* value = lval_pop(self, idx);
+    lval* value = lval_pop(self, idx);
     lval_del(self);
     return value;
 }
 
-lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
+lval* lval_call(lenv* env, lval* fn, lval* args) {
     assert(NULL != env);
     assert(NULL != fn);
     assert(NULL != args);
@@ -319,7 +319,7 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
             );
         }
         // Pop the first symbol from the formals
-        lval_t* sym = lval_pop(fn->formals, 0);
+        lval* sym = lval_pop(fn->formals, 0);
 
         // Special case to deal with '&'
         if (0 == strcmp(sym->sym, "&")) {
@@ -332,7 +332,7 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
             }
 
             // Next formal should be bound to remaining arguments
-            lval_t* nsym = lval_pop(fn->formals, 0);
+            lval* nsym = lval_pop(fn->formals, 0);
             lenv_put(fn->env, nsym, builtin_list(env, args));
             lval_del(sym);
             lval_del(nsym);
@@ -340,7 +340,7 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
         }
 
         // Pop the next argument from the list
-        lval_t* val = lval_pop(args, 0);
+        lval* val = lval_pop(args, 0);
 
         // Bind a copy into the fn's environment
         lenv_put(fn->env, sym, val);
@@ -360,12 +360,12 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
             );
         }
         // Pop and delete '&' symbol
-        lval_t* popped = lval_pop(fn->formals, 0);
+        lval* popped = lval_pop(fn->formals, 0);
         lval_del(popped);
 
         // Pop next symbol and create empty list
-        lval_t* sym = lval_pop(fn->formals, 0);
-        lval_t* val = lval_qexpr();
+        lval* sym = lval_pop(fn->formals, 0);
+        lval* val = lval_qexpr();
 
         // Bind to environment and delete
         lenv_put(fn->env, sym, val);
@@ -379,8 +379,8 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
         fn->env->parent = env;
 
         // Evaluate and return
-        lval_t* new_sexpr = lval_sexpr();
-        lval_t* body_copy = lval_copy(fn->body);
+        lval* new_sexpr = lval_sexpr();
+        lval* body_copy = lval_copy(fn->body);
 
         assert(NULL != new_sexpr);
         assert(NULL != body_copy);
@@ -392,7 +392,7 @@ lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args) {
     return lval_copy(fn);
 }
 
-int lval_eq(const lval_t* self, const lval_t* other) {
+int lval_eq(const lval* self, const lval* other) {
     assert(NULL != self);
     assert(NULL != other);
 
@@ -446,7 +446,7 @@ int lval_eq(const lval_t* self, const lval_t* other) {
     return false;
 }
 
-void lval_del(lval_t* self) {
+void lval_del(lval* self) {
     assert(NULL != self);
     if (NULL == self) {
         return;

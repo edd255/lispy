@@ -2,7 +2,7 @@
 
 //==== BUILTIN METHODS =========================================================
 
-void lenv_add_builtins(lenv_t* env) {
+void lenv_add_builtins(lenv* env) {
     assert(NULL != env);
 
     // Variable functions
@@ -83,24 +83,24 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_const(env, "otherwise", lval_num(1));
 }
 
-void lenv_add_builtin_fn(lenv_t* env, char* name, lbuiltin_t fn) {
+void lenv_add_builtin_fn(lenv* env, char* name, lbuiltin fn) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != fn);
 
-    lval_t* key = lval_sym(name);
-    lval_t* value = lval_fn(fn);
+    lval* key = lval_sym(name);
+    lval* value = lval_fn(fn);
     lenv_put(env, key, value);
     lval_del(key);
     lval_del(value);
 }
 
-void lenv_add_builtin_const(lenv_t* env, char* name, lval_t* value) {
+void lenv_add_builtin_const(lenv* env, char* name, lval* value) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != value);
 
-    lval_t* key = lval_sym(name);
+    lval* key = lval_sym(name);
     lenv_put(env, key, value);
     lval_del(key);
     lval_del(value);

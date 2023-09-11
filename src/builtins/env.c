@@ -3,12 +3,12 @@
 #include "builtins/list.h"
 #include "io.h"
 
-lval_t* builtin_env(lenv_t* env, lval_t* args) {
+lval* builtin_env(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-    lval_t* x = lval_qexpr();
+    lval* x = lval_qexpr();
     for (int i = 0; i < env->count; i++) {
-        lval_t* y = lval_sym(env->syms[i]);
+        lval* y = lval_sym(env->syms[i]);
         assert(NULL != y);
         x = lval_add(x, y);
     }
@@ -16,7 +16,7 @@ lval_t* builtin_env(lenv_t* env, lval_t* args) {
     return x;
 }
 
-lval_t* builtin_fun(lenv_t* env, lval_t* args) {
+lval* builtin_fun(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 2);
@@ -25,10 +25,10 @@ lval_t* builtin_fun(lenv_t* env, lval_t* args) {
     LCHECK_QEXPR_NOT_EMPTY(__func__, args, 0);
     LCHECK_QEXPR_NOT_EMPTY(__func__, args, 1);
 
-    lval_t* fn_body = lval_pop(args, 1);
-    lval_t* fn_args = builtin_tail(env, lval_copy(args));
-    lval_t* fn_lambda = lval_lambda(fn_args, fn_body);
-    lval_t* fn_name = lval_take(builtin_head(env, args), 0);
+    lval* fn_body = lval_pop(args, 1);
+    lval* fn_args = builtin_tail(env, lval_copy(args));
+    lval* fn_lambda = lval_lambda(fn_args, fn_body);
+    lval* fn_name = lval_take(builtin_head(env, args), 0);
     lenv_def(env, fn_name, fn_lambda);
     lval_del(fn_lambda);
     lval_del(fn_name);

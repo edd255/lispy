@@ -49,7 +49,7 @@ void setup_parser(void);
 ///
 /// @param std A pointer to the standard-library (if loaded, else NULL)
 /// @param env A pointer to the used environment
-void cleanup(lval_t* std, lenv_t* env);
+void cleanup(lval* std, lenv* env);
 
 /// @brief A REPL for Lispy.
 ///
@@ -62,7 +62,7 @@ void cleanup(lval_t* std, lenv_t* env);
 /// version).
 ///
 /// @param env The environment from which we get and where we store variables
-void cli_interpreter(lenv_t* env);
+void cli_interpreter(lenv* env);
 
 /// @brief Interprets a given file.
 ///
@@ -71,7 +71,7 @@ void cli_interpreter(lenv_t* env);
 ///
 /// @param env The environment which we use for interpreting the file
 /// @param file The file to interpret
-void file_interpreter(lenv_t* env, const char* file);
+void file_interpreter(lenv* env, const char* file);
 
 /// @brief Loads the standard library and returns a pointer to it.
 ///
@@ -80,11 +80,11 @@ void file_interpreter(lenv_t* env, const char* file);
 ///
 /// @param env The environment into which the standard library should be loaded
 /// @return A pointer to the standard library.
-lval_t* get_stdlib(lenv_t* env);
+lval* get_stdlib(lenv* env);
 
 /// @brief Sets up an environment which contains all builtins.
 /// @return An environment which contains all builtin methods
-lenv_t* set_env(void);
+lenv* set_env(void);
 
 /// @brief Returns the truncated git hash
 /// @return The current truncated git hash
@@ -170,8 +170,8 @@ int main(int argc, const char** argv) {
 
     // Set up the interpreter
     setup_parser();
-    lenv_t* env = set_env();
-    lval_t* std = NULL;
+    lenv* env = set_env();
+    lval* std = NULL;
     if (0 == no_stdlib) {
         std = get_stdlib(env);
     }
@@ -219,7 +219,7 @@ void setup_parser(void) {
     );
 }
 
-void cleanup(lval_t* std, lenv_t* env) {
+void cleanup(lval* std, lenv* env) {
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
     if (NULL != std) {
         lval_del(std);
@@ -232,7 +232,7 @@ mpc_parser_t* get_lispy_parser(void) {
 }
 
 //--- Interpreter --------------------------------------------------------------
-void cli_interpreter(lenv_t* env) {
+void cli_interpreter(lenv* env) {
     print_prompt();
     while (true) {
         char* input = readline(">>> ");
@@ -243,9 +243,9 @@ void cli_interpreter(lenv_t* env) {
         }
         mpc_result_t parse_result;
         if (mpc_parse("<stdin>", input, lispy, &parse_result)) {
-            lval_t* read_result = lval_read(parse_result.output);
+            lval* read_result = lval_read(parse_result.output);
             assert(NULL != read_result);
-            lval_t* eval_result = lval_eval(env, read_result);
+            lval* eval_result = lval_eval(env, read_result);
             lval_println(eval_result);
             lval_del(eval_result);
             mpc_ast_delete(parse_result.output);
@@ -257,13 +257,13 @@ void cli_interpreter(lenv_t* env) {
     }
 }
 
-void file_interpreter(lenv_t* env, const char* file) {
+void file_interpreter(lenv* env, const char* file) {
     // Argument list with a single argument, the filename
-    lval_t* argv_str = lval_str(file);
-    lval_t* args = lval_add(lval_sexpr(), argv_str);
+    lval* argv_str = lval_str(file);
+    lval* args = lval_add(lval_sexpr(), argv_str);
 
     // Pass to builtin load and get the result
-    lval_t* x = builtin_load(env, args);
+    lval* x = builtin_load(env, args);
 
     // If the result is an error, be sure to print it
     if (LISPY_VAL_ERR == x->type) {
@@ -272,15 +272,15 @@ void file_interpreter(lenv_t* env, const char* file) {
     lval_del(x);
 }
 
-lval_t* get_stdlib(lenv_t* env) {
-    lval_t* standard =
+lval* get_stdlib(lenv* env) {
+    lval* standard =
         lval_add(lval_sexpr(), lval_str("/usr/local/lib/lispy/stdlib.lspy"));
-    lval_t* std = builtin_load(env, standard);
+    lval* std = builtin_load(env, standard);
     return std;
 }
 
-lenv_t* set_env(void) {
-    lenv_t* env = lenv_new();
+lenv* set_env(void) {
+    lenv* env = lenv_new();
     lenv_add_builtins(env);
     return env;
 }

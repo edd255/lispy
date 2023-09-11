@@ -1,7 +1,7 @@
 #include "builtins/eq_cmp.h"
 
 //---- Equality comparison functions -------------------------------------------
-lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op) {
+lval* builtin_cmp(lenv* env, lval* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != op);
@@ -20,14 +20,14 @@ lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op) {
     return lval_num(r);
 }
 
-lval_t* builtin_eq(lenv_t* env, lval_t* args) {
+lval* builtin_eq(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_cmp(env, args, "==");
 }
 
-lval_t* builtin_ne(lenv_t* env, lval_t* args) {
+lval* builtin_ne(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 

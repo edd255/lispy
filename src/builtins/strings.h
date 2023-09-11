@@ -13,18 +13,18 @@
 /// @param env The environment to load the content in
 /// @param args The file name
 /// @return An empty list or an error if it fails
-lval_t* builtin_load(lenv_t* env, lval_t* args);
+lval* builtin_load(lenv* env, lval* args);
 
 /// @brief Prints a string
 /// @param env The used environment
 /// @param args The arguments to print
 /// @return An empty symbolic expression
-lval_t* builtin_print(lenv_t* env, lval_t* args);
+lval* builtin_print(lenv* env, lval* args);
 
 /// @brief Constructs an error from the first argument
 /// @param env The used environment
 /// @param args The error to use
 /// @return An Lispy value that represents the error
-lval_t* builtin_error(lenv_t* env, lval_t* args);
+lval* builtin_error(lenv* env, lval* args);
 
 #endif

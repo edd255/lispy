@@ -5,7 +5,7 @@
 #include "main.h"
 
 //==== String functions ========================================================
-lval_t* builtin_load(lenv_t* env, lval_t* args) {
+lval* builtin_load(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     LCHECK_NUM(__func__, args, 1);
@@ -17,13 +17,13 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
     if (mpc_parse_contents(args->cell[0]->str, lispy, &parse_result)) {
         // Read contents
         assert(NULL != parse_result.output);
-        lval_t* expr = lval_read(parse_result.output);
+        lval* expr = lval_read(parse_result.output);
         assert(NULL != expr);
         mpc_ast_delete(parse_result.output);
 
         // Evaluate each expression
         while (expr->count) {
-            lval_t* x = lval_eval(env, lval_pop(expr, 0));
+            lval* x = lval_eval(env, lval_pop(expr, 0));
 
             // If evaluation leads to error print it
             if (LISPY_VAL_ERR == x->type) {
@@ -42,7 +42,7 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
     mpc_err_delete(parse_result.error);
 
     // Create new error message using it
-    lval_t* err = lval_err("Could not load library %s", err_msg);
+    lval* err = lval_err("Could not load library %s", err_msg);
     FREE(err_msg);
     lval_del(args);
 
@@ -50,7 +50,7 @@ lval_t* builtin_load(lenv_t* env, lval_t* args) {
     return err;
 }
 
-lval_t* builtin_print(lenv_t* env, lval_t* args) {
+lval* builtin_print(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -66,7 +66,7 @@ lval_t* builtin_print(lenv_t* env, lval_t* args) {
     return lval_sexpr();
 }
 
-lval_t* builtin_error(lenv_t* env, lval_t* args) {
+lval* builtin_error(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -74,7 +74,7 @@ lval_t* builtin_error(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
 
     // Construct error from first argument
-    lval_t* err = lval_err(args->cell[0]->str);
+    lval* err = lval_err(args->cell[0]->str);
 
     // Delete arguments and return
     lval_del(args);

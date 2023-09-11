@@ -4,7 +4,7 @@
 #include "io.h"
 
 //==== Logical functions =======================================================
-lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
+lval* builtin_logic(lenv* env, lval* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -41,14 +41,14 @@ lval_t* builtin_logic(lenv_t* env, lval_t* args, char* op) {
     return lval_num(result);
 }
 
-lval_t* builtin_and(lenv_t* env, lval_t* args) {
+lval* builtin_and(lenv* env, lval* args) {
     return builtin_logic(env, args, "and");
 }
 
-lval_t* builtin_or(lenv_t* env, lval_t* args) {
+lval* builtin_or(lenv* env, lval* args) {
     return builtin_logic(env, args, "or");
 }
 
-lval_t* builtin_not(lenv_t* env, lval_t* args) {
+lval* builtin_not(lenv* env, lval* args) {
     return builtin_logic(env, args, "not");
 }

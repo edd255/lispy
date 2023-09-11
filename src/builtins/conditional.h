@@ -13,7 +13,7 @@
 /// @param env The environment in which the expression is used
 /// @param args The condition, and the consequences
 /// @return The evaluation of the consequence
-lval_t* builtin_if(lenv_t* env, lval_t* args);
+lval* builtin_if(lenv* env, lval* args);
 
 /// @brief Evaluates a condition. On fail, prints expected and actual values.
 ///
@@ -23,7 +23,7 @@ lval_t* builtin_if(lenv_t* env, lval_t* args);
 /// @param env The environment in which the expression is used
 /// @param args The condition, the expected and actual values
 /// @return "PASSED" on success, "FAIL" and expected and actual values else
-lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
+lval* builtin_testhelper(lenv* env, lval* args);
 
 /// @brief Evaluates a series of conditions
 /// @param env The environment in which the expression is used
@@ -31,7 +31,7 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args);
 /// themselves contain one condition and one body that should be executed if the
 /// condition evaluates to true
 /// @return The evaluated body of the true condition
-lval_t* builtin_select(lenv_t* env, lval_t* args);
+lval* builtin_select(lenv* env, lval* args);
 
 /// @brief Evaluates switch-case statements
 /// @param env The environment in which the expression is used
@@ -39,6 +39,6 @@ lval_t* builtin_select(lenv_t* env, lval_t* args);
 /// arguments are quoted expression that contain as first element the case, and
 /// as second argument the result
 /// @return The evaluated body of the true condition
-lval_t* builtin_case(lenv_t* env, lval_t* args);
+lval* builtin_case(lenv* env, lval* args);
 
 #endif
