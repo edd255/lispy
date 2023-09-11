@@ -9,8 +9,8 @@
 
 /// must not be zero
 #define INITIAL_CAPACITY 16
-#define FNV_OFFSET 14695981039346656037UL
-#define FNV_PRIME 1099511628211UL
+#define FNV_OFFSET       14695981039346656037UL
+#define FNV_PRIME        1099511628211UL
 
 //=== HASH TABLE ===============================================================
 
@@ -150,13 +150,7 @@ static bool ht_expand(hash_tbl* tbl) {
     for (size_t i = 0; i < tbl->capacity; i++) {
         ht_entry entry = tbl->entries[i];
         if (entry.key != NULL) {
-            ht_set_entry(
-                new_entries,
-                new_capacity,
-                entry.key,
-                entry.val,
-                NULL
-            );
+            ht_set_entry(new_entries, new_capacity, entry.key, entry.val, NULL);
         }
     }
     // Free old entries array and update this table's details.
@@ -178,13 +172,7 @@ const char* ht_set(hash_tbl* tbl, const char* key, void* val) {
         }
     }
     // Set entry and update length.
-    return ht_set_entry(
-        tbl->entries,
-        tbl->capacity,
-        key,
-        val,
-        &tbl->len
-    );
+    return ht_set_entry(tbl->entries, tbl->capacity, key, val, &tbl->len);
 }
 
 size_t ht_length(hash_tbl* tbl) {
