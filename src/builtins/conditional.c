@@ -1,6 +1,5 @@
 #include "builtins/conditional.h"
 
-#include "builtins/list.h"
 #include "deps/color-sh/color-sh.h"
 #include "eval.h"
 #include "io.h"

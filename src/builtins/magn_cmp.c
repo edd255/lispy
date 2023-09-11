@@ -13,7 +13,7 @@ lval_t* builtin_ord(lenv_t* env, lval_t* args, char* op) {
     LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
     LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
 
-    int r = 0;
+    int r;
     if (0 == strcmp(op, ">")) {
         r = (args->cell[0]->num > args->cell[1]->num);
     } else if (0 == strcmp(op, "<")) {
