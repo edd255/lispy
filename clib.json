@@ -2,6 +2,7 @@
   "dependencies": {
     "edd255/logger": "0.2.0",
     "orangeduck/mpc": "0.9.8",
-    "edd255/color-sh": "1.0.1"
+    "edd255/color-sh": "1.0.1",
+    "edd255/hash_tbl": "1.0"
   }
 }
