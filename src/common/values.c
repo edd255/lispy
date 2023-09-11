@@ -164,21 +164,21 @@ lval* lval_copy(const lval* self) {
         }
         // Copy Strings using malloc and strlcpy
         case LISPY_VAL_ERR: {
-            size_t err_len = strlen(self->err) + 1;
-            x->err = MALLOC(err_len);
-            strlcpy(x->err, self->err, err_len);
+            x->err = MALLOC(self->len + 1);
+            strlcpy(x->err, self->err, self->len + 1);
+            x->len = self->len;
             break;
         }
         case LISPY_VAL_SYM: {
-            size_t sym_len = strlen(self->sym) + 1;
-            x->sym = MALLOC(sym_len);
-            strlcpy(x->sym, self->sym, sym_len);
+            x->sym = MALLOC(self->len + 1);
+            strlcpy(x->sym, self->sym, self->len + 1);
+            x->len = self->len;
             break;
         }
         case LISPY_VAL_STR: {
-            size_t str_len = strlen(self->str) + 1;
-            x->str = MALLOC(str_len);
-            strlcpy(x->str, self->str, str_len);
+            x->str = MALLOC(self->len + 1);
+            strlcpy(x->str, self->str, self->len + 1);
+            x->len = self->len;
             break;
         }
         // Copy Lists by copying each sub-expression

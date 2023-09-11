@@ -57,11 +57,11 @@
 #define LCHECK_IDX_STR(fn, args, cell_idx, idx) \
     LCHECK( \
         (args), \
-        ((idx) < strlen((args)->cell[cell_idx]->str)), \
+        ((idx) < ((args)->cell[cell_idx]->len)), \
         "Function '%s' passed index %d but argument has size %d.", \
         (fn), \
         (idx), \
-        (strlen((args)->cell[(cell_idx)]->str)) \
+        ((args)->cell[(cell_idx)]->len) \
     )
 
 /// @brief Macro to check whether a function passed the correct number of
@@ -91,7 +91,7 @@
 #define LCHECK_STR_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
-        (0 != strlen((args)->cell[idx]->str)), \
+        (0 != (args)->cell[idx]->len), \
         "Function '%s' passed {} for argument %i.", \
         (fn), \
         (idx) \
