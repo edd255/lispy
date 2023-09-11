@@ -58,7 +58,6 @@ ERR  := -Wall \
 		-Wpedantic \
 		-Wextra \
 		-Werror \
-		-Wvla \
 		-Wno-gnu-zero-variadic-macro-arguments
 OPT  := -Ofast -DNDEBUG
 DBG  := -Og -g
