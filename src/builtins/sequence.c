@@ -3,7 +3,7 @@
 #include "eval.h"
 #include "io.h"
 
-lval_t* builtin_do(lenv_t* env, lval_t* args) {
+lval* builtin_do(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 

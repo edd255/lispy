@@ -6,7 +6,7 @@
 #include "io.h"
 
 //==== Arithmetic functions ====================================================
-lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
+lval* builtin_op(lenv* env, lval* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != op);
@@ -19,7 +19,7 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
     }
 
     // Pop the first element
-    lval_t* x = lval_pop(args, 0);
+    lval* x = lval_pop(args, 0);
     assert(NULL != x);
 
     // If no arguments and sub then perform unary negation
@@ -39,7 +39,7 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
     // While there are still elements remaining
     while (args->count > 0) {
         // Pop the next element
-        lval_t* y = lval_pop(args, 0);
+        lval* y = lval_pop(args, 0);
         assert(NULL != y);
         switch (arithm_op_from_str(op)) {
             case LISPY_ARITHM_ADD: {
@@ -189,70 +189,70 @@ lval_t* builtin_op(lenv_t* env, lval_t* args, char* op) {
     return x;
 }
 
-lval_t* builtin_add(lenv_t* env, lval_t* args) {
+lval* builtin_add(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "+");
 }
 
-lval_t* builtin_sub(lenv_t* env, lval_t* args) {
+lval* builtin_sub(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "-");
 }
 
-lval_t* builtin_mul(lenv_t* env, lval_t* args) {
+lval* builtin_mul(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "*");
 }
 
-lval_t* builtin_div(lenv_t* env, lval_t* args) {
+lval* builtin_div(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "/");
 }
 
-lval_t* builtin_mod(lenv_t* env, lval_t* args) {
+lval* builtin_mod(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "%");
 }
 
-lval_t* builtin_pow(lenv_t* env, lval_t* args) {
+lval* builtin_pow(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "^");
 }
 
-lval_t* builtin_max(lenv_t* env, lval_t* args) {
+lval* builtin_max(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "max");
 }
 
-lval_t* builtin_min(lenv_t* env, lval_t* args) {
+lval* builtin_min(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_op(env, args, "min");
 }
 
-lval_t* builtin_sum(lenv_t* env, lval_t* args) {
+lval* builtin_sum(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
 
-    lval_t* list = args->cell[0];
+    lval* list = args->cell[0];
     double dec_sum = 0;
     long int_sum = 0;
     bool dec_flag = false;
@@ -275,14 +275,14 @@ lval_t* builtin_sum(lenv_t* env, lval_t* args) {
     return dec_flag ? lval_dec(dec_sum) : lval_num(int_sum);
 }
 
-lval_t* builtin_prod(lenv_t* env, lval_t* args) {
+lval* builtin_prod(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
 
-    lval_t* list = args->cell[0];
+    lval* list = args->cell[0];
     double dec_prod = 1;
     long int_prod = 1;
     bool dec_flag = false;

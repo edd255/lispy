@@ -1,6 +1,6 @@
 var builtins_8h =
 [
-    [ "lenv_add_builtin_const", "builtins_8h.html#a0b94b4f4e2a2d86187b645f4312c0b48", null ],
-    [ "lenv_add_builtin_fn", "builtins_8h.html#a3c4192d677b9ccc0db00ceef157f865f", null ],
-    [ "lenv_add_builtins", "builtins_8h.html#afdf208cb23050963ae7ef2af4a68442d", null ]
+    [ "lenv_add_builtin_const", "builtins_8h.html#a3070d3185869b027151b4ce135aee409", null ],
+    [ "lenv_add_builtin_fn", "builtins_8h.html#abf0b4efdab21e5f7eff17833b086b13e", null ],
+    [ "lenv_add_builtins", "builtins_8h.html#a2882a898a516362d7da596785b9f4200", null ]
 ];

@@ -44,7 +44,7 @@ This file contains macros to check runtime assertions and do runtime error repor
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!(cond))\ \{\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{structlval__t}{lval\_t}}*\ err\ =\ \mbox{\hyperlink{common_8h_a8948ac2f47e6d29894f135aeaead227a}{lval\_err}}(fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{structlval}{lval}}*\ err\ =\ \mbox{\hyperlink{common_8h_a20f8e62c5f7817d5fc792b43600fa774}{lval\_err}}(fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ lval\_del(args);\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ err;\ \(\backslash\)}
 \DoxyCodeLine{\ \ \ \ \}}

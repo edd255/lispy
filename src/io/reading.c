@@ -3,7 +3,7 @@
 
 //==== READING =================================================================
 
-lval_t* lval_read_num(const mpc_ast_t* tree) {
+lval* lval_read_num(const mpc_ast_t* tree) {
     assert(NULL != tree);
 
     errno = 0;
@@ -15,7 +15,7 @@ lval_t* lval_read_num(const mpc_ast_t* tree) {
     return errno != ERANGE ? lval_dec(x) : lval_err("invalid number");
 }
 
-lval_t* lval_read(mpc_ast_t* tree) {
+lval* lval_read(mpc_ast_t* tree) {
     assert(NULL != tree);
 
     // If Symbol, String or Number return conversion to that type
@@ -30,7 +30,7 @@ lval_t* lval_read(mpc_ast_t* tree) {
     }
 
     // If root (>) or sexpr then create empty list
-    lval_t* x = NULL;
+    lval* x = NULL;
     if (0 == strcmp(tree->tag, ">")) {
         x = lval_sexpr();
     }
@@ -66,7 +66,7 @@ lval_t* lval_read(mpc_ast_t* tree) {
     return x;
 }
 
-lval_t* lval_read_str(mpc_ast_t* tree) {
+lval* lval_read_str(mpc_ast_t* tree) {
     assert(NULL != tree);
 
     // Cut off final quote character
@@ -81,7 +81,7 @@ lval_t* lval_read_str(mpc_ast_t* tree) {
     unescaped = mpcf_unescape(unescaped);
 
     // Construct a new lval using the string
-    lval_t* str = lval_str(unescaped);
+    lval* str = lval_str(unescaped);
 
     // Free the string and return
     FREE(unescaped);

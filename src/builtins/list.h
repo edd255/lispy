@@ -13,19 +13,19 @@
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return Returns a quoted expression which contains the arguments
-lval_t* builtin_list(lenv_t* env, lval_t* args);
+lval* builtin_list(lenv* env, lval* args);
 
 /// @brief Computes the head of a list or string
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return Head of the list/string
-lval_t* builtin_head(lenv_t* env, lval_t* args);
+lval* builtin_head(lenv* env, lval* args);
 
 /// @brief Computes the tail of a list or string
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return Tail of the list/string
-lval_t* builtin_tail(lenv_t* env, lval_t* args);
+lval* builtin_tail(lenv* env, lval* args);
 
 /// @brief Evaluates a quoted expression
 ///
@@ -35,13 +35,13 @@ lval_t* builtin_tail(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The result of the evaluation
-lval_t* builtin_eval(lenv_t* env, lval_t* args);
+lval* builtin_eval(lenv* env, lval* args);
 
 /// @brief Joins two quoted expressions/two strings
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return A quoted expression/string that represents the join
-lval_t* builtin_join(lenv_t* env, lval_t* args);
+lval* builtin_join(lenv* env, lval* args);
 
 /// @brief Appends a value to the front of a quoted expression
 ///
@@ -50,13 +50,13 @@ lval_t* builtin_join(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The resulting quoted expression
-lval_t* builtin_cons(lenv_t* env, lval_t* args);
+lval* builtin_cons(lenv* env, lval* args);
 
 /// @brief Computes the length of the quoted expression/string
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The length of the quoted expression/string
-lval_t* builtin_len(lenv_t* env, lval_t* args);
+lval* builtin_len(lenv* env, lval* args);
 
 /// @brief Applies a function to a variable number of arguments.
 ///
@@ -67,7 +67,7 @@ lval_t* builtin_len(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The result of the evaluation.
-lval_t* builtin_pack(lenv_t* env, lval_t* args);
+lval* builtin_pack(lenv* env, lval* args);
 
 /// @brief Applies a function to a list of arguments.
 ///
@@ -78,7 +78,7 @@ lval_t* builtin_pack(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The result of the evaluation.
-lval_t* builtin_unpack(lenv_t* env, lval_t* args);
+lval* builtin_unpack(lenv* env, lval* args);
 
 /// @brief Returns the nth element of a list or string.
 ///
@@ -87,7 +87,7 @@ lval_t* builtin_unpack(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The nth element of the given list/string.
-lval_t* builtin_nth(lenv_t* env, lval_t* args);
+lval* builtin_nth(lenv* env, lval* args);
 
 /// @brief Returns the first element of a list or string.
 ///
@@ -96,7 +96,7 @@ lval_t* builtin_nth(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The first element of the given list/string.
-lval_t* builtin_first(lenv_t* env, lval_t* args);
+lval* builtin_first(lenv* env, lval* args);
 
 /// @brief Returns the last element of a list or string.
 ///
@@ -105,7 +105,7 @@ lval_t* builtin_first(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The second element of the given list/string.
-lval_t* builtin_second(lenv_t* env, lval_t* args);
+lval* builtin_second(lenv* env, lval* args);
 
 /// @brief Returns the last element of a list or string.
 ///
@@ -114,7 +114,7 @@ lval_t* builtin_second(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The third element of the given list/string.
-lval_t* builtin_third(lenv_t* env, lval_t* args);
+lval* builtin_third(lenv* env, lval* args);
 
 /// @brief Returns the last element of a list or string.
 ///
@@ -123,37 +123,37 @@ lval_t* builtin_third(lenv_t* env, lval_t* args);
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return The last element of the given list/string.
-lval_t* builtin_last(lenv_t* env, lval_t* args);
+lval* builtin_last(lenv* env, lval* args);
 
 /// @brief Checks whether the first argument is element in the list/string
 /// @param env The environment in which the arguments are used
 /// @param args The element to check and the list/string
 /// @return 1 if the argument is in the list/string, else 0
-lval_t* builtin_elem(lenv_t* env, lval_t* args);
+lval* builtin_elem(lenv* env, lval* args);
 
 /// @brief Returns all of list/string but last element
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return The list/string but w/o last element
-lval_t* builtin_init(lenv_t* env, lval_t* args);
+lval* builtin_init(lenv* env, lval* args);
 
 /// @brief Takes n items from list/string
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return A list/string with the first n items of the given list/string
-lval_t* builtin_take(lenv_t* env, lval_t* args);
+lval* builtin_take(lenv* env, lval* args);
 
 /// @brief Drops n items from list/string
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return A list/string without the first n items of the given list/string
-lval_t* builtin_drop(lenv_t* env, lval_t* args);
+lval* builtin_drop(lenv* env, lval* args);
 
 /// @brief Splits a list/string at n
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
 /// @return A qexpr with two elements: The first contains the first n elements of
 /// the given list/string, the second contains the rest
-lval_t* builtin_split(lenv_t* env, lval_t* args);
+lval* builtin_split(lenv* env, lval* args);
 
 #endif

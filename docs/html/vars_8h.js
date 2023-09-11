@@ -1,7 +1,7 @@
 var vars_8h =
 [
-    [ "builtin_def", "vars_8h.html#a3978aeec271e1dabe62ef9cf6e0f99ef", null ],
-    [ "builtin_lambda", "vars_8h.html#a7e05d83209d4a9e6e38b9fd730cd5a22", null ],
-    [ "builtin_put", "vars_8h.html#ac706e1796bc3cf0162e0effec7518869", null ],
-    [ "builtin_var", "vars_8h.html#a14e6227bb642a9aa8200ec59c7bbf77b", null ]
+    [ "builtin_def", "vars_8h.html#a60f651a3825e9866f905d927ea1fd8c8", null ],
+    [ "builtin_lambda", "vars_8h.html#ac58375458a1bc963caae0dc52223dce2", null ],
+    [ "builtin_put", "vars_8h.html#a18d8ba0f04d3c74ca2c4aa7668d9e972", null ],
+    [ "builtin_var", "vars_8h.html#a7c77a56166db2b5e34ba045d0d93985f", null ]
 ];

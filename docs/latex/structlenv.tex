@@ -1,0 +1,36 @@
+\doxysection{lenv Struct Reference}
+\hypertarget{structlenv}{}\label{structlenv}\index{lenv@{lenv}}
+
+
+A structure that contains data and metadata about used environments.  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structlenv_a2fb313c742edfdf22e045dd8973c60a5}\label{structlenv_a2fb313c742edfdf22e045dd8973c60a5} 
+\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} {\bfseries parent}
+\begin{DoxyCompactList}\small\item\em A pointer to the parent environment. \end{DoxyCompactList}\item 
+\Hypertarget{structlenv_a9316f06df9ad9c244613b9b4ff9e0f1e}\label{structlenv_a9316f06df9ad9c244613b9b4ff9e0f1e} 
+int {\bfseries count}
+\begin{DoxyCompactList}\small\item\em The number of symbols in the environment. \end{DoxyCompactList}\item 
+\Hypertarget{structlenv_a63d204386b02a915b215d57a9de274ab}\label{structlenv_a63d204386b02a915b215d57a9de274ab} 
+char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries syms}
+\begin{DoxyCompactList}\small\item\em A pointer to the symbols. \end{DoxyCompactList}\item 
+\Hypertarget{structlenv_a9f3359ad7eb1658984a06a392fc86512}\label{structlenv_a9f3359ad7eb1658984a06a392fc86512} 
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries vals}
+\begin{DoxyCompactList}\small\item\em A pointer to the values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A structure that contains data and metadata about used environments. 
+
+The env\+\_\+t struct encodes a list of relationships between symbols (names) and values. This is implemented by using two lists of equal length, where each entry in one list has a corresponding entry in the other list at the same position. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{common_8h}{common.\+h}}\end{DoxyCompactItemize}

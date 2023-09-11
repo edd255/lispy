@@ -3,8 +3,8 @@
 
 //=== WRITING ==================================================================
 
-/* Print an lval_t */
-void lval_print(lval_t* val) {
+/* Print an lval */
+void lval_print(lval* val) {
     assert(NULL != val);
     if (NULL == val) {
         return;
@@ -53,7 +53,7 @@ void lval_print(lval_t* val) {
     }
 }
 
-void lval_print_expr(lval_t* val, char open, char close) {
+void lval_print_expr(lval* val, char open, char close) {
     assert(NULL != val);
 
     putchar(open);
@@ -69,15 +69,15 @@ void lval_print_expr(lval_t* val, char open, char close) {
     putchar(close);
 }
 
-/* Print a lval_t followed by a newline */
-void lval_println(lval_t* val) {
+/* Print a lval followed by a newline */
+void lval_println(lval* val) {
     assert(NULL != val);
 
     lval_print(val);
     putchar('\n');
 }
 
-void lval_print_str(const lval_t* val) {
+void lval_print_str(const lval* val) {
     assert(NULL != val);
 
     if (NULL == val) {

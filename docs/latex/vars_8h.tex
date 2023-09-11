@@ -9,13 +9,13 @@ This file contains all builtin variable methods.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a14e6227bb642a9aa8200ec59c7bbf77b}{builtin\+\_\+var}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}fn)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a7c77a56166db2b5e34ba045d0d93985f}{builtin\+\_\+var}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}fn)
 \begin{DoxyCompactList}\small\item\em Defines a function in the local or global environment. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a7e05d83209d4a9e6e38b9fd730cd5a22}{builtin\+\_\+lambda}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_ac58375458a1bc963caae0dc52223dce2}{builtin\+\_\+lambda}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Define a lambda function. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a3978aeec271e1dabe62ef9cf6e0f99ef}{builtin\+\_\+def}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a60f651a3825e9866f905d927ea1fd8c8}{builtin\+\_\+def}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Defines a key-\/value pair globally. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_ac706e1796bc3cf0162e0effec7518869}{builtin\+\_\+put}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vars_8h_a18d8ba0f04d3c74ca2c4aa7668d9e972}{builtin\+\_\+put}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Define a key-\/value in an environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -25,11 +25,11 @@ This file contains all builtin variable methods.
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{vars_8h_a3978aeec271e1dabe62ef9cf6e0f99ef}\label{vars_8h_a3978aeec271e1dabe62ef9cf6e0f99ef} 
+\Hypertarget{vars_8h_a60f651a3825e9866f905d927ea1fd8c8}\label{vars_8h_a60f651a3825e9866f905d927ea1fd8c8} 
 \index{vars.h@{vars.h}!builtin\_def@{builtin\_def}}
 \index{builtin\_def@{builtin\_def}!vars.h@{vars.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_def()}{builtin\_def()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -47,11 +47,11 @@ This method calls builtin\+\_\+var, and then lenv\+\_\+def internally.
 \begin{DoxyReturn}{Returns}
 An empty symbolic expression or an error 
 \end{DoxyReturn}
-\Hypertarget{vars_8h_a7e05d83209d4a9e6e38b9fd730cd5a22}\label{vars_8h_a7e05d83209d4a9e6e38b9fd730cd5a22} 
+\Hypertarget{vars_8h_ac58375458a1bc963caae0dc52223dce2}\label{vars_8h_ac58375458a1bc963caae0dc52223dce2} 
 \index{vars.h@{vars.h}!builtin\_lambda@{builtin\_lambda}}
 \index{builtin\_lambda@{builtin\_lambda}!vars.h@{vars.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_lambda()}{builtin\_lambda()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+lambda (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+lambda (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -67,11 +67,11 @@ Define a lambda function.
 \begin{DoxyReturn}{Returns}
 The specified lambda function 
 \end{DoxyReturn}
-\Hypertarget{vars_8h_ac706e1796bc3cf0162e0effec7518869}\label{vars_8h_ac706e1796bc3cf0162e0effec7518869} 
+\Hypertarget{vars_8h_a18d8ba0f04d3c74ca2c4aa7668d9e972}\label{vars_8h_a18d8ba0f04d3c74ca2c4aa7668d9e972} 
 \index{vars.h@{vars.h}!builtin\_put@{builtin\_put}}
 \index{builtin\_put@{builtin\_put}!vars.h@{vars.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_put()}{builtin\_put()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -87,11 +87,11 @@ Define a key-\/value in an environment.
 \begin{DoxyReturn}{Returns}
 An empty symbolic expression or an error 
 \end{DoxyReturn}
-\Hypertarget{vars_8h_a14e6227bb642a9aa8200ec59c7bbf77b}\label{vars_8h_a14e6227bb642a9aa8200ec59c7bbf77b} 
+\Hypertarget{vars_8h_a7c77a56166db2b5e34ba045d0d93985f}\label{vars_8h_a7c77a56166db2b5e34ba045d0d93985f} 
 \index{vars.h@{vars.h}!builtin\_var@{builtin\_var}}
 \index{builtin\_var@{builtin\_var}!vars.h@{vars.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_var()}{builtin\_var()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+var (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{fn }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+var (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{fn }\end{DoxyParamCaption})}
 
 
 

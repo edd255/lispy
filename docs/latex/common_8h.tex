@@ -10,27 +10,31 @@ This file contains the definitions, constructors, destructors and methods for Li
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}deps/hash\+\_\+tbl/ht.\+h"{}}\newline
 {\ttfamily \#include "{}utils/alloc.\+h"{}}\newline
 {\ttfamily \#include "{}utils/errors.\+h"{}}\newline
 \doxysubsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structlval__t}{lval\+\_\+t}}
+struct \mbox{\hyperlink{structlval}{lval}}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}}
+struct \mbox{\hyperlink{structlenv}{lenv}}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{common_8h_a63ce590ca5f53ca77ead1e12fd2865b0}\label{common_8h_a63ce590ca5f53ca77ead1e12fd2865b0} 
-typedef struct \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} {\bfseries lval\+\_\+t}
+\Hypertarget{common_8h_ac0be6732e3296097afd990ec2434709b}\label{common_8h_ac0be6732e3296097afd990ec2434709b} 
+typedef struct \mbox{\hyperlink{structlval}{lval}} {\bfseries lval}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
-\Hypertarget{common_8h_a7fa88502c8f70b507d9a2966e062275f}\label{common_8h_a7fa88502c8f70b507d9a2966e062275f} 
-typedef struct \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} {\bfseries lenv\+\_\+t}
+\Hypertarget{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db}\label{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db} 
+typedef struct \mbox{\hyperlink{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db}{hash\+\_\+tbl}} {\bfseries hash\+\_\+tbl}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\item 
-\Hypertarget{common_8h_a9b47e1b04752a06074ffc0740c018d21}\label{common_8h_a9b47e1b04752a06074ffc0740c018d21} 
-typedef \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} {\bfseries lbuiltin\+\_\+t}) (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*})
-\begin{DoxyCompactList}\small\item\em A function pointer that takes an lenv\+\_\+t\texorpdfstring{$\ast$}{*} and a lval\+\_\+t\texorpdfstring{$\ast$}{*} and returns a lval\+\_\+t\texorpdfstring{$\ast$}{*}, briefly\+: a pointer to a builtin function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\Hypertarget{common_8h_ab1f893162cf89ecaf1eac6dcd0be5e89}\label{common_8h_ab1f893162cf89ecaf1eac6dcd0be5e89} 
+typedef struct \mbox{\hyperlink{structlenv}{lenv}} {\bfseries lenv}
+\begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\item 
+\Hypertarget{common_8h_aa1e098d57c350b2a9852b4fb350e2d95}\label{common_8h_aa1e098d57c350b2a9852b4fb350e2d95} 
+typedef \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}(\texorpdfstring{$\ast$}{*} {\bfseries lbuiltin}) (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em A function pointer that takes an lenv\texorpdfstring{$\ast$}{*} and a lval\texorpdfstring{$\ast$}{*} and returns a lval\texorpdfstring{$\ast$}{*}, briefly\+: a pointer to a builtin function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,51 +61,51 @@ enum \mbox{\hyperlink{common_8h_abea235b4767f389601d0d19eaf7069c1}{LISPY\+\_\+\+
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae25dce2491f988d8c2e3e42213a70eda}{lval\+\_\+num}} (long value)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ac9130703db4222fec287ff063a7b5eee}{lval\+\_\+num}} (long value)
 \begin{DoxyCompactList}\small\item\em Constructor for numeric values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae76b2ad4b671e5a044518d0ba5524616}{lval\+\_\+dec}} (double value)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ad41374b58f9ac4927c37be0e9c356efd}{lval\+\_\+dec}} (double value)
 \begin{DoxyCompactList}\small\item\em Constructor for decimal values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a8948ac2f47e6d29894f135aeaead227a}{lval\+\_\+err}} (char \texorpdfstring{$\ast$}{*}fmt,...)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a20f8e62c5f7817d5fc792b43600fa774}{lval\+\_\+err}} (char \texorpdfstring{$\ast$}{*}fmt,...)
 \begin{DoxyCompactList}\small\item\em Constructor for error values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a13075389187d0c715b972f210026f453}{lval\+\_\+sym}} (char \texorpdfstring{$\ast$}{*}str)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a4a56c1ec17a911f328b64c7e4f8e67d9}{lval\+\_\+sym}} (char \texorpdfstring{$\ast$}{*}str)
 \begin{DoxyCompactList}\small\item\em Constructor for symbolic values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae2467304e919348e4797626133646631}{lval\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a6a9fa5c8341d2f3915b7ea81f82559e9}{lval\+\_\+str}} (const char \texorpdfstring{$\ast$}{*}str)
 \begin{DoxyCompactList}\small\item\em Constructor for string values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae0c4b5d63c28689c69636af53a2e4221}{lval\+\_\+sexpr}} (void)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ae1f1789c9d802b370dcddf26c14c202e}{lval\+\_\+sexpr}} (void)
 \begin{DoxyCompactList}\small\item\em Constructor for symbolic expressions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_af2634a77289fda684f9fc1806418bff0}{lval\+\_\+qexpr}} (void)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a58fa34cd290931d83a281e823b7e9d88}{lval\+\_\+qexpr}} (void)
 \begin{DoxyCompactList}\small\item\em Constructor for quoted expressions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a9f64cc5fe33b9b9a5f25c4400d33e009}{lval\+\_\+fn}} (\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}} fn)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a8d0bb1b1ad44364d421f95a07c5db059}{lval\+\_\+fn}} (\mbox{\hyperlink{common_8h_aa1e098d57c350b2a9852b4fb350e2d95}{lbuiltin}} fn)
 \begin{DoxyCompactList}\small\item\em Constructor for functional values. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ab1d3edcfbb6845ae9cb911d8ecdc7fad}{lval\+\_\+lambda}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}formals, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}body)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a89318f2ec6259264c6c6676d47c66584}{lval\+\_\+lambda}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}formals, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}body)
 \begin{DoxyCompactList}\small\item\em Constructor for lambda expressions. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a428595b3c81fa24a19d8bb7c9f3a7c63}{lval\+\_\+copy}} (const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ad2547ab128adc3dbc873895b17a02c8a}{lval\+\_\+copy}} (const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self)
 \begin{DoxyCompactList}\small\item\em Copies a Lispy value and returns a new one which contains the given value. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a3fa181cb063e603b67eaea243b8f20b3}{lval\+\_\+add}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}other)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ab9f4e6d4de414ab68f4be55872caa2f6}{lval\+\_\+add}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}other)
 \begin{DoxyCompactList}\small\item\em Adds an element to a symbolic expression. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ab25f0e3236cca2127ded2c89b823893e}{lval\+\_\+join}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}other)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a498be5e1760cb54272da1d1281079541}{lval\+\_\+join}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}other)
 \begin{DoxyCompactList}\small\item\em Adds each cell in x to self. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a060fb30807a10066bf94bdfc35e9c252}{lval\+\_\+pop}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, int idx)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_acce4599097304ad62eea4f1b63e0fa00}{lval\+\_\+pop}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self, int idx)
 \begin{DoxyCompactList}\small\item\em Pops the value at index idx from self. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ada9b08d70a9d4f4fa2b67f1d385a8e20}{lval\+\_\+take}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, int idx)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a936eac976c9a6d61ea33b77b79fcc0c6}{lval\+\_\+take}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self, int idx)
 \begin{DoxyCompactList}\small\item\em As pop, but deletes self. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_ac5ca3ce4ead7abbbf133cef22e0e703c}{lval\+\_\+call}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}fn, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a04a3f4b496017e63214e9ca6a09e5283}{lval\+\_\+call}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}fn, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Calls a function with specific arguments in an environment. Differentiates between builtins and lambdas. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{common_8h_a1548d95541e8d0ca241d3720dd7324cb}{lval\+\_\+eq}} (const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self, const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}other)
+int \mbox{\hyperlink{common_8h_a9f577590825ddc42dd2bca4c807b0e78}{lval\+\_\+eq}} (const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self, const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}other)
 \begin{DoxyCompactList}\small\item\em Compares to Lispy values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{common_8h_affcacd53fa4f60cb6132bc34bd3bcc9e}{lval\+\_\+del}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}self)
+void \mbox{\hyperlink{common_8h_a30a247b94a8421f4278cce9459d8531b}{lval\+\_\+del}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}self)
 \begin{DoxyCompactList}\small\item\em Deletes a Lispy value. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_af3e25accaf4d84e9c3d2fa72ccfe5cb3}{lenv\+\_\+new}} (void)
+\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a8c8b9f4d457b30374507d006e2deada2}{lenv\+\_\+new}} (void)
 \begin{DoxyCompactList}\small\item\em Creates a new, empty environment. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{common_8h_a1070e40e77795793a1ae39226de4b94a}{lenv\+\_\+del}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+void \mbox{\hyperlink{common_8h_a620e53365cf1f88e3e5773d2bcabd1ba}{lenv\+\_\+del}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em Frees the given environment. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a4891ab126b7cc84d7190e201e852c687}{lenv\+\_\+get}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}key)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a440ee8e566a57dc7fa2b2580413c9ef6}{lenv\+\_\+get}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}key)
 \begin{DoxyCompactList}\small\item\em Returns the associated value for the given key in the environment. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{common_8h_a920fddf059168923fb3ee9b2695c1686}{lenv\+\_\+put}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+void \mbox{\hyperlink{common_8h_a9917059cb17db4a16bd5a0c7f19ecf53}{lenv\+\_\+put}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}val)
 \begin{DoxyCompactList}\small\item\em Puts key and value in the environment. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a453f4c4bad69b5ffa58a346c297a1d64}{lenv\+\_\+copy}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{common_8h_a42648010d0c31b5f26074ed9ddddc48c}{lenv\+\_\+copy}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em Copies an environment to a new one. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{common_8h_a5aed6188f6ab1f859afec97887e005b7}{lenv\+\_\+def}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+void \mbox{\hyperlink{common_8h_a917b08b1952017b6431c4f4a6075f9b3}{lenv\+\_\+def}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}key, const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}val)
 \begin{DoxyCompactList}\small\item\em Defines a key-\/value pair globally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -196,11 +200,11 @@ LISPY\+\_\+\+VAL\+\_\+\+FN&Function. \\
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{common_8h_a453f4c4bad69b5ffa58a346c297a1d64}\label{common_8h_a453f4c4bad69b5ffa58a346c297a1d64} 
+\Hypertarget{common_8h_a42648010d0c31b5f26074ed9ddddc48c}\label{common_8h_a42648010d0c31b5f26074ed9ddddc48c} 
 \index{common.h@{common.h}!lenv\_copy@{lenv\_copy}}
 \index{lenv\_copy@{lenv\_copy}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_copy()}{lenv\_copy()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} lenv\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} lenv\+\_\+copy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
 
 
 
@@ -214,11 +218,11 @@ Copies an environment to a new one.
 \begin{DoxyReturn}{Returns}
 A pointer to the newly created environment 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a5aed6188f6ab1f859afec97887e005b7}\label{common_8h_a5aed6188f6ab1f859afec97887e005b7} 
+\Hypertarget{common_8h_a917b08b1952017b6431c4f4a6075f9b3}\label{common_8h_a917b08b1952017b6431c4f4a6075f9b3} 
 \index{common.h@{common.h}!lenv\_def@{lenv\_def}}
 \index{lenv\_def@{lenv\_def}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_def()}{lenv\_def()}}
-{\footnotesize\ttfamily void lenv\+\_\+def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{key,  }\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void lenv\+\_\+def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{key,  }\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
 
 
 
@@ -235,11 +239,11 @@ This method defines a key-\/value pair globally by chaining up the parent enviro
 {\em val} & The associated value \\
 \hline
 \end{DoxyParams}
-\Hypertarget{common_8h_a1070e40e77795793a1ae39226de4b94a}\label{common_8h_a1070e40e77795793a1ae39226de4b94a} 
+\Hypertarget{common_8h_a620e53365cf1f88e3e5773d2bcabd1ba}\label{common_8h_a620e53365cf1f88e3e5773d2bcabd1ba} 
 \index{common.h@{common.h}!lenv\_del@{lenv\_del}}
 \index{lenv\_del@{lenv\_del}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_del()}{lenv\_del()}}
-{\footnotesize\ttfamily void lenv\+\_\+del (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void lenv\+\_\+del (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
 
 
 
@@ -250,11 +254,11 @@ Frees the given environment.
 {\em env} & A pointer to the environment \\
 \hline
 \end{DoxyParams}
-\Hypertarget{common_8h_a4891ab126b7cc84d7190e201e852c687}\label{common_8h_a4891ab126b7cc84d7190e201e852c687} 
+\Hypertarget{common_8h_a440ee8e566a57dc7fa2b2580413c9ef6}\label{common_8h_a440ee8e566a57dc7fa2b2580413c9ef6} 
 \index{common.h@{common.h}!lenv\_get@{lenv\_get}}
 \index{lenv\_get@{lenv\_get}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_get()}{lenv\_get()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lenv\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lenv\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{key }\end{DoxyParamCaption})}
 
 
 
@@ -270,11 +274,11 @@ Returns the associated value for the given key in the environment.
 \begin{DoxyReturn}{Returns}
 The value associated with the key in the environment 
 \end{DoxyReturn}
-\Hypertarget{common_8h_af3e25accaf4d84e9c3d2fa72ccfe5cb3}\label{common_8h_af3e25accaf4d84e9c3d2fa72ccfe5cb3} 
+\Hypertarget{common_8h_a8c8b9f4d457b30374507d006e2deada2}\label{common_8h_a8c8b9f4d457b30374507d006e2deada2} 
 \index{common.h@{common.h}!lenv\_new@{lenv\_new}}
 \index{lenv\_new@{lenv\_new}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_new()}{lenv\_new()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} lenv\+\_\+new (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} lenv\+\_\+new (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -283,11 +287,11 @@ Creates a new, empty environment.
 \begin{DoxyReturn}{Returns}
 A pointer to the created environment. 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a920fddf059168923fb3ee9b2695c1686}\label{common_8h_a920fddf059168923fb3ee9b2695c1686} 
+\Hypertarget{common_8h_a9917059cb17db4a16bd5a0c7f19ecf53}\label{common_8h_a9917059cb17db4a16bd5a0c7f19ecf53} 
 \index{common.h@{common.h}!lenv\_put@{lenv\_put}}
 \index{lenv\_put@{lenv\_put}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lenv\_put()}{lenv\_put()}}
-{\footnotesize\ttfamily void lenv\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{key,  }\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void lenv\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{key,  }\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
 
 
 
@@ -302,11 +306,11 @@ Puts key and value in the environment.
 {\em val} & The associated value \\
 \hline
 \end{DoxyParams}
-\Hypertarget{common_8h_a3fa181cb063e603b67eaea243b8f20b3}\label{common_8h_a3fa181cb063e603b67eaea243b8f20b3} 
+\Hypertarget{common_8h_ab9f4e6d4de414ab68f4be55872caa2f6}\label{common_8h_ab9f4e6d4de414ab68f4be55872caa2f6} 
 \index{common.h@{common.h}!lval\_add@{lval\_add}}
 \index{lval\_add@{lval\_add}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_add()}{lval\_add()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
 
 
 
@@ -322,11 +326,11 @@ Adds an element to a symbolic expression.
 \begin{DoxyReturn}{Returns}
 A pointer to the symbolic expression which includes x 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ac5ca3ce4ead7abbbf133cef22e0e703c}\label{common_8h_ac5ca3ce4ead7abbbf133cef22e0e703c} 
+\Hypertarget{common_8h_a04a3f4b496017e63214e9ca6a09e5283}\label{common_8h_a04a3f4b496017e63214e9ca6a09e5283} 
 \index{common.h@{common.h}!lval\_call@{lval\_call}}
 \index{lval\_call@{lval\_call}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_call()}{lval\_call()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{fn,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{fn,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -344,11 +348,11 @@ Calls a function with specific arguments in an environment. Differentiates betwe
 \begin{DoxyReturn}{Returns}
 A (partial) evaluation of the function call 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a428595b3c81fa24a19d8bb7c9f3a7c63}\label{common_8h_a428595b3c81fa24a19d8bb7c9f3a7c63} 
+\Hypertarget{common_8h_ad2547ab128adc3dbc873895b17a02c8a}\label{common_8h_ad2547ab128adc3dbc873895b17a02c8a} 
 \index{common.h@{common.h}!lval\_copy@{lval\_copy}}
 \index{lval\_copy@{lval\_copy}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_copy()}{lval\_copy()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self }\end{DoxyParamCaption})}
 
 
 
@@ -362,11 +366,11 @@ Copies a Lispy value and returns a new one which contains the given value.
 \begin{DoxyReturn}{Returns}
 A Lispy value that is equal to self 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ae76b2ad4b671e5a044518d0ba5524616}\label{common_8h_ae76b2ad4b671e5a044518d0ba5524616} 
+\Hypertarget{common_8h_ad41374b58f9ac4927c37be0e9c356efd}\label{common_8h_ad41374b58f9ac4927c37be0e9c356efd} 
 \index{common.h@{common.h}!lval\_dec@{lval\_dec}}
 \index{lval\_dec@{lval\_dec}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_dec()}{lval\_dec()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+dec (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+dec (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
 
 
 
@@ -380,11 +384,11 @@ Constructor for decimal values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the given decimal value 
 \end{DoxyReturn}
-\Hypertarget{common_8h_affcacd53fa4f60cb6132bc34bd3bcc9e}\label{common_8h_affcacd53fa4f60cb6132bc34bd3bcc9e} 
+\Hypertarget{common_8h_a30a247b94a8421f4278cce9459d8531b}\label{common_8h_a30a247b94a8421f4278cce9459d8531b} 
 \index{common.h@{common.h}!lval\_del@{lval\_del}}
 \index{lval\_del@{lval\_del}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_del()}{lval\_del()}}
-{\footnotesize\ttfamily void lval\+\_\+del (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void lval\+\_\+del (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self }\end{DoxyParamCaption})}
 
 
 
@@ -395,11 +399,11 @@ Deletes a Lispy value.
 {\em self} & The value to free \\
 \hline
 \end{DoxyParams}
-\Hypertarget{common_8h_a1548d95541e8d0ca241d3720dd7324cb}\label{common_8h_a1548d95541e8d0ca241d3720dd7324cb} 
+\Hypertarget{common_8h_a9f577590825ddc42dd2bca4c807b0e78}\label{common_8h_a9f577590825ddc42dd2bca4c807b0e78} 
 \index{common.h@{common.h}!lval\_eq@{lval\_eq}}
 \index{lval\_eq@{lval\_eq}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_eq()}{lval\_eq()}}
-{\footnotesize\ttfamily int lval\+\_\+eq (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{const \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int lval\+\_\+eq (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{const \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
 
 
 
@@ -415,11 +419,11 @@ Compares to Lispy values.
 \begin{DoxyReturn}{Returns}
 1 if both are equal, else 0. 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a8948ac2f47e6d29894f135aeaead227a}\label{common_8h_a8948ac2f47e6d29894f135aeaead227a} 
+\Hypertarget{common_8h_a20f8e62c5f7817d5fc792b43600fa774}\label{common_8h_a20f8e62c5f7817d5fc792b43600fa774} 
 \index{common.h@{common.h}!lval\_err@{lval\_err}}
 \index{lval\_err@{lval\_err}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_err()}{lval\_err()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+err (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+err (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
 
 
 
@@ -435,11 +439,11 @@ Constructor for error values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the error 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a9f64cc5fe33b9b9a5f25c4400d33e009}\label{common_8h_a9f64cc5fe33b9b9a5f25c4400d33e009} 
+\Hypertarget{common_8h_a8d0bb1b1ad44364d421f95a07c5db059}\label{common_8h_a8d0bb1b1ad44364d421f95a07c5db059} 
 \index{common.h@{common.h}!lval\_fn@{lval\_fn}}
 \index{lval\_fn@{lval\_fn}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_fn()}{lval\_fn()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+fn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_a9b47e1b04752a06074ffc0740c018d21}{lbuiltin\+\_\+t}}}]{fn }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+fn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_aa1e098d57c350b2a9852b4fb350e2d95}{lbuiltin}}}]{fn }\end{DoxyParamCaption})}
 
 
 
@@ -453,11 +457,11 @@ Constructor for functional values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the builtin method 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ab25f0e3236cca2127ded2c89b823893e}\label{common_8h_ab25f0e3236cca2127ded2c89b823893e} 
+\Hypertarget{common_8h_a498be5e1760cb54272da1d1281079541}\label{common_8h_a498be5e1760cb54272da1d1281079541} 
 \index{common.h@{common.h}!lval\_join@{lval\_join}}
 \index{lval\_join@{lval\_join}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_join()}{lval\_join()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
 
 
 
@@ -475,11 +479,11 @@ This function iteratively calls lval\+\_\+add to join to symbolic expressions.
 \begin{DoxyReturn}{Returns}
 A Lispy value that is the join of both symbolic expressions 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ab1d3edcfbb6845ae9cb911d8ecdc7fad}\label{common_8h_ab1d3edcfbb6845ae9cb911d8ecdc7fad} 
+\Hypertarget{common_8h_a89318f2ec6259264c6c6676d47c66584}\label{common_8h_a89318f2ec6259264c6c6676d47c66584} 
 \index{common.h@{common.h}!lval\_lambda@{lval\_lambda}}
 \index{lval\_lambda@{lval\_lambda}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_lambda()}{lval\_lambda()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+lambda (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{formals,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{body }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+lambda (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{formals,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{body }\end{DoxyParamCaption})}
 
 
 
@@ -495,11 +499,11 @@ Constructor for lambda expressions.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the lambda function 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ae25dce2491f988d8c2e3e42213a70eda}\label{common_8h_ae25dce2491f988d8c2e3e42213a70eda} 
+\Hypertarget{common_8h_ac9130703db4222fec287ff063a7b5eee}\label{common_8h_ac9130703db4222fec287ff063a7b5eee} 
 \index{common.h@{common.h}!lval\_num@{lval\_num}}
 \index{lval\_num@{lval\_num}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_num()}{lval\_num()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+num (\begin{DoxyParamCaption}\item[{long}]{value }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+num (\begin{DoxyParamCaption}\item[{long}]{value }\end{DoxyParamCaption})}
 
 
 
@@ -513,11 +517,11 @@ Constructor for numeric values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the given numeric value 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a060fb30807a10066bf94bdfc35e9c252}\label{common_8h_a060fb30807a10066bf94bdfc35e9c252} 
+\Hypertarget{common_8h_acce4599097304ad62eea4f1b63e0fa00}\label{common_8h_acce4599097304ad62eea4f1b63e0fa00} 
 \index{common.h@{common.h}!lval\_pop@{lval\_pop}}
 \index{lval\_pop@{lval\_pop}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_pop()}{lval\_pop()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{int}]{idx }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{int}]{idx }\end{DoxyParamCaption})}
 
 
 
@@ -537,11 +541,11 @@ Pops the value at index idx from self.
 \begin{DoxyReturn}{Returns}
 The requested value at index idx. 
 \end{DoxyReturn}
-\Hypertarget{common_8h_af2634a77289fda684f9fc1806418bff0}\label{common_8h_af2634a77289fda684f9fc1806418bff0} 
+\Hypertarget{common_8h_a58fa34cd290931d83a281e823b7e9d88}\label{common_8h_a58fa34cd290931d83a281e823b7e9d88} 
 \index{common.h@{common.h}!lval\_qexpr@{lval\_qexpr}}
 \index{lval\_qexpr@{lval\_qexpr}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_qexpr()}{lval\_qexpr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+qexpr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+qexpr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -550,11 +554,11 @@ Constructor for quoted expressions.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains an empty quoted expression 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ae0c4b5d63c28689c69636af53a2e4221}\label{common_8h_ae0c4b5d63c28689c69636af53a2e4221} 
+\Hypertarget{common_8h_ae1f1789c9d802b370dcddf26c14c202e}\label{common_8h_ae1f1789c9d802b370dcddf26c14c202e} 
 \index{common.h@{common.h}!lval\_sexpr@{lval\_sexpr}}
 \index{lval\_sexpr@{lval\_sexpr}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_sexpr()}{lval\_sexpr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+sexpr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+sexpr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 
@@ -563,11 +567,11 @@ Constructor for symbolic expressions.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains an empty symbolic expression 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ae2467304e919348e4797626133646631}\label{common_8h_ae2467304e919348e4797626133646631} 
+\Hypertarget{common_8h_a6a9fa5c8341d2f3915b7ea81f82559e9}\label{common_8h_a6a9fa5c8341d2f3915b7ea81f82559e9} 
 \index{common.h@{common.h}!lval\_str@{lval\_str}}
 \index{lval\_str@{lval\_str}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_str()}{lval\_str()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+str (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
 
 
 
@@ -581,11 +585,11 @@ Constructor for string values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the given string 
 \end{DoxyReturn}
-\Hypertarget{common_8h_a13075389187d0c715b972f210026f453}\label{common_8h_a13075389187d0c715b972f210026f453} 
+\Hypertarget{common_8h_a4a56c1ec17a911f328b64c7e4f8e67d9}\label{common_8h_a4a56c1ec17a911f328b64c7e4f8e67d9} 
 \index{common.h@{common.h}!lval\_sym@{lval\_sym}}
 \index{lval\_sym@{lval\_sym}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_sym()}{lval\_sym()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+sym (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+sym (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
 
 
 
@@ -599,11 +603,11 @@ Constructor for symbolic values.
 \begin{DoxyReturn}{Returns}
 A Lispy value that contains the symbolic value 
 \end{DoxyReturn}
-\Hypertarget{common_8h_ada9b08d70a9d4f4fa2b67f1d385a8e20}\label{common_8h_ada9b08d70a9d4f4fa2b67f1d385a8e20} 
+\Hypertarget{common_8h_a936eac976c9a6d61ea33b77b79fcc0c6}\label{common_8h_a936eac976c9a6d61ea33b77b79fcc0c6} 
 \index{common.h@{common.h}!lval\_take@{lval\_take}}
 \index{lval\_take@{lval\_take}!common.h@{common.h}}
 \doxysubsubsection{\texorpdfstring{lval\_take()}{lval\_take()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{int}]{idx }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{self,  }\item[{int}]{idx }\end{DoxyParamCaption})}
 
 
 

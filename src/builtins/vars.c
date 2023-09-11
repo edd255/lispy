@@ -3,14 +3,14 @@
 #include "io.h"
 
 //==== Variable functions ======================================================
-lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
+lval* builtin_var(lenv* env, lval* args, char* fn) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != fn);
     LCHECK_TYPE(fn, args, 0, LISPY_VAL_QEXPR);
 
     // First argument is symbol list
-    lval_t* syms = args->cell[0];
+    lval* syms = args->cell[0];
 
     // Ensure all elements of first list are symbols
     for (int i = 0; i < syms->count; i++) {
@@ -48,7 +48,7 @@ lval_t* builtin_var(lenv_t* env, lval_t* args, char* fn) {
     return lval_sexpr();
 }
 
-lval_t* builtin_lambda(lenv_t* env, lval_t* args) {
+lval* builtin_lambda(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -70,8 +70,8 @@ lval_t* builtin_lambda(lenv_t* env, lval_t* args) {
         );
     }
     // Pop first two arguments and pass them to lval_lambda
-    lval_t* formals = lval_pop(args, 0);
-    lval_t* body = lval_pop(args, 0);
+    lval* formals = lval_pop(args, 0);
+    lval* body = lval_pop(args, 0);
 
     assert(NULL != formals);
     assert(NULL != body);
@@ -80,14 +80,14 @@ lval_t* builtin_lambda(lenv_t* env, lval_t* args) {
     return lval_lambda(formals, body);
 }
 
-lval_t* builtin_def(lenv_t* env, lval_t* args) {
+lval* builtin_def(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_var(env, args, "def");
 }
 
-lval_t* builtin_put(lenv_t* env, lval_t* args) {
+lval* builtin_put(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 

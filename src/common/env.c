@@ -1,8 +1,8 @@
 #include "common.h"
 
 //=== ENVIRONMENT ==============================================================
-lenv_t* lenv_new(void) {
-    lenv_t* env = MALLOC(sizeof(lenv_t));
+lenv* lenv_new(void) {
+    lenv* env = MALLOC(sizeof(lenv));
     env->parent = NULL;
     env->count = 0;
     env->syms = NULL;
@@ -10,7 +10,7 @@ lenv_t* lenv_new(void) {
     return env;
 }
 
-void lenv_del(lenv_t* env) {
+void lenv_del(lenv* env) {
     assert(NULL != env);
 
     for (int i = 0; i < env->count; i++) {
@@ -22,7 +22,7 @@ void lenv_del(lenv_t* env) {
     FREE(env);
 }
 
-lval_t* lenv_get(lenv_t* env, lval_t* key) {
+lval* lenv_get(lenv* env, lval* key) {
     assert(NULL != env);
     assert(NULL != key);
 
@@ -41,7 +41,7 @@ lval_t* lenv_get(lenv_t* env, lval_t* key) {
     return lval_err("Unbound symbol '%s'", key->sym);
 }
 
-void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val) {
+void lenv_put(lenv* env, const lval* key, const lval* val) {
     assert(NULL != env);
     assert(NULL != key);
     assert(NULL != val);
@@ -59,7 +59,7 @@ void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val) {
     }
     // If no existing entry found allocate space for new entry
     env->count++;
-    env->vals = REALLOC(env->vals, sizeof(lval_t*) * env->count);
+    env->vals = REALLOC(env->vals, sizeof(lval*) * env->count);
     env->syms = REALLOC(env->syms, sizeof(char*) * env->count);
 
     // Copy contents of lval and symbol string into new location
@@ -70,14 +70,14 @@ void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val) {
     strlcpy(env->syms[env->count - 1], key->sym, env_syms_len);
 }
 
-lenv_t* lenv_copy(lenv_t* env) {
+lenv* lenv_copy(lenv* env) {
     assert(NULL != env);
 
-    lenv_t* n = MALLOC(sizeof(lenv_t));
+    lenv* n = MALLOC(sizeof(lenv));
     n->parent = env->parent;
     n->count = env->count;
     n->syms = MALLOC(sizeof(char*) * (n->count));
-    n->vals = MALLOC(sizeof(lval_t*) * (n->count));
+    n->vals = MALLOC(sizeof(lval*) * (n->count));
     for (int i = 0; i < env->count; i++) {
         size_t env_syms_len = strlen(env->syms[i] + 1);
         n->syms[i] = MALLOC(env_syms_len);
@@ -87,7 +87,7 @@ lenv_t* lenv_copy(lenv_t* env) {
     return n;
 }
 
-void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val) {
+void lenv_def(lenv* env, const lval* key, const lval* val) {
     assert(NULL != env);
     assert(NULL != key);
     assert(NULL != val);

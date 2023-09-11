@@ -4,7 +4,7 @@
 
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
-lval_t* builtin_ord(lenv_t* env, lval_t* args, char* op) {
+lval* builtin_ord(lenv* env, lval* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != op);
@@ -31,28 +31,28 @@ lval_t* builtin_ord(lenv_t* env, lval_t* args, char* op) {
     return lval_num(r);
 }
 
-lval_t* builtin_gt(lenv_t* env, lval_t* args) {
+lval* builtin_gt(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_ord(env, args, ">");
 }
 
-lval_t* builtin_lt(lenv_t* env, lval_t* args) {
+lval* builtin_lt(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_ord(env, args, "<");
 }
 
-lval_t* builtin_ge(lenv_t* env, lval_t* args) {
+lval* builtin_ge(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 
     return builtin_ord(env, args, ">=");
 }
 
-lval_t* builtin_le(lenv_t* env, lval_t* args) {
+lval* builtin_le(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
 

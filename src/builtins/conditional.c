@@ -5,7 +5,7 @@
 #include "io.h"
 
 //==== Conditional functions ===================================================
-lval_t* builtin_if(lenv_t* env, lval_t* args) {
+lval* builtin_if(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -15,11 +15,11 @@ lval_t* builtin_if(lenv_t* env, lval_t* args) {
     LCHECK_TYPE(__func__, args, 2, LISPY_VAL_QEXPR);
 
     // Mark both expressions as evaluable
-    lval_t* x = NULL;
+    lval* x = NULL;
     args->cell[1]->type = LISPY_VAL_SEXPR;
     args->cell[2]->type = LISPY_VAL_SEXPR;
 
-    lval_t* cond = lval_eval(env, args->cell[0]);
+    lval* cond = lval_eval(env, args->cell[0]);
     LCHECK(
         cond,
         cond->type == LISPY_VAL_NUM,
@@ -29,12 +29,12 @@ lval_t* builtin_if(lenv_t* env, lval_t* args) {
 
     if (cond->num) {
         // If condition is true evaluate first expression
-        lval_t* y = lval_pop(args, 1);
+        lval* y = lval_pop(args, 1);
         assert(NULL != y);
         x = lval_eval(env, y);
     } else {
         // Otherwise evaluate second expression
-        lval_t* y = lval_pop(args, 2);
+        lval* y = lval_pop(args, 2);
         assert(NULL != y);
         x = lval_eval(env, y);
     }
@@ -43,15 +43,15 @@ lval_t* builtin_if(lenv_t* env, lval_t* args) {
     return x;
 }
 
-lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
+lval* builtin_testhelper(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
 
-    const lval_t* cond = lval_eval(env, args->cell[0]);
-    lval_t* expected = args->cell[1];
-    lval_t* actual = args->cell[2];
+    const lval* cond = lval_eval(env, args->cell[0]);
+    lval* expected = args->cell[1];
+    lval* actual = args->cell[2];
 
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
     if (cond->num) {
@@ -68,7 +68,7 @@ lval_t* builtin_testhelper(lenv_t* env, lval_t* args) {
     return lval_sexpr();
 }
 
-lval_t* builtin_select(lenv_t* env, lval_t* args) {
+lval* builtin_select(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -80,14 +80,14 @@ lval_t* builtin_select(lenv_t* env, lval_t* args) {
     }
     for (int i = 0; i < args->count; i++) {
         LCHECK_NUM(__func__, args->cell[i], 2);
-        lval_t* args_cond = lval_copy(args->cell[i]->cell[0]);
-        lval_t* body = lval_copy(args->cell[i]->cell[1]);
-        lval_t* cond = lval_eval(env, args_cond);
+        lval* args_cond = lval_copy(args->cell[i]->cell[0]);
+        lval* body = lval_copy(args->cell[i]->cell[1]);
+        lval* cond = lval_eval(env, args_cond);
         assert(NULL != args_cond);
         assert(NULL != body);
         assert(NULL != cond);
         if (cond->num) {
-            lval_t* res = lval_eval(env, body);
+            lval* res = lval_eval(env, body);
             lval_del(cond);
             lval_del(args);
             return res;
@@ -102,17 +102,17 @@ lval_t* builtin_select(lenv_t* env, lval_t* args) {
     );
 }
 
-lval_t* builtin_case(lenv_t* env, lval_t* args) {
+lval* builtin_case(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
 
-    const lval_t* arg = args->cell[0];
+    const lval* arg = args->cell[0];
     for (int i = 1; i < args->count; i++) {
-        lval_t* case_stmt = args->cell[i];
+        lval* case_stmt = args->cell[i];
         int cond = lval_eq(arg, case_stmt->cell[0]);
         if (cond) {
-            lval_t* res = lval_copy(case_stmt->cell[1]);
+            lval* res = lval_copy(case_stmt->cell[1]);
             lval_del(args);
             return res;
         }

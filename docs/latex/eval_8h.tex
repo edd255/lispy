@@ -9,9 +9,9 @@ This file contains the methods which evaluate values in environments.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eval_8h_a77c8a1919206162415a5e1f96f4d4d54}{lval\+\_\+eval}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eval_8h_aa48243ddbff450f932627a29714ae91c}{lval\+\_\+eval}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}val)
 \begin{DoxyCompactList}\small\item\em Evaluates a value in an environment. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eval_8h_ac8e07bc19625b9680ba0a377a8225b19}{lval\+\_\+eval\+\_\+sexpr}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}val)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{eval_8h_a766a4dd5bf424fc943caec888d8814ea}{lval\+\_\+eval\+\_\+sexpr}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}val)
 \begin{DoxyCompactList}\small\item\em Evaluates a symbolic expression in an environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -21,11 +21,11 @@ This file contains the methods which evaluate values in environments.
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{eval_8h_a77c8a1919206162415a5e1f96f4d4d54}\label{eval_8h_a77c8a1919206162415a5e1f96f4d4d54} 
+\Hypertarget{eval_8h_aa48243ddbff450f932627a29714ae91c}\label{eval_8h_aa48243ddbff450f932627a29714ae91c} 
 \index{eval.h@{eval.h}!lval\_eval@{lval\_eval}}
 \index{lval\_eval@{lval\_eval}!eval.h@{eval.h}}
 \doxysubsubsection{\texorpdfstring{lval\_eval()}{lval\_eval()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
 
 
 
@@ -43,11 +43,11 @@ For symbols, we return the associated value in the given environment. For symbol
 \begin{DoxyReturn}{Returns}
 The evaluated Lispy value 
 \end{DoxyReturn}
-\Hypertarget{eval_8h_ac8e07bc19625b9680ba0a377a8225b19}\label{eval_8h_ac8e07bc19625b9680ba0a377a8225b19} 
+\Hypertarget{eval_8h_a766a4dd5bf424fc943caec888d8814ea}\label{eval_8h_a766a4dd5bf424fc943caec888d8814ea} 
 \index{eval.h@{eval.h}!lval\_eval\_sexpr@{lval\_eval\_sexpr}}
 \index{lval\_eval\_sexpr@{lval\_eval\_sexpr}!eval.h@{eval.h}}
 \doxysubsubsection{\texorpdfstring{lval\_eval\_sexpr()}{lval\_eval\_sexpr()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} lval\+\_\+eval\+\_\+sexpr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} lval\+\_\+eval\+\_\+sexpr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{val }\end{DoxyParamCaption})}
 
 
 

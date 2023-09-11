@@ -9,13 +9,13 @@ This file contains all builtin logic methods.
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a99842a5e8b82b311894230dfe7cea677}{builtin\+\_\+logic}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}op)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a1acf63b2f5b5760a746aeaeb53937acc}{builtin\+\_\+logic}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args, char \texorpdfstring{$\ast$}{*}op)
 \begin{DoxyCompactList}\small\item\em The main function of this module which does the actual computation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a46660ab2277b85a5c28645d48dab5f7f}{builtin\+\_\+and}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a59d65fc0b7ffe5345f32122b616a706a}{builtin\+\_\+and}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Computes the and of two arguments. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a1fe84161a55d741e55c767e469973810}{builtin\+\_\+or}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_ab7819ee5a7684f1e1aea41dc3fb35a2e}{builtin\+\_\+or}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Computes the or of two arguments. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a46db2dce92afa3351cccf438f2d42f64}{builtin\+\_\+not}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}args)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{logic_8h_a820ca611eaef529c50be76f5b73a0762}{builtin\+\_\+not}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}args)
 \begin{DoxyCompactList}\small\item\em Computes the not of one arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -25,11 +25,11 @@ This file contains all builtin logic methods.
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{logic_8h_a46660ab2277b85a5c28645d48dab5f7f}\label{logic_8h_a46660ab2277b85a5c28645d48dab5f7f} 
+\Hypertarget{logic_8h_a59d65fc0b7ffe5345f32122b616a706a}\label{logic_8h_a59d65fc0b7ffe5345f32122b616a706a} 
 \index{logic.h@{logic.h}!builtin\_and@{builtin\_and}}
 \index{builtin\_and@{builtin\_and}!logic.h@{logic.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_and()}{builtin\_and()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+and (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+and (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -45,11 +45,11 @@ Computes the and of two arguments.
 \begin{DoxyReturn}{Returns}
 A Lispy value which contains the and of all arguments 
 \end{DoxyReturn}
-\Hypertarget{logic_8h_a99842a5e8b82b311894230dfe7cea677}\label{logic_8h_a99842a5e8b82b311894230dfe7cea677} 
+\Hypertarget{logic_8h_a1acf63b2f5b5760a746aeaeb53937acc}\label{logic_8h_a1acf63b2f5b5760a746aeaeb53937acc} 
 \index{logic.h@{logic.h}!builtin\_logic@{builtin\_logic}}
 \index{builtin\_logic@{builtin\_logic}!logic.h@{logic.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_logic()}{builtin\_logic()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+logic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{op }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+logic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args,  }\item[{char \texorpdfstring{$\ast$}{*}}]{op }\end{DoxyParamCaption})}
 
 
 
@@ -67,11 +67,11 @@ The main function of this module which does the actual computation.
 \begin{DoxyReturn}{Returns}
 The result of (op args) 
 \end{DoxyReturn}
-\Hypertarget{logic_8h_a46db2dce92afa3351cccf438f2d42f64}\label{logic_8h_a46db2dce92afa3351cccf438f2d42f64} 
+\Hypertarget{logic_8h_a820ca611eaef529c50be76f5b73a0762}\label{logic_8h_a820ca611eaef529c50be76f5b73a0762} 
 \index{logic.h@{logic.h}!builtin\_not@{builtin\_not}}
 \index{builtin\_not@{builtin\_not}!logic.h@{logic.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_not()}{builtin\_not()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+not (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+not (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 
@@ -87,11 +87,11 @@ Computes the not of one arguments.
 \begin{DoxyReturn}{Returns}
 A Lispy value which contains the not of all arguments 
 \end{DoxyReturn}
-\Hypertarget{logic_8h_a1fe84161a55d741e55c767e469973810}\label{logic_8h_a1fe84161a55d741e55c767e469973810} 
+\Hypertarget{logic_8h_ab7819ee5a7684f1e1aea41dc3fb35a2e}\label{logic_8h_ab7819ee5a7684f1e1aea41dc3fb35a2e} 
 \index{logic.h@{logic.h}!builtin\_or@{builtin\_or}}
 \index{builtin\_or@{builtin\_or}!logic.h@{logic.h}}
 \doxysubsubsection{\texorpdfstring{builtin\_or()}{builtin\_or()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} builtin\+\_\+or (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} builtin\+\_\+or (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{args }\end{DoxyParamCaption})}
 
 
 

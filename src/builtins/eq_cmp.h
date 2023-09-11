@@ -14,18 +14,18 @@
 /// @param args The arguments to use
 /// @param op The operator to apply
 /// @return A Lispy value containing the result of (op args)
-lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op);
+lval* builtin_cmp(lenv* env, lval* args, char* op);
 
 /// @brief Compares whether two values are equal
 /// @param env The environment in which the arguments reside
 /// @param args A list containing two arguments
 /// @return A Lispy value containing 1 if they are equal, 0 else
-lval_t* builtin_eq(lenv_t* env, lval_t* args);
+lval* builtin_eq(lenv* env, lval* args);
 
 /// @brief Compares whether two values are unequal
 /// @param env The environment in which the arguments reside
 /// @param args A list containing two arguments
 /// @return A Lispy value containg 1 if they are unequal, 0 else
-lval_t* builtin_ne(lenv_t* env, lval_t* args);
+lval* builtin_ne(lenv* env, lval* args);
 
 #endif

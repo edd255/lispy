@@ -4,13 +4,13 @@
 
 //==== EVALUATION METHODS ======================================================
 
-lval_t* lval_eval(lenv_t* env, lval_t* val) {
+lval* lval_eval(lenv* env, lval* val) {
     assert(NULL != env);
     assert(NULL != val);
 
     // Evaluate symbols
     if (LISPY_VAL_SYM == val->type) {
-        lval_t* x = lenv_get(env, val);
+        lval* x = lenv_get(env, val);
         lval_del(val);
         return x;
     }
@@ -22,7 +22,7 @@ lval_t* lval_eval(lenv_t* env, lval_t* val) {
     return val;
 }
 
-lval_t* lval_eval_sexpr(lenv_t* env, lval_t* val) {
+lval* lval_eval_sexpr(lenv* env, lval* val) {
     assert(NULL != env);
     assert(NULL != val);
 
@@ -45,9 +45,9 @@ lval_t* lval_eval_sexpr(lenv_t* env, lval_t* val) {
         return lval_eval(env, lval_take(val, 0));
     }
     // Ensure first element is a function after evaluation
-    lval_t* fn = lval_pop(val, 0);
+    lval* fn = lval_pop(val, 0);
     if (LISPY_VAL_FN != fn->type) {
-        lval_t* err = lval_err(
+        lval* err = lval_err(
             "S-Expression starts with incorrect type. Got %s, Expected %s.",
             ltype_name(fn->type),
             ltype_name(LISPY_VAL_FN)
@@ -57,7 +57,7 @@ lval_t* lval_eval_sexpr(lenv_t* env, lval_t* val) {
         return err;
     }
     // Call builtin with op
-    lval_t* result = lval_call(env, fn, val);
+    lval* result = lval_call(env, fn, val);
     lval_del(fn);
     return result;
 }

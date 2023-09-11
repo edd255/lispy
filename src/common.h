@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "deps/hash_tbl/ht.h"
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
@@ -26,25 +27,31 @@ enum {
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------
 /// A data structure that contains Lispy values.
-struct lval_t;
+struct lval;
 
 /// A data structure that contains Lispy values.
-typedef struct lval_t lval_t;
+typedef struct lval lval;
+
+/// A hash table structure for the Lispy environments
+struct hash_tbl;
 
 /// A structure that contains data and metadata about used environments.
-struct lenv_t;
+typedef struct hash_tbl hash_tbl;
 
 /// A structure that contains data and metadata about used environments.
-typedef struct lenv_t lenv_t;
+struct lenv;
 
-/// A function pointer that takes an lenv_t* and a lval_t* and returns a lval_t*, briefly: a pointer to a builtin function.
-typedef lval_t* (*lbuiltin_t)(lenv_t*, lval_t*);
+/// A structure that contains data and metadata about used environments.
+typedef struct lenv lenv;
+
+/// A function pointer that takes an lenv* and a lval* and returns a lval*, briefly: a pointer to a builtin function.
+typedef lval* (*lbuiltin)(lenv*, lval*);
 
 /// @brief A data structure that contains Lispy values.
 ///
 /// The data structure contains the type and the associated numeric, string,
 /// functional or expressional value.
-struct lval_t {
+struct lval {
     //--- Type -----------------------------------------------------------------
     /// The type of the value
     int type;
@@ -71,23 +78,23 @@ struct lval_t {
 
     //--- Function -------------------------------------------------------------
     /// A pointer to the function
-    lbuiltin_t builtin;
+    lbuiltin builtin;
 
     /// The environment of the function
-    lenv_t* env;
+    lenv* env;
 
     /// The formal arguments
-    lval_t* formals;
+    lval* formals;
 
     /// The body of the function
-    lval_t* body;
+    lval* body;
 
     //--- Expression -----------------------------------------------------------
     /// The number of values in the list
     int count;
 
     /// A pointer to the list
-    lval_t** cell;
+    lval** cell;
 };
 
 /// @brief A structure that contains data and metadata about used environments.
@@ -96,9 +103,9 @@ struct lval_t {
 /// values. This is implemented by using two lists of equal length, where each
 /// entry in one list has a corresponding entry in the other list at the same
 /// position.
-struct lenv_t {
+struct lenv {
     /// A pointer to the parent environment
-    lenv_t* parent;
+    lenv* parent;
 
     /// The number of symbols in the environment
     int count;
@@ -107,54 +114,54 @@ struct lenv_t {
     char** syms;
 
     /// A pointer to the values
-    lval_t** vals;
+    lval** vals;
 };
 
 //--- Constructors & Destructors for Values ------------------------------------
 /// @brief Constructor for numeric values
 /// @param value The numeric value
 /// @return A Lispy value that contains the given numeric value
-lval_t* lval_num(long value);
+lval* lval_num(long value);
 
 /// @brief Constructor for decimal values
 /// @param value The decimal value
 /// @return A Lispy value that contains the given decimal value
-lval_t* lval_dec(double value);
+lval* lval_dec(double value);
 
 /// @brief Constructor for error values
 /// @param fmt The error message
 /// @param ... The format specifiers used in the error message
 /// @return A Lispy value that contains the error
-lval_t* lval_err(char* fmt, ...);
+lval* lval_err(char* fmt, ...);
 
 /// @brief Constructor for symbolic values
 /// @param str String data which the symbolic value should contain
 /// @return A Lispy value that contains the symbolic value
-lval_t* lval_sym(char* str);
+lval* lval_sym(char* str);
 
 /// @brief Constructor for string values
 /// @param str String data
 /// @return A Lispy value that contains the given string
-lval_t* lval_str(const char* str);
+lval* lval_str(const char* str);
 
 /// @brief Constructor for symbolic expressions
 /// @return A Lispy value that contains an empty symbolic expression
-lval_t* lval_sexpr(void);
+lval* lval_sexpr(void);
 
 /// @brief Constructor for quoted expressions
 /// @return A Lispy value that contains an empty quoted expression
-lval_t* lval_qexpr(void);
+lval* lval_qexpr(void);
 
 /// @brief Constructor for functional values
 /// @param fn A function pointer to the builtin method
 /// @return A Lispy value that contains the builtin method
-lval_t* lval_fn(lbuiltin_t fn);
+lval* lval_fn(lbuiltin fn);
 
 /// @brief Constructor for lambda expressions
 /// @param formals The formal arguments of the lambda expression
 /// @param body The body of the function
 /// @return A Lispy value that contains the lambda function
-lval_t* lval_lambda(lval_t* formals, lval_t* body);
+lval* lval_lambda(lval* formals, lval* body);
 
 //--- Methods for Values -------------------------------------------------------
 
@@ -162,14 +169,14 @@ lval_t* lval_lambda(lval_t* formals, lval_t* body);
 /// value.
 /// @param self The value to copy
 /// @return A Lispy value that is equal to self
-lval_t* lval_copy(const lval_t* self);
+lval* lval_copy(const lval* self);
 
 /// @brief Adds an element to a symbolic expression.
 ///
 /// @param self The symbolic expression
 /// @param other The value to add
 /// @return A pointer to the symbolic expression which includes x
-lval_t* lval_add(lval_t* self, lval_t* other);
+lval* lval_add(lval* self, lval* other);
 
 /// @brief Adds each cell in x to self
 ///
@@ -178,7 +185,7 @@ lval_t* lval_add(lval_t* self, lval_t* other);
 /// @param self The first symbolic expression
 /// @param other The second symbolic expression
 /// @return A Lispy value that is the join of both symbolic expressions
-lval_t* lval_join(lval_t* self, lval_t* other);
+lval* lval_join(lval* self, lval* other);
 
 /// @brief Pops the value at index idx from self.
 ///
@@ -187,14 +194,14 @@ lval_t* lval_join(lval_t* self, lval_t* other);
 /// @param self The symbolic expression to pop the value from.
 /// @param idx The index at which the value resides.
 /// @return The requested value at index idx.
-lval_t* lval_pop(lval_t* self, int idx);
+lval* lval_pop(lval* self, int idx);
 
 /// @brief As pop, but deletes self.
 ///
 /// @param self The symbolic expression to pop the value from.
 /// @param idx The index at which the value resides.
 /// @return The requested value at index idx.
-lval_t* lval_take(lval_t* self, int idx);
+lval* lval_take(lval* self, int idx);
 
 /// @brief Calls a function with specific arguments in an environment.
 /// Differentiates between builtins and lambdas.
@@ -202,27 +209,27 @@ lval_t* lval_take(lval_t* self, int idx);
 /// @param fn The function to call
 /// @param args The arguments to use for the function call
 /// @return A (partial) evaluation of the function call
-lval_t* lval_call(lenv_t* env, lval_t* fn, lval_t* args);
+lval* lval_call(lenv* env, lval* fn, lval* args);
 
 /// @brief Compares to Lispy values.
 /// @param self The first Lispy value to compare
 /// @param other The second Lispy value to compare
 /// @return 1 if both are equal, else 0.
-int lval_eq(const lval_t* self, const lval_t* other);
+int lval_eq(const lval* self, const lval* other);
 
 /// @brief Deletes a Lispy value
 /// @param self The value to free
-void lval_del(lval_t* self);
+void lval_del(lval* self);
 
 //--- Constructors & Destructors for Environments ------------------------------
 
 /// @brief Creates a new, empty environment.
 /// @return A pointer to the created environment.
-lenv_t* lenv_new(void);
+lenv* lenv_new(void);
 
 /// @brief Frees the given environment.
 /// @param env A pointer to the environment
-void lenv_del(lenv_t* env);
+void lenv_del(lenv* env);
 
 //--- Methods for Environments -------------------------------------------------
 
@@ -230,18 +237,18 @@ void lenv_del(lenv_t* env);
 /// @param env The environment to lookup
 /// @param key The key for the value
 /// @return The value associated with the key in the environment
-lval_t* lenv_get(lenv_t* env, lval_t* key);
+lval* lenv_get(lenv* env, lval* key);
 
 /// @brief Puts key and value in the environment
 /// @param env The environment in which key and value should be put
 /// @param key The key for the value
 /// @param val The associated value
-void lenv_put(lenv_t* env, const lval_t* key, const lval_t* val);
+void lenv_put(lenv* env, const lval* key, const lval* val);
 
 /// @brief Copies an environment to a new one
 /// @param env The environment to copy
 /// @return A pointer to the newly created environment
-lenv_t* lenv_copy(lenv_t* env);
+lenv* lenv_copy(lenv* env);
 
 /// @brief Defines a key-value pair globally.
 ///
@@ -251,7 +258,7 @@ lenv_t* lenv_copy(lenv_t* env);
 /// @param env The given environment
 /// @param key The key to define
 /// @param val The associated value
-void lenv_def(lenv_t* env, const lval_t* key, const lval_t* val);
+void lenv_def(lenv* env, const lval* key, const lval* val);
 
 //=== ENUMS ====================================================================
 /// An enumeration of possible error types

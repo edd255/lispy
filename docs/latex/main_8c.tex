@@ -21,15 +21,15 @@ int \mbox{\hyperlink{main_8c_a217dbf8b442f20279ea00b898af96f52}{main}} (int argc
 \begin{DoxyCompactList}\small\item\em The main function of the interpreter. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a74926c46a74d5dd4afb62910905e8907}{setup\+\_\+parser}} (void)
 \begin{DoxyCompactList}\small\item\em Sets up the mpc parser. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_aed182b973ecb166e50c0e4338be146d5}{cleanup}} (\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}std, \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+void \mbox{\hyperlink{main_8c_a4cef4fda1b1e6c9bb941c63f8f585bfa}{cleanup}} (\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}std, \mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em Cleans up the memory used by the interpreter. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_ab4bcf6908817f7fb2303080122c2c5e0}{cli\+\_\+interpreter}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+void \mbox{\hyperlink{main_8c_ae0bc1b95ea825d6afef0872fa8e5b28a}{cli\+\_\+interpreter}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em A REPL for Lispy. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_a99b844445b71a66fe9186921fb96272d}{file\+\_\+interpreter}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env, const char \texorpdfstring{$\ast$}{*}file)
+void \mbox{\hyperlink{main_8c_a4fd536d76f0f29640e57d14a7e002c1f}{file\+\_\+interpreter}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, const char \texorpdfstring{$\ast$}{*}file)
 \begin{DoxyCompactList}\small\item\em Interprets a given file. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a5de7cb8a1360ab29803b862e4ec02711}{get\+\_\+stdlib}} (\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}env)
+\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a36daa9bb72e29b36be7bc6811d623bee}{get\+\_\+stdlib}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em Loads the standard library and returns a pointer to it. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a6d2345e0990fb4567064efd36ff2197c}{set\+\_\+env}} (void)
+\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}{set\+\_\+env}} (void)
 \begin{DoxyCompactList}\small\item\em Sets up an environment which contains all builtins. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a63ab71f67fdf5f6372fbca175e9bda3e}{get\+\_\+git\+\_\+hash}} (void)
 \begin{DoxyCompactList}\small\item\em Returns the truncated git hash. \end{DoxyCompactList}\item 
@@ -88,11 +88,11 @@ This file contains the main function which sets up the logger and the parser and
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8c_aed182b973ecb166e50c0e4338be146d5}\label{main_8c_aed182b973ecb166e50c0e4338be146d5} 
+\Hypertarget{main_8c_a4cef4fda1b1e6c9bb941c63f8f585bfa}\label{main_8c_a4cef4fda1b1e6c9bb941c63f8f585bfa} 
 \index{main.c@{main.c}!cleanup@{cleanup}}
 \index{cleanup@{cleanup}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
-{\footnotesize\ttfamily void cleanup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{std,  }\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cleanup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*}}]{std,  }\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
 
 
 
@@ -107,11 +107,11 @@ This function cleans up the memory used by the parsers, as well as the standard 
 {\em env} & A pointer to the used environment \\
 \hline
 \end{DoxyParams}
-\Hypertarget{main_8c_ab4bcf6908817f7fb2303080122c2c5e0}\label{main_8c_ab4bcf6908817f7fb2303080122c2c5e0} 
+\Hypertarget{main_8c_ae0bc1b95ea825d6afef0872fa8e5b28a}\label{main_8c_ae0bc1b95ea825d6afef0872fa8e5b28a} 
 \index{main.c@{main.c}!cli\_interpreter@{cli\_interpreter}}
 \index{cli\_interpreter@{cli\_interpreter}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{cli\_interpreter()}{cli\_interpreter()}}
-{\footnotesize\ttfamily void cli\+\_\+interpreter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cli\+\_\+interpreter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
 
 
 
@@ -128,11 +128,11 @@ This function realizes a REPL for Lispy which first prints out version and exiti
 {\em env} & The environment from which we get and where we store variables \\
 \hline
 \end{DoxyParams}
-\Hypertarget{main_8c_a99b844445b71a66fe9186921fb96272d}\label{main_8c_a99b844445b71a66fe9186921fb96272d} 
+\Hypertarget{main_8c_a4fd536d76f0f29640e57d14a7e002c1f}\label{main_8c_a4fd536d76f0f29640e57d14a7e002c1f} 
 \index{main.c@{main.c}!file\_interpreter@{file\_interpreter}}
 \index{file\_interpreter@{file\_interpreter}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{file\_interpreter()}{file\_interpreter()}}
-{\footnotesize\ttfamily void file\+\_\+interpreter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void file\+\_\+interpreter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{file }\end{DoxyParamCaption})}
 
 
 
@@ -186,11 +186,11 @@ Returns the lispy parser.
 \begin{DoxyReturn}{Returns}
 The lispy parser 
 \end{DoxyReturn}
-\Hypertarget{main_8c_a5de7cb8a1360ab29803b862e4ec02711}\label{main_8c_a5de7cb8a1360ab29803b862e4ec02711} 
+\Hypertarget{main_8c_a36daa9bb72e29b36be7bc6811d623bee}\label{main_8c_a36daa9bb72e29b36be7bc6811d623bee} 
 \index{main.c@{main.c}!get\_stdlib@{get\_stdlib}}
 \index{get\_stdlib@{get\_stdlib}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{get\_stdlib()}{get\_stdlib()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlval__t}{lval\+\_\+t}} \texorpdfstring{$\ast$}{*} get\+\_\+stdlib (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} get\+\_\+stdlib (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}}]{env }\end{DoxyParamCaption})}
 
 
 
@@ -264,11 +264,11 @@ This function sets up the log-\/file in the XDG cache directory if the directory
 \begin{DoxyReturn}{Returns}
 A pointer to the log file. 
 \end{DoxyReturn}
-\Hypertarget{main_8c_a6d2345e0990fb4567064efd36ff2197c}\label{main_8c_a6d2345e0990fb4567064efd36ff2197c} 
+\Hypertarget{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}\label{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a} 
 \index{main.c@{main.c}!set\_env@{set\_env}}
 \index{set\_env@{set\_env}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{set\_env()}{set\_env()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structlenv__t}{lenv\+\_\+t}} \texorpdfstring{$\ast$}{*} set\+\_\+env (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} set\+\_\+env (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['parent_0',['parent',['../structlenv__t.html#aaf49bc5a68bf694faebd339d16c05704',1,'lenv_t']]],
+  ['parent_0',['parent',['../structlenv.html#a2fb313c742edfdf22e045dd8973c60a5',1,'lenv']]],
   ['parse_5fargs_1',['parse_args',['../main_8c.html#a1265b5fcd95aa90525ccd721723f91c1',1,'main.c']]],
   ['power_5flong_2',['power_long',['../helpers_8h.html#a21aabcef9dfc36d3d2305a36b42de5a7',1,'helpers.c']]],
   ['prepare_5flogfile_3',['prepare_logfile',['../main_8c.html#aadcdb38d3064679ab74180a4629d969c',1,'main.c']]],

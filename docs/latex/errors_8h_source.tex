@@ -12,7 +12,7 @@
 \DoxyCodeLine{00010\ \textcolor{comment}{//===\ ERRORS\ ===================================================================}}
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ LCHECK(args,\ cond,\ fmt,\ ...)\ \(\backslash\)}}
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ if\ (!(cond))\ \{\ \(\backslash\)}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ lval\_t*\ err\ =\ lval\_err(fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ lval*\ err\ =\ lval\_err(fmt,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}}
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ lval\_del(args);\ \(\backslash\)}}
 \DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ err;\ \(\backslash\)}}
 \DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \}}}
