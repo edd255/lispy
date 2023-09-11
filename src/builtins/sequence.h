@@ -1,5 +1,5 @@
 /// @file strings.h
-/// @brief This file contains all builtin sequencial execution methods.
+/// @brief This file contains all builtin sequential execution methods.
 
 #pragma once
 

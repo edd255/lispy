@@ -8,7 +8,7 @@ lval_t* builtin_cmp(lenv_t* env, lval_t* args, char* op) {
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
 
-    int r = 0;
+    int r;
     if (0 == strcmp(op, "==")) {
         r = lval_eq(args->cell[0], args->cell[1]);
     } else if (0 == strcmp(op, "!=")) {

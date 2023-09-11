@@ -17,7 +17,7 @@
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
-/// Bufsize definition
+/// Buffer size definition
 enum {
     /// Buffers of size 1024 are used
     BUFSIZE = 1024
@@ -60,7 +60,7 @@ struct lval_t {
     /// The string for Lispy errors
     char* err;
 
-    /// Symbol types have somge string data, too
+    /// Symbol types have some string data, too
     char* sym;
 
     /// The string value for Lispy strings

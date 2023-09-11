@@ -58,12 +58,12 @@ void lenv_add_builtins(lenv_t* env) {
     lenv_add_builtin_fn(env, "select", builtin_select);
     lenv_add_builtin_fn(env, "case", builtin_case);
 
-    // Logical functionvns
+    // Logical functions
     lenv_add_builtin_fn(env, "and", builtin_and);
     lenv_add_builtin_fn(env, "or", builtin_or);
     lenv_add_builtin_fn(env, "not", builtin_not);
 
-    // Comparison funcnvtions
+    // Comparison functions
     lenv_add_builtin_fn(env, "==", builtin_eq);
     lenv_add_builtin_fn(env, "!=", builtin_ne);
     lenv_add_builtin_fn(env, ">", builtin_gt);
