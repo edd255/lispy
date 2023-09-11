@@ -84,9 +84,8 @@ void lval_print_str(const lval* val) {
         return;
     }
     // Make a copy of the string
-    size_t escaped_size = strlen(val->str) + 1;
-    char* escaped = MALLOC(escaped_size);
-    strlcpy(escaped, val->str, escaped_size);
+    char* escaped = MALLOC(val->len + 1);
+    strlcpy(escaped, val->str, val->len + 1);
 
     // Pass it through the escape function
     escaped = mpcf_escape(escaped);
