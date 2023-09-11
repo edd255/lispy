@@ -24,6 +24,10 @@ enum {
     BUFSIZE = 1024
 };
 
+#define INITIAL_CAPACITY 100
+#define HT_FNV_OFFSET    14695981039346656037UL
+#define HT_FNV_PRIME     1099511628211UL
+
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------
 /// A data structure that contains Lispy values.
@@ -37,6 +41,12 @@ struct hash_tbl;
 
 /// A structure that contains data and metadata about used environments.
 typedef struct hash_tbl hash_tbl;
+
+/// A structure for hash table entries
+struct hash_tbl_entry;
+
+/// A structure for hash table entries
+typedef struct hash_tbl_entry hash_tbl_entry;
 
 /// A structure that contains data and metadata about used environments.
 struct lenv;
@@ -115,6 +125,28 @@ struct lenv {
 
     /// A pointer to the values
     lval** vals;
+};
+
+/// Hash table entry
+struct hash_tbl_entry {
+    /// key is NULL if slot is empty
+    const char* key;
+
+    /// length of the key
+    size_t len;
+    lval* val;
+};
+
+/// Hash table structure: create with lenv_new, free with lenv_del
+struct hash_tbl {
+    /// hash slots
+    hash_tbl_entry* entries;
+
+    /// size of entries
+    size_t capacity;
+
+    /// number of items in hash table
+    size_t len;
 };
 
 //--- Constructors & Destructors for Values ------------------------------------
