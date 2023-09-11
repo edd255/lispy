@@ -21,6 +21,7 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [X] Adding builtin fun operators
 - [X] Writing a function that prints all out named values in an environment
 - [X] Documenting the code (to some extent)
+- [X] Added length field to strings
 
 ## TODO
 However, I'm far from finished.
