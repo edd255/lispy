@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('common_8h.html',''); initResizable(); 
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -121,6 +122,24 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlenv.html">lenv</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains data and metadata about used environments.  <a href="structlenv.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhash__tbl__entry.html">hash_tbl_entry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash table entry.  <a href="structhash__tbl__entry.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhash__tbl.html">hash_tbl</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash table structure: create with lenv_new, free with lenv_del.  <a href="structhash__tbl.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a5446a5bbb68bb93392b04dfbfa0095af" id="r_a5446a5bbb68bb93392b04dfbfa0095af"><td class="memItemLeft" align="right" valign="top"><a id="a5446a5bbb68bb93392b04dfbfa0095af" name="a5446a5bbb68bb93392b04dfbfa0095af"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INITIAL_CAPACITY</b>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:a5446a5bbb68bb93392b04dfbfa0095af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa30f3d923588cf76040bea293d221a1e" id="r_aa30f3d923588cf76040bea293d221a1e"><td class="memItemLeft" align="right" valign="top"><a id="aa30f3d923588cf76040bea293d221a1e" name="aa30f3d923588cf76040bea293d221a1e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HT_FNV_OFFSET</b>&#160;&#160;&#160;14695981039346656037UL</td></tr>
+<tr class="separator:aa30f3d923588cf76040bea293d221a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fa71a338fc3fa31aa88338f51b047b0" id="r_a5fa71a338fc3fa31aa88338f51b047b0"><td class="memItemLeft" align="right" valign="top"><a id="a5fa71a338fc3fa31aa88338f51b047b0" name="a5fa71a338fc3fa31aa88338f51b047b0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HT_FNV_PRIME</b>&#160;&#160;&#160;1099511628211UL</td></tr>
+<tr class="separator:a5fa71a338fc3fa31aa88338f51b047b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -129,9 +148,13 @@ typedef struct <a class="el" href="structlval.html">lval</a>&#160;</td><td class
 <tr class="memdesc:ac0be6732e3296097afd990ec2434709b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A data structure that contains Lispy values. <br /></td></tr>
 <tr class="separator:ac0be6732e3296097afd990ec2434709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f9e6f6dc479763721a0cfc3466cb3db" id="r_a9f9e6f6dc479763721a0cfc3466cb3db"><td class="memItemLeft" align="right" valign="top"><a id="a9f9e6f6dc479763721a0cfc3466cb3db" name="a9f9e6f6dc479763721a0cfc3466cb3db"></a>
-typedef struct <a class="el" href="common_8h.html#a9f9e6f6dc479763721a0cfc3466cb3db">hash_tbl</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hash_tbl</b></td></tr>
+typedef struct <a class="el" href="structhash__tbl.html">hash_tbl</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hash_tbl</b></td></tr>
 <tr class="memdesc:a9f9e6f6dc479763721a0cfc3466cb3db"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains data and metadata about used environments. <br /></td></tr>
 <tr class="separator:a9f9e6f6dc479763721a0cfc3466cb3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec24628afd8da26b1b7d0ccc2ee25eb0" id="r_aec24628afd8da26b1b7d0ccc2ee25eb0"><td class="memItemLeft" align="right" valign="top"><a id="aec24628afd8da26b1b7d0ccc2ee25eb0" name="aec24628afd8da26b1b7d0ccc2ee25eb0"></a>
+typedef struct <a class="el" href="structhash__tbl__entry.html">hash_tbl_entry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hash_tbl_entry</b></td></tr>
+<tr class="memdesc:aec24628afd8da26b1b7d0ccc2ee25eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure for hash table entries. <br /></td></tr>
+<tr class="separator:aec24628afd8da26b1b7d0ccc2ee25eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1f893162cf89ecaf1eac6dcd0be5e89" id="r_ab1f893162cf89ecaf1eac6dcd0be5e89"><td class="memItemLeft" align="right" valign="top"><a id="ab1f893162cf89ecaf1eac6dcd0be5e89" name="ab1f893162cf89ecaf1eac6dcd0be5e89"></a>
 typedef struct <a class="el" href="structlenv.html">lenv</a>&#160;</td><td class="memItemRight" valign="bottom"><b>lenv</b></td></tr>
 <tr class="memdesc:ab1f893162cf89ecaf1eac6dcd0be5e89"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure that contains data and metadata about used environments. <br /></td></tr>
@@ -1072,7 +1095,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="common_8h.html">common.h</a></li>
-    <li class="footer">Generated on Mon Sep 11 2023 20:32:23 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Sep 16 2023 17:12:21 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

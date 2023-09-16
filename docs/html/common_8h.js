@@ -2,7 +2,10 @@ var common_8h =
 [
     [ "lval", "structlval.html", "structlval" ],
     [ "lenv", "structlenv.html", "structlenv" ],
+    [ "hash_tbl_entry", "structhash__tbl__entry.html", "structhash__tbl__entry" ],
+    [ "hash_tbl", "structhash__tbl.html", "structhash__tbl" ],
     [ "hash_tbl", "common_8h.html#a9f9e6f6dc479763721a0cfc3466cb3db", null ],
+    [ "hash_tbl_entry", "common_8h.html#aec24628afd8da26b1b7d0ccc2ee25eb0", null ],
     [ "lbuiltin", "common_8h.html#aa1e098d57c350b2a9852b4fb350e2d95", null ],
     [ "lenv", "common_8h.html#ab1f893162cf89ecaf1eac6dcd0be5e89", null ],
     [ "lval", "common_8h.html#ac0be6732e3296097afd990ec2434709b", null ],

@@ -13,15 +13,16 @@
 /// parser and sets up the command line arguments.
 
 #include <editline/readline.h>
-#include <gnu/libc-version.h>
 
 #include "builtins.h"
 #include "common.h"
-#include "deps/argparse/argparse.h"
 #include "deps/logger/log.h"
 #include "deps/mpc/mpc.h"
 #include "eval.h"
 #include "io.h"
+#include "utils/argparser.h"
+#include "utils/logger.h"
+#include "utils/prompt.h"
 
 //=== DECLARATIONS =============================================================
 /// @brief The main function of the interpreter
@@ -86,35 +87,6 @@ lval* get_stdlib(lenv* env);
 /// @return An environment which contains all builtin methods
 lenv* set_env(void);
 
-/// @brief Returns the truncated git hash
-/// @return The current truncated git hash
-char* get_git_hash(void);
-
-/// @brief Returns the git branch name
-/// @return The current git branch name
-char* get_git_branch_name(void);
-
-/// @brief Prints the prompt for the command-line interpreter.
-void print_prompt(void);
-
-/// @brief Sets up the command-line argument parser.
-///
-/// This function sets up the command-line argument parser. In case, that wrong
-/// arguments are given, the usage is repeated.
-/// @param argc The number of arguments
-/// @param argv The array containing the arguments
-void parse_args(int argc, const char** argv);
-
-/// @brief Sets up the log-file in the XDG cache directory.
-///
-/// This function sets up the log-file in the XDG cache directory if the
-/// directory exists.
-///
-/// \todo Make the function portable.
-///
-/// @return A pointer to the log file.
-FILE* prepare_logfile(void);
-
 //--- Variables ----------------------------------------------------------------
 /// Parses integer and decimal number
 const mpc_parser_t* number;
@@ -140,29 +112,12 @@ const mpc_parser_t* expr;
 /// Parses lists of expressions
 mpc_parser_t* lispy;
 
-//--- Command-line argument parsing --------------------------------------------
-/// A pointer to the file to interpret
-char* filename = NULL;
-
-/// Indicates whether to use the stdlib or not
-int no_stdlib = 0;
-
-/// Indicates whether to print logs, or to write them in a file
-int print_logs = 0;
-
-/// The usage of the binary is printed out in case the binary gets a wrong
-/// format of arguments
-static const char* const usages[] = {
-    "lispy --filename=<FILENAME> --nostdlib --print_logs ",
-    NULL,
-};
-
 //=== MAIN METHOD ==============================================================
 int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
     FILE* log_file = NULL;
     parse_args(argc, argv);
-    if (0 == print_logs) {
+    if (0 == get_print_logs()) {
         log_file = prepare_logfile();
         log_add_fp(log_file, 0);
         log_set_quiet(true);
@@ -172,11 +127,11 @@ int main(int argc, const char** argv) {
     setup_parser();
     lenv* env = set_env();
     lval* std = NULL;
-    if (0 == no_stdlib) {
+    if (0 == get_nostdlib()) {
         std = get_stdlib(env);
     }
-    if (NULL != filename) {
-        file_interpreter(env, filename);
+    if (NULL != get_filename()) {
+        file_interpreter(env, get_filename());
     } else {
         cli_interpreter(env);
     }
@@ -283,145 +238,4 @@ lenv* set_env(void) {
     lenv* env = lenv_new();
     lenv_add_builtins(env);
     return env;
-}
-
-char* get_git_branch_name(void) {
-    char* branch_name = malloc(sizeof(char) * BUFSIZE);
-    FILE* cmd_output = popen("git rev-parse --abbrev-ref HEAD", "r");
-    if (NULL == cmd_output) {
-        free(branch_name);
-        perror("popen");
-        return NULL;
-    }
-    if (NULL != fgets(branch_name, sizeof(branch_name), cmd_output)) {
-        size_t len = strlen(branch_name);
-        if (0 < len && '\n' == branch_name[len - 1]) {
-            branch_name[len - 1] = '\0';
-        }
-        return branch_name;
-    }
-    free(branch_name);
-    pclose(cmd_output);
-    char* empty = malloc(2 * sizeof(char));
-    empty[0] = ' ';
-    empty[1] = ' ';
-    return empty;
-}
-
-char* get_git_hash(void) {
-    char* git_hash = malloc(sizeof(char) * BUFSIZE);
-    FILE* cmd_output = popen("git rev-parse HEAD", "r");
-    if (NULL == cmd_output) {
-        free(git_hash);
-        perror("popen");
-        return NULL;
-    }
-    if (NULL != fgets(git_hash, sizeof(git_hash), cmd_output)) {
-        size_t len = strlen(git_hash);
-        if (0 < len && '\n' == git_hash[len - 1]) {
-            git_hash[len - 1] = '\0';
-        }
-        if (len >= 7) {
-            git_hash[7] = '\0';
-        }
-        return git_hash;
-    }
-    free(git_hash);
-    char* empty = malloc(2 * sizeof(char));
-    empty[0] = ' ';
-    empty[1] = ' ';
-    pclose(cmd_output);
-    return empty;
-}
-
-void print_prompt(void) {
-    char* branch_name = get_git_branch_name();
-    char* git_hash = get_git_hash();
-#if defined(__GNU__)
-    printf(
-        "Lispy %g (%s %s, %s %s) [GCC %d.%d.%d, libc %s]\n",
-        VERSION,
-        branch_name,
-        git_hash,
-        __DATE__,
-        __TIME__,
-        __GNUC__,
-        __GNUC_MINOR__,
-        __GNUC_PATCHLEVEL__,
-        gnu_get_libc_version()
-    );
-#elif defined(__clang__)
-    printf(
-        "Lispy %g (%s %s, %s %s) [clang %d.%d.%d, libc %s]\n",
-        VERSION,
-        branch_name,
-        git_hash,
-        __DATE__,
-        __TIME__,
-        __clang_major__,
-        __clang_minor__,
-        __clang_patchlevel__,
-        gnu_get_libc_version()
-    );
-#else
-    printf(
-        "Lispy %g (%s %s, %s %s)\n",
-        VERSION,
-        branch_name,
-        git_hash,
-        __DATE__,
-        __TIME__
-    );
-#endif
-    printf("Press Ctrl+c or type 'exit' to exit.\n");
-    FREE(branch_name);
-    FREE(git_hash);
-}
-
-//--- Command-Line Argument Parser ---------------------------------------------
-void parse_args(int argc, const char** argv) {
-    // Command-line parsing
-    struct argparse_option options[] = {
-        OPT_HELP(),
-        OPT_GROUP("Basic options"),
-        OPT_STRING('f', "filename", &filename, "lispy file to run", NULL, 0, 0),
-        OPT_BOOLEAN('n', "no_stdlib", &no_stdlib, "exclude stdlib", NULL, 0, 0),
-        OPT_BOOLEAN(
-            'w',
-            "print_logs",
-            &print_logs,
-            "print logs to stderr",
-            NULL,
-            0,
-            0
-        ),
-        OPT_END(),
-    };
-    struct argparse argparse;
-    argparse_init(&argparse, options, usages, 0);
-    argparse_describe(&argparse, "\nLispy Interpreter", "");
-    (void)argparse_parse(&argparse, argc, argv);
-}
-
-//--- Logger -------------------------------------------------------------------
-FILE* prepare_logfile(void) {
-    FILE* log = NULL;
-    char* cache_dir = getenv("XDG_CACHE_HOME");
-    if (NULL == cache_dir) {
-        char* tmp_dir = "/tmp";
-        size_t log_file_size = strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1;
-        char* log_file = malloc(log_file_size);
-        strlcpy(log_file, tmp_dir, log_file_size);
-        strlcat(log_file, "/lispy/lispy.log", log_file_size);
-        log = fopen(log_file, "we");
-        free(log_file);
-        return log;
-    }
-    size_t log_file_size = strlen(cache_dir) + strlen("/lispy/lispy.log") + 1;
-    char* log_file = malloc(log_file_size);
-    strlcpy(log_file, cache_dir, log_file_size);
-    strlcat(log_file, "/lispy/lispy.log", log_file_size);
-    log = fopen(log_file, "we");
-    free(log_file);
-    return log;
 }

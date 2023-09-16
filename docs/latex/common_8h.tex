@@ -19,7 +19,23 @@ This file contains the definitions, constructors, destructors and methods for Li
 struct \mbox{\hyperlink{structlval}{lval}}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structlenv}{lenv}}
-\begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structhash__tbl__entry}{hash\+\_\+tbl\+\_\+entry}}
+\begin{DoxyCompactList}\small\item\em Hash table entry. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structhash__tbl}{hash\+\_\+tbl}}
+\begin{DoxyCompactList}\small\item\em Hash table structure\+: create with lenv\+\_\+new, free with lenv\+\_\+del. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{common_8h_a5446a5bbb68bb93392b04dfbfa0095af}\label{common_8h_a5446a5bbb68bb93392b04dfbfa0095af} 
+\#define {\bfseries INITIAL\+\_\+\+CAPACITY}~100
+\item 
+\Hypertarget{common_8h_aa30f3d923588cf76040bea293d221a1e}\label{common_8h_aa30f3d923588cf76040bea293d221a1e} 
+\#define {\bfseries HT\+\_\+\+FNV\+\_\+\+OFFSET}~14695981039346656037UL
+\item 
+\Hypertarget{common_8h_a5fa71a338fc3fa31aa88338f51b047b0}\label{common_8h_a5fa71a338fc3fa31aa88338f51b047b0} 
+\#define {\bfseries HT\+\_\+\+FNV\+\_\+\+PRIME}~1099511628211UL
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,8 +43,11 @@ struct \mbox{\hyperlink{structlenv}{lenv}}
 typedef struct \mbox{\hyperlink{structlval}{lval}} {\bfseries lval}
 \begin{DoxyCompactList}\small\item\em A data structure that contains Lispy values. \end{DoxyCompactList}\item 
 \Hypertarget{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db}\label{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db} 
-typedef struct \mbox{\hyperlink{common_8h_a9f9e6f6dc479763721a0cfc3466cb3db}{hash\+\_\+tbl}} {\bfseries hash\+\_\+tbl}
+typedef struct \mbox{\hyperlink{structhash__tbl}{hash\+\_\+tbl}} {\bfseries hash\+\_\+tbl}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\item 
+\Hypertarget{common_8h_aec24628afd8da26b1b7d0ccc2ee25eb0}\label{common_8h_aec24628afd8da26b1b7d0ccc2ee25eb0} 
+typedef struct \mbox{\hyperlink{structhash__tbl__entry}{hash\+\_\+tbl\+\_\+entry}} {\bfseries hash\+\_\+tbl\+\_\+entry}
+\begin{DoxyCompactList}\small\item\em A structure for hash table entries. \end{DoxyCompactList}\item 
 \Hypertarget{common_8h_ab1f893162cf89ecaf1eac6dcd0be5e89}\label{common_8h_ab1f893162cf89ecaf1eac6dcd0be5e89} 
 typedef struct \mbox{\hyperlink{structlenv}{lenv}} {\bfseries lenv}
 \begin{DoxyCompactList}\small\item\em A structure that contains data and metadata about used environments. \end{DoxyCompactList}\item 

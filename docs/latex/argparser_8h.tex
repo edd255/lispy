@@ -1,0 +1,46 @@
+\doxysection{src/utils/argparser.h File Reference}
+\hypertarget{argparser_8h}{}\label{argparser_8h}\index{src/utils/argparser.h@{src/utils/argparser.h}}
+
+
+This file contains methods to parse command-\/line arguments.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{argparser_8h_a1265b5fcd95aa90525ccd721723f91c1}{parse\+\_\+args}} (int argc, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\begin{DoxyCompactList}\small\item\em Sets up the command-\/line argument parser. \end{DoxyCompactList}\item 
+\Hypertarget{argparser_8h_a8e099d7d9e0c0e7313c2425de994e961}\label{argparser_8h_a8e099d7d9e0c0e7313c2425de994e961} 
+char \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+filename} (void)
+\begin{DoxyCompactList}\small\item\em Getter for filename arg. \end{DoxyCompactList}\item 
+\Hypertarget{argparser_8h_ae2b963bf8122bd1ed4f4c9de4e7389e4}\label{argparser_8h_ae2b963bf8122bd1ed4f4c9de4e7389e4} 
+int {\bfseries get\+\_\+nostdlib} (void)
+\begin{DoxyCompactList}\small\item\em Getter for no\+\_\+stdlib arg. \end{DoxyCompactList}\item 
+\Hypertarget{argparser_8h_a8209de748ff2f064470bc9374c7326ad}\label{argparser_8h_a8209de748ff2f064470bc9374c7326ad} 
+int {\bfseries get\+\_\+print\+\_\+logs} (void)
+\begin{DoxyCompactList}\small\item\em Getter for print\+\_\+logs arg. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains methods to parse command-\/line arguments. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{argparser_8h_a1265b5fcd95aa90525ccd721723f91c1}\label{argparser_8h_a1265b5fcd95aa90525ccd721723f91c1} 
+\index{argparser.h@{argparser.h}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparser.h@{argparser.h}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
+{\footnotesize\ttfamily void parse\+\_\+args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+
+
+Sets up the command-\/line argument parser. 
+
+This function sets up the command-\/line argument parser. In case, that wrong arguments are given, the usage is repeated. 
+\begin{DoxyParams}{Parameters}
+{\em argc} & The number of arguments \\
+\hline
+{\em argv} & The array containing the arguments \\
+\hline
+\end{DoxyParams}

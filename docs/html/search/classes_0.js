@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['lenv_0',['lenv',['../structlenv.html',1,'']]],
-  ['lispy_5farithm_5fop_5fmap_5ft_1',['lispy_arithm_op_map_t',['../structlispy__arithm__op__map__t.html',1,'']]],
-  ['lispy_5flogic_5fop_5fmap_5ft_2',['lispy_logic_op_map_t',['../structlispy__logic__op__map__t.html',1,'']]],
-  ['lval_3',['lval',['../structlval.html',1,'']]]
+  ['hash_5ftbl_0',['hash_tbl',['../structhash__tbl.html',1,'']]],
+  ['hash_5ftbl_5fentry_1',['hash_tbl_entry',['../structhash__tbl__entry.html',1,'']]]
 ];

@@ -6,14 +6,15 @@ This file contains the main function which sets up the logger and the parser and
 
 
 {\ttfamily \#include $<$editline/readline.\+h$>$}\newline
-{\ttfamily \#include $<$gnu/libc-\/version.\+h$>$}\newline
 {\ttfamily \#include "{}builtins.\+h"{}}\newline
 {\ttfamily \#include "{}common.\+h"{}}\newline
-{\ttfamily \#include "{}deps/argparse/argparse.\+h"{}}\newline
 {\ttfamily \#include "{}deps/logger/log.\+h"{}}\newline
 {\ttfamily \#include "{}deps/mpc/mpc.\+h"{}}\newline
 {\ttfamily \#include "{}eval.\+h"{}}\newline
 {\ttfamily \#include "{}io.\+h"{}}\newline
+{\ttfamily \#include "{}utils/argparser.\+h"{}}\newline
+{\ttfamily \#include "{}utils/logger.\+h"{}}\newline
+{\ttfamily \#include "{}utils/prompt.\+h"{}}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,17 +32,6 @@ void \mbox{\hyperlink{main_8c_a4fd536d76f0f29640e57d14a7e002c1f}{file\+\_\+inter
 \begin{DoxyCompactList}\small\item\em Loads the standard library and returns a pointer to it. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}{set\+\_\+env}} (void)
 \begin{DoxyCompactList}\small\item\em Sets up an environment which contains all builtins. \end{DoxyCompactList}\item 
-char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a63ab71f67fdf5f6372fbca175e9bda3e}{get\+\_\+git\+\_\+hash}} (void)
-\begin{DoxyCompactList}\small\item\em Returns the truncated git hash. \end{DoxyCompactList}\item 
-char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a46ce6aca187cded7f1a0955c91aa7ce1}{get\+\_\+git\+\_\+branch\+\_\+name}} (void)
-\begin{DoxyCompactList}\small\item\em Returns the git branch name. \end{DoxyCompactList}\item 
-\Hypertarget{main_8c_aef924c3fc395643d3a42c785b2de067f}\label{main_8c_aef924c3fc395643d3a42c785b2de067f} 
-void {\bfseries print\+\_\+prompt} (void)
-\begin{DoxyCompactList}\small\item\em Prints the prompt for the command-\/line interpreter. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_a1265b5fcd95aa90525ccd721723f91c1}{parse\+\_\+args}} (int argc, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
-\begin{DoxyCompactList}\small\item\em Sets up the command-\/line argument parser. \end{DoxyCompactList}\item 
-FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_aadcdb38d3064679ab74180a4629d969c}{prepare\+\_\+logfile}} (void)
-\begin{DoxyCompactList}\small\item\em Sets up the log-\/file in the XDG cache directory. \end{DoxyCompactList}\item 
 mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a33d140882b6f455504ea3f64c726961d}{get\+\_\+lispy\+\_\+parser}} (void)
 \begin{DoxyCompactList}\small\item\em Returns the lispy parser. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
@@ -70,16 +60,7 @@ const mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries expr}
 \begin{DoxyCompactList}\small\item\em Parses expressions (which can be numbers, symbols, strings, comments, s-\/ and q-\/expressions) \end{DoxyCompactList}\item 
 \Hypertarget{main_8c_a065721c05a37f8befd463c37f3d3dfe4}\label{main_8c_a065721c05a37f8befd463c37f3d3dfe4} 
 mpc\+\_\+parser\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries lispy}
-\begin{DoxyCompactList}\small\item\em Parses lists of expressions. \end{DoxyCompactList}\item 
-\Hypertarget{main_8c_aeac90097f29f7529968697163cea5c18}\label{main_8c_aeac90097f29f7529968697163cea5c18} 
-char \texorpdfstring{$\ast$}{*} {\bfseries filename} = NULL
-\begin{DoxyCompactList}\small\item\em A pointer to the file to interpret. \end{DoxyCompactList}\item 
-\Hypertarget{main_8c_ac5eb6eef7255a3857a377bb13960165a}\label{main_8c_ac5eb6eef7255a3857a377bb13960165a} 
-int {\bfseries no\+\_\+stdlib} = 0
-\begin{DoxyCompactList}\small\item\em Indicates whether to use the stdlib or not. \end{DoxyCompactList}\item 
-\Hypertarget{main_8c_acc0e8215964fc15509f3ca72c8d98b6b}\label{main_8c_acc0e8215964fc15509f3ca72c8d98b6b} 
-int {\bfseries print\+\_\+logs} = 0
-\begin{DoxyCompactList}\small\item\em Indicates whether to print logs, or to write them in a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parses lists of expressions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -147,32 +128,6 @@ This function runs the file interpreter, the second option, next to the command-
 {\em file} & The file to interpret \\
 \hline
 \end{DoxyParams}
-\Hypertarget{main_8c_a46ce6aca187cded7f1a0955c91aa7ce1}\label{main_8c_a46ce6aca187cded7f1a0955c91aa7ce1} 
-\index{main.c@{main.c}!get\_git\_branch\_name@{get\_git\_branch\_name}}
-\index{get\_git\_branch\_name@{get\_git\_branch\_name}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{get\_git\_branch\_name()}{get\_git\_branch\_name()}}
-{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} get\+\_\+git\+\_\+branch\+\_\+name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-Returns the git branch name. 
-
-\begin{DoxyReturn}{Returns}
-The current git branch name 
-\end{DoxyReturn}
-\Hypertarget{main_8c_a63ab71f67fdf5f6372fbca175e9bda3e}\label{main_8c_a63ab71f67fdf5f6372fbca175e9bda3e} 
-\index{main.c@{main.c}!get\_git\_hash@{get\_git\_hash}}
-\index{get\_git\_hash@{get\_git\_hash}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{get\_git\_hash()}{get\_git\_hash()}}
-{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} get\+\_\+git\+\_\+hash (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-Returns the truncated git hash. 
-
-\begin{DoxyReturn}{Returns}
-The current truncated git hash 
-\end{DoxyReturn}
 \Hypertarget{main_8c_a33d140882b6f455504ea3f64c726961d}\label{main_8c_a33d140882b6f455504ea3f64c726961d} 
 \index{main.c@{main.c}!get\_lispy\_parser@{get\_lispy\_parser}}
 \index{get\_lispy\_parser@{get\_lispy\_parser}!main.c@{main.c}}
@@ -227,42 +182,6 @@ The main method sets up the logger, the command-\/line parser and the parser for
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 0 if everything ran without problems 
-\end{DoxyReturn}
-\Hypertarget{main_8c_a1265b5fcd95aa90525ccd721723f91c1}\label{main_8c_a1265b5fcd95aa90525ccd721723f91c1} 
-\index{main.c@{main.c}!parse\_args@{parse\_args}}
-\index{parse\_args@{parse\_args}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
-{\footnotesize\ttfamily void parse\+\_\+args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
-
-
-
-Sets up the command-\/line argument parser. 
-
-This function sets up the command-\/line argument parser. In case, that wrong arguments are given, the usage is repeated. 
-\begin{DoxyParams}{Parameters}
-{\em argc} & The number of arguments \\
-\hline
-{\em argv} & The array containing the arguments \\
-\hline
-\end{DoxyParams}
-\Hypertarget{main_8c_aadcdb38d3064679ab74180a4629d969c}\label{main_8c_aadcdb38d3064679ab74180a4629d969c} 
-\index{main.c@{main.c}!prepare\_logfile@{prepare\_logfile}}
-\index{prepare\_logfile@{prepare\_logfile}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{prepare\_logfile()}{prepare\_logfile()}}
-{\footnotesize\ttfamily FILE \texorpdfstring{$\ast$}{*} prepare\+\_\+logfile (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
-
-
-
-Sets up the log-\/file in the XDG cache directory. 
-
-This function sets up the log-\/file in the XDG cache directory if the directory exists.
-
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000003}{Todo}}]Make the function portable.\end{DoxyRefDesc}
-
-
-\begin{DoxyReturn}{Returns}
-A pointer to the log file. 
 \end{DoxyReturn}
 \Hypertarget{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}\label{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a} 
 \index{main.c@{main.c}!set\_env@{set\_env}}
