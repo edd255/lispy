@@ -6,6 +6,7 @@ var main_8c =
     [ "get_lispy_parser", "main_8c.html#a33d140882b6f455504ea3f64c726961d", null ],
     [ "get_stdlib", "main_8c.html#a36daa9bb72e29b36be7bc6811d623bee", null ],
     [ "main", "main_8c.html#a217dbf8b442f20279ea00b898af96f52", null ],
+    [ "save_history", "main_8c.html#a727c958d113dd911bde24e59dafee042", null ],
     [ "set_env", "main_8c.html#acd4fbe2cc8ff8c35ec4918838aa5636a", null ],
     [ "setup_parser", "main_8c.html#a74926c46a74d5dd4afb62910905e8907", null ],
     [ "comment", "main_8c.html#a1fe3acfecc3c0b9477f38556ac69a5e2", null ],
