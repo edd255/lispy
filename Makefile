@@ -4,13 +4,11 @@ include .config/make/config.mk
 #---- RELEASE ------------------------------------------------------------------
 
 $(BIN)_release: $(OPT_OBJS)
-	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: %.c
-	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
@@ -20,13 +18,11 @@ release: $(BIN)_release
 #---- DEBUGGING ----------------------------------------------------------------
 
 $(BIN)_debugging: $(DBG_OBJS) 
-	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.dbg.o: %.c
-	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
@@ -36,13 +32,11 @@ debugging: $(BIN)_debugging
 #---- SANITIZED ----------------------------------------------------------------
 
 $(BIN)_sanitized: $(SAN_OBJS) 
-	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: %.c
-	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
@@ -52,13 +46,11 @@ sanitized: $(BIN)_sanitized
 #---- PROFILING ----------------------------------------------------------------
 
 $(BIN)_profiling: $(PROF_OBJS) 
-	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(PROFILING) $+ -o $@ $(LDFLAGS) -pg
 
 $(BUILD_DIR)/%.prof.o: %.c
-	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(PROFILING) $(CFLAGS) -c $< -o $@
@@ -81,7 +73,7 @@ docs:
 
 style:
 	$(Q)echo "====> Formatting..."
-	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i $(CLANG_FMT_CONFIG)
+	$(Q)find $(SRC_DIR) -iname *.h -o -iname *.c | xargs clang-format -i $(CLANG_FMT_CFG)
 
 #---- ANALYSIS -----------------------------------------------------------------
 
@@ -93,7 +85,7 @@ analyze:
 	$(Q)cppcheck src/ $(CPPCHECK) 2> logs/cppcheck.log
 	$(Q)echo "====> Running clang-tidy..."
 	$(Q)compiledb make all
-	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CONFIG) || true
+	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CFG) || true
 	$(Q)yq 'del(.Diagnostics[] | select(.DiagnosticMessage.FilePath | test("deps")))' tidy.log > logs/tidy.log
 	$(Q)$(RM) tidy.log
 	$(Q)scan-build $(MAKE)
