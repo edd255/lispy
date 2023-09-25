@@ -125,10 +125,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ae0bc1b95ea825d6afef0872fa8e5b28a" id="r_ae0bc1b95ea825d6afef0872fa8e5b28a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ae0bc1b95ea825d6afef0872fa8e5b28a">cli_interpreter</a> (<a class="el" href="structlenv.html">lenv</a> *env)</td></tr>
 <tr class="memdesc:ae0bc1b95ea825d6afef0872fa8e5b28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A REPL for Lispy.  <br /></td></tr>
 <tr class="separator:ae0bc1b95ea825d6afef0872fa8e5b28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a727c958d113dd911bde24e59dafee042" id="r_a727c958d113dd911bde24e59dafee042"><td class="memItemLeft" align="right" valign="top"><a id="a727c958d113dd911bde24e59dafee042" name="a727c958d113dd911bde24e59dafee042"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_history</b> (const int num_elements)</td></tr>
-<tr class="memdesc:a727c958d113dd911bde24e59dafee042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the input history to a file. <br /></td></tr>
+<tr class="memitem:a727c958d113dd911bde24e59dafee042" id="r_a727c958d113dd911bde24e59dafee042"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a727c958d113dd911bde24e59dafee042">save_history</a> (const int num_elements)</td></tr>
+<tr class="memdesc:a727c958d113dd911bde24e59dafee042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the input history to a file.  <br /></td></tr>
 <tr class="separator:a727c958d113dd911bde24e59dafee042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c5b02f5147742c78eebf88b9886549" id="r_ab2c5b02f5147742c78eebf88b9886549"><td class="memItemLeft" align="right" valign="top"><a id="ab2c5b02f5147742c78eebf88b9886549" name="ab2c5b02f5147742c78eebf88b9886549"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_history</b> (void)</td></tr>
+<tr class="memdesc:ab2c5b02f5147742c78eebf88b9886549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the history file. <br /></td></tr>
+<tr class="separator:ab2c5b02f5147742c78eebf88b9886549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fd536d76f0f29640e57d14a7e002c1f" id="r_a4fd536d76f0f29640e57d14a7e002c1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4fd536d76f0f29640e57d14a7e002c1f">file_interpreter</a> (<a class="el" href="structlenv.html">lenv</a> *env, const char *file)</td></tr>
 <tr class="memdesc:a4fd536d76f0f29640e57d14a7e002c1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interprets a given file.  <br /></td></tr>
 <tr class="separator:a4fd536d76f0f29640e57d14a7e002c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -372,6 +375,27 @@ mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>lispy</b></
 
 </div>
 </div>
+<a id="a727c958d113dd911bde24e59dafee042" name="a727c958d113dd911bde24e59dafee042"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a727c958d113dd911bde24e59dafee042">&#9670;&#160;</a></span>save_history()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void save_history </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>num_elements</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the input history to a file. </p>
+<p>@parem num_elements The number of elements to append to the history file </p>
+
+</div>
+</div>
 <a id="acd4fbe2cc8ff8c35ec4918838aa5636a" name="acd4fbe2cc8ff8c35ec4918838aa5636a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd4fbe2cc8ff8c35ec4918838aa5636a">&#9670;&#160;</a></span>set_env()</h2>
 
@@ -420,7 +444,7 @@ mpc_parser_t *&#160;</td><td class="memItemRight" valign="bottom"><b>lispy</b></
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
-    <li class="footer">Generated on Mon Sep 25 2023 21:04:12 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Sep 25 2023 21:09:19 for Lispy by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

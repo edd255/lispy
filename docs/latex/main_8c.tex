@@ -26,9 +26,11 @@ void \mbox{\hyperlink{main_8c_a4cef4fda1b1e6c9bb941c63f8f585bfa}{cleanup}} (\mbo
 \begin{DoxyCompactList}\small\item\em Cleans up the memory used by the interpreter. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_ae0bc1b95ea825d6afef0872fa8e5b28a}{cli\+\_\+interpreter}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
 \begin{DoxyCompactList}\small\item\em A REPL for Lispy. \end{DoxyCompactList}\item 
-\Hypertarget{main_8c_a727c958d113dd911bde24e59dafee042}\label{main_8c_a727c958d113dd911bde24e59dafee042} 
-void {\bfseries save\+\_\+history} (const int num\+\_\+elements)
+void \mbox{\hyperlink{main_8c_a727c958d113dd911bde24e59dafee042}{save\+\_\+history}} (const int num\+\_\+elements)
 \begin{DoxyCompactList}\small\item\em Saves the input history to a file. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_ab2c5b02f5147742c78eebf88b9886549}\label{main_8c_ab2c5b02f5147742c78eebf88b9886549} 
+int {\bfseries get\+\_\+history} (void)
+\begin{DoxyCompactList}\small\item\em Reads the history file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a4fd536d76f0f29640e57d14a7e002c1f}{file\+\_\+interpreter}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env, const char \texorpdfstring{$\ast$}{*}file)
 \begin{DoxyCompactList}\small\item\em Interprets a given file. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structlval}{lval}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a36daa9bb72e29b36be7bc6811d623bee}{get\+\_\+stdlib}} (\mbox{\hyperlink{structlenv}{lenv}} \texorpdfstring{$\ast$}{*}env)
@@ -186,7 +188,17 @@ The main method sets up the logger, the command-\/line parser and the parser for
 \begin{DoxyReturn}{Returns}
 0 if everything ran without problems 
 \end{DoxyReturn}
-\Hypertarget{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}\label{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a} 
+\Hypertarget{main_8c_a727c958d113dd911bde24e59dafee042}\label{main_8c_a727c958d113dd911bde24e59dafee042} 
+\index{main.c@{main.c}!save\_history@{save\_history}}
+\index{save\_history@{save\_history}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{save\_history()}{save\_history()}}
+{\footnotesize\ttfamily void save\+\_\+history (\begin{DoxyParamCaption}\item[{const int}]{num\+\_\+elements }\end{DoxyParamCaption})}
+
+
+
+Saves the input history to a file. 
+
+@parem num\+\_\+elements The number of elements to append to the history file \Hypertarget{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a}\label{main_8c_acd4fbe2cc8ff8c35ec4918838aa5636a} 
 \index{main.c@{main.c}!set\_env@{set\_env}}
 \index{set\_env@{set\_env}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{set\_env()}{set\_env()}}
