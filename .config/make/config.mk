@@ -68,7 +68,10 @@ SAN  := -fsanitize=address \
 	    -fsanitize=leak \
 	    -fsanitize=undefined \
 	    -fsanitize-address-use-after-scope
-FORT := -D_FORTIFY_SOURCE=2
+FORT := -D_FORTIFY_SOURCE=3 \
+		-fstack-protector-strong \
+		-fstack-clash-protection \
+		-fcf-protection=full
 PROF := -pg
 
 RELEASE   := ${FORT} ${ERR} ${OPT}
