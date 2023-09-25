@@ -4,11 +4,13 @@ include .config/make/config.mk
 #---- RELEASE ------------------------------------------------------------------
 
 $(BIN)_release: $(OPT_OBJS)
+	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: %.c
+	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
@@ -18,11 +20,13 @@ release: $(BIN)_release
 #---- DEBUGGING ----------------------------------------------------------------
 
 $(BIN)_debugging: $(DBG_OBJS) 
+	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.dbg.o: %.c
+	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
@@ -32,11 +36,13 @@ debugging: $(BIN)_debugging
 #---- SANITIZED ----------------------------------------------------------------
 
 $(BIN)_sanitized: $(SAN_OBJS) 
+	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.san.o: %.c
+	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
@@ -46,11 +52,13 @@ sanitized: $(BIN)_sanitized
 #---- PROFILING ----------------------------------------------------------------
 
 $(BIN)_profiling: $(PROF_OBJS) 
+	$(Q)./git_info.sh
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(PROFILING) $+ -o $@ $(LDFLAGS) -pg
 
 $(BUILD_DIR)/%.prof.o: %.c
+	$(Q)./git_info.sh
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(CC) $(PROFILING) $(CFLAGS) -c $< -o $@
