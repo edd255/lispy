@@ -12,7 +12,6 @@ lval* builtin_ord(lenv* env, lval* args, char* op) {
     LCHECK_NUM(op, args, 2);
     LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
     LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
-
     int r;
     if (0 == strcmp(op, ">")) {
         r = (args->cell[0]->num > args->cell[1]->num);
@@ -34,27 +33,23 @@ lval* builtin_ord(lenv* env, lval* args, char* op) {
 lval* builtin_gt(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_ord(env, args, ">");
 }
 
 lval* builtin_lt(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_ord(env, args, "<");
 }
 
 lval* builtin_ge(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_ord(env, args, ">=");
 }
 
 lval* builtin_le(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_ord(env, args, "<=");
 }

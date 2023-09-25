@@ -24,7 +24,6 @@ lval* builtin_fun(lenv* env, lval* args) {
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     LCHECK_QEXPR_NOT_EMPTY(__func__, args, 0);
     LCHECK_QEXPR_NOT_EMPTY(__func__, args, 1);
-
     lval* fn_body = lval_pop(args, 1);
     lval* fn_args = builtin_tail(env, lval_copy(args));
     lval* fn_lambda = lval_lambda(fn_args, fn_body);

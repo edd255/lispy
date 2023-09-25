@@ -37,7 +37,8 @@ lval* builtin_load(lenv* env, lval* args) {
 
         // Return empty list
         return lval_sexpr();
-    }  // Get parse error as string
+    }
+    // Get parse error as string
     char* err_msg = mpc_err_string(parse_result.error);
     mpc_err_delete(parse_result.error);
 
@@ -54,13 +55,10 @@ lval* builtin_print(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-
-    // Print each argument followed by a space
     for (int i = 0; i < args->count; i++) {
         lval_print(args->cell[i]);
         putchar(' ');
     }
-    // Print a newline and delete arguments
     putchar('\n');
     lval_del(args);
     return lval_sexpr();
@@ -72,11 +70,7 @@ lval* builtin_error(lenv* env, lval* args) {
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
-
-    // Construct error from first argument
     lval* err = lval_err(args->cell[0]->str);
-
-    // Delete arguments and return
     lval_del(args);
     return err;
 }

@@ -87,7 +87,6 @@ void lenv_add_builtin_fn(lenv* env, char* name, lbuiltin fn) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != fn);
-
     lval* key = lval_sym(name);
     lval* value = lval_fn(fn);
     lenv_put(env, key, value);
@@ -99,7 +98,6 @@ void lenv_add_builtin_const(lenv* env, char* name, lval* value) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != value);
-
     lval* key = lval_sym(name);
     lenv_put(env, key, value);
     lval_del(key);

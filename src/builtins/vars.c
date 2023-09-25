@@ -72,10 +72,8 @@ lval* builtin_lambda(lenv* env, lval* args) {
     // Pop first two arguments and pass them to lval_lambda
     lval* formals = lval_pop(args, 0);
     lval* body = lval_pop(args, 0);
-
     assert(NULL != formals);
     assert(NULL != body);
-
     lval_del(args);
     return lval_lambda(formals, body);
 }
@@ -83,13 +81,11 @@ lval* builtin_lambda(lenv* env, lval* args) {
 lval* builtin_def(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_var(env, args, "def");
 }
 
 lval* builtin_put(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_var(env, args, "=");
 }

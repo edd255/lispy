@@ -118,7 +118,6 @@ lval* lval_fn(lbuiltin fn) {
 lval* lval_lambda(lval* formals, lval* body) {
     assert(NULL != formals);
     assert(NULL != body);
-
     lval* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
 
@@ -138,11 +137,10 @@ lval* lval_lambda(lval* formals, lval* body) {
 
 lval* lval_copy(const lval* self) {
     assert(NULL != self);
-
     lval* x = MALLOC(sizeof(lval));
     x->type = self->type;
     switch (self->type) {
-        // Copy Functions and Numbers Directly
+        // Copy Functions and Numbers directly
         case LISPY_VAL_FN: {
             if (self->builtin) {
                 x->builtin = self->builtin;
@@ -197,7 +195,6 @@ lval* lval_copy(const lval* self) {
 lval* lval_add(lval* self, lval* other) {
     assert(NULL != self);
     assert(NULL != other);
-
     self->count++;
     self->cell = REALLOC(self->cell, sizeof(lval*) * self->count);
     self->cell[self->count - 1] = other;
@@ -267,7 +264,6 @@ lval* lval_pop(lval* self, const int idx) {
         idx,
         self->count
     );
-
     // Find the item at "i"
     lval* value = self->cell[idx];
 
@@ -288,7 +284,6 @@ lval* lval_pop(lval* self, const int idx) {
 
 lval* lval_take(lval* self, const int idx) {
     assert(NULL != self);
-
     lval* value = lval_pop(self, idx);
     lval_del(self);
     return value;
@@ -351,7 +346,6 @@ lval* lval_call(lenv* env, lval* fn, lval* args) {
     }
     // Argument list is now bound so can be cleaned up
     lval_del(args);
-
     if (0 < fn->formals->count && 0 == strcmp(fn->formals->cell[0]->sym, "&")) {
         // Check to ensure that & is not passed invalidly
         if (2 != fn->formals->count) {
@@ -372,7 +366,6 @@ lval* lval_call(lenv* env, lval* fn, lval* args) {
         lval_del(sym);
         lval_del(val);
     }
-
     // If all formals have been bound evaluate
     if (0 == fn->formals->count) {
         // Set environment parent to evaluation environment
@@ -381,11 +374,9 @@ lval* lval_call(lenv* env, lval* fn, lval* args) {
         // Evaluate and return
         lval* new_sexpr = lval_sexpr();
         lval* body_copy = lval_copy(fn->body);
-
         assert(NULL != new_sexpr);
         assert(NULL != body_copy);
         assert(NULL != fn->env);
-
         return builtin_eval(fn->env, lval_add(new_sexpr, body_copy));
     }
     // Otherwise return partially evaluated function
