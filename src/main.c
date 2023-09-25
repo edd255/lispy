@@ -70,6 +70,9 @@ void cli_interpreter(lenv* env);
 /// @parem num_elements The number of elements to append to the history file
 void save_history(const int num_elements);
 
+/// @brief Reads the history file.
+int get_history(void);
+
 /// @brief Interprets a given file.
 ///
 /// This function runs the file interpreter, the second option, next to the
@@ -194,6 +197,7 @@ mpc_parser_t* get_lispy_parser(void) {
 void cli_interpreter(lenv* env) {
     print_prompt();
     using_history();
+    (void)get_history();
     int i = 0;
     while (true) {
         char* input = readline(">>> ");
@@ -246,6 +250,18 @@ lenv* set_env(void) {
     lenv* env = lenv_new();
     lenv_add_builtins(env);
     return env;
+}
+
+int get_history(void) {
+    const char* cache_dir = getenv("XDG_CACHE_HOME");
+    if (NULL == cache_dir) {
+        return 1;
+    }
+    size_t history_file_size = strlen(cache_dir) + strlen("/lispy/history") + 1;
+    char* history_file = malloc(history_file_size);
+    strlcpy(history_file, cache_dir, history_file_size);
+    strlcat(history_file, "/lispy/history", history_file_size);
+    return read_history(history_file);
 }
 
 void save_history(const int num_elements) {
