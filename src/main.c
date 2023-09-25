@@ -66,7 +66,9 @@ void cleanup(lval* std, lenv* env);
 void cli_interpreter(lenv* env);
 
 /// @brief Saves the input history to a file.
-void save_history(void);
+///
+/// @parem num_elements The number of elements to append to the history file
+void save_history(const int num_elements);
 
 /// @brief Interprets a given file.
 ///
@@ -192,9 +194,11 @@ mpc_parser_t* get_lispy_parser(void) {
 void cli_interpreter(lenv* env) {
     print_prompt();
     using_history();
+    int i = 0;
     while (true) {
         char* input = readline(">>> ");
         add_history(input);
+        i++;
         if (0 == strcmp(input, "exit")) {
             FREE(input);
             break;
@@ -213,7 +217,7 @@ void cli_interpreter(lenv* env) {
         }
         FREE(input);
     }
-    save_history();
+    save_history(i);
 }
 
 void file_interpreter(lenv* env, const char* file) {
@@ -244,7 +248,7 @@ lenv* set_env(void) {
     return env;
 }
 
-void save_history(void) {
+void save_history(const int num_elements) {
     const char* cache_dir = getenv("XDG_CACHE_HOME");
     if (NULL == cache_dir) {
         return;
@@ -253,6 +257,6 @@ void save_history(void) {
     char* history_file = malloc(history_file_size);
     strlcpy(history_file, cache_dir, history_file_size);
     strlcat(history_file, "/lispy/history", history_file_size);
-    write_history(history_file);
+    append_history(num_elements, history_file);
     return;
 }
