@@ -40,19 +40,35 @@ SAN_OBJS  := $(SRCS:%.c=$(BUILD_DIR)/%.san.o)
 DBG_OBJS  := $(SRCS:%.c=$(BUILD_DIR)/%.dbg.o)
 DEPS      := $(OBJS:.o=.d)
 
+#---- PROMPT -------------------------------------------------------------------
+
+LISPY_GIT_COMMIT_HASH := $(shell git rev-parse --short HEAD)
+LISPY_GIT_BRANCH_NAME := $(shell git rev-parse --abbrev-ref HEAD)
+
 #---- FLAGS --------------------------------------------------------------------
 
-INC_FLAGS         := -I. -I$(SRC_DIR)
-LDFLAGS           += -ledit -lm -DLOGC_USE_COLOR -DVERSION=$(VERSION)
-CFLAGS            := $(INC_FLAGS) -MMD -MP -DLOGC_USE_COLOR -DVERSION=$(VERSION)
-MAKEFLAGS         := --jobs=$(shell nproc)
-VALGRIND          := --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck
-CALLGRIND         := --dump-instr=yes --collect-jumps=yes --tool=callgrind
-MASSIF            := --tool=massif
-DHAT              := --tool=dhat
-CPPCHECK          := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
-CLANG_FMT_CONFIG  := --Werror --style=file:.config/clang/fmt.conf
-CLANG_TIDY_CONFIG := -config-file=.config/clang/tidy.conf -export-fixes=tidy.log -fix
+INC_FLAGS      := -I. -I$(SRC_DIR)
+LDFLAGS        += -ledit \
+				  -lm \
+				  -DLOGC_USE_COLOR \
+				  -DVERSION=$(VERSION) \
+				  -DLISPY_GIT_COMMIT_HASH=\"$(LISPY_GIT_COMMIT_HASH)\" \
+				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\"
+CFLAGS         := $(INC_FLAGS) \
+				  -MMD \
+				  -MP \
+				  -DLOGC_USE_COLOR \
+				  -DVERSION=$(VERSION) \
+				  -DLISPY_GIT_COMMIT_HASH=\"$(LISPY_GIT_COMMIT_HASH)\" \
+				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\"
+MAKEFLAGS      := --jobs=$(shell nproc)
+VALGRIND       := --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck
+CALLGRIND      := --dump-instr=yes --collect-jumps=yes --tool=callgrind
+MASSIF         := --tool=massif
+DHAT           := --tool=dhat
+CPPCHECK       := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
+CLANG_FMT_CFG  := --Werror --style=file:.config/clang/fmt.conf
+CLANG_TIDY_CFG := -config-file=.config/clang/tidy.conf -export-fixes=tidy.log -fix
 
 ERR  := -Wall \
 		-Wpedantic \

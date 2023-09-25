@@ -3,7 +3,6 @@
 #include <gnu/libc-version.h>
 
 #include "common.h"
-#include "utils/git_info.h"
 
 void print_prompt(void) {
 #if defined(__GNU__)
