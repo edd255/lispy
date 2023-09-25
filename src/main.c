@@ -65,6 +65,9 @@ void cleanup(lval* std, lenv* env);
 /// @param env The environment from which we get and where we store variables
 void cli_interpreter(lenv* env);
 
+/// @brief Saves the input history to a file.
+void save_history(void);
+
 /// @brief Interprets a given file.
 ///
 /// This function runs the file interpreter, the second option, next to the
@@ -188,6 +191,7 @@ mpc_parser_t* get_lispy_parser(void) {
 //--- Interpreter --------------------------------------------------------------
 void cli_interpreter(lenv* env) {
     print_prompt();
+    using_history();
     while (true) {
         char* input = readline(">>> ");
         add_history(input);
@@ -209,6 +213,7 @@ void cli_interpreter(lenv* env) {
         }
         FREE(input);
     }
+    save_history();
 }
 
 void file_interpreter(lenv* env, const char* file) {
@@ -237,4 +242,17 @@ lenv* set_env(void) {
     lenv* env = lenv_new();
     lenv_add_builtins(env);
     return env;
+}
+
+void save_history(void) {
+    const char* cache_dir = getenv("XDG_CACHE_HOME");
+    if (NULL == cache_dir) {
+        return;
+    }
+    size_t history_file_size = strlen(cache_dir) + strlen("/lispy/history") + 1;
+    char* history_file = malloc(history_file_size);
+    strlcpy(history_file, cache_dir, history_file_size);
+    strlcat(history_file, "/lispy/history", history_file_size);
+    write_history(history_file);
+    return;
 }
