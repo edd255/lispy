@@ -5,7 +5,6 @@
 
 lval* lval_read_num(const mpc_ast_t* tree) {
     assert(NULL != tree);
-
     errno = 0;
     if (NULL == strchr(tree->contents, '.')) {
         long x = strtol(tree->contents, NULL, 10);
@@ -28,7 +27,6 @@ lval* lval_read(mpc_ast_t* tree) {
     if (strstr(tree->tag, "symbol")) {
         return lval_sym(tree->contents);
     }
-
     // If root (>) or sexpr then create empty list
     lval* x = NULL;
     if (0 == strcmp(tree->tag, ">")) {
@@ -40,7 +38,6 @@ lval* lval_read(mpc_ast_t* tree) {
     if (strstr(tree->tag, "qexpr")) {
         x = lval_qexpr();
     }
-
     // Fill this list with any valid expression contained within
     for (int i = 0; i < tree->children_num; i++) {
         if (0 == strcmp(tree->children[i]->contents, "(")) {

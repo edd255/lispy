@@ -18,7 +18,6 @@ lval* builtin_if(lenv* env, lval* args) {
     lval* x = NULL;
     args->cell[1]->type = LISPY_VAL_SEXPR;
     args->cell[2]->type = LISPY_VAL_SEXPR;
-
     lval* cond = lval_eval(env, args->cell[0]);
     LCHECK(
         cond,
@@ -26,7 +25,6 @@ lval* builtin_if(lenv* env, lval* args) {
         "%s: symbolic expression did not evaluate to number",
         __func__
     );
-
     if (cond->num) {
         // If condition is true evaluate first expression
         lval* y = lval_pop(args, 1);
@@ -48,11 +46,9 @@ lval* builtin_testhelper(lenv* env, lval* args) {
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
-
     const lval* cond = lval_eval(env, args->cell[0]);
     lval* expected = args->cell[1];
     lval* actual = args->cell[2];
-
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
     if (cond->num) {
         color_bgreen("PASSED\n");
@@ -106,7 +102,6 @@ lval* builtin_case(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-
     const lval* arg = args->cell[0];
     for (int i = 1; i < args->count; i++) {
         lval* case_stmt = args->cell[i];

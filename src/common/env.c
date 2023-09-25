@@ -12,7 +12,6 @@ lenv* lenv_new(void) {
 
 void lenv_del(lenv* env) {
     assert(NULL != env);
-
     for (int i = 0; i < env->count; i++) {
         FREE(env->syms[i]);
         lval_del(env->vals[i]);
@@ -65,13 +64,11 @@ void lenv_put(lenv* env, const lval* key, const lval* val) {
     // Copy contents of lval and symbol string into new location
     env->vals[env->count - 1] = lval_copy(val);
     env->syms[env->count - 1] = MALLOC(key->len + 1);
-
     strlcpy(env->syms[env->count - 1], key->sym, key->len + 1);
 }
 
 lenv* lenv_copy(lenv* env) {
     assert(NULL != env);
-
     lenv* n = MALLOC(sizeof(lenv));
     n->parent = env->parent;
     n->count = env->count;

@@ -17,11 +17,9 @@ lval* builtin_op(lenv* env, lval* args, char* op) {
     for (int i = 0; i < args->count; i++) {
         LCHECK_TYPE(op, args, i, args->cell[0]->type);
     }
-
     // Pop the first element
     lval* x = lval_pop(args, 0);
     assert(NULL != x);
-
     // If no arguments and sub then perform unary negation
     if ((0 == strcmp(op, "-")) && 0 == args->count) {
         switch (x->type) {
@@ -35,7 +33,6 @@ lval* builtin_op(lenv* env, lval* args, char* op) {
             }
         }
     }
-
     // While there are still elements remaining
     while (args->count > 0) {
         // Pop the next element
@@ -192,56 +189,48 @@ lval* builtin_op(lenv* env, lval* args, char* op) {
 lval* builtin_add(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "+");
 }
 
 lval* builtin_sub(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "-");
 }
 
 lval* builtin_mul(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "*");
 }
 
 lval* builtin_div(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "/");
 }
 
 lval* builtin_mod(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "%");
 }
 
 lval* builtin_pow(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "^");
 }
 
 lval* builtin_max(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "max");
 }
 
 lval* builtin_min(lenv* env, lval* args) {
     assert(NULL != env);
     assert(NULL != args);
-
     return builtin_op(env, args, "min");
 }
 
@@ -251,7 +240,6 @@ lval* builtin_sum(lenv* env, lval* args) {
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
-
     lval* list = args->cell[0];
     double dec_sum = 0;
     long int_sum = 0;
@@ -281,7 +269,6 @@ lval* builtin_prod(lenv* env, lval* args) {
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
-
     lval* list = args->cell[0];
     double dec_prod = 1;
     long int_prod = 1;

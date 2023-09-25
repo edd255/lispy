@@ -122,7 +122,6 @@ int main(int argc, const char** argv) {
         log_add_fp(log_file, 0);
         log_set_quiet(true);
     }
-
     // Set up the interpreter
     setup_parser();
     lenv* env = set_env();
