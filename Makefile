@@ -6,7 +6,7 @@ include .config/make/config.mk
 $(BIN)_release: $(OPT_OBJS)
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
-	$(Q)$(CC) $(RELEASE) $+ -o $@ $(LDFLAGS)
+	$(Q)$(CC) $(RELEASE) $+ -s -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: %.c
 	$(Q)echo "====> CC $@"
