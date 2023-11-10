@@ -75,7 +75,7 @@ ERR  := -Wall \
 		-Wextra \
 		-Werror \
 		-Wno-gnu-zero-variadic-macro-arguments
-OPT  := -Ofast -DNDEBUG
+OPT  := -Ofast -DNDEBUG -march=native -mtune=native
 DBG  := -Og -g
 LOG  := -DLOG_ALLOCS
 SAN  := -fsanitize=address \
