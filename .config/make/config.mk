@@ -53,7 +53,9 @@ LDFLAGS        += -ledit \
 				  -DLOGC_USE_COLOR \
 				  -DVERSION=$(VERSION) \
 				  -DLISPY_GIT_COMMIT_HASH=\"$(LISPY_GIT_COMMIT_HASH)\" \
-				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\"
+				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\" \
+				  -Wl,-z,relro,-z,now \
+				  -pie -fPIE
 CFLAGS         := $(INC_FLAGS) \
 				  -MMD \
 				  -MP \
@@ -70,10 +72,12 @@ CPPCHECK       := --enable=all --suppress=missingIncludeSystem $(INC_FLAGS)
 CLANG_FMT_CFG  := --Werror --style=file:.config/clang/fmt.conf
 CLANG_TIDY_CFG := -config-file=.config/clang/tidy.conf -export-fixes=tidy.log -fix
 
+# -Wconversion, -Wsign-conversion
 ERR  := -Wall \
 		-Wpedantic \
 		-Wextra \
 		-Werror \
+		-Wformat-security \
 		-Wno-gnu-zero-variadic-macro-arguments
 OPT  := -Ofast -DNDEBUG -march=native -mtune=native
 DBG  := -Og -g
