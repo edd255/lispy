@@ -261,7 +261,9 @@ int get_history(void) {
     char* history_file = malloc(history_file_size);
     strlcpy(history_file, cache_dir, history_file_size);
     strlcat(history_file, "/lispy/history", history_file_size);
-    return read_history(history_file);
+    int result = read_history(history_file);
+    free(history_file);
+    return result;
 }
 
 void save_history(const int num_elements) {
@@ -274,5 +276,6 @@ void save_history(const int num_elements) {
     strlcpy(history_file, cache_dir, history_file_size);
     strlcat(history_file, "/lispy/history", history_file_size);
     append_history(num_elements, history_file);
+    free(history_file);
     return;
 }
