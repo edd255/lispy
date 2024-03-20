@@ -62,7 +62,8 @@ CFLAGS         := $(INC_FLAGS) \
 				  -DLOGC_USE_COLOR \
 				  -DVERSION=$(VERSION) \
 				  -DLISPY_GIT_COMMIT_HASH=\"$(LISPY_GIT_COMMIT_HASH)\" \
-				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\"
+				  -DLISPY_GIT_BRANCH_NAME=\"$(LISPY_GIT_BRANCH_NAME)\" \
+				  -fPIE
 MAKEFLAGS      := --jobs=$(shell nproc)
 VALGRIND       := --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=memcheck
 CALLGRIND      := --dump-instr=yes --collect-jumps=yes --tool=callgrind
