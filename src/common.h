@@ -105,7 +105,7 @@ struct lval {
 
     /// A pointer to the list
     lval** cell;
-};
+} __attribute__((aligned(16)));
 
 /// @brief A structure that contains data and metadata about used environments.
 ///
@@ -125,7 +125,7 @@ struct lenv {
 
     /// A pointer to the values
     lval** vals;
-};
+} __attribute__((aligned(16)));
 
 /// Hash table entry
 struct hash_tbl_entry {
@@ -135,7 +135,7 @@ struct hash_tbl_entry {
     /// length of the key
     size_t len;
     lval* val;
-};
+} __attribute__((aligned(16)));
 
 /// Hash table structure: create with lenv_new, free with lenv_del
 struct hash_tbl {
@@ -147,7 +147,7 @@ struct hash_tbl {
 
     /// number of items in hash table
     size_t len;
-};
+} __attribute__((aligned(16)));
 
 //--- Constructors & Destructors for Values ------------------------------------
 /// @brief Constructor for numeric values
