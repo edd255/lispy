@@ -7,7 +7,7 @@ VERSION := 0.1
 #---- TOOLS --------------------------------------------------------------------
 
 CC     := ccache clang
-LD     := ccache clang -fuse-ld=mold -flto=thin
+LD     := ccache clang -fuse-ld=mold -flto=full
 RM     := rm
 MKDIR  := mkdir --parents
 Q      ?= @
