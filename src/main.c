@@ -195,6 +195,7 @@ mpc_parser_t* get_lispy_parser(void) {
 
 //--- Interpreter --------------------------------------------------------------
 void cli_interpreter(lenv* env) {
+    print_banner();
     print_prompt();
     using_history();
     (void)get_history();
