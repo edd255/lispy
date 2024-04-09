@@ -17,7 +17,7 @@
 /// @param env The environment in which to evaluate the given Lispy value
 /// @param val The Lispy value to evaluate
 /// @return The evaluated Lispy value
-lval* lval_eval(lenv* env, lval* val);
+Value* val_eval(Environment* env, Value* val);
 
 /// @brief Evaluates a symbolic expression in an environment.
 ///
@@ -33,6 +33,6 @@ lval* lval_eval(lenv* env, lval* val);
 /// @param env The environment in which to evaluate the given Lispy value
 /// @param val The Lispy value to evaluate
 /// @return The evaluated Lispy value
-lval* lval_eval_sexpr(lenv* env, lval* val);
+Value* val_eval_sexpr(Environment* env, Value* val);
 
 #endif

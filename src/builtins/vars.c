@@ -3,15 +3,13 @@
 #include "io.h"
 
 //==== Variable functions ======================================================
-lval* builtin_var(lenv* env, lval* args, char* fn) {
+Value* builtin_var(Environment* env, Value* args, char* fn) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != fn);
     LCHECK_TYPE(fn, args, 0, LISPY_VAL_QEXPR);
-
     // First argument is symbol list
-    lval* syms = args->cell[0];
-
+    Value* syms = args->cell[0];
     // Ensure all elements of first list are symbols
     for (int i = 0; i < syms->count; i++) {
         LCHECK(
@@ -38,26 +36,24 @@ lval* builtin_var(lenv* env, lval* args, char* fn) {
     for (int i = 0; i < syms->count; i++) {
         // If 'def' define in globally. If 'put' define in locally.
         if (0 == strcmp(fn, "def")) {
-            lenv_def(env, syms->cell[i], args->cell[i + 1]);
+            env_def(env, syms->cell[i], args->cell[i + 1]);
         }
         if (0 == strcmp(fn, "=")) {
-            lenv_put(env, syms->cell[i], args->cell[i + 1]);
+            env_put(env, syms->cell[i], args->cell[i + 1]);
         }
     }
-    lval_del(args);
-    return lval_sexpr();
+    val_del(args);
+    return val_sexpr();
 }
 
-lval* builtin_lambda(lenv* env, lval* args) {
+Value* builtin_lambda(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-
     // Check two arguments, each of which are Q-Expressions
     LCHECK_NUM("\\", args, 2);
     LCHECK_TYPE("\\", args, 0, LISPY_VAL_QEXPR);
     LCHECK_TYPE("\\", args, 1, LISPY_VAL_QEXPR);
-
     // Check first Q-Expression contains only Symbols
     for (int i = 0; i < args->cell[0]->count; i++) {
         LCHECK(
@@ -69,22 +65,22 @@ lval* builtin_lambda(lenv* env, lval* args) {
             ltype_name(LISPY_VAL_SYM)
         );
     }
-    // Pop first two arguments and pass them to lval_lambda
-    lval* formals = lval_pop(args, 0);
-    lval* body = lval_pop(args, 0);
+    // Pop first two arguments and pass them to val_lambda
+    Value* formals = val_pop(args, 0);
+    Value* body = val_pop(args, 0);
     assert(NULL != formals);
     assert(NULL != body);
-    lval_del(args);
-    return lval_lambda(formals, body);
+    val_del(args);
+    return val_lambda(formals, body);
 }
 
-lval* builtin_def(lenv* env, lval* args) {
+Value* builtin_def(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_var(env, args, "def");
 }
 
-lval* builtin_put(lenv* env, lval* args) {
+Value* builtin_put(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_var(env, args, "=");

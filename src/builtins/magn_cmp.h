@@ -14,30 +14,30 @@
 /// @param args The arguments to use
 /// @param op The operator to apply
 /// @return The result of (op args)
-lval* builtin_ord(lenv* env, lval* args, char* op);
+Value* builtin_ord(Environment* env, Value* args, char* op);
 
 /// @brief Compares two argument using greater-than
 /// @param env The environment to use
 /// @param args The arguments to compare
 /// @return Returns a if a >= b else b
-lval* builtin_gt(lenv* env, lval* args);
+Value* builtin_gt(Environment* env, Value* args);
 
 /// @brief
 /// @param env The environment to use
 /// @param args The arguments to compare
 /// @return Returns a if a <= b else b
-lval* builtin_lt(lenv* env, lval* args);
+Value* builtin_lt(Environment* env, Value* args);
 
 /// @brief
 /// @param env The environment to use
 /// @param args The arguments to compare
 /// @return Returns a if a > b else b
-lval* builtin_ge(lenv* env, lval* args);
+Value* builtin_ge(Environment* env, Value* args);
 
 /// @brief
 /// @param env The environment to use
 /// @param args The arguments to compare
 /// @return Returns a if a < b else b
-lval* builtin_le(lenv* env, lval* args);
+Value* builtin_le(Environment* env, Value* args);
 
 #endif

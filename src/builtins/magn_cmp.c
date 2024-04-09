@@ -4,7 +4,7 @@
 
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
-lval* builtin_ord(lenv* env, lval* args, char* op) {
+Value* builtin_ord(Environment* env, Value* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != op);
@@ -22,33 +22,33 @@ lval* builtin_ord(lenv* env, lval* args, char* op) {
     } else if (0 == strcmp(op, "<=")) {
         r = (args->cell[0]->num <= args->cell[1]->num);
     } else {
-        return lval_err(
+        return val_err(
             "Error during magnitude comparison: Neither >, <, >=, <= used!"
         );
     }
-    lval_del(args);
-    return lval_num(r);
+    val_del(args);
+    return val_num(r);
 }
 
-lval* builtin_gt(lenv* env, lval* args) {
+Value* builtin_gt(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_ord(env, args, ">");
 }
 
-lval* builtin_lt(lenv* env, lval* args) {
+Value* builtin_lt(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_ord(env, args, "<");
 }
 
-lval* builtin_ge(lenv* env, lval* args) {
+Value* builtin_ge(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_ord(env, args, ">=");
 }
 
-lval* builtin_le(lenv* env, lval* args) {
+Value* builtin_le(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_ord(env, args, "<=");

@@ -1,7 +1,7 @@
 #include "builtins/eq_cmp.h"
 
 //---- Equality comparison functions -------------------------------------------
-lval* builtin_cmp(lenv* env, lval* args, char* op) {
+Value* builtin_cmp(Environment* env, Value* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     assert(NULL != op);
@@ -9,23 +9,23 @@ lval* builtin_cmp(lenv* env, lval* args, char* op) {
     LCHECK_NUM(op, args, 2);
     int r;
     if (0 == strcmp(op, "==")) {
-        r = lval_eq(args->cell[0], args->cell[1]);
+        r = val_eq(args->cell[0], args->cell[1]);
     } else if (0 == strcmp(op, "!=")) {
-        r = !lval_eq(args->cell[0], args->cell[1]);
+        r = !val_eq(args->cell[0], args->cell[1]);
     } else {
-        return lval_err("Error during comparison: Neither == nor != used!");
+        return val_err("Error during comparison: Neither == nor != used!");
     }
-    lval_del(args);
-    return lval_num(r);
+    val_del(args);
+    return val_num(r);
 }
 
-lval* builtin_eq(lenv* env, lval* args) {
+Value* builtin_eq(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_cmp(env, args, "==");
 }
 
-lval* builtin_ne(lenv* env, lval* args) {
+Value* builtin_ne(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     return builtin_cmp(env, args, "!=");
