@@ -14,24 +14,24 @@
 /// @param args The arguments to use
 /// @param op The operator to apply
 /// @return The result of (op args)
-lval* builtin_logic(lenv* env, lval* args, char* op);
+Value* builtin_logic(Environment* env, Value* args, char* op);
 
 /// @brief Computes the and of two arguments
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return A Lispy value which contains the and of all arguments
-lval* builtin_and(lenv* env, lval* args);
+Value* builtin_and(Environment* env, Value* args);
 
 /// @brief Computes the or of two arguments
 /// @param env The environment in which the arguments are used
 /// @param args The arguments to use
 /// @return A Lispy value which contains the or of all arguments
-lval* builtin_or(lenv* env, lval* args);
+Value* builtin_or(Environment* env, Value* args);
 
 /// @brief Computes the not of one arguments
 /// @param env The environment in which the argument is used
 /// @param args The argument to use
 /// @return A Lispy value which contains the not of all arguments
-lval* builtin_not(lenv* env, lval* args);
+Value* builtin_not(Environment* env, Value* args);
 
 #endif

@@ -11,8 +11,8 @@
 /// @brief Macro to check an assertion and report errors during runtime
 #define LCHECK(args, cond, fmt, ...) \
     if (!(cond)) { \
-        lval* err = lval_err(fmt, ##__VA_ARGS__); \
-        lval_del(args); \
+        Value* err = val_err(fmt, ##__VA_ARGS__); \
+        val_del(args); \
         return err; \
     }
 

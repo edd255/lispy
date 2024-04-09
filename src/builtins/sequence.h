@@ -12,6 +12,6 @@
 /// @param env The used environment
 /// @param args All symbolic expressions to execute
 /// @return An empty symbolic expression
-lval* builtin_do(lenv* env, lval* args);
+Value* builtin_do(Environment* env, Value* args);
 
 #endif

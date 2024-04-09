@@ -15,7 +15,7 @@
 /// @param env The environment whose values we want to print
 /// @param args Necessary but unused arguments
 /// @return A quoted expression that contains the names of all values
-lval* builtin_env(lenv* env, lval* args);
+Value* builtin_env(Environment* env, Value* args);
 
 /// @brief A builtin-method to define new functions
 ///
@@ -24,6 +24,6 @@ lval* builtin_env(lenv* env, lval* args);
 /// @param env The environment in which the function is put
 /// @param args Body, arguments, and name of the function
 /// @return An empty symbolic expression, else runtime errors
-lval* builtin_fun(lenv* env, lval* args);
+Value* builtin_fun(Environment* env, Value* args);
 
 #endif

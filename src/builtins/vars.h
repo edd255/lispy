@@ -14,27 +14,27 @@
 /// @param args The function to define
 /// @param fn "def" or "="
 /// @return An empty symbolic expression or an error
-lval* builtin_var(lenv* env, lval* args, char* fn);
+Value* builtin_var(Environment* env, Value* args, char* fn);
 
 /// @brief Define a lambda function
 /// @param env The used environment
 /// @param args The formal arguments and the body of the lambda function
 /// @return The specified lambda function
-lval* builtin_lambda(lenv* env, lval* args);
+Value* builtin_lambda(Environment* env, Value* args);
 
 /// @brief Defines a key-value pair globally.
 ///
-/// This method calls builtin_var, and then lenv_def internally.
+/// This method calls builtin_var, and then env_def internally.
 ///
 /// @param env The current environment
 /// @param args The function to define
 /// @return An empty symbolic expression or an error
-lval* builtin_def(lenv* env, lval* args);
+Value* builtin_def(Environment* env, Value* args);
 
 /// @brief Define a key-value in an environment
 /// @param env The environment in which we define key and value.
 /// @param args The function to define
 /// @return An empty symbolic expression or an error
-lval* builtin_put(lenv* env, lval* args);
+Value* builtin_put(Environment* env, Value* args);
 
 #endif

@@ -2,104 +2,94 @@
 
 //==== BUILTIN METHODS =========================================================
 
-void lenv_add_builtins(lenv* env) {
+void env_add_builtins(Environment* env) {
     assert(NULL != env);
-
     // Variable functions
-    lenv_add_builtin_fn(env, "\\", builtin_lambda);
-    lenv_add_builtin_fn(env, "def", builtin_def);
-    lenv_add_builtin_fn(env, "=", builtin_put);
-
+    env_add_builtin_fn(env, "\\", builtin_lambda);
+    env_add_builtin_fn(env, "def", builtin_def);
+    env_add_builtin_fn(env, "=", builtin_put);
     // Environment functions
-    lenv_add_builtin_fn(env, "env", builtin_env);
-    lenv_add_builtin_fn(env, "fun", builtin_fun);
-
+    env_add_builtin_fn(env, "env", builtin_env);
+    env_add_builtin_fn(env, "fun", builtin_fun);
     // List functions
-    lenv_add_builtin_fn(env, "list", builtin_list);
-    lenv_add_builtin_fn(env, "head", builtin_head);
-    lenv_add_builtin_fn(env, "tail", builtin_tail);
-    lenv_add_builtin_fn(env, "eval", builtin_eval);
-    lenv_add_builtin_fn(env, "join", builtin_join);
-    lenv_add_builtin_fn(env, "cons", builtin_cons);
-    lenv_add_builtin_fn(env, "len", builtin_len);
-    lenv_add_builtin_fn(env, "pack", builtin_pack);
-    lenv_add_builtin_fn(env, "unpack", builtin_unpack);
-    lenv_add_builtin_fn(env, "curry", builtin_unpack);
-    lenv_add_builtin_fn(env, "uncurry", builtin_pack);
-    lenv_add_builtin_fn(env, "nth", builtin_nth);
-    lenv_add_builtin_fn(env, "fst", builtin_first);
-    lenv_add_builtin_fn(env, "snd", builtin_second);
-    lenv_add_builtin_fn(env, "trd", builtin_third);
-    lenv_add_builtin_fn(env, "last", builtin_last);
-    lenv_add_builtin_fn(env, "elem", builtin_elem);
-    lenv_add_builtin_fn(env, "init", builtin_init);
-    lenv_add_builtin_fn(env, "take", builtin_take);
-    lenv_add_builtin_fn(env, "drop", builtin_drop);
-    lenv_add_builtin_fn(env, "split", builtin_split);
-
+    env_add_builtin_fn(env, "list", builtin_list);
+    env_add_builtin_fn(env, "head", builtin_head);
+    env_add_builtin_fn(env, "tail", builtin_tail);
+    env_add_builtin_fn(env, "eval", builtin_eval);
+    env_add_builtin_fn(env, "join", builtin_join);
+    env_add_builtin_fn(env, "cons", builtin_cons);
+    env_add_builtin_fn(env, "len", builtin_len);
+    env_add_builtin_fn(env, "pack", builtin_pack);
+    env_add_builtin_fn(env, "unpack", builtin_unpack);
+    env_add_builtin_fn(env, "curry", builtin_unpack);
+    env_add_builtin_fn(env, "uncurry", builtin_pack);
+    env_add_builtin_fn(env, "nth", builtin_nth);
+    env_add_builtin_fn(env, "fst", builtin_first);
+    env_add_builtin_fn(env, "snd", builtin_second);
+    env_add_builtin_fn(env, "trd", builtin_third);
+    env_add_builtin_fn(env, "last", builtin_last);
+    env_add_builtin_fn(env, "elem", builtin_elem);
+    env_add_builtin_fn(env, "init", builtin_init);
+    env_add_builtin_fn(env, "take", builtin_take);
+    env_add_builtin_fn(env, "drop", builtin_drop);
+    env_add_builtin_fn(env, "split", builtin_split);
     // Sequence functions
-    lenv_add_builtin_fn(env, "do", builtin_do);
-
+    env_add_builtin_fn(env, "do", builtin_do);
     // Mathematical functions
-    lenv_add_builtin_fn(env, "+", builtin_add);
-    lenv_add_builtin_fn(env, "-", builtin_sub);
-    lenv_add_builtin_fn(env, "*", builtin_mul);
-    lenv_add_builtin_fn(env, "/", builtin_div);
-    lenv_add_builtin_fn(env, "%", builtin_mod);
-    lenv_add_builtin_fn(env, "^", builtin_pow);
-    lenv_add_builtin_fn(env, "max", builtin_max);
-    lenv_add_builtin_fn(env, "min", builtin_min);
-    lenv_add_builtin_fn(env, "sum", builtin_sum);
-    lenv_add_builtin_fn(env, "prod", builtin_prod);
-
+    env_add_builtin_fn(env, "+", builtin_add);
+    env_add_builtin_fn(env, "-", builtin_sub);
+    env_add_builtin_fn(env, "*", builtin_mul);
+    env_add_builtin_fn(env, "/", builtin_div);
+    env_add_builtin_fn(env, "%", builtin_mod);
+    env_add_builtin_fn(env, "^", builtin_pow);
+    env_add_builtin_fn(env, "max", builtin_max);
+    env_add_builtin_fn(env, "min", builtin_min);
+    env_add_builtin_fn(env, "sum", builtin_sum);
+    env_add_builtin_fn(env, "prod", builtin_prod);
     // Conditional functions
-    lenv_add_builtin_fn(env, "if", builtin_if);
-    lenv_add_builtin_fn(env, "testhelper", builtin_testhelper);
-    lenv_add_builtin_fn(env, "select", builtin_select);
-    lenv_add_builtin_fn(env, "case", builtin_case);
-
+    env_add_builtin_fn(env, "if", builtin_if);
+    env_add_builtin_fn(env, "testhelper", builtin_testhelper);
+    env_add_builtin_fn(env, "select", builtin_select);
+    env_add_builtin_fn(env, "case", builtin_case);
     // Logical functions
-    lenv_add_builtin_fn(env, "and", builtin_and);
-    lenv_add_builtin_fn(env, "or", builtin_or);
-    lenv_add_builtin_fn(env, "not", builtin_not);
-
+    env_add_builtin_fn(env, "and", builtin_and);
+    env_add_builtin_fn(env, "or", builtin_or);
+    env_add_builtin_fn(env, "not", builtin_not);
     // Comparison functions
-    lenv_add_builtin_fn(env, "==", builtin_eq);
-    lenv_add_builtin_fn(env, "!=", builtin_ne);
-    lenv_add_builtin_fn(env, ">", builtin_gt);
-    lenv_add_builtin_fn(env, "<", builtin_lt);
-    lenv_add_builtin_fn(env, ">=", builtin_ge);
-    lenv_add_builtin_fn(env, "<=", builtin_le);
-
+    env_add_builtin_fn(env, "==", builtin_eq);
+    env_add_builtin_fn(env, "!=", builtin_ne);
+    env_add_builtin_fn(env, ">", builtin_gt);
+    env_add_builtin_fn(env, "<", builtin_lt);
+    env_add_builtin_fn(env, ">=", builtin_ge);
+    env_add_builtin_fn(env, "<=", builtin_le);
     // String Functions
-    lenv_add_builtin_fn(env, "load", builtin_load);
-    lenv_add_builtin_fn(env, "error", builtin_error);
-    lenv_add_builtin_fn(env, "print", builtin_print);
-
+    env_add_builtin_fn(env, "load", builtin_load);
+    env_add_builtin_fn(env, "error", builtin_error);
+    env_add_builtin_fn(env, "print", builtin_print);
     // Atoms
-    lenv_add_builtin_const(env, "nil", lval_qexpr());
-    lenv_add_builtin_const(env, "true", lval_num(1));
-    lenv_add_builtin_const(env, "false", lval_num(0));
-    lenv_add_builtin_const(env, "otherwise", lval_num(1));
+    env_add_builtin_const(env, "nil", val_qexpr());
+    env_add_builtin_const(env, "true", val_num(1));
+    env_add_builtin_const(env, "false", val_num(0));
+    env_add_builtin_const(env, "otherwise", val_num(1));
 }
 
-void lenv_add_builtin_fn(lenv* env, char* name, lbuiltin fn) {
+void env_add_builtin_fn(Environment* env, char* name, Function fn) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != fn);
-    lval* key = lval_sym(name);
-    lval* value = lval_fn(fn);
-    lenv_put(env, key, value);
-    lval_del(key);
-    lval_del(value);
+    Value* key = val_sym(name);
+    Value* value = val_fn(fn);
+    env_put(env, key, value);
+    val_del(key);
+    val_del(value);
 }
 
-void lenv_add_builtin_const(lenv* env, char* name, lval* value) {
+void env_add_builtin_const(Environment* env, char* name, Value* value) {
     assert(NULL != env);
     assert(NULL != name);
     assert(NULL != value);
-    lval* key = lval_sym(name);
-    lenv_put(env, key, value);
-    lval_del(key);
-    lval_del(value);
+    Value* key = val_sym(name);
+    env_put(env, key, value);
+    val_del(key);
+    val_del(value);
 }

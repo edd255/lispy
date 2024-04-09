@@ -4,7 +4,7 @@
 #include "io.h"
 
 //==== Logical functions =======================================================
-lval* builtin_logic(lenv* env, lval* args, char* op) {
+Value* builtin_logic(Environment* env, Value* args, char* op) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -31,24 +31,24 @@ lval* builtin_logic(lenv* env, lval* args, char* op) {
             break;
         }
         case LISPY_LOGIC_UNKNOWN: {
-            return lval_err(
+            return val_err(
                 "Function '%s' expected 'not', 'or' or 'and'",
                 __func__
             );
         }
     }
-    lval_del(args);
-    return lval_num(result);
+    val_del(args);
+    return val_num(result);
 }
 
-lval* builtin_and(lenv* env, lval* args) {
+Value* builtin_and(Environment* env, Value* args) {
     return builtin_logic(env, args, "and");
 }
 
-lval* builtin_or(lenv* env, lval* args) {
+Value* builtin_or(Environment* env, Value* args) {
     return builtin_logic(env, args, "or");
 }
 
-lval* builtin_not(lenv* env, lval* args) {
+Value* builtin_not(Environment* env, Value* args) {
     return builtin_logic(env, args, "not");
 }

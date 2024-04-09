@@ -5,7 +5,7 @@
 #include "io.h"
 
 //==== Conditional functions ===================================================
-lval* builtin_if(lenv* env, lval* args) {
+Value* builtin_if(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
@@ -13,12 +13,11 @@ lval* builtin_if(lenv* env, lval* args) {
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_SEXPR);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     LCHECK_TYPE(__func__, args, 2, LISPY_VAL_QEXPR);
-
     // Mark both expressions as evaluable
-    lval* x = NULL;
+    Value* x = NULL;
     args->cell[1]->type = LISPY_VAL_SEXPR;
     args->cell[2]->type = LISPY_VAL_SEXPR;
-    lval* cond = lval_eval(env, args->cell[0]);
+    Value* cond = val_eval(env, args->cell[0]);
     LCHECK(
         cond,
         cond->type == LISPY_VAL_NUM,
@@ -27,93 +26,93 @@ lval* builtin_if(lenv* env, lval* args) {
     );
     if (cond->num) {
         // If condition is true evaluate first expression
-        lval* y = lval_pop(args, 1);
+        Value* y = val_pop(args, 1);
         assert(NULL != y);
-        x = lval_eval(env, y);
+        x = val_eval(env, y);
     } else {
         // Otherwise evaluate second expression
-        lval* y = lval_pop(args, 2);
+        Value* y = val_pop(args, 2);
         assert(NULL != y);
-        x = lval_eval(env, y);
+        x = val_eval(env, y);
     }
     // Delete argument list and return
-    lval_del(args);
+    val_del(args);
     return x;
 }
 
-lval* builtin_testhelper(lenv* env, lval* args) {
+Value* builtin_testhelper(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
-    const lval* cond = lval_eval(env, args->cell[0]);
-    lval* expected = args->cell[1];
-    lval* actual = args->cell[2];
+    const Value* cond = val_eval(env, args->cell[0]);
+    Value* expected = args->cell[1];
+    Value* actual = args->cell[2];
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
     if (cond->num) {
         color_bgreen("PASSED\n");
     } else {
         color_bred("FAILED. ");
         printf("Expected: ");
-        lval_print(expected);
+        val_print(expected);
         printf(". Got: ");
-        lval_print(actual);
+        val_print(actual);
         printf("\n");
     }
-    lval_del(args);
-    return lval_sexpr();
+    val_del(args);
+    return val_sexpr();
 }
 
-lval* builtin_select(lenv* env, lval* args) {
+Value* builtin_select(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
     if (args->count == 0) {
-        return lval_err(
+        return val_err(
             "'%s' expected at least one selection but got 0",
             __func__
         );
     }
     for (int i = 0; i < args->count; i++) {
         LCHECK_NUM(__func__, args->cell[i], 2);
-        lval* args_cond = lval_copy(args->cell[i]->cell[0]);
-        lval* body = lval_copy(args->cell[i]->cell[1]);
-        lval* cond = lval_eval(env, args_cond);
+        Value* args_cond = val_copy(args->cell[i]->cell[0]);
+        Value* body = val_copy(args->cell[i]->cell[1]);
+        Value* cond = val_eval(env, args_cond);
         assert(NULL != args_cond);
         assert(NULL != body);
         assert(NULL != cond);
         if (cond->num) {
-            lval* res = lval_eval(env, body);
-            lval_del(cond);
-            lval_del(args);
+            Value* res = val_eval(env, body);
+            val_del(cond);
+            val_del(args);
             return res;
         }
-        lval_del(cond);
-        lval_del(body);
+        val_del(cond);
+        val_del(body);
     }
-    lval_del(args);
-    return lval_err(
+    val_del(args);
+    return val_err(
         "'%s' expected that at least one selection is true but none is",
         __func__
     );
 }
 
-lval* builtin_case(lenv* env, lval* args) {
+Value* builtin_case(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
     UNUSED(env);
-    const lval* arg = args->cell[0];
+    const Value* arg = args->cell[0];
     for (int i = 1; i < args->count; i++) {
-        lval* case_stmt = args->cell[i];
-        int cond = lval_eq(arg, case_stmt->cell[0]);
+        Value* case_stmt = args->cell[i];
+        int cond = val_eq(arg, case_stmt->cell[0]);
         if (cond) {
-            lval* res = lval_copy(case_stmt->cell[1]);
-            lval_del(args);
+            Value* res = val_copy(case_stmt->cell[1]);
+            val_del(args);
             return res;
         }
     }
-    lval_del(args);
-    return lval_err(
+    val_del(args);
+    return val_err(
         "'%s' expected that arg matches one case but it doesn't",
         __func__
     );

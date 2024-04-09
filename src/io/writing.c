@@ -3,8 +3,8 @@
 
 //=== WRITING ==================================================================
 
-/* Print an lval */
-void lval_print(lval* val) {
+/* Print an Value */
+void val_print(Value* val) {
     assert(NULL != val);
     if (NULL == val) {
         return;
@@ -31,34 +31,34 @@ void lval_print(lval* val) {
                 printf("<builtin>");
             } else {
                 printf("(\\ ");
-                lval_print(val->formals);
+                val_print(val->formals);
                 putchar(' ');
-                lval_print(val->body);
+                val_print(val->body);
                 putchar(')');
             }
             break;
         }
         case LISPY_VAL_STR: {
-            lval_print_str(val);
+            val_print_str(val);
             break;
         }
         case LISPY_VAL_SEXPR: {
-            lval_print_expr(val, '(', ')');
+            val_print_expr(val, '(', ')');
             break;
         }
         case LISPY_VAL_QEXPR: {
-            lval_print_expr(val, '{', '}');
+            val_print_expr(val, '{', '}');
             break;
         }
     }
 }
 
-void lval_print_expr(lval* val, char open, char close) {
+void val_print_expr(Value* val, char open, char close) {
     assert(NULL != val);
     putchar(open);
     for (int i = 0; i < val->count; i++) {
         // Print Value contained within
-        lval_print(val->cell[i]);
+        val_print(val->cell[i]);
 
         // Don't print trailing space if last element
         if (i != (val->count - 1)) {
@@ -68,14 +68,14 @@ void lval_print_expr(lval* val, char open, char close) {
     putchar(close);
 }
 
-/* Print a lval followed by a newline */
-void lval_println(lval* val) {
+/* Print a Value followed by a newline */
+void val_println(Value* val) {
     assert(NULL != val);
-    lval_print(val);
+    val_print(val);
     putchar('\n');
 }
 
-void lval_print_str(const lval* val) {
+void val_print_str(const Value* val) {
     assert(NULL != val);
     if (NULL == val) {
         return;
@@ -83,13 +83,10 @@ void lval_print_str(const lval* val) {
     // Make a copy of the string
     char* escaped = MALLOC(val->len + 1);
     strlcpy(escaped, val->str, val->len + 1);
-
     // Pass it through the escape function
     escaped = mpcf_escape(escaped);
-
     // Print it between " characters
     printf("%s", escaped);
-
     // free copied string
     FREE(escaped);
 }
