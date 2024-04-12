@@ -168,4 +168,10 @@ Value* builtin_filter(Environment* env, Value* args);
 /// @return The list/string but reversed
 Value* builtin_reverse(Environment* env, Value* args);
 
+/// @brief Applies a function to a map
+/// @param env The environment in which the arguments are used
+/// @param args A list or string
+/// @return The list/string, with the function applied
+Value* builtin_map(Environment* env, Value* args);
+
 #endif
