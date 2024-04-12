@@ -1,12 +1,10 @@
 ;==== Fibonacci Test ==========================================================
+(load "tests/test.lspy")
+
 (fn {fac n} {
   select
     { (== n 0) 1 }
     { otherwise (* n (fac (- n 1))) }
-})
-
-(fn {test exp got} {
-    testhelper (== exp got) exp got
 })
 
 (test (fac 0) 1)

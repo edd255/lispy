@@ -1,7 +1,6 @@
 ;==== Map Test ================================================================
-(fn {test exp got} {
-    testhelper (== exp got) exp got
-})
+(load "tests/test.lspy")
+(load "lib/stdlib.lspy")
 
 (test (map - {5 6 7 8 2 22 44}) {-5 -6 -7 -8 -2 -22 -44})
-(test (map (\ {x} {+ x 10}) {5 2 11}) {15 12 21})
+(test (map (lambda {x} {+ x 10}) {5 2 11}) {15 12 21})

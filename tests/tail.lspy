@@ -1,7 +1,5 @@
 ;==== nth Test ================================================================
-(fn {test got exp} {
-    testhelper (== exp got) exp got
-})
+(load "tests/test.lspy")
 
 (test (tail "Hello, World!") "ello, World!") "ello, World!" (tail "Hello, World!")
 (test (tail "ok") "k")
