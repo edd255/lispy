@@ -22,13 +22,13 @@ So far, I've completed the following bonus tasks, resp. applied the following mo
 - [x] Writing a function that prints all out named values in an environment
 - [x] Documenting the code (to some extent)
 - [x] Added length field to strings
+- [x] Implementing all stdlib methods in C
 
 ## TODO
 However, I'm far from finished.
 - [ ] Writing a better README.md ;)
 - [ ] Using a unit-test framework (that calculates code coverage)
 - [ ] Using an integration test framework
-- [ ] Implementing all stdlib methods in C
 - [ ] Adding functions to wrap all of C's file handling functions such as fopen and fgets
 - [ ] Using hash tables for environments
 - [ ] Implementing lexical scoping
@@ -37,4 +37,3 @@ However, I'm far from finished.
 - [ ] Implementing operating system interaction
 - [ ] Implementing tail call optimisation
 - [ ] Implementing garbage collection
-- [ ] Enabling user defined types

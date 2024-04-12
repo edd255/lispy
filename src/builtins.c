@@ -1,17 +1,5 @@
 #include "builtins.h"
 
-#include "builtins/arithmetic.h"
-#include "builtins/conditional.h"
-#include "builtins/env.h"
-#include "builtins/eq_cmp.h"
-#include "builtins/list.h"
-#include "builtins/logic.h"
-#include "builtins/magn_cmp.h"
-#include "builtins/misc.h"
-#include "builtins/sequence.h"
-#include "builtins/strings.h"
-#include "builtins/vars.h"
-
 //==== BUILTIN METHODS =========================================================
 
 void env_add_builtins(Environment* env) {
@@ -52,6 +40,7 @@ void env_add_builtins(Environment* env) {
     env_add_builtin_fn(env, "lookup", builtin_lookup);
     env_add_builtin_fn(env, "zip", builtin_zip);
     env_add_builtin_fn(env, "unzip", builtin_unzip);
+    env_add_builtin_fn(env, "foldl", builtin_foldl);
     // Sequence functions
     env_add_builtin_fn(env, "do", builtin_do);
     // Mathematical functions
