@@ -12,10 +12,10 @@
     {6 "Sunday"}
 })
 
-(test (day-name 0) "Monday")
-(test (day-name 1) "Tuesday")
-(test (day-name 2) "Wednesday")
-(test (day-name 3) "Thursday")
-(test (day-name 4) "Friday")
-(test (day-name 5) "Saturday")
-(test (day-name 6) "Sunday")
+(test "Monday" (day-name 0))
+(test "Tuesday" (day-name 1))
+(test "Wednesday" (day-name 2))
+(test "Thursday" (day-name 3))
+(test "Friday" (day-name 4))
+(test "Saturday" (day-name 5))
+(test "Sunday" (day-name 6))

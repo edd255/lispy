@@ -1,13 +1,13 @@
 ;==== nth Test ================================================================
 (load "tests/test.lspy")
 
-(test (tail "Hello, World!") "ello, World!") "ello, World!" (tail "Hello, World!")
-(test (tail "ok") "k")
-(test (head "Hello, World!") "H")
-(test (head "ok") "o")
+(test "ello, World!" (tail "Hello, World!"))
+(test "k" (tail "ok"))
+(test "H" (head "Hello, World!"))
+(test "o" (head "ok"))
 
-(test (head {1 2 3 4}) {1})
-(test (tail {1 2 3 4}) {2 3 4})
+(test {1} (head {1 2 3 4}))
+(test {2 3 4} (tail {1 2 3 4}))
 
-(test (head {1}) {1})
-(test (tail {1}) {})
+(test {1} (head {1}))
+(test {} (tail {1}))

@@ -1,12 +1,12 @@
 ;==== nth Test ================================================================
 (load "tests/test.lspy")
 
-(test (drop 1 {1}) {})
-(test (drop 1 {1 2}) {2})
-(test (drop 3 {1 2 3 4 5}) {4 5})
-(test (drop 4 {1 2 3 4 5}) {5})
+(test {} (drop 1 {1}))
+(test {2} (drop 1 {1 2}))
+(test {4 5} (drop 3 {1 2 3 4 5}))
+(test {5} (drop 4 {1 2 3 4 5}))
 
-(test (take 1 {1}) {1})
-(test (take 1 {1}) {1})
-(test (take 3 {1 2 3 4 5}) {1 2 3})
-(test (take 4 {1 2 3 4 5}) {1 2 3 4})
+(test {1} (take 1 {1}))
+(test {1} (take 1 {1}))
+(test {1 2 3} (take 3 {1 2 3 4 5}))
+(test {1 2 3 4} (take 4 {1 2 3 4 5}))

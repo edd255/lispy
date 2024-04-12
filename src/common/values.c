@@ -283,7 +283,7 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
     assert(NULL != fn);
     assert(NULL != args);
     // If Function, then simply call that
-    if (fn->builtin) {
+    if (NULL != fn->builtin) {
         return fn->builtin(env, args);
     }
     // Record argument counts
