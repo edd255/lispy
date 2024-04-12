@@ -28,17 +28,6 @@
     {f (fst l) (foldr f z (tail l))}
 })
 
-; Find element in list of pairs
-(fn {lookup x l} {
-  if (== l nil)
-    {error "No Element Found"}
-    {do
-      (= {key} (fst (fst l)))
-      (= {val} (snd (fst l)))
-      (if (== key x) {val} {lookup x (tail l)})
-    }
-})
-
 ; Zip two lists together into a list of pairs
 ; https://github.com/Federico-abss/Lispy/blob/master/std-library/std_library.lspy#L198
 (fn {zip x y} {

@@ -1,6 +1,7 @@
 #include "builtins/list.h"
 
 #include "builtins/eq_cmp.h"
+#include "common.h"
 #include "eval.h"
 #include "io.h"
 
@@ -694,4 +695,41 @@ Value* builtin_map(Environment* env, Value* args) {
     );
     val_del(args);
     return err;
+}
+
+Value* builtin_lookup(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
+    Value* elem = val_eval(env, val_copy(args->cell[0]));
+    Value* list = args->cell[1];
+    Value* result = NULL;
+    for (int i = 0; i < list->count; i++) {
+        Value* pair = list->cell[0];
+        LCHECK(
+            args,
+            pair->type == LISPY_VAL_QEXPR,
+            "'%s' expected a qexpr at index %d but got %s",
+            __func__,
+            i,
+            ltype_name(pair->type)
+        );
+        LCHECK(
+            args,
+            pair->count == 2,
+            "'%s' expected a 2 elements at index %d but got %d",
+            __func__,
+            i,
+            pair->count
+        );
+        Value* key = val_eval(env, val_copy(pair->cell[0]));
+        Value* value = pair->cell[1];
+        if (val_eq(key, elem)) {
+            result = val_copy(value);
+            break;
+        }
+    }
+    val_del(args);
+    return result == NULL ? val_sexpr() : val_eval(env, result);
 }
