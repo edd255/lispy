@@ -192,4 +192,10 @@ Value* builtin_zip(Environment* env, Value* args);
 /// @return A list of two lists
 Value* builtin_unzip(Environment* env, Value* args);
 
+/// @brief Foldls a list using a lambda function and a start argument
+/// @param env The environment in which the arguments are used
+/// @param args A function, a start argument, and a list
+/// @return The result of the folding
+Value* builtin_foldl(Environment* env, Value* args);
+
 #endif

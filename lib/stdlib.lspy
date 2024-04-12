@@ -5,19 +5,3 @@
 (fn {let b} {
   ((lambda {_} b) ())
 })
-
-;---- List fnctions -----------------------------------------------------------
-
-; Fold Left
-(fn {foldl f z l} {
-  if (== l nil) 
-    {z}
-    {foldl f (f z (fst l)) (tail l)}
-})
-
-; Fold Right
-(fn {foldr f z l} {
-  if (== l nil) 
-    {z}
-    {f (fst l) (foldr f z (tail l))}
-})

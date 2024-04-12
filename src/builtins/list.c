@@ -783,3 +783,27 @@ Value* builtin_unzip(Environment* env, Value* args) {
     val_del(args);
     return result;
 }
+
+Value* builtin_foldl(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 3);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
+    LCHECK_TYPE(__func__, args, 2, LISPY_VAL_QEXPR);
+    Value* f = args->cell[0];
+    Value* x = val_eval(env, args->cell[1]);
+    Value* ys = args->cell[2];
+    Value* f_args = val_qexpr();
+    val_add(f_args, val_copy(x));
+    val_add(f_args, val_copy(ys->cell[0]));
+    Value* z = val_call(env, f, f_args);
+    for (int i = 1; i < ys->count; i++) {
+        f_args = val_qexpr();
+        val_add(f_args, z);
+        val_add(f_args, val_copy(ys->cell[i]));
+        z = val_call(env, f, f_args);
+    }
+    val_del(args);
+    return z;
+}
