@@ -14,18 +14,11 @@
 
 ;---- List fnctions -----------------------------------------------------------
 
-; Apply fnction to List
+; Apply function to List
 (fn {map f l} {
   if (== l nil)
     {nil}
     {join (list (f (fst l))) (map f (tail l))}
-})
-
-; Reverse List
-(fn {reverse l} {
-  if (== l nil)
-    {nil}
-    {join (reverse (tail l)) (head l)}
 })
 
 ; Fold Left
