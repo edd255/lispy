@@ -1,7 +1,5 @@
 ;==== nth Test ================================================================
-(fn {test got exp} {
-    testhelper (== exp got) exp got
-})
+(load "tests/test.lspy")
 
 (test (drop 1 {1}) {})
 (test (drop 1 {1 2}) {2})

@@ -11,6 +11,7 @@ void env_add_builtins(Environment* env) {
     // Environment functions
     env_add_builtin_fn(env, "env", builtin_env);
     env_add_builtin_fn(env, "fn", builtin_fun);
+    env_add_builtin_fn(env, "load", builtin_load);
     // List functions
     env_add_builtin_fn(env, "list", builtin_list);
     env_add_builtin_fn(env, "head", builtin_head);
@@ -63,7 +64,6 @@ void env_add_builtins(Environment* env) {
     env_add_builtin_fn(env, ">=", builtin_ge);
     env_add_builtin_fn(env, "<=", builtin_le);
     // String Functions
-    env_add_builtin_fn(env, "load", builtin_load);
     env_add_builtin_fn(env, "error", builtin_error);
     env_add_builtin_fn(env, "print", builtin_print);
     // Atoms

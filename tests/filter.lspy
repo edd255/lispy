@@ -1,15 +1,14 @@
 ;==== Filter Test =============================================================
-(fn {test exp got} {
-    testhelper (== exp got) exp got
-})
+(load "tests/test.lspy")
+(load "lib/stdlib.lspy")
 
-(test (filter (\ {x} {> x -8}) {5 2 11 -7 8 1}) {5 2 11 -7 8 1})
-(test (filter (\ {x} {> x 0}) {5 2 11 -7 8 1}) {5 2 11 8 1})
-(test (filter (\ {x} {> x 1}) {5 2 11 -7 8 1}) {5 2 11 8})
-(test (filter (\ {x} {> x 2}) {5 2 11 -7 8 1}) {5 11 8})
-(test (filter (\ {x} {> x 3}) {5 2 11 -7 8 1}) {5 11 8})
-(test (filter (\ {x} {> x 4}) {5 2 11 -7 8 1}) {5 11 8})
-(test (filter (\ {x} {> x 4}) {5 2 11 -7 8 1}) {5 11 8})
-(test (filter (\ {x} {> x 5}) {5 2 11 -7 8 1}) {11 8})
-(test (filter (\ {x} {> x 8}) {5 2 11 -7 8 1}) {11})
-(test (filter (\ {x} {> x 11}) {5 2 11 -7 8 1}) {})
+(test (filter (lambda {x} {> x -8}) {5 2 11 -7 8 1}) {5 2 11 -7 8 1})
+(test (filter (lambda {x} {> x 0}) {5 2 11 -7 8 1}) {5 2 11 8 1})
+(test (filter (lambda {x} {> x 1}) {5 2 11 -7 8 1}) {5 2 11 8})
+(test (filter (lambda {x} {> x 2}) {5 2 11 -7 8 1}) {5 11 8})
+(test (filter (lambda {x} {> x 3}) {5 2 11 -7 8 1}) {5 11 8})
+(test (filter (lambda {x} {> x 4}) {5 2 11 -7 8 1}) {5 11 8})
+(test (filter (lambda {x} {> x 4}) {5 2 11 -7 8 1}) {5 11 8})
+(test (filter (lambda {x} {> x 5}) {5 2 11 -7 8 1}) {11 8})
+(test (filter (lambda {x} {> x 8}) {5 2 11 -7 8 1}) {11})
+(test (filter (lambda {x} {> x 11}) {5 2 11 -7 8 1}) {})

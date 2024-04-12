@@ -9,12 +9,6 @@
 #include "common.h"
 
 //---- String functions --------------------------------------------------------
-/// @brief Loads the content of a file when given the name of the file
-/// @param env The environment to load the content in
-/// @param args The file name
-/// @return An empty list or an error if it fails
-Value* builtin_load(Environment* env, Value* args);
-
 /// @brief Prints a string
 /// @param env The used environment
 /// @param args The arguments to print

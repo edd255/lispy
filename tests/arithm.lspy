@@ -1,8 +1,5 @@
 ;==== nth Test ================================================================
-(fn {test exp got} {
-    testhelper (== exp got) exp got
-})
-
+(load "tests/test.lspy")
 (test (+ 0 0) 0)
 (test (+ (-100) (-100)) (-200))
 (test (* (-100) (-100)) (10000))
