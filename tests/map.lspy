@@ -1,5 +1,5 @@
 ;==== Map Test ================================================================
-(fun {test exp got} {
+(fn {test exp got} {
     testhelper (== exp got) exp got
 })
 

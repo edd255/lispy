@@ -1,11 +1,11 @@
 ;==== Fibonacci Test ==========================================================
-(fun {fac n} {
+(fn {fac n} {
   select
     { (== n 0) 1 }
     { otherwise (* n (fac (- n 1))) }
 })
 
-(fun {test exp got} {
+(fn {test exp got} {
     testhelper (== exp got) exp got
 })
 

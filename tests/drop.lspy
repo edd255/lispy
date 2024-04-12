@@ -1,5 +1,5 @@
 ;==== nth Test ================================================================
-(fun {test got exp} {
+(fn {test got exp} {
     testhelper (== exp got) exp got
 })
 
