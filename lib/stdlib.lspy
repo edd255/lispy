@@ -6,12 +6,6 @@
   ((lambda {_} b) ())
 })
 
-;---- Misc functions ----------------------------------------------------------
-
-(fn {flip f a b} {f b a})
-(fn {ghost & xs} {eval xs})
-(fn {comp f g x} {f (g x)})
-
 ;---- List fnctions -----------------------------------------------------------
 
 ; Fold Left
