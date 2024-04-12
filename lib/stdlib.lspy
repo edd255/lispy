@@ -1,25 +1,18 @@
 ;==== Lispy Standard Library ===================================================
-;---- functional definitions ---------------------------------------------------
+;---- Functional definitions ---------------------------------------------------
 
 ; Open new scope
 (fn {let b} {
   ((lambda {_} b) ())
 })
 
-;---- Misc fnctions -----------------------------------------------------------
+;---- Misc functions ----------------------------------------------------------
 
 (fn {flip f a b} {f b a})
 (fn {ghost & xs} {eval xs})
 (fn {comp f g x} {f (g x)})
 
 ;---- List fnctions -----------------------------------------------------------
-
-; Apply function to List
-(fn {map f l} {
-  if (== l nil)
-    {nil}
-    {join (list (f (fst l))) (map f (tail l))}
-})
 
 ; Fold Left
 (fn {foldl f z l} {
