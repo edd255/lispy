@@ -1,12 +1,12 @@
 ;==== Fibonacci Test ==========================================================
-(fun {fib n} {
+(fn {fib n} {
   select
     { (== n 0) 0 }
     { (== n 1) 1 }
     { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
 })
 
-(fun {test exp got} {
+(fn {test exp got} {
     testhelper (== exp got) exp got
 })
 

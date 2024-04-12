@@ -5,12 +5,12 @@
 void env_add_builtins(Environment* env) {
     assert(NULL != env);
     // Variable functions
-    env_add_builtin_fn(env, "\\", builtin_lambda);
+    env_add_builtin_fn(env, "lambda", builtin_lambda);
     env_add_builtin_fn(env, "def", builtin_def);
     env_add_builtin_fn(env, "=", builtin_put);
     // Environment functions
     env_add_builtin_fn(env, "env", builtin_env);
-    env_add_builtin_fn(env, "fun", builtin_fun);
+    env_add_builtin_fn(env, "fn", builtin_fun);
     // List functions
     env_add_builtin_fn(env, "list", builtin_list);
     env_add_builtin_fn(env, "head", builtin_head);

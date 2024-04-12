@@ -1,56 +1,56 @@
 ;==== Lispy Standard Library ===================================================
-;---- Functional Definitions ---------------------------------------------------
+;---- functional definitions ---------------------------------------------------
 
 ; Open new scope
-(fun {let b} {
-  ((\ {_} b) ())
+(fn {let b} {
+  ((lambda {_} b) ())
 })
 
-;---- Misc Functions -----------------------------------------------------------
+;---- Misc fnctions -----------------------------------------------------------
 
-(fun {flip f a b} {f b a})
-(fun {ghost & xs} {eval xs})
-(fun {comp f g x} {f (g x)})
+(fn {flip f a b} {f b a})
+(fn {ghost & xs} {eval xs})
+(fn {comp f g x} {f (g x)})
 
-;---- List Functions -----------------------------------------------------------
+;---- List fnctions -----------------------------------------------------------
 
-; Apply Function to List
-(fun {map f l} {
+; Apply fnction to List
+(fn {map f l} {
   if (== l nil)
     {nil}
     {join (list (f (fst l))) (map f (tail l))}
 })
 
 ; Apply Filter to List
-(fun {filter f l} {
+(fn {filter f l} {
   if (== l nil)
     {nil}
     {join (if (f (fst l)) {head l} {nil}) (filter f (tail l))}
 })
 
 ; Reverse List
-(fun {reverse l} {
+(fn {reverse l} {
   if (== l nil)
     {nil}
     {join (reverse (tail l)) (head l)}
 })
 
 ; Fold Left
-(fun {foldl f z l} {
+(fn {foldl f z l} {
   if (== l nil) 
     {z}
     {foldl f (f z (fst l)) (tail l)}
 })
 
 ; Fold Right
-(fun {foldr f z l} {
+(fn {foldr f z l} {
   if (== l nil) 
     {z}
     {f (fst l) (foldr f z (tail l))}
 })
 
 ; Find element in list of pairs
-(fun {lookup x l} {
+(fn {lookup x l} {
   if (== l nil)
     {error "No Element Found"}
     {do
@@ -62,7 +62,7 @@
 
 ; Zip two lists together into a list of pairs
 ; https://github.com/Federico-abss/Lispy/blob/master/std-library/std_library.lspy#L198
-(fun {zip x y} {
+(fn {zip x y} {
   if (or (== x nil) (== y nil))
     {nil}
     {join (list (join (head x) (head y))) (zip (tail x) (tail y))}
@@ -70,7 +70,7 @@
 
 ; Unzip a list of pairs into two lists
 ; https://github.com/Federico-abss/Lispy/blob/master/std-library/std_library.lspy#L204
-(fun {unzip l} {
+(fn {unzip l} {
   if (== l nil)
     {{nil nil}}
     {do
