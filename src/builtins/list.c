@@ -733,3 +733,53 @@ Value* builtin_lookup(Environment* env, Value* args) {
     val_del(args);
     return result == NULL ? val_sexpr() : val_eval(env, result);
 }
+
+Value* builtin_zip(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
+    Value* result = val_qexpr();
+    Value* list1 = args->cell[0];
+    Value* list2 = args->cell[1];
+    int limit = list1->count < list2->count ? list1->count : list2->count;
+    for (int i = 0; i < limit; i++) {
+        Value* pair = val_qexpr();
+        val_add(pair, val_copy(list1->cell[i]));
+        val_add(pair, val_copy(list2->cell[i]));
+        val_add(result, pair);
+    }
+    val_del(args);
+    return result;
+}
+
+Value* builtin_unzip(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    Value* result = val_qexpr();
+    Value* list = args->cell[0];
+    Value* list1 = val_qexpr();
+    Value* list2 = val_qexpr();
+    for (int i = 0; i < list->count; i++) {
+        Value* pair = list->cell[i];
+        LCHECK(
+            args,
+            pair->count == 2,
+            "'%s' expected a pair at index %d but got %d",
+            __func__,
+            i,
+            args->cell[i]->count
+        );
+        val_add(list1, val_copy(pair->cell[0]));
+        val_add(list2, val_copy(pair->cell[1]));
+    }
+    val_add(result, list1);
+    val_add(result, list2);
+    val_del(args);
+    return result;
+}

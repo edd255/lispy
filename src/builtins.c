@@ -50,6 +50,8 @@ void env_add_builtins(Environment* env) {
     env_add_builtin_fn(env, "reverse", builtin_reverse);
     env_add_builtin_fn(env, "map", builtin_map);
     env_add_builtin_fn(env, "lookup", builtin_lookup);
+    env_add_builtin_fn(env, "zip", builtin_zip);
+    env_add_builtin_fn(env, "unzip", builtin_unzip);
     // Sequence functions
     env_add_builtin_fn(env, "do", builtin_do);
     // Mathematical functions

@@ -180,4 +180,16 @@ Value* builtin_map(Environment* env, Value* args);
 /// @return The value to the given key or an error
 Value* builtin_lookup(Environment* env, Value* args);
 
+/// @brief Zips two lists together into a list of pairs
+/// @param env The environment in which the arguments are used
+/// @param args Two lists
+/// @return A list of pairs
+Value* builtin_zip(Environment* env, Value* args);
+
+/// @brief Unzips a list of pairs to two lists
+/// @param env The environment in which the arguments are used
+/// @param args A list of pairs
+/// @return A list of two lists
+Value* builtin_unzip(Environment* env, Value* args);
+
 #endif
