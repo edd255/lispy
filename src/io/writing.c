@@ -30,7 +30,7 @@ void val_print(Value* val) {
             if (val->builtin) {
                 printf("<builtin>");
             } else {
-                printf("(\\ ");
+                printf("(lambda ");
                 val_print(val->formals);
                 putchar(' ');
                 val_print(val->body);

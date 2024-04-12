@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "deps/hash_tbl/ht.h"
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
@@ -35,18 +34,6 @@ struct Value;
 
 /// A data structure that contains Lispy values.
 typedef struct Value Value;
-
-/// A hash table structure for the Lispy environments
-struct hash_tbl;
-
-/// A structure that contains data and metadata about used environments.
-typedef struct hash_tbl hash_tbl;
-
-/// A structure for hash table entries
-struct hash_tbl_entry;
-
-/// A structure for hash table entries
-typedef struct hash_tbl_entry hash_tbl_entry;
 
 /// A structure that contains data and metadata about used environments.
 struct Environment;
@@ -125,28 +112,6 @@ struct Environment {
 
     /// A pointer to the values
     Value** vals;
-} __attribute__((aligned(16)));
-
-/// Hash table entry
-struct hash_tbl_entry {
-    /// key is NULL if slot is empty
-    const char* key;
-
-    /// length of the key
-    size_t len;
-    Value* val;
-} __attribute__((aligned(16)));
-
-/// Hash table structure: create with env_new, free with env_del
-struct hash_tbl {
-    /// hash slots
-    hash_tbl_entry* entries;
-
-    /// size of entries
-    size_t capacity;
-
-    /// number of items in hash table
-    size_t len;
 } __attribute__((aligned(16)));
 
 //--- Constructors & Destructors for Values ------------------------------------

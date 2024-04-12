@@ -556,3 +556,59 @@ Value* builtin_split(Environment* env, Value* args) {
     val_del(args);
     return err;
 }
+
+Value* builtin_filter(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
+    LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    Value* fn = args->cell[0];
+    switch (args->cell[1]->type) {
+        case LISPY_VAL_QEXPR: {
+            Value* qexpr = args->cell[1];
+            Value* copy = val_copy(args->cell[1]);
+            Value* result = val_qexpr();
+            for (int i = 0; i < qexpr->count; i++) {
+                Value* val = val_eval(env, val_pop(copy, 0));
+                Value* arg = val_add(val_sexpr(), val_copy(val));
+                Value* lambda = val_copy(fn);
+                Value* condition = val_call(env, lambda, arg);
+                if (1 == condition->num) {
+                    val_add(result, val_copy(val));
+                }
+                val_del(val);
+                val_del(condition);
+                val_del(lambda);
+            }
+            val_del(args);
+            val_del(copy);
+            return result;
+        }
+        case LISPY_VAL_STR: {
+            const char* str = args->cell[1]->str;
+            Value* result = val_qexpr();
+            for (unsigned long i = 0; i < strlen(str); i++) {
+                Value* lambda = val_copy(fn);
+                Value* val = val_str(&str[i]);
+                Value* condition = val_call(env, lambda, val);
+                if (1 == condition->num) {
+                    val_add(result, val_copy(val));
+                }
+                val_del(val);
+                val_del(condition);
+                val_del(lambda);
+            }
+            val_del(args);
+            return result;
+        }
+    }
+    Value* err = val_err(
+        "'%s' expected string or quoted expression but got %s",
+        __func__,
+        ltype_name(args->cell[1]->type)
+    );
+    val_del(args);
+    return err;
+}

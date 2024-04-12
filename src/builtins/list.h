@@ -156,4 +156,11 @@ Value* builtin_drop(Environment* env, Value* args);
 /// the given list/string, the second contains the rest
 Value* builtin_split(Environment* env, Value* args);
 
+/// @brief Filters
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+/// @return A qexpr with two elements: The first contains the first n elements of
+/// the given list/string, the second contains the rest
+Value* builtin_filter(Environment* env, Value* args);
+
 #endif

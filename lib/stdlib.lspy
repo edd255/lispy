@@ -21,13 +21,6 @@
     {join (list (f (fst l))) (map f (tail l))}
 })
 
-; Apply Filter to List
-(fn {filter f l} {
-  if (== l nil)
-    {nil}
-    {join (if (f (fst l)) {head l} {nil}) (filter f (tail l))}
-})
-
 ; Reverse List
 (fn {reverse l} {
   if (== l nil)

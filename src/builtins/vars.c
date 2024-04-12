@@ -51,9 +51,9 @@ Value* builtin_lambda(Environment* env, Value* args) {
     assert(NULL != args);
     UNUSED(env);
     // Check two arguments, each of which are Q-Expressions
-    LCHECK_NUM("\\", args, 2);
-    LCHECK_TYPE("\\", args, 0, LISPY_VAL_QEXPR);
-    LCHECK_TYPE("\\", args, 1, LISPY_VAL_QEXPR);
+    LCHECK_NUM(__func__, args, 2);
+    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     // Check first Q-Expression contains only Symbols
     for (int i = 0; i < args->cell[0]->count; i++) {
         LCHECK(
