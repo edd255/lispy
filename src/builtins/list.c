@@ -560,7 +560,6 @@ Value* builtin_split(Environment* env, Value* args) {
 Value* builtin_filter(Environment* env, Value* args) {
     assert(NULL != env);
     assert(NULL != args);
-    UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -612,3 +611,47 @@ Value* builtin_filter(Environment* env, Value* args) {
     val_del(args);
     return err;
 }
+
+Value* builtin_reverse(Environment* env, Value* args) {
+    assert(NULL != env);
+    assert(NULL != args);
+    UNUSED(env);
+    LCHECK_NUM(__func__, args, 1);
+    LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
+    switch (args->cell[0]->type) {
+        case LISPY_VAL_QEXPR: {
+            Value* result = val_qexpr();
+            Value* qexpr = args->cell[0];
+            for (int i = qexpr->count - 1; i >= 0; i--) {
+                val_add(result, val_copy(qexpr->cell[i]));
+            }
+            val_del(args);
+            return result;
+        }
+        case LISPY_VAL_STR: {
+            Value* val = args->cell[0];
+            int len = strlen(val->str);
+            for (int i = 0, j = len - 1; i <= j; i++, j--) {
+                char c = val->str[i];
+                val->str[i] = val->str[j];
+                val->str[j] = c;
+            }
+            return val;
+        }
+    }
+    Value* err = val_err(
+        "'%s' expected string or quoted expression but got %s",
+        __func__,
+        ltype_name(args->cell[1]->type)
+    );
+    val_del(args);
+    return err;
+}
+
+// ; Reverse List
+// (fn {reverse l} {
+//   if (== l nil)
+//     {nil}
+//     {join (reverse (tail l)) (head l)}
+// })
+//

@@ -156,11 +156,16 @@ Value* builtin_drop(Environment* env, Value* args);
 /// the given list/string, the second contains the rest
 Value* builtin_split(Environment* env, Value* args);
 
-/// @brief Filters
+/// @brief Filters a list/string using a lambda fn
 /// @param env The environment in which the arguments are used
 /// @param args The list/string
-/// @return A qexpr with two elements: The first contains the first n elements of
-/// the given list/string, the second contains the rest
+/// @return A qexpr that contains all elements that evaluate to true using the lambda fn
 Value* builtin_filter(Environment* env, Value* args);
+
+/// @brief Reverses a list/string
+/// @param env The environment in which the arguments are used
+/// @param args The list/string
+/// @return The list/string but reversed
+Value* builtin_reverse(Environment* env, Value* args);
 
 #endif

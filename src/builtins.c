@@ -35,6 +35,7 @@ void env_add_builtins(Environment* env) {
     env_add_builtin_fn(env, "drop", builtin_drop);
     env_add_builtin_fn(env, "split", builtin_split);
     env_add_builtin_fn(env, "filter", builtin_filter);
+    env_add_builtin_fn(env, "reverse", builtin_reverse);
     // Sequence functions
     env_add_builtin_fn(env, "do", builtin_do);
     // Mathematical functions
