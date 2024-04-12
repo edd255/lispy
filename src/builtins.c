@@ -1,5 +1,17 @@
 #include "builtins.h"
 
+#include "builtins/arithmetic.h"
+#include "builtins/conditional.h"
+#include "builtins/env.h"
+#include "builtins/eq_cmp.h"
+#include "builtins/list.h"
+#include "builtins/logic.h"
+#include "builtins/magn_cmp.h"
+#include "builtins/misc.h"
+#include "builtins/sequence.h"
+#include "builtins/strings.h"
+#include "builtins/vars.h"
+
 //==== BUILTIN METHODS =========================================================
 
 void env_add_builtins(Environment* env) {
@@ -70,6 +82,9 @@ void env_add_builtins(Environment* env) {
     // String Functions
     env_add_builtin_fn(env, "error", builtin_error);
     env_add_builtin_fn(env, "print", builtin_print);
+    // Misc
+    env_add_builtin_fn(env, "flip", builtin_flip);
+    env_add_builtin_fn(env, "comp", builtin_comp);
     // Atoms
     env_add_builtin_const(env, "nil", val_qexpr());
     env_add_builtin_const(env, "true", val_num(1));
