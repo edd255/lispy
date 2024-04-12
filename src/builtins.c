@@ -37,6 +37,7 @@ void env_add_builtins(Environment* env) {
     env_add_builtin_fn(env, "filter", builtin_filter);
     env_add_builtin_fn(env, "reverse", builtin_reverse);
     env_add_builtin_fn(env, "map", builtin_map);
+    env_add_builtin_fn(env, "lookup", builtin_lookup);
     // Sequence functions
     env_add_builtin_fn(env, "do", builtin_do);
     // Mathematical functions

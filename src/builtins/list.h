@@ -174,4 +174,10 @@ Value* builtin_reverse(Environment* env, Value* args);
 /// @return The list/string, with the function applied
 Value* builtin_map(Environment* env, Value* args);
 
+/// @brief Find a value in a key-value-pair list
+/// @param env The environment in which the arguments are used
+/// @param args A list of key-value-pairs
+/// @return The value to the given key or an error
+Value* builtin_lookup(Environment* env, Value* args);
+
 #endif
