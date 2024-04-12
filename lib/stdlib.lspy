@@ -21,23 +21,3 @@
     {z}
     {f (fst l) (foldr f z (tail l))}
 })
-
-; Zip two lists together into a list of pairs
-; https://github.com/Federico-abss/Lispy/blob/master/std-library/std_library.lspy#L198
-(fn {zip x y} {
-  if (or (== x nil) (== y nil))
-    {nil}
-    {join (list (join (head x) (head y))) (zip (tail x) (tail y))}
-})
-
-; Unzip a list of pairs into two lists
-; https://github.com/Federico-abss/Lispy/blob/master/std-library/std_library.lspy#L204
-(fn {unzip l} {
-  if (== l nil)
-    {{nil nil}}
-    {do
-      (= {x} (fst l))
-      (= {xs} (unzip (tail l)))
-      (list (join (head x) (fst xs)) (join (tail x) (snd xs)))
-    }
-})
