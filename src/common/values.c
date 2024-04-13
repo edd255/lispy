@@ -196,7 +196,6 @@ Value* val_add(Value* self, Value* other) {
 Value* val_join(Value* self, Value* other) {
     assert(NULL != self);
     assert(NULL != other);
-    assert(NULL != other->cell);
     LCHECK(
         self,
         (self->type == LISPY_VAL_QEXPR || self->type == LISPY_VAL_STR),
