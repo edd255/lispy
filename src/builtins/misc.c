@@ -6,8 +6,8 @@
 
 //==== Miscellaneous functions =================================================
 Value* builtin_flip(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_FN);
@@ -22,8 +22,8 @@ Value* builtin_flip(Environment* env, Value* args) {
 }
 
 Value* builtin_comp(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_FN);

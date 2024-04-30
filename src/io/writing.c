@@ -5,7 +5,7 @@
 
 /* Print an Value */
 void val_print(Value* val) {
-    assert(NULL != val);
+    ASSERT(NULL != val);
     if (NULL == val) {
         return;
     }
@@ -54,7 +54,7 @@ void val_print(Value* val) {
 }
 
 void val_print_expr(Value* val, char open, char close) {
-    assert(NULL != val);
+    ASSERT(NULL != val);
     putchar(open);
     for (int i = 0; i < val->count; i++) {
         // Print Value contained within
@@ -70,13 +70,13 @@ void val_print_expr(Value* val, char open, char close) {
 
 /* Print a Value followed by a newline */
 void val_println(Value* val) {
-    assert(NULL != val);
+    ASSERT(NULL != val);
     val_print(val);
     putchar('\n');
 }
 
 void val_print_str(const Value* val) {
-    assert(NULL != val);
+    ASSERT(NULL != val);
     if (NULL == val) {
         return;
     }

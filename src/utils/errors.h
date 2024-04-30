@@ -1,5 +1,5 @@
 /// @file errors.h
-/// @brief This file contains macros to check runtime assertions and do runtime
+/// @brief This file contains macros to check runtime ASSERTions and do runtime
 /// error reporting
 
 #pragma once
@@ -8,7 +8,7 @@
 #define LISPY_UTILS_ERRORS_H
 
 //=== ERRORS ===================================================================
-/// @brief Macro to check an assertion and report errors during runtime
+/// @brief Macro to check an ASSERTion and report errors during runtime
 #define LCHECK(args, cond, fmt, ...) \
     if (!(cond)) { \
         Value* err = val_err(fmt, ##__VA_ARGS__); \
@@ -28,7 +28,7 @@
         ltype_name(expect) \
     )
 
-/// @brief Macro to check two assertion and report errors during runtime
+/// @brief Macro to check two ASSERTion and report errors during runtime
 #define LCHECK_TYPES(fn, args, idx, expect1, expect2) \
     LCHECK( \
         (args), \

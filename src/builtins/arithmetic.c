@@ -7,9 +7,9 @@
 
 //==== Arithmetic functions ====================================================
 Value* builtin_op(Environment* env, Value* args, char* op) {
-    assert(NULL != env);
-    assert(NULL != args);
-    assert(NULL != op);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
+    ASSERT(NULL != op);
     UNUSED(env);
     LCHECK_TYPES(op, args, 0, LISPY_VAL_NUM, LISPY_VAL_DEC);
     // Ensure all arguments are numbers
@@ -18,7 +18,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
     }
     // Pop the first element
     Value* x = val_pop(args, 0);
-    assert(NULL != x);
+    ASSERT(NULL != x);
     // If no arguments and sub then perform unary negation
     if ((0 == strcmp(op, "-")) && 0 == args->count) {
         switch (x->type) {
@@ -36,7 +36,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
     while (args->count > 0) {
         // Pop the next element
         Value* y = val_pop(args, 0);
-        assert(NULL != y);
+        ASSERT(NULL != y);
         switch (arithm_op_from_str(op)) {
             case LISPY_ARITHM_ADD: {
                 switch (x->type) {
@@ -186,56 +186,56 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_add(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "+");
 }
 
 Value* builtin_sub(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "-");
 }
 
 Value* builtin_mul(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "*");
 }
 
 Value* builtin_div(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "/");
 }
 
 Value* builtin_mod(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "%");
 }
 
 Value* builtin_pow(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "^");
 }
 
 Value* builtin_max(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "max");
 }
 
 Value* builtin_min(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_op(env, args, "min");
 }
 
 Value* builtin_sum(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -263,8 +263,8 @@ Value* builtin_sum(Environment* env, Value* args) {
 }
 
 Value* builtin_prod(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);

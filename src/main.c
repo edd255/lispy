@@ -21,7 +21,6 @@
 #include "eval.h"
 #include "io.h"
 #include "utils/argparser.h"
-#include "utils/logger.h"
 #include "utils/prompt.h"
 
 //=== DECLARATIONS =============================================================
@@ -94,6 +93,17 @@ Value* get_stdlib(Environment* env);
 /// @brief Sets up an environment which contains all builtins.
 /// @return An environment which contains all builtin methods
 Environment* set_env(void);
+
+//--- Logger -------------------------------------------------------------------
+/// @brief Sets up the log-file in the XDG cache directory.
+///
+/// This function sets up the log-file in the XDG cache directory if the
+/// directory exists.
+///
+/// \todo Make the function portable.
+///
+/// @return A pointer to the log file.
+FILE* prepare_logfile(void);
 
 //--- Variables ----------------------------------------------------------------
 /// Parses integer and decimal number
@@ -211,7 +221,7 @@ void cli_interpreter(Environment* env) {
         mpc_result_t parse_result;
         if (mpc_parse("<stdin>", input, lispy, &parse_result)) {
             Value* read_result = val_read(parse_result.output);
-            assert(NULL != read_result);
+            ASSERT(NULL != read_result);
             Value* eval_result = val_eval(env, read_result);
             val_println(eval_result);
             val_del(eval_result);
@@ -277,4 +287,27 @@ void save_history(const int num_elements) {
     append_history(num_elements, history_file);
     free(history_file);
     return;
+}
+
+//--- Logger -------------------------------------------------------------------
+FILE* prepare_logfile(void) {
+    FILE* log = NULL;
+    char* cache_dir = getenv("XDG_CACHE_HOME");
+    if (NULL == cache_dir) {
+        char* tmp_dir = "/tmp";
+        size_t log_file_size = strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1;
+        char* log_file = malloc(log_file_size);
+        strlcpy(log_file, tmp_dir, log_file_size);
+        strlcat(log_file, "/lispy/lispy.log", log_file_size);
+        log = fopen(log_file, "we");
+        free(log_file);
+        return log;
+    }
+    size_t log_file_size = strlen(cache_dir) + strlen("/lispy/lispy.log") + 1;
+    char* log_file = malloc(log_file_size);
+    strlcpy(log_file, cache_dir, log_file_size);
+    strlcat(log_file, "/lispy/lispy.log", log_file_size);
+    log = fopen(log_file, "we");
+    free(log_file);
+    return log;
 }

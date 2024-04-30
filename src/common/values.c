@@ -67,7 +67,7 @@ Value* val_err(char* fmt, ...) {
 }
 
 Value* val_sym(char* str) {
-    assert(NULL != str);
+    ASSERT(NULL != str);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_SYM;
     self->len = strlen(str);
@@ -77,7 +77,7 @@ Value* val_sym(char* str) {
 }
 
 Value* val_str(const char* str) {
-    assert(NULL != str);
+    ASSERT(NULL != str);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_STR;
     self->len = strlen(str);
@@ -103,7 +103,7 @@ Value* val_qexpr(void) {
 }
 
 Value* val_fn(Function fn) {
-    assert(NULL != fn);
+    ASSERT(NULL != fn);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     self->builtin = fn;
@@ -111,8 +111,8 @@ Value* val_fn(Function fn) {
 }
 
 Value* val_lambda(Value* formals, Value* body) {
-    assert(NULL != formals);
-    assert(NULL != body);
+    ASSERT(NULL != formals);
+    ASSERT(NULL != body);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     // Set builtin to NULL
@@ -128,7 +128,7 @@ Value* val_lambda(Value* formals, Value* body) {
 //=== METHODS ==================================================================
 
 Value* val_copy(const Value* self) {
-    assert(NULL != self);
+    ASSERT(NULL != self);
     Value* x = MALLOC(sizeof(Value));
     x->type = self->type;
     switch (self->type) {
@@ -185,8 +185,8 @@ Value* val_copy(const Value* self) {
 }
 
 Value* val_add(Value* self, Value* other) {
-    assert(NULL != self);
-    assert(NULL != other);
+    ASSERT(NULL != self);
+    ASSERT(NULL != other);
     self->count++;
     self->cell = REALLOC(self->cell, sizeof(Value*) * self->count);
     self->cell[self->count - 1] = other;
@@ -194,8 +194,8 @@ Value* val_add(Value* self, Value* other) {
 }
 
 Value* val_join(Value* self, Value* other) {
-    assert(NULL != self);
-    assert(NULL != other);
+    ASSERT(NULL != self);
+    ASSERT(NULL != other);
     LCHECK(
         self,
         (self->type == LISPY_VAL_QEXPR || self->type == LISPY_VAL_STR),
@@ -236,7 +236,7 @@ Value* val_join(Value* self, Value* other) {
     }
     // For each cell in 'other' add it to 'self'
     for (int i = 0; i < other->count; i++) {
-        assert(NULL != other->cell[i]);
+        ASSERT(NULL != other->cell[i]);
         self = val_add(self, other->cell[i]);
     }
     // Delete the empty 'other' and return 'self'
@@ -246,7 +246,7 @@ Value* val_join(Value* self, Value* other) {
 }
 
 Value* val_pop(Value* self, const int idx) {
-    assert(NULL != self);
+    ASSERT(NULL != self);
     LCHECK(
         self,
         self->count > idx,
@@ -271,16 +271,16 @@ Value* val_pop(Value* self, const int idx) {
 }
 
 Value* val_take(Value* self, const int idx) {
-    assert(NULL != self);
+    ASSERT(NULL != self);
     Value* value = val_pop(self, idx);
     val_del(self);
     return value;
 }
 
 Value* val_call(Environment* env, Value* fn, Value* args) {
-    assert(NULL != env);
-    assert(NULL != fn);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != fn);
+    ASSERT(NULL != args);
     // If Function, then simply call that
     if (NULL != fn->builtin) {
         return fn->builtin(env, args);
@@ -352,9 +352,9 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
         // Evaluate and return
         Value* new_sexpr = val_sexpr();
         Value* body_copy = val_copy(fn->body);
-        assert(NULL != new_sexpr);
-        assert(NULL != body_copy);
-        assert(NULL != fn->env);
+        ASSERT(NULL != new_sexpr);
+        ASSERT(NULL != body_copy);
+        ASSERT(NULL != fn->env);
         return builtin_eval(fn->env, val_add(new_sexpr, body_copy));
     }
     // Otherwise return partially evaluated function
@@ -362,8 +362,8 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
 }
 
 int val_eq(const Value* self, const Value* other) {
-    assert(NULL != self);
-    assert(NULL != other);
+    ASSERT(NULL != self);
+    ASSERT(NULL != other);
     // Different types are always unequal
     if (self->type != other->type) {
         return false;
@@ -415,7 +415,7 @@ int val_eq(const Value* self, const Value* other) {
 }
 
 void val_del(Value* self) {
-    assert(NULL != self);
+    ASSERT(NULL != self);
     if (NULL == self) {
         return;
     }

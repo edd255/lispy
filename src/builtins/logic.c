@@ -5,8 +5,8 @@
 
 //==== Logical functions =======================================================
 Value* builtin_logic(Environment* env, Value* args, char* op) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     int result = 0;
     switch (logic_op_from_str(op)) {

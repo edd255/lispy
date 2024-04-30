@@ -5,9 +5,9 @@
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
 Value* builtin_ord(Environment* env, Value* args, char* op) {
-    assert(NULL != env);
-    assert(NULL != args);
-    assert(NULL != op);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
+    ASSERT(NULL != op);
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
     LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
@@ -31,25 +31,25 @@ Value* builtin_ord(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_gt(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_ord(env, args, ">");
 }
 
 Value* builtin_lt(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_ord(env, args, "<");
 }
 
 Value* builtin_ge(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_ord(env, args, ">=");
 }
 
 Value* builtin_le(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_ord(env, args, "<=");
 }

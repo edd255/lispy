@@ -7,16 +7,16 @@
 
 //==== List functions ==========================================================
 Value* builtin_list(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     args->type = LISPY_VAL_QEXPR;
     return args;
 }
 
 Value* builtin_head(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -48,8 +48,8 @@ Value* builtin_head(Environment* env, Value* args) {
 }
 
 Value* builtin_tail(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -60,7 +60,7 @@ Value* builtin_tail(Environment* env, Value* args) {
             Value* v = val_take(args, 0);
             // Delete first element and return
             Value* y = val_pop(v, 0);
-            assert(NULL != y);
+            ASSERT(NULL != y);
             val_del(y);
             return v;
         }
@@ -90,8 +90,8 @@ Value* builtin_tail(Environment* env, Value* args) {
 }
 
 Value* builtin_eval(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     Value* x = val_take(args, 0);
@@ -100,8 +100,8 @@ Value* builtin_eval(Environment* env, Value* args) {
 }
 
 Value* builtin_join(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     switch (args->cell[0]->type) {
@@ -119,7 +119,7 @@ Value* builtin_join(Environment* env, Value* args) {
         }
     }
     Value* x = val_pop(args, 0);
-    assert(NULL != x);
+    ASSERT(NULL != x);
     while (args->count) {
         x = val_join(x, val_pop(args, 0));
     }
@@ -128,8 +128,8 @@ Value* builtin_join(Environment* env, Value* args) {
 }
 
 Value* builtin_cons(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     UNUSED(env);
@@ -144,8 +144,8 @@ Value* builtin_cons(Environment* env, Value* args) {
 }
 
 Value* builtin_len(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     UNUSED(env);
@@ -156,7 +156,7 @@ Value* builtin_len(Environment* env, Value* args) {
             break;
         }
         case LISPY_VAL_STR: {
-            assert(NULL != args->cell[0]->str);
+            ASSERT(NULL != args->cell[0]->str);
             num = val_num(args->cell[0]->len);
             break;
         }
@@ -166,8 +166,8 @@ Value* builtin_len(Environment* env, Value* args) {
 }
 
 Value* builtin_pack(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     Value* eval = val_sexpr();
     val_add(eval, val_pop(args, 0));
@@ -181,8 +181,8 @@ Value* builtin_pack(Environment* env, Value* args) {
 }
 
 Value* builtin_unpack(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
@@ -198,8 +198,8 @@ Value* builtin_unpack(Environment* env, Value* args) {
 }
 
 Value* builtin_nth(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -293,8 +293,8 @@ Value* builtin_last(Environment* env, Value* args) {
 }
 
 Value* builtin_elem(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_STR);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     const Value* needle = args->cell[0];
@@ -334,8 +334,8 @@ Value* builtin_elem(Environment* env, Value* args) {
 }
 
 Value* builtin_init(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -373,8 +373,8 @@ Value* builtin_init(Environment* env, Value* args) {
 }
 
 Value* builtin_take(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -430,8 +430,8 @@ Value* builtin_take(Environment* env, Value* args) {
 }
 
 Value* builtin_drop(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -485,8 +485,8 @@ Value* builtin_drop(Environment* env, Value* args) {
 }
 
 Value* builtin_split(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -557,8 +557,8 @@ Value* builtin_split(Environment* env, Value* args) {
 }
 
 Value* builtin_filter(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -612,8 +612,8 @@ Value* builtin_filter(Environment* env, Value* args) {
 }
 
 Value* builtin_reverse(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -648,8 +648,8 @@ Value* builtin_reverse(Environment* env, Value* args) {
 }
 
 Value* builtin_map(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
@@ -698,8 +698,8 @@ Value* builtin_map(Environment* env, Value* args) {
 }
 
 Value* builtin_lookup(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     Value* elem = val_eval(env, val_copy(args->cell[0]));
@@ -735,8 +735,8 @@ Value* builtin_lookup(Environment* env, Value* args) {
 }
 
 Value* builtin_zip(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -756,8 +756,8 @@ Value* builtin_zip(Environment* env, Value* args) {
 }
 
 Value* builtin_unzip(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -785,8 +785,8 @@ Value* builtin_unzip(Environment* env, Value* args) {
 }
 
 Value* builtin_foldl(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);

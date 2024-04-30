@@ -6,12 +6,12 @@
 #include "main.h"
 
 Value* builtin_env(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     Value* x = val_qexpr();
     for (int i = 0; i < env->count; i++) {
         Value* y = val_sym(env->syms[i]);
-        assert(NULL != y);
+        ASSERT(NULL != y);
         x = val_add(x, y);
     }
     val_del(args);
@@ -19,8 +19,8 @@ Value* builtin_env(Environment* env, Value* args) {
 }
 
 Value* builtin_fun(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
@@ -37,8 +37,8 @@ Value* builtin_fun(Environment* env, Value* args) {
 }
 
 Value* builtin_load(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
     // Parse file given by string name
@@ -46,9 +46,9 @@ Value* builtin_load(Environment* env, Value* args) {
     mpc_parser_t* lispy = get_lispy_parser();
     if (mpc_parse_contents(args->cell[0]->str, lispy, &parse_result)) {
         // Read contents
-        assert(NULL != parse_result.output);
+        ASSERT(NULL != parse_result.output);
         Value* expr = val_read(parse_result.output);
-        assert(NULL != expr);
+        ASSERT(NULL != expr);
         mpc_ast_delete(parse_result.output);
         // Evaluate each expression
         while (expr->count) {
