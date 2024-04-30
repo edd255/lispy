@@ -8,12 +8,12 @@
 #ifndef LISPY_COMMON_H
 #define LISPY_COMMON_H
 
-#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#include "deps/logger/log.h"
 #include "utils/alloc.h"
 #include "utils/errors.h"
 
@@ -23,9 +23,18 @@ enum {
     BUFSIZE = 1024
 };
 
-#define INITIAL_CAPACITY 100
-#define HT_FNV_OFFSET    14695981039346656037UL
-#define HT_FNV_PRIME     1099511628211UL
+//=== ASSERT ===================================================================
+#ifndef NDEBUG
+#define ASSERT(condition) \
+    do { \
+        if (!(condition)) { \
+            log_fatal("Assertion failed: %s", #condition); \
+            exit(EXIT_FAILURE); \
+        } \
+    } while (0)
+#else
+#define ASSERT(condition)
+#endif
 
 //=== DECLARATIONS =============================================================
 //--- Structs ------------------------------------------------------------------

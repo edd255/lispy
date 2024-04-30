@@ -5,8 +5,8 @@
 //==== EVALUATION METHODS ======================================================
 
 Value* val_eval(Environment* env, Value* val) {
-    assert(NULL != env);
-    assert(NULL != val);
+    ASSERT(NULL != env);
+    ASSERT(NULL != val);
     // Evaluate symbols
     if (LISPY_VAL_SYM == val->type) {
         Value* x = env_get(env, val);
@@ -22,8 +22,8 @@ Value* val_eval(Environment* env, Value* val) {
 }
 
 Value* val_eval_sexpr(Environment* env, Value* val) {
-    assert(NULL != env);
-    assert(NULL != val);
+    ASSERT(NULL != env);
+    ASSERT(NULL != val);
     // Evaluate Children
     for (int i = 0; i < val->count; i++) {
         val->cell[i] = val_eval(env, val->cell[i]);

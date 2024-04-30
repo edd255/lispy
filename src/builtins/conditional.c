@@ -6,8 +6,8 @@
 
 //==== Conditional functions ===================================================
 Value* builtin_if(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_SEXPR);
@@ -27,12 +27,12 @@ Value* builtin_if(Environment* env, Value* args) {
     if (cond->num) {
         // If condition is true evaluate first expression
         Value* y = val_pop(args, 1);
-        assert(NULL != y);
+        ASSERT(NULL != y);
         x = val_eval(env, y);
     } else {
         // Otherwise evaluate second expression
         Value* y = val_pop(args, 2);
-        assert(NULL != y);
+        ASSERT(NULL != y);
         x = val_eval(env, y);
     }
     // Delete argument list and return
@@ -41,8 +41,8 @@ Value* builtin_if(Environment* env, Value* args) {
 }
 
 Value* builtin_testhelper(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     const Value* cond = val_eval(env, args->cell[0]);
@@ -64,8 +64,8 @@ Value* builtin_testhelper(Environment* env, Value* args) {
 }
 
 Value* builtin_select(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     if (args->count == 0) {
         return val_err(
@@ -78,9 +78,9 @@ Value* builtin_select(Environment* env, Value* args) {
         Value* args_cond = val_copy(args->cell[i]->cell[0]);
         Value* body = val_copy(args->cell[i]->cell[1]);
         Value* cond = val_eval(env, args_cond);
-        assert(NULL != args_cond);
-        assert(NULL != body);
-        assert(NULL != cond);
+        ASSERT(NULL != args_cond);
+        ASSERT(NULL != body);
+        ASSERT(NULL != cond);
         if (cond->num) {
             Value* res = val_eval(env, body);
             val_del(cond);
@@ -98,8 +98,8 @@ Value* builtin_select(Environment* env, Value* args) {
 }
 
 Value* builtin_case(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     const Value* arg = args->cell[0];
     for (int i = 1; i < args->count; i++) {

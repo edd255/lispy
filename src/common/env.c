@@ -11,7 +11,7 @@ Environment* env_new(void) {
 }
 
 void env_del(Environment* env) {
-    assert(NULL != env);
+    ASSERT(NULL != env);
     for (int i = 0; i < env->count; i++) {
         FREE(env->syms[i]);
         val_del(env->vals[i]);
@@ -22,8 +22,8 @@ void env_del(Environment* env) {
 }
 
 Value* env_get(Environment* env, Value* key) {
-    assert(NULL != env);
-    assert(NULL != key);
+    ASSERT(NULL != env);
+    ASSERT(NULL != key);
     // Iterate over all items in environment
     for (int i = 0; i < env->count; i++) {
         // Check if the stored string matches the symbol string. If it does,
@@ -40,9 +40,9 @@ Value* env_get(Environment* env, Value* key) {
 }
 
 void env_put(Environment* env, const Value* key, const Value* val) {
-    assert(NULL != env);
-    assert(NULL != key);
-    assert(NULL != val);
+    ASSERT(NULL != env);
+    ASSERT(NULL != key);
+    ASSERT(NULL != val);
     // Iterate over all items in environment. This is to see if variable already
     // exists.
     for (int i = 0; i < env->count; i++) {
@@ -65,7 +65,7 @@ void env_put(Environment* env, const Value* key, const Value* val) {
 }
 
 Environment* env_copy(Environment* env) {
-    assert(NULL != env);
+    ASSERT(NULL != env);
     Environment* n = MALLOC(sizeof(Environment));
     n->parent = env->parent;
     n->count = env->count;
@@ -81,9 +81,9 @@ Environment* env_copy(Environment* env) {
 }
 
 void env_def(Environment* env, const Value* key, const Value* val) {
-    assert(NULL != env);
-    assert(NULL != key);
-    assert(NULL != val);
+    ASSERT(NULL != env);
+    ASSERT(NULL != key);
+    ASSERT(NULL != val);
     // Iterate until e has no parent
     while (env->parent) {
         env = env->parent;

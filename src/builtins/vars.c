@@ -4,9 +4,9 @@
 
 //==== Variable functions ======================================================
 Value* builtin_var(Environment* env, Value* args, char* fn) {
-    assert(NULL != env);
-    assert(NULL != args);
-    assert(NULL != fn);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
+    ASSERT(NULL != fn);
     LCHECK_TYPE(fn, args, 0, LISPY_VAL_QEXPR);
     // First argument is symbol list
     Value* syms = args->cell[0];
@@ -47,8 +47,8 @@ Value* builtin_var(Environment* env, Value* args, char* fn) {
 }
 
 Value* builtin_lambda(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     // Check two arguments, each of which are Q-Expressions
     LCHECK_NUM(__func__, args, 2);
@@ -68,20 +68,20 @@ Value* builtin_lambda(Environment* env, Value* args) {
     // Pop first two arguments and pass them to val_lambda
     Value* formals = val_pop(args, 0);
     Value* body = val_pop(args, 0);
-    assert(NULL != formals);
-    assert(NULL != body);
+    ASSERT(NULL != formals);
+    ASSERT(NULL != body);
     val_del(args);
     return val_lambda(formals, body);
 }
 
 Value* builtin_def(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_var(env, args, "def");
 }
 
 Value* builtin_put(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_var(env, args, "=");
 }

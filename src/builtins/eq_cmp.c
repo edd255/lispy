@@ -2,9 +2,9 @@
 
 //---- Equality comparison functions -------------------------------------------
 Value* builtin_cmp(Environment* env, Value* args, char* op) {
-    assert(NULL != env);
-    assert(NULL != args);
-    assert(NULL != op);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
+    ASSERT(NULL != op);
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
     int r;
@@ -20,13 +20,13 @@ Value* builtin_cmp(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_eq(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_cmp(env, args, "==");
 }
 
 Value* builtin_ne(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     return builtin_cmp(env, args, "!=");
 }

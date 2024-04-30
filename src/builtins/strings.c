@@ -6,8 +6,8 @@
 
 //==== String functions ========================================================
 Value* builtin_print(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     for (int i = 0; i < args->count; i++) {
         val_print(args->cell[i]);
@@ -19,8 +19,8 @@ Value* builtin_print(Environment* env, Value* args) {
 }
 
 Value* builtin_error(Environment* env, Value* args) {
-    assert(NULL != env);
-    assert(NULL != args);
+    ASSERT(NULL != env);
+    ASSERT(NULL != args);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);

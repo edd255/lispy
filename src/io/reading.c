@@ -4,7 +4,7 @@
 //==== READING =================================================================
 
 Value* val_read_num(const mpc_ast_t* tree) {
-    assert(NULL != tree);
+    ASSERT(NULL != tree);
     errno = 0;
     if (NULL == strchr(tree->contents, '.')) {
         long x = strtol(tree->contents, NULL, 10);
@@ -15,7 +15,7 @@ Value* val_read_num(const mpc_ast_t* tree) {
 }
 
 Value* val_read(mpc_ast_t* tree) {
-    assert(NULL != tree);
+    ASSERT(NULL != tree);
 
     // If Symbol, String or Number return conversion to that type
     if (strstr(tree->tag, "number")) {
@@ -64,7 +64,7 @@ Value* val_read(mpc_ast_t* tree) {
 }
 
 Value* val_read_str(mpc_ast_t* tree) {
-    assert(NULL != tree);
+    ASSERT(NULL != tree);
     // Cut off final quote character
     tree->contents[strlen(tree->contents) - 1] = '\0';
     // Copy the string missing out the first quote character

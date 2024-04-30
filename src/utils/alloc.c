@@ -1,7 +1,6 @@
 #include "alloc.h"
 
 #include "common.h"
-#include "deps/logger/log.h"
 
 //=== LOGGING MEMORY ALLOCATIONS ===============================================
 void* log_malloc(size_t size, const char* fn, const char* file, int line) {
