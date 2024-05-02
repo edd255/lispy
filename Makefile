@@ -1,19 +1,19 @@
 include .config/make/config.mk
 
 #==== RULES ====================================================================
-#---- RELEASE ------------------------------------------------------------------
+#---- OPTIMIZED ----------------------------------------------------------------
 
-$(BIN)_release: $(OPT_OBJS)
+$(BIN)_optimized: $(OPT_OBJS)
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
-	$(Q)$(CC) $(RELEASE) $+ -s -o $@ $(LDFLAGS)
+	$(Q)$(CC) $(OPTIMIZED) $+ -s -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.opt.o: %.c
 	$(Q)echo "====> CC $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(RELEASE) $(CFLAGS) -c $< -o $@
+	$(Q)$(CC) $(OPTIMIZED) $(CFLAGS) -c $< -o $@
 
-release: $(BIN)_release
+optimized: $(BIN)_optimized
 
 #---- DEBUGGING ----------------------------------------------------------------
 
@@ -116,9 +116,9 @@ tests: sanitized
 
 #---- INSTALLING ---------------------------------------------------------------
 
-install: release
+install: optimized
 	$(Q)echo "====> Installing the binary..."
-	$(Q)cp $(BIN)_release $(PREFIX)/bin/$(NAME)
+	$(Q)cp $(BIN)_optimized $(PREFIX)/bin/$(NAME)
 	$(Q)echo "====> Installing the library..."
 	$(Q)$(MKDIR) $(PREFIX)/lib/lispy
 	$(Q)cp $(LIB)/stdlib.lspy $(PREFIX)/lib/lispy/
@@ -134,9 +134,9 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style release debugging sanitized profiling tests docs
+all: style optimized debugging sanitized profiling tests docs
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
 -include $(DEPS)
-.PHONY: all release debugging memcheck style install uninstall tests profiling docs
+.PHONY: all optimized debugging memcheck style install uninstall tests profiling docs
