@@ -46,14 +46,23 @@ void parse_args(int argc, const char** argv) {
     (void)argparse_parse(&argparse, argc, argv);
 }
 
+/// @brief returns file-local variable `filename`
+///
+/// @return A pointer to the file to interpret
 char* get_filename(void) {
     return filename;
 }
 
+/// @brief returns file-local variable `no_stdlib`
+///
+/// @return Indicates whether to use the stdlib or not
 int get_nostdlib(void) {
     return no_stdlib;
 }
 
+/// @brief returns file-local variable `print_logs`
+///
+/// @return Indicates whether to print logs, or to write them in a file
 int get_print_logs(void) {
     return print_logs;
 }
