@@ -314,7 +314,7 @@ Value* builtin_elem(Environment* env, Value* args) {
                 eq_args = val_add(eq_args, cp_elem);
                 eq_args = val_add(eq_args, list_elem);
                 Value* res = builtin_eq(env, eq_args);
-                if (res->num == 1) {
+                if (1 == res->num) {
                     val_del(args);
                     return res;
                 }
@@ -350,7 +350,7 @@ Value* builtin_init(Environment* env, Value* args) {
             LCHECK_STR_NOT_EMPTY(__func__, args, 0);
             char* old_str = args->cell[0]->str;
             size_t length = args->cell[0]->len;
-            if (length == 1) {
+            if (1 == length) {
                 val_del(args);
                 return val_str("");
             }
@@ -709,7 +709,7 @@ Value* builtin_lookup(Environment* env, Value* args) {
         Value* pair = list->cell[0];
         LCHECK(
             args,
-            pair->type == LISPY_VAL_QEXPR,
+            LISPY_VAL_QEXPR == pair->type,
             "'%s' expected a qexpr at index %d but got %s",
             __func__,
             i,
@@ -717,7 +717,7 @@ Value* builtin_lookup(Environment* env, Value* args) {
         );
         LCHECK(
             args,
-            pair->count == 2,
+            2 == pair->count,
             "'%s' expected a 2 elements at index %d but got %d",
             __func__,
             i,
@@ -731,7 +731,7 @@ Value* builtin_lookup(Environment* env, Value* args) {
         }
     }
     val_del(args);
-    return result == NULL ? val_sexpr() : val_eval(env, result);
+    return NULL == result ? val_sexpr() : val_eval(env, result);
 }
 
 Value* builtin_zip(Environment* env, Value* args) {
@@ -769,7 +769,7 @@ Value* builtin_unzip(Environment* env, Value* args) {
         Value* pair = list->cell[i];
         LCHECK(
             args,
-            pair->count == 2,
+            2 == pair->count,
             "'%s' expected a pair at index %d but got %d",
             __func__,
             i,
