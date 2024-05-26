@@ -66,10 +66,12 @@ void cli_interpreter(Environment* env);
 
 /// @brief Saves the input history to a file.
 ///
-/// @parem num_elements The number of elements to append to the history file
+/// @param num_elements The number of elements to append to the history file
 void save_history(const int num_elements);
 
 /// @brief Reads the history file.
+///
+/// @return File descriptor to history file
 int get_history(void);
 
 /// @brief Interprets a given file.

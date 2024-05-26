@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <math.h>
 #ifndef LISPY_COMMON_H
 #define LISPY_COMMON_H
 
@@ -25,6 +26,7 @@ enum {
 
 //=== ASSERT ===================================================================
 #ifndef NDEBUG
+/// Assert macro that logs failed assertions fatally & exits application
 #define ASSERT(condition) \
     do { \
         if (!(condition)) { \
@@ -101,7 +103,7 @@ struct Value {
 
     /// A pointer to the list
     Value** cell;
-} __attribute__((aligned(16)));
+};
 
 /// @brief A structure that contains data and metadata about used environments.
 ///
@@ -121,7 +123,7 @@ struct Environment {
 
     /// A pointer to the values
     Value** vals;
-} __attribute__((aligned(16)));
+};
 
 //--- Constructors & Destructors for Values ------------------------------------
 /// @brief Constructor for numeric values

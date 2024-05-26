@@ -21,7 +21,7 @@ Value* builtin_env(Environment* env, Value* args);
 ///
 /// https://github.com/Federico-abss/Lispy/blob/master/lispy.c#L1110
 ///
-/// @param env[out] The environment in which the function is put
+/// @param[out] env The environment in which the function is put
 /// @param args Body, arguments, and name of the function
 /// @return An empty symbolic expression, else runtime errors
 Value* builtin_fun(Environment* env, Value* args);
