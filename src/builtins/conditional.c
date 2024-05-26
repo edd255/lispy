@@ -20,7 +20,7 @@ Value* builtin_if(Environment* env, Value* args) {
     Value* cond = val_eval(env, args->cell[0]);
     LCHECK(
         cond,
-        cond->type == LISPY_VAL_NUM,
+        LISPY_VAL_NUM == cond->type,
         "%s: symbolic expression did not evaluate to number",
         __func__
     );
@@ -67,7 +67,7 @@ Value* builtin_select(Environment* env, Value* args) {
     ASSERT(NULL != env);
     ASSERT(NULL != args);
     UNUSED(env);
-    if (args->count == 0) {
+    if (0 == args->count) {
         return val_err(
             "'%s' expected at least one selection but got 0",
             __func__

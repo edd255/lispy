@@ -198,7 +198,7 @@ Value* val_join(Value* self, Value* other) {
     ASSERT(NULL != other);
     LCHECK(
         self,
-        (self->type == LISPY_VAL_QEXPR || self->type == LISPY_VAL_STR),
+        (LISPY_VAL_QEXPR == self->type || LISPY_VAL_STR == self->type),
         "%s expected quoted expression or string but got %s",
         __func__,
         ltype_name(self->type)
@@ -207,7 +207,7 @@ Value* val_join(Value* self, Value* other) {
         case LISPY_VAL_QEXPR: {
             LCHECK(
                 self,
-                other->type == LISPY_VAL_QEXPR,
+                LISPY_VAL_QEXPR == other->type,
                 "%s expected quoted expression but got %s",
                 __func__,
                 ltype_name(other->type)
@@ -217,7 +217,7 @@ Value* val_join(Value* self, Value* other) {
         case LISPY_VAL_STR: {
             LCHECK(
                 self,
-                other->type == LISPY_VAL_STR,
+                LISPY_VAL_STR == other->type,
                 "%s expected string but got %s",
                 __func__,
                 ltype_name(other->type)
@@ -226,7 +226,7 @@ Value* val_join(Value* self, Value* other) {
         }
     }
     // For strings
-    if ((self->type == LISPY_VAL_STR) && (other->type == LISPY_VAL_STR)) {
+    if ((LISPY_VAL_STR == self->type) && (LISPY_VAL_STR == other->type)) {
         char str[BUFSIZE];
         strlcpy(str, self->str, BUFSIZE);
         strlcat(str, other->str, BUFSIZE);
