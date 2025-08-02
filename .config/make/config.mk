@@ -22,10 +22,11 @@ SRC_DIR := src
 BUILD_DIR := build
 BIN_DIR := bin
 LIB := lib
+SHELL := /bin/bash
 
 #---- CODE FILES ---------------------------------------------------------------
 
-PROJ_SRCS := $(shell find src -type f -name "*.c" -o -name "*.h")
+PROJ_SRCS := $(shell find src \( -name "*.c" -o -name "*.h" \))
 SRC_DIRS := $(SRC_DIR) $(wildcard ./deps/*)
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 TESTS := $(wildcard tests/*)
@@ -33,7 +34,7 @@ TESTS := $(wildcard tests/*)
 #---- OBJECTS, BINARIES AND DEPENDENCIES ---------------------------------------
 
 BIN := $(BIN_DIR)/$(NAME)
-SRCS := $(shell find $(SRC_DIRS) -name '*.c')
+SRCS := $(shell find $(SRC_DIRS) -name '*.c' | sort)
 OPT_OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.opt.o)
 PROF_OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.prof.o)
 SAN_OBJS := $(SRCS:%.c=$(BUILD_DIR)/%.san.o)
@@ -80,7 +81,7 @@ ERR := -Wall \
 	-Werror \
 	-Wformat-security \
 	-Wno-gnu-zero-variadic-macro-arguments
-OPT := -Ofast -DNDEBUG -march=native -mtune=native
+OPT := -O3 -DNDEBUG -march=native -mtune=native
 DBG := -Og -g
 LOG := -DLOG_ALLOCS
 SAN := -fsanitize=address \

@@ -1,17 +1,24 @@
 include .config/make/config.mk
 
 #==== RULES ====================================================================
+define compile_template
+$(BUILD_DIR)/%.$(1).o: %.c
+	$(Q)echo "====> CC $$@"
+	$(Q)mkdir -p $$(dir $$@)
+	$(Q)$(CC) $($(2)) $(CFLAGS) -c $$< -o $$@
+endef
+
+$(eval $(call compile_template,opt,OPTIMIZED))
+$(eval $(call compile_template,dbg,DEBUGGING))
+$(eval $(call compile_template,san,SANITIZED))
+$(eval $(call compile_template,prof,PROFILING))
+
 #---- OPTIMIZED ----------------------------------------------------------------
 
 $(BIN)_optimized: $(OPT_OBJS)
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(OPTIMIZED) $+ -s -o $@ $(LDFLAGS)
-
-$(BUILD_DIR)/%.opt.o: %.c
-	$(Q)echo "====> CC $@"
-	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(OPTIMIZED) $(CFLAGS) -c $< -o $@
 
 optimized: $(BIN)_optimized
 
@@ -22,11 +29,6 @@ $(BIN)_debugging: $(DBG_OBJS)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(DEBUGGING) $+ -o $@ $(LDFLAGS)
 
-$(BUILD_DIR)/%.dbg.o: %.c
-	$(Q)echo "====> CC $@"
-	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(DEBUGGING) $(CFLAGS) -c $< -o $@
-
 debugging: $(BIN)_debugging
 
 #---- SANITIZED ----------------------------------------------------------------
@@ -35,11 +37,6 @@ $(BIN)_sanitized: $(SAN_OBJS)
 	$(Q)$(MKDIR) $(BIN_DIR)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(SANITIZED) $+ -o $@ $(LDFLAGS)
-
-$(BUILD_DIR)/%.san.o: %.c
-	$(Q)echo "====> CC $@"
-	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(SANITIZED) $(CFLAGS) -c $< -o $@
 
 sanitized: $(BIN)_sanitized
 
@@ -50,11 +47,6 @@ $(BIN)_profiling: $(PROF_OBJS)
 	$(Q)echo -e "====> LD $@"
 	$(Q)$(CC) $(PROFILING) $+ -o $@ $(LDFLAGS) -pg
 
-$(BUILD_DIR)/%.prof.o: %.c
-	$(Q)echo "====> CC $@"
-	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(PROFILING) $(CFLAGS) -c $< -o $@
-
 profiling: $(BIN)_profiling
 
 #---- CLEANING -----------------------------------------------------------------
@@ -62,6 +54,7 @@ profiling: $(BIN)_profiling
 clean:
 	$(Q)echo "====> Cleaning..."
 	$(Q)$(RM) --recursive --force $(BUILD_DIR)/$(SRC_DIR)
+	$(Q)$(RM) cscope.files cscope.in.out cscope.out cscope.po.out tags
 
 #---- DOCUMENTATION ------------------------------------------------------------
 
