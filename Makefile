@@ -106,6 +106,13 @@ dhat: debugging
 	$(Q)echo "====> Running massif..."
 	$(Q)valgrind ${dhat} $(BIN)_debugging
 
+tags:
+	$(Q)echo "====> Generating ctags..."
+	$(Q)ctags -R --languages=C --exclude=build --exclude=deps .
+	$(Q)echo "====> Generating cscope database..."
+	$(Q)find . -name '*.c' -o -name '*.h' > cscope.files
+	$(Q)cscope -b -q -k
+
 #---- TESTING ------------------------------------------------------------------
 
 tests: sanitized
@@ -134,7 +141,7 @@ uninstall:
 
 #==== EPILOGUE =================================================================
 
-all: style optimized debugging sanitized profiling tests docs
+all: style optimized debugging sanitized profiling tests docs tags
 	$(Q)echo "====> Finished!"
 
 # Include the .d makefiles
