@@ -62,3 +62,7 @@ lispy.log
 compile_commands.json
 logs
 docs
+
+# ctags and cscope
+cscope.files
+tags
