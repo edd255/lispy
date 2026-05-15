@@ -1,0 +1,78 @@
+;==== Regression Tests ========================================================
+(load "tests/test.lspy")
+
+; cons should prepend any value to a q-expression
+(test {1 2 3} (cons 1 {2 3}))
+
+; string init/drop must preserve the expected contents and length metadata
+(test "abc" (init "abcd"))
+(test "cde" (drop 2 "abcde"))
+(test 3 (len (drop 2 "abcde")))
+
+; string map/filter should pass one-character strings as ordinary arguments
+(test {"a" "b" "c"} (map head "abc"))
+(test {"b"} (filter (lambda {x} {== x "b"}) "abc"))
+
+; lookup must check every pair, not just the first one
+(test 20 (lookup 2 {{1 10} {2 20}}))
+
+; foldl must be able to reuse lambdas across iterations
+(test 6 (foldl (lambda {x y} {+ x y}) 0 {1 2 3}))
+
+; lambdas returned from lambdas should keep their local bindings
+(def {mk-adder} (lambda {x} {lambda {y} {+ x y}}))
+(test 5 ((mk-adder 2) 3))
+
+; higher-order helpers should validate the function positions and call safely
+(test 1 (flip - 1 2))
+(test 5 (comp (lambda {x} {+ x 1}) (lambda {x} {* x 2}) 2))
+
+; do should evaluate q-expression bodies in order
+(def {do-x} 0)
+(do {(= {do-x} 4)} {(= {do-x} (+ do-x 3))})
+(test 7 do-x)
+
+; string join should not truncate at the fixed buffer size
+(def {s10} "aaaaaaaaaa")
+(def {s20} (join s10 s10))
+(def {s40} (join s20 s20))
+(def {s80} (join s40 s40))
+(def {s160} (join s80 s80))
+(def {s320} (join s160 s160))
+(def {s640} (join s320 s320))
+(def {s1280} (join s640 s640))
+(test 1280 (len s1280))
+
+; reverse should preserve string results while releasing its argument wrapper
+(test "cba" (reverse "abc"))
+
+; unzip should validate all pairs and still unzip valid input
+(test {{1 3} {2 4}} (unzip {{1 2} {3 4}}))
+
+; These should return errors instead of crashing
+(last {})
+(last "")
+(nth -1 {1 2 3})
+(split -1 {1 2 3})
+(take -1 "abc")
+(drop -1 "abc")
+(flip 1 - +)
+(comp 1 - +)
+(case 1)
+(case 1 {})
+(case 1 2)
+(select 1)
+(select {1})
+(unzip {{1 2} {3}})
+(unzip {1})
+(do 1)
+(sum {1 "x"})
+(prod {1 "x"})
+(fst {1} 2)
+(snd {1 2} 3)
+(trd {1 2 3} 4)
+(last {1 2} 3)
+(elem 1 {1} 2)
+(env 1)
+(filter (lambda {x} {unknown}) {1})
+(filter (lambda {x} {"yes"}) {1})
