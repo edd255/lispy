@@ -4,9 +4,9 @@
 
 //==== Variable functions ======================================================
 Value* builtin_var(Environment* env, Value* args, char* fn) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
-    ASSERT(NULL != fn);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    ASSERT(fn != NULL);
     LCHECK_TYPE(fn, args, 0, LISPY_VAL_QEXPR);
     // First argument is symbol list
     Value* syms = args->cell[0];
@@ -14,7 +14,7 @@ Value* builtin_var(Environment* env, Value* args, char* fn) {
     for (int i = 0; i < syms->count; i++) {
         LCHECK(
             args,
-            (LISPY_VAL_SYM == syms->cell[i]->type),
+            (syms->cell[i]->type == LISPY_VAL_SYM),
             "Error in procedure %s. Function '%s' cannot define non-symbol! Got %s. Expected %s.",
             __func__,
             fn,
@@ -25,7 +25,7 @@ Value* builtin_var(Environment* env, Value* args, char* fn) {
     // Check correct number of symbols and values
     LCHECK(
         args,
-        (args->count - 1 == syms->count),
+        (syms->count == args->count - 1),
         "Error in procedure %s. Function '%s' passed too many arguments for symbols. Got %i. Expected %i.",
         __func__,
         fn,
@@ -35,10 +35,10 @@ Value* builtin_var(Environment* env, Value* args, char* fn) {
     // Assign copies of values to symbols
     for (int i = 0; i < syms->count; i++) {
         // If 'def' define in globally. If 'put' define in locally.
-        if (0 == strcmp(fn, "def")) {
+        if (strcmp(fn, "def") == 0) {
             env_def(env, syms->cell[i], args->cell[i + 1]);
         }
-        if (0 == strcmp(fn, "=")) {
+        if (strcmp(fn, "=") == 0) {
             env_put(env, syms->cell[i], args->cell[i + 1]);
         }
     }
@@ -47,9 +47,8 @@ Value* builtin_var(Environment* env, Value* args, char* fn) {
 }
 
 Value* builtin_lambda(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
-    UNUSED(env);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     // Check two arguments, each of which are Q-Expressions
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -58,7 +57,7 @@ Value* builtin_lambda(Environment* env, Value* args) {
     for (int i = 0; i < args->cell[0]->count; i++) {
         LCHECK(
             args,
-            (LISPY_VAL_SYM == args->cell[0]->cell[i]->type),
+            (args->cell[0]->cell[i]->type == LISPY_VAL_SYM),
             "Error in procedure %s. Cannot define non-symbol. Got %s. Expected %s.",
             __func__,
             ltype_name(args->cell[0]->cell[i]->type),
@@ -68,20 +67,20 @@ Value* builtin_lambda(Environment* env, Value* args) {
     // Pop first two arguments and pass them to val_lambda
     Value* formals = val_pop(args, 0);
     Value* body = val_pop(args, 0);
-    ASSERT(NULL != formals);
-    ASSERT(NULL != body);
+    ASSERT(formals != NULL);
+    ASSERT(body != NULL);
     val_del(args);
-    return val_lambda(formals, body);
+    return val_lambda(env, formals, body);
 }
 
 Value* builtin_def(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_var(env, args, "def");
 }
 
 Value* builtin_put(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_var(env, args, "=");
 }

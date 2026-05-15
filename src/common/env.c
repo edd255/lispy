@@ -11,7 +11,7 @@ Environment* env_new(void) {
 }
 
 void env_del(Environment* env) {
-    ASSERT(NULL != env);
+    ASSERT(env != NULL);
     for (int i = 0; i < env->count; i++) {
         FREE(env->syms[i]);
         val_del(env->vals[i]);
@@ -22,13 +22,13 @@ void env_del(Environment* env) {
 }
 
 Value* env_get(Environment* env, Value* key) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != key);
+    ASSERT(env != NULL);
+    ASSERT(key != NULL);
     // Iterate over all items in environment
     for (int i = 0; i < env->count; i++) {
         // Check if the stored string matches the symbol string. If it does,
         // return a copy of the value
-        if (0 == strcmp(env->syms[i], key->sym)) {
+        if (strcmp(env->syms[i], key->sym) == 0) {
             return val_copy(env->vals[i]);
         }
     }
@@ -40,15 +40,15 @@ Value* env_get(Environment* env, Value* key) {
 }
 
 void env_put(Environment* env, const Value* key, const Value* val) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != key);
-    ASSERT(NULL != val);
+    ASSERT(env != NULL);
+    ASSERT(key != NULL);
+    ASSERT(val != NULL);
     // Iterate over all items in environment. This is to see if variable already
     // exists.
     for (int i = 0; i < env->count; i++) {
         // If variable is found delete item at that position. And replace with
         // variable supplied by user.
-        if (0 == strcmp(env->syms[i], key->sym)) {
+        if (strcmp(env->syms[i], key->sym) == 0) {
             val_del(env->vals[i]);
             env->vals[i] = val_copy(val);
             return;
@@ -65,14 +65,14 @@ void env_put(Environment* env, const Value* key, const Value* val) {
 }
 
 Environment* env_copy(Environment* env) {
-    ASSERT(NULL != env);
+    ASSERT(env != NULL);
     Environment* n = MALLOC(sizeof(Environment));
     n->parent = env->parent;
     n->count = env->count;
     n->syms = MALLOC(sizeof(char*) * (n->count));
     n->vals = MALLOC(sizeof(Value*) * (n->count));
     for (int i = 0; i < env->count; i++) {
-        size_t env_syms_len = strlen(env->syms[i] + 1);
+        size_t env_syms_len = strlen(env->syms[i]) + 1;
         n->syms[i] = MALLOC(env_syms_len);
         strlcpy(n->syms[i], env->syms[i], env_syms_len);
         n->vals[i] = val_copy(env->vals[i]);
@@ -81,9 +81,9 @@ Environment* env_copy(Environment* env) {
 }
 
 void env_def(Environment* env, const Value* key, const Value* val) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != key);
-    ASSERT(NULL != val);
+    ASSERT(env != NULL);
+    ASSERT(key != NULL);
+    ASSERT(val != NULL);
     // Iterate until e has no parent
     while (env->parent) {
         env = env->parent;

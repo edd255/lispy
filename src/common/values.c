@@ -67,7 +67,7 @@ Value* val_err(char* fmt, ...) {
 }
 
 Value* val_sym(char* str) {
-    ASSERT(NULL != str);
+    ASSERT(str != NULL);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_SYM;
     self->len = strlen(str);
@@ -77,7 +77,7 @@ Value* val_sym(char* str) {
 }
 
 Value* val_str(const char* str) {
-    ASSERT(NULL != str);
+    ASSERT(str != NULL);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_STR;
     self->len = strlen(str);
@@ -103,22 +103,23 @@ Value* val_qexpr(void) {
 }
 
 Value* val_fn(Function fn) {
-    ASSERT(NULL != fn);
+    ASSERT(fn != NULL);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     self->builtin = fn;
     return self;
 }
 
-Value* val_lambda(Value* formals, Value* body) {
-    ASSERT(NULL != formals);
-    ASSERT(NULL != body);
+Value* val_lambda(Environment* env, Value* formals, Value* body) {
+    ASSERT(env != NULL);
+    ASSERT(formals != NULL);
+    ASSERT(body != NULL);
     Value* self = LVAL_INIT();
     self->type = LISPY_VAL_FN;
     // Set builtin to NULL
     self->builtin = NULL;
-    // Build new environment
-    self->env = env_new();
+    // Capture local bindings when lambdas are created inside another call.
+    self->env = env->parent ? env_copy(env) : env_new();
     // Set formals and body
     self->formals = formals;
     self->body = body;
@@ -128,7 +129,7 @@ Value* val_lambda(Value* formals, Value* body) {
 //=== METHODS ==================================================================
 
 Value* val_copy(const Value* self) {
-    ASSERT(NULL != self);
+    ASSERT(self != NULL);
     Value* x = MALLOC(sizeof(Value));
     x->type = self->type;
     switch (self->type) {
@@ -185,8 +186,8 @@ Value* val_copy(const Value* self) {
 }
 
 Value* val_add(Value* self, Value* other) {
-    ASSERT(NULL != self);
-    ASSERT(NULL != other);
+    ASSERT(self != NULL);
+    ASSERT(other != NULL);
     self->count++;
     self->cell = REALLOC(self->cell, sizeof(Value*) * self->count);
     self->cell[self->count - 1] = other;
@@ -194,11 +195,11 @@ Value* val_add(Value* self, Value* other) {
 }
 
 Value* val_join(Value* self, Value* other) {
-    ASSERT(NULL != self);
-    ASSERT(NULL != other);
+    ASSERT(self != NULL);
+    ASSERT(other != NULL);
     LCHECK(
         self,
-        (LISPY_VAL_QEXPR == self->type || LISPY_VAL_STR == self->type),
+        (self->type == LISPY_VAL_QEXPR || self->type == LISPY_VAL_STR),
         "%s expected quoted expression or string but got %s",
         __func__,
         ltype_name(self->type)
@@ -207,7 +208,7 @@ Value* val_join(Value* self, Value* other) {
         case LISPY_VAL_QEXPR: {
             LCHECK(
                 self,
-                LISPY_VAL_QEXPR == other->type,
+                other->type == LISPY_VAL_QEXPR,
                 "%s expected quoted expression but got %s",
                 __func__,
                 ltype_name(other->type)
@@ -217,7 +218,7 @@ Value* val_join(Value* self, Value* other) {
         case LISPY_VAL_STR: {
             LCHECK(
                 self,
-                LISPY_VAL_STR == other->type,
+                other->type == LISPY_VAL_STR,
                 "%s expected string but got %s",
                 __func__,
                 ltype_name(other->type)
@@ -226,17 +227,20 @@ Value* val_join(Value* self, Value* other) {
         }
     }
     // For strings
-    if ((LISPY_VAL_STR == self->type) && (LISPY_VAL_STR == other->type)) {
-        char str[BUFSIZE];
-        strlcpy(str, self->str, BUFSIZE);
-        strlcat(str, other->str, BUFSIZE);
+    if ((self->type == LISPY_VAL_STR) && (other->type == LISPY_VAL_STR)) {
+        size_t joined_len = self->len + other->len + 1;
+        char* str = MALLOC(joined_len);
+        strlcpy(str, self->str, joined_len);
+        strlcat(str, other->str, joined_len);
         val_del(self);
         val_del(other);
-        return val_str(str);
+        Value* joined = val_str(str);
+        FREE(str);
+        return joined;
     }
     // For each cell in 'other' add it to 'self'
     for (int i = 0; i < other->count; i++) {
-        ASSERT(NULL != other->cell[i]);
+        ASSERT(other->cell[i] != NULL);
         self = val_add(self, other->cell[i]);
     }
     // Delete the empty 'other' and return 'self'
@@ -246,15 +250,15 @@ Value* val_join(Value* self, Value* other) {
 }
 
 Value* val_pop(Value* self, const int idx) {
-    ASSERT(NULL != self);
-    LCHECK(
-        self,
-        self->count > idx,
-        "%s passed %d as index but list has a length of %d",
-        __func__,
-        idx,
-        self->count
-    );
+    ASSERT(self != NULL);
+    if (idx < 0 || self->count <= idx) {
+        return val_err(
+            "%s passed %d as index but list has a length of %d",
+            __func__,
+            idx,
+            self->count
+        );
+    }
     // Find the item at "i"
     Value* value = self->cell[idx];
     // Shift memory after the item at "i" over the top
@@ -271,18 +275,18 @@ Value* val_pop(Value* self, const int idx) {
 }
 
 Value* val_take(Value* self, const int idx) {
-    ASSERT(NULL != self);
+    ASSERT(self != NULL);
     Value* value = val_pop(self, idx);
     val_del(self);
     return value;
 }
 
 Value* val_call(Environment* env, Value* fn, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != fn);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(fn != NULL);
+    ASSERT(args != NULL);
     // If Function, then simply call that
-    if (NULL != fn->builtin) {
+    if (fn->builtin != NULL) {
         return fn->builtin(env, args);
     }
     // Record argument counts
@@ -291,7 +295,7 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
     // While arguments still remain to be processed
     while (args->count) {
         // If we've run out of formal arguments to bind
-        if (0 == fn->formals->count) {
+        if (fn->formals->count == 0) {
             val_del(args);
             return val_err(
                 "Function passed too many arguments. Got %i. Expected %i.",
@@ -302,9 +306,9 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
         // Pop the first symbol from the formals
         Value* sym = val_pop(fn->formals, 0);
         // Special case to deal with '&'
-        if (0 == strcmp(sym->sym, "&")) {
+        if (strcmp(sym->sym, "&") == 0) {
             // Ensure "&" is followed by another symbol
-            if (1 != fn->formals->count) {
+            if (fn->formals->count != 1) {
                 val_del(args);
                 return val_err(
                     "Function format invalid. Symbol '&' not followed by single symbol."
@@ -327,9 +331,9 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
     }
     // Argument list is now bound so can be cleaned up
     val_del(args);
-    if (0 < fn->formals->count && 0 == strcmp(fn->formals->cell[0]->sym, "&")) {
+    if (fn->formals->count > 0 && strcmp(fn->formals->cell[0]->sym, "&") == 0) {
         // Check to ensure that & is not passed invalidly
-        if (2 != fn->formals->count) {
+        if (fn->formals->count != 2) {
             return val_err(
                 "Function format invalid. Symbol '&' not followed by single symbol."
             );
@@ -346,15 +350,15 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
         val_del(val);
     }
     // If all formals have been bound evaluate
-    if (0 == fn->formals->count) {
+    if (fn->formals->count == 0) {
         // Set environment parent to evaluation environment
         fn->env->parent = env;
         // Evaluate and return
         Value* new_sexpr = val_sexpr();
         Value* body_copy = val_copy(fn->body);
-        ASSERT(NULL != new_sexpr);
-        ASSERT(NULL != body_copy);
-        ASSERT(NULL != fn->env);
+        ASSERT(new_sexpr != NULL);
+        ASSERT(body_copy != NULL);
+        ASSERT(fn->env != NULL);
         return builtin_eval(fn->env, val_add(new_sexpr, body_copy));
     }
     // Otherwise return partially evaluated function
@@ -362,8 +366,8 @@ Value* val_call(Environment* env, Value* fn, Value* args) {
 }
 
 int val_eq(const Value* self, const Value* other) {
-    ASSERT(NULL != self);
-    ASSERT(NULL != other);
+    ASSERT(self != NULL);
+    ASSERT(other != NULL);
     // Different types are always unequal
     if (self->type != other->type) {
         return false;
@@ -379,10 +383,10 @@ int val_eq(const Value* self, const Value* other) {
         }
         // Compare string values
         case LISPY_VAL_ERR: {
-            return 0 == strcmp(self->err, other->err);
+            return strcmp(self->err, other->err) == 0;
         }
         case LISPY_VAL_SYM: {
-            return 0 == strcmp(self->sym, other->sym);
+            return strcmp(self->sym, other->sym) == 0;
         }
         // If builtin compare, otherwise compare formals and body
         case LISPY_VAL_FN: {
@@ -393,7 +397,7 @@ int val_eq(const Value* self, const Value* other) {
                 && val_eq(self->body, other->body);
         }
         case LISPY_VAL_STR: {
-            return 0 == strcmp(self->str, other->str);
+            return strcmp(self->str, other->str) == 0;
         }
         // If list compare every individual element
         case LISPY_VAL_QEXPR:
@@ -415,8 +419,8 @@ int val_eq(const Value* self, const Value* other) {
 }
 
 void val_del(Value* self) {
-    ASSERT(NULL != self);
-    if (NULL == self) {
+    ASSERT(self != NULL);
+    if (self == NULL) {
         return;
     }
     switch (self->type) {
@@ -426,14 +430,14 @@ void val_del(Value* self) {
         }
         // For Errors or Symbols free the string data
         case LISPY_VAL_ERR: {
-            if (NULL == self->err) {
+            if (self->err == NULL) {
                 break;
             }
             FREE(self->err);
             break;
         }
         case LISPY_VAL_SYM: {
-            if (NULL == self->sym) {
+            if (self->sym == NULL) {
                 break;
             }
             FREE(self->sym);
@@ -448,7 +452,7 @@ void val_del(Value* self) {
             break;
         }
         case LISPY_VAL_STR: {
-            if (NULL == self->str) {
+            if (self->str == NULL) {
                 break;
             }
             FREE(self->str);

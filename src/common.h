@@ -166,10 +166,11 @@ Value* val_qexpr(void);
 Value* val_fn(Function fn);
 
 /// @brief Constructor for lambda expressions
+/// @param env The environment where the lambda expression is created
 /// @param formals The formal arguments of the lambda expression
 /// @param body The body of the function
 /// @return A Lispy value that contains the lambda function
-Value* val_lambda(Value* formals, Value* body);
+Value* val_lambda(Environment* env, Value* formals, Value* body);
 
 //--- Methods for Values -------------------------------------------------------
 

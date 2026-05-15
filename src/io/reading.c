@@ -4,9 +4,9 @@
 //==== READING =================================================================
 
 Value* val_read_num(const mpc_ast_t* tree) {
-    ASSERT(NULL != tree);
+    ASSERT(tree != NULL);
     errno = 0;
-    if (NULL == strchr(tree->contents, '.')) {
+    if (strchr(tree->contents, '.') == NULL) {
         long x = strtol(tree->contents, NULL, 10);
         return errno != ERANGE ? val_num(x) : val_err("invalid number");
     }
@@ -15,7 +15,7 @@ Value* val_read_num(const mpc_ast_t* tree) {
 }
 
 Value* val_read(mpc_ast_t* tree) {
-    ASSERT(NULL != tree);
+    ASSERT(tree != NULL);
 
     // If Symbol, String or Number return conversion to that type
     if (strstr(tree->tag, "number")) {
@@ -29,7 +29,7 @@ Value* val_read(mpc_ast_t* tree) {
     }
     // If root (>) or sexpr then create empty list
     Value* x = NULL;
-    if (0 == strcmp(tree->tag, ">")) {
+    if (strcmp(tree->tag, ">") == 0) {
         x = val_sexpr();
     }
     if (strstr(tree->tag, "sexpr")) {
@@ -40,19 +40,19 @@ Value* val_read(mpc_ast_t* tree) {
     }
     // Fill this list with any valid expression contained within
     for (int i = 0; i < tree->children_num; i++) {
-        if (0 == strcmp(tree->children[i]->contents, "(")) {
+        if (strcmp(tree->children[i]->contents, "(") == 0) {
             continue;
         }
-        if (0 == strcmp(tree->children[i]->contents, ")")) {
+        if (strcmp(tree->children[i]->contents, ")") == 0) {
             continue;
         }
-        if (0 == strcmp(tree->children[i]->contents, "{")) {
+        if (strcmp(tree->children[i]->contents, "{") == 0) {
             continue;
         }
-        if (0 == strcmp(tree->children[i]->contents, "}")) {
+        if (strcmp(tree->children[i]->contents, "}") == 0) {
             continue;
         }
-        if (0 == strcmp(tree->children[i]->tag, "regex")) {
+        if (strcmp(tree->children[i]->tag, "regex") == 0) {
             continue;
         }
         if (strstr(tree->children[i]->tag, "comment")) {
@@ -64,7 +64,7 @@ Value* val_read(mpc_ast_t* tree) {
 }
 
 Value* val_read_str(mpc_ast_t* tree) {
-    ASSERT(NULL != tree);
+    ASSERT(tree != NULL);
     // Cut off final quote character
     tree->contents[strlen(tree->contents) - 1] = '\0';
     // Copy the string missing out the first quote character

@@ -2,15 +2,15 @@
 
 //---- Equality comparison functions -------------------------------------------
 Value* builtin_cmp(Environment* env, Value* args, char* op) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
-    ASSERT(NULL != op);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    ASSERT(op != NULL);
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
     int r;
-    if (0 == strcmp(op, "==")) {
+    if (strcmp(op, "==") == 0) {
         r = val_eq(args->cell[0], args->cell[1]);
-    } else if (0 == strcmp(op, "!=")) {
+    } else if (strcmp(op, "!=") == 0) {
         r = !val_eq(args->cell[0], args->cell[1]);
     } else {
         return val_err("Error during comparison: Neither == nor != used!");
@@ -20,13 +20,13 @@ Value* builtin_cmp(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_eq(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_cmp(env, args, "==");
 }
 
 Value* builtin_ne(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_cmp(env, args, "!=");
 }

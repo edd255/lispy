@@ -6,12 +6,13 @@
 #include "main.h"
 
 Value* builtin_env(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    LCHECK_NUM(__func__, args, 0);
     Value* x = val_qexpr();
     for (int i = 0; i < env->count; i++) {
         Value* y = val_sym(env->syms[i]);
-        ASSERT(NULL != y);
+        ASSERT(y != NULL);
         x = val_add(x, y);
     }
     val_del(args);
@@ -19,8 +20,8 @@ Value* builtin_env(Environment* env, Value* args) {
 }
 
 Value* builtin_fun(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
@@ -28,7 +29,7 @@ Value* builtin_fun(Environment* env, Value* args) {
     LCHECK_QEXPR_NOT_EMPTY(__func__, args, 1);
     Value* fn_body = val_pop(args, 1);
     Value* fn_args = builtin_tail(env, val_copy(args));
-    Value* fn_lambda = val_lambda(fn_args, fn_body);
+    Value* fn_lambda = val_lambda(env, fn_args, fn_body);
     Value* fn_name = val_take(builtin_head(env, args), 0);
     env_def(env, fn_name, fn_lambda);
     val_del(fn_lambda);
@@ -37,8 +38,8 @@ Value* builtin_fun(Environment* env, Value* args) {
 }
 
 Value* builtin_load(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_STR);
     // Parse file given by string name
@@ -46,16 +47,16 @@ Value* builtin_load(Environment* env, Value* args) {
     mpc_parser_t* lispy = get_lispy_parser();
     if (mpc_parse_contents(args->cell[0]->str, lispy, &parse_result)) {
         // Read contents
-        ASSERT(NULL != parse_result.output);
+        ASSERT(parse_result.output != NULL);
         Value* expr = val_read(parse_result.output);
-        ASSERT(NULL != expr);
+        ASSERT(expr != NULL);
         mpc_ast_delete(parse_result.output);
         // Evaluate each expression
         while (expr->count) {
             Value* x = val_eval(env, val_pop(expr, 0));
 
             // If evaluation leads to error print it
-            if (LISPY_VAL_ERR == x->type) {
+            if (x->type == LISPY_VAL_ERR) {
                 val_println(x);
             }
             val_del(x);

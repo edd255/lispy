@@ -7,16 +7,16 @@
 
 //==== List functions ==========================================================
 Value* builtin_list(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     args->type = LISPY_VAL_QEXPR;
     return args;
 }
 
 Value* builtin_head(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -48,8 +48,8 @@ Value* builtin_head(Environment* env, Value* args) {
 }
 
 Value* builtin_tail(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -60,14 +60,14 @@ Value* builtin_tail(Environment* env, Value* args) {
             Value* v = val_take(args, 0);
             // Delete first element and return
             Value* y = val_pop(v, 0);
-            ASSERT(NULL != y);
+            ASSERT(y != NULL);
             val_del(y);
             return v;
         }
         case LISPY_VAL_STR: {
             LCHECK_STR_NOT_EMPTY(__func__, args, 0);
             char* str = (args->cell[0]->str);
-            if (NULL == str || '\0' == str[0] || '\0' == str[1]) {
+            if (str == NULL || str[0] == '\0' || str[1] == '\0') {
                 val_del(args);
                 return val_err("Function '%s' needs a longer string", __func__);
             }
@@ -90,8 +90,8 @@ Value* builtin_tail(Environment* env, Value* args) {
 }
 
 Value* builtin_eval(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
     Value* x = val_take(args, 0);
@@ -100,8 +100,8 @@ Value* builtin_eval(Environment* env, Value* args) {
 }
 
 Value* builtin_join(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     switch (args->cell[0]->type) {
@@ -119,7 +119,7 @@ Value* builtin_join(Environment* env, Value* args) {
         }
     }
     Value* x = val_pop(args, 0);
-    ASSERT(NULL != x);
+    ASSERT(x != NULL);
     while (args->count) {
         x = val_join(x, val_pop(args, 0));
     }
@@ -128,24 +128,19 @@ Value* builtin_join(Environment* env, Value* args) {
 }
 
 Value* builtin_cons(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 2);
-    LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
+    LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
     UNUSED(env);
-    if (LISPY_VAL_QEXPR != args->cell[0]->type) {
-        Value* x = val_add(val_qexpr(), val_pop(args, 0));
-        x = val_join(x, val_take(args, 0));
-        return x;
-    }
-    Value* x = val_pop(args, 0);
+    Value* x = val_add(val_qexpr(), val_pop(args, 0));
     x = val_join(x, val_take(args, 0));
     return x;
 }
 
 Value* builtin_len(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     UNUSED(env);
@@ -156,7 +151,7 @@ Value* builtin_len(Environment* env, Value* args) {
             break;
         }
         case LISPY_VAL_STR: {
-            ASSERT(NULL != args->cell[0]->str);
+            ASSERT(args->cell[0]->str != NULL);
             num = val_num(args->cell[0]->len);
             break;
         }
@@ -166,8 +161,8 @@ Value* builtin_len(Environment* env, Value* args) {
 }
 
 Value* builtin_pack(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     Value* eval = val_sexpr();
     val_add(eval, val_pop(args, 0));
@@ -181,8 +176,8 @@ Value* builtin_pack(Environment* env, Value* args) {
 }
 
 Value* builtin_unpack(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
@@ -198,8 +193,8 @@ Value* builtin_unpack(Environment* env, Value* args) {
 }
 
 Value* builtin_nth(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -208,6 +203,7 @@ Value* builtin_nth(Environment* env, Value* args) {
     Value* arg = args->cell[1];
     switch (arg->type) {
         case LISPY_VAL_QEXPR: {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, idx);
             LCHECK_IDX_QEXPR(__func__, args, 1, idx);
             Value* nth_element = val_pop(arg, 0);
             for (int i = idx; i > 0; i--) {
@@ -218,7 +214,8 @@ Value* builtin_nth(Environment* env, Value* args) {
             return nth_element;
         }
         case LISPY_VAL_STR: {
-            LCHECK_IDX_STR(__func__, args, 1, (unsigned long)idx);
+            LCHECK_IDX_QEXPR_NEG(__func__, args, idx);
+            LCHECK_IDX_STR(__func__, args, 1, idx);
             const char nth_element[2] = {(args->cell[1]->str)[idx], '\0'};
             val_del(args);
             return val_str(nth_element);
@@ -234,6 +231,7 @@ Value* builtin_nth(Environment* env, Value* args) {
 }
 
 Value* builtin_first(Environment* env, Value* args) {
+    LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     Value* nth_args = val_qexpr();
     nth_args = val_add(nth_args, val_num(0));
@@ -244,6 +242,7 @@ Value* builtin_first(Environment* env, Value* args) {
 }
 
 Value* builtin_second(Environment* env, Value* args) {
+    LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     Value* nth_args = val_qexpr();
     nth_args = val_add(nth_args, val_num(1));
@@ -254,6 +253,7 @@ Value* builtin_second(Environment* env, Value* args) {
 }
 
 Value* builtin_third(Environment* env, Value* args) {
+    LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     Value* nth_args = val_qexpr();
     nth_args = val_add(nth_args, val_num(2));
@@ -264,10 +264,12 @@ Value* builtin_third(Environment* env, Value* args) {
 }
 
 Value* builtin_last(Environment* env, Value* args) {
+    LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
-    Value* nth_args = val_qexpr();
     switch (args->cell[0]->type) {
         case LISPY_VAL_QEXPR: {
+            LCHECK_QEXPR_NOT_EMPTY(__func__, args, 0);
+            Value* nth_args = val_qexpr();
             nth_args = val_add(nth_args, val_num(args->cell[0]->count - 1));
             nth_args = val_add(nth_args, val_pop(args, 0));
             Value* last = builtin_nth(env, nth_args);
@@ -275,6 +277,8 @@ Value* builtin_last(Environment* env, Value* args) {
             return last;
         }
         case LISPY_VAL_STR: {
+            LCHECK_STR_NOT_EMPTY(__func__, args, 0);
+            Value* nth_args = val_qexpr();
             size_t len = args->cell[0]->len;
             nth_args = val_add(nth_args, val_num(len - 1));
             nth_args = val_add(nth_args, val_pop(args, 0));
@@ -293,8 +297,9 @@ Value* builtin_last(Environment* env, Value* args) {
 }
 
 Value* builtin_elem(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_NUM, LISPY_VAL_STR);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
     const Value* needle = args->cell[0];
@@ -304,7 +309,7 @@ Value* builtin_elem(Environment* env, Value* args) {
             LCHECK_TYPE(__func__, args, 1, LISPY_VAL_STR);
             const char* ptr = strstr(haystack->str, needle->str);
             val_del(args);
-            return val_num(NULL != ptr);
+            return val_num(ptr != NULL);
         }
         case LISPY_VAL_NUM: {
             for (int i = 0; i < haystack->count; i++) {
@@ -314,7 +319,7 @@ Value* builtin_elem(Environment* env, Value* args) {
                 eq_args = val_add(eq_args, cp_elem);
                 eq_args = val_add(eq_args, list_elem);
                 Value* res = builtin_eq(env, eq_args);
-                if (1 == res->num) {
+                if (res->num == 1) {
                     val_del(args);
                     return res;
                 }
@@ -334,8 +339,8 @@ Value* builtin_elem(Environment* env, Value* args) {
 }
 
 Value* builtin_init(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -350,13 +355,12 @@ Value* builtin_init(Environment* env, Value* args) {
             LCHECK_STR_NOT_EMPTY(__func__, args, 0);
             char* old_str = args->cell[0]->str;
             size_t length = args->cell[0]->len;
-            if (1 == length) {
+            if (length == 1) {
                 val_del(args);
                 return val_str("");
             }
             char* init_str = MALLOC(length);
-            strlcpy(init_str, old_str, length - 1);
-            init_str[length - 1] = '\0';
+            strlcpy(init_str, old_str, length);
             val_del(args);
             Value* init = val_str(init_str);
             FREE(init_str);
@@ -373,8 +377,8 @@ Value* builtin_init(Environment* env, Value* args) {
 }
 
 Value* builtin_take(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -383,11 +387,12 @@ Value* builtin_take(Environment* env, Value* args) {
     Value* expr = args->cell[1];
     switch (expr->type) {
         case LISPY_VAL_QEXPR: {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
             if (num->num > expr->count) {
                 Value* err = val_err(
-                    "'%s' passed %d but qexpr only has %d elements",
+                    "'%s' passed %li but qexpr only has %d elements",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     expr->count
                 );
                 val_del(args);
@@ -402,11 +407,12 @@ Value* builtin_take(Environment* env, Value* args) {
         }
         case LISPY_VAL_STR: {
             size_t len = expr->len;
-            if ((unsigned long)num->num > len) {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
+            if (num->num > (long)len) {
                 Value* err = val_err(
-                    "'%s' passed %d but string only has %d char",
+                    "'%s' passed %li but string only has %zu char",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     len
                 );
                 val_del(args);
@@ -430,8 +436,8 @@ Value* builtin_take(Environment* env, Value* args) {
 }
 
 Value* builtin_drop(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -440,11 +446,12 @@ Value* builtin_drop(Environment* env, Value* args) {
     Value* expr = args->cell[1];
     switch (expr->type) {
         case LISPY_VAL_QEXPR: {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
             if (num->num > expr->count) {
                 Value* err = val_err(
-                    "'%s' passed %d but qexpr only has %d elements",
+                    "'%s' passed %li but qexpr only has %d elements",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     expr->count
                 );
                 val_del(args);
@@ -459,18 +466,18 @@ Value* builtin_drop(Environment* env, Value* args) {
         }
         case LISPY_VAL_STR: {
             size_t len = expr->len;
-            if ((unsigned long)num->num > len) {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
+            if (num->num > (long)len) {
                 Value* err = val_err(
-                    "'%s' passed %d but string only has %d char",
+                    "'%s' passed %li but string only has %zu char",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     len
                 );
                 val_del(args);
                 return err;
             }
-            memmove(expr->str, expr->str + num->num, len - num->num + 1);
-            Value* res = val_copy(expr);
+            Value* res = val_str(expr->str + num->num);
             val_del(args);
             return res;
         }
@@ -485,8 +492,8 @@ Value* builtin_drop(Environment* env, Value* args) {
 }
 
 Value* builtin_split(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_NUM);
@@ -495,11 +502,12 @@ Value* builtin_split(Environment* env, Value* args) {
     Value* expr = args->cell[1];
     switch (expr->type) {
         case LISPY_VAL_QEXPR: {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
             if (num->num > expr->count) {
                 Value* err = val_err(
-                    "'%s' passed %d but qexpr only has %d elements",
+                    "'%s' passed %li but qexpr only has %d elements",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     expr->count
                 );
                 val_del(args);
@@ -519,11 +527,12 @@ Value* builtin_split(Environment* env, Value* args) {
         }
         case LISPY_VAL_STR: {
             size_t len = expr->len;
-            if ((unsigned long)num->num > len) {
+            LCHECK_IDX_QEXPR_NEG(__func__, args, num->num);
+            if (num->num > (long)len) {
                 Value* err = val_err(
-                    "'%s' passed %d but string only has %d char",
+                    "'%s' passed %li but string only has %zu char",
                     __func__,
-                    num->num,
+                    (long)num->num,
                     len
                 );
                 val_del(args);
@@ -557,8 +566,8 @@ Value* builtin_split(Environment* env, Value* args) {
 }
 
 Value* builtin_filter(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPES(__func__, args, 1, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -566,14 +575,34 @@ Value* builtin_filter(Environment* env, Value* args) {
     switch (args->cell[1]->type) {
         case LISPY_VAL_QEXPR: {
             Value* qexpr = args->cell[1];
-            Value* copy = val_copy(args->cell[1]);
             Value* result = val_qexpr();
             for (int i = 0; i < qexpr->count; i++) {
-                Value* val = val_eval(env, val_pop(copy, 0));
+                Value* val = val_eval(env, val_copy(qexpr->cell[i]));
                 Value* arg = val_add(val_sexpr(), val_copy(val));
                 Value* lambda = val_copy(fn);
                 Value* condition = val_call(env, lambda, arg);
-                if (1 == condition->num) {
+                if (condition->type == LISPY_VAL_ERR) {
+                    val_del(val);
+                    val_del(lambda);
+                    val_del(args);
+                    val_del(result);
+                    return condition;
+                }
+                if (LISPY_VAL_NUM != condition->type) {
+                    Value* err = val_err(
+                        "'%s' expected predicate to return %s but got %s",
+                        __func__,
+                        ltype_name(LISPY_VAL_NUM),
+                        ltype_name(condition->type)
+                    );
+                    val_del(val);
+                    val_del(condition);
+                    val_del(lambda);
+                    val_del(args);
+                    val_del(result);
+                    return err;
+                }
+                if (condition->num == 1) {
                     val_add(result, val_copy(val));
                 }
                 val_del(val);
@@ -581,17 +610,39 @@ Value* builtin_filter(Environment* env, Value* args) {
                 val_del(lambda);
             }
             val_del(args);
-            val_del(copy);
             return result;
         }
         case LISPY_VAL_STR: {
             const char* str = args->cell[1]->str;
             Value* result = val_qexpr();
-            for (unsigned long i = 0; i < strlen(str); i++) {
+            for (size_t i = 0; i < args->cell[1]->len; i++) {
+                const char letter[2] = {str[i], '\0'};
                 Value* lambda = val_copy(fn);
-                Value* val = val_str(&str[i]);
-                Value* condition = val_call(env, lambda, val);
-                if (1 == condition->num) {
+                Value* val = val_str(letter);
+                Value* arg = val_add(val_sexpr(), val_copy(val));
+                Value* condition = val_call(env, lambda, arg);
+                if (condition->type == LISPY_VAL_ERR) {
+                    val_del(val);
+                    val_del(lambda);
+                    val_del(args);
+                    val_del(result);
+                    return condition;
+                }
+                if (LISPY_VAL_NUM != condition->type) {
+                    Value* err = val_err(
+                        "'%s' expected predicate to return %s but got %s",
+                        __func__,
+                        ltype_name(LISPY_VAL_NUM),
+                        ltype_name(condition->type)
+                    );
+                    val_del(val);
+                    val_del(condition);
+                    val_del(lambda);
+                    val_del(args);
+                    val_del(result);
+                    return err;
+                }
+                if (condition->num == 1) {
                     val_add(result, val_copy(val));
                 }
                 val_del(val);
@@ -612,8 +663,8 @@ Value* builtin_filter(Environment* env, Value* args) {
 }
 
 Value* builtin_reverse(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPES(__func__, args, 0, LISPY_VAL_QEXPR, LISPY_VAL_STR);
@@ -628,13 +679,14 @@ Value* builtin_reverse(Environment* env, Value* args) {
             return result;
         }
         case LISPY_VAL_STR: {
-            Value* val = args->cell[0];
-            int len = strlen(val->str);
-            for (int i = 0, j = len - 1; i <= j; i++, j--) {
+            Value* val = val_pop(args, 0);
+            for (size_t i = 0; i < val->len / 2; i++) {
+                size_t j = val->len - i - 1;
                 char c = val->str[i];
                 val->str[i] = val->str[j];
                 val->str[j] = c;
             }
+            val_del(args);
             return val;
         }
     }
@@ -648,8 +700,8 @@ Value* builtin_reverse(Environment* env, Value* args) {
 }
 
 Value* builtin_map(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
@@ -658,10 +710,9 @@ Value* builtin_map(Environment* env, Value* args) {
     switch (args->cell[1]->type) {
         case LISPY_VAL_QEXPR: {
             Value* qexpr = args->cell[1];
-            Value* copy = val_copy(args->cell[1]);
             Value* result = val_qexpr();
             for (int i = 0; i < qexpr->count; i++) {
-                Value* val = val_eval(env, val_pop(copy, 0));
+                Value* val = val_eval(env, val_copy(qexpr->cell[i]));
                 Value* arg = val_add(val_sexpr(), val_copy(val));
                 Value* lambda = val_copy(fn);
                 Value* res = val_call(env, lambda, arg);
@@ -670,16 +721,17 @@ Value* builtin_map(Environment* env, Value* args) {
                 val_del(lambda);
             }
             val_del(args);
-            val_del(copy);
             return result;
         }
         case LISPY_VAL_STR: {
             const char* str = args->cell[1]->str;
             Value* result = val_qexpr();
-            for (unsigned long i = 0; i < strlen(str); i++) {
+            for (size_t i = 0; i < args->cell[1]->len; i++) {
+                const char letter[2] = {str[i], '\0'};
                 Value* lambda = val_copy(fn);
-                Value* val = val_str(&str[i]);
-                Value* res = val_call(env, lambda, val);
+                Value* val = val_str(letter);
+                Value* arg = val_add(val_sexpr(), val_copy(val));
+                Value* res = val_call(env, lambda, arg);
                 val_add(result, res);
                 val_del(val);
                 val_del(lambda);
@@ -698,18 +750,16 @@ Value* builtin_map(Environment* env, Value* args) {
 }
 
 Value* builtin_lookup(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 1, LISPY_VAL_QEXPR);
-    Value* elem = val_eval(env, val_copy(args->cell[0]));
     Value* list = args->cell[1];
-    Value* result = NULL;
     for (int i = 0; i < list->count; i++) {
-        Value* pair = list->cell[0];
+        Value* pair = list->cell[i];
         LCHECK(
             args,
-            LISPY_VAL_QEXPR == pair->type,
+            pair->type == LISPY_VAL_QEXPR,
             "'%s' expected a qexpr at index %d but got %s",
             __func__,
             i,
@@ -717,26 +767,34 @@ Value* builtin_lookup(Environment* env, Value* args) {
         );
         LCHECK(
             args,
-            2 == pair->count,
+            pair->count == 2,
             "'%s' expected a 2 elements at index %d but got %d",
             __func__,
             i,
             pair->count
         );
+    }
+    Value* elem = val_eval(env, val_copy(args->cell[0]));
+    Value* result = NULL;
+    for (int i = 0; i < list->count; i++) {
+        Value* pair = list->cell[i];
         Value* key = val_eval(env, val_copy(pair->cell[0]));
         Value* value = pair->cell[1];
         if (val_eq(key, elem)) {
             result = val_copy(value);
+            val_del(key);
             break;
         }
+        val_del(key);
     }
+    val_del(elem);
     val_del(args);
-    return NULL == result ? val_sexpr() : val_eval(env, result);
+    return result == NULL ? val_sexpr() : val_eval(env, result);
 }
 
 Value* builtin_zip(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 2);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -756,25 +814,36 @@ Value* builtin_zip(Environment* env, Value* args) {
 }
 
 Value* builtin_unzip(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
-    Value* result = val_qexpr();
     Value* list = args->cell[0];
-    Value* list1 = val_qexpr();
-    Value* list2 = val_qexpr();
     for (int i = 0; i < list->count; i++) {
         Value* pair = list->cell[i];
         LCHECK(
             args,
-            2 == pair->count,
+            pair->type == LISPY_VAL_QEXPR,
+            "'%s' expected a qexpr at index %d but got %s",
+            __func__,
+            i,
+            ltype_name(pair->type)
+        );
+        LCHECK(
+            args,
+            pair->count == 2,
             "'%s' expected a pair at index %d but got %d",
             __func__,
             i,
-            args->cell[i]->count
+            pair->count
         );
+    }
+    Value* result = val_qexpr();
+    Value* list1 = val_qexpr();
+    Value* list2 = val_qexpr();
+    for (int i = 0; i < list->count; i++) {
+        Value* pair = list->cell[i];
         val_add(list1, val_copy(pair->cell[0]));
         val_add(list2, val_copy(pair->cell[1]));
     }
@@ -785,24 +854,30 @@ Value* builtin_unzip(Environment* env, Value* args) {
 }
 
 Value* builtin_foldl(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 3);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_FN);
     LCHECK_TYPE(__func__, args, 2, LISPY_VAL_QEXPR);
+    LCHECK_QEXPR_NOT_EMPTY(__func__, args, 2);
     Value* f = args->cell[0];
-    Value* x = val_eval(env, args->cell[1]);
+    Value* x = val_eval(env, val_copy(args->cell[1]));
     Value* ys = args->cell[2];
     Value* f_args = val_qexpr();
     val_add(f_args, val_copy(x));
     val_add(f_args, val_copy(ys->cell[0]));
-    Value* z = val_call(env, f, f_args);
+    Value* lambda = val_copy(f);
+    Value* z = val_call(env, lambda, f_args);
+    val_del(lambda);
+    val_del(x);
     for (int i = 1; i < ys->count; i++) {
         f_args = val_qexpr();
         val_add(f_args, z);
         val_add(f_args, val_copy(ys->cell[i]));
-        z = val_call(env, f, f_args);
+        lambda = val_copy(f);
+        z = val_call(env, lambda, f_args);
+        val_del(lambda);
     }
     val_del(args);
     return z;

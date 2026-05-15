@@ -18,49 +18,79 @@
 
 /// @brief Macro to check types and report errors during runtime
 #define LCHECK_TYPE(fn, args, idx, expect) \
-    LCHECK( \
-        (args), \
-        (args)->cell[idx]->type == ((expect)), \
-        "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s.", \
-        (fn), \
-        (idx), \
-        ltype_name((args)->cell[idx]->type), \
-        ltype_name(expect) \
-    )
+    do { \
+        LCHECK( \
+            (args), \
+            (args)->count > (idx), \
+            "Function '%s' passed incorrect number of arguments. Got %i, Expected at least %i.", \
+            (fn), \
+            (args)->count, \
+            (idx) + 1 \
+        ); \
+        LCHECK( \
+            (args), \
+            (args)->cell[idx]->type == ((expect)), \
+            "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s.", \
+            (fn), \
+            (idx), \
+            ltype_name((args)->cell[idx]->type), \
+            ltype_name(expect) \
+        ); \
+    } while (0)
 
 /// @brief Macro to check two ASSERTion and report errors during runtime
 #define LCHECK_TYPES(fn, args, idx, expect1, expect2) \
-    LCHECK( \
-        (args), \
-        ((args)->cell[idx]->type == ((expect1)) \
-         || (args)->cell[idx]->type == ((expect2))), \
-        "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.", \
-        (fn), \
-        (idx), \
-        ltype_name((args)->cell[idx]->type), \
-        ltype_name(expect1), \
-        ltype_name(expect2) \
-    )
+    do { \
+        LCHECK( \
+            (args), \
+            (args)->count > (idx), \
+            "Function '%s' passed incorrect number of arguments. Got %i, Expected at least %i.", \
+            (fn), \
+            (args)->count, \
+            (idx) + 1 \
+        ); \
+        LCHECK( \
+            (args), \
+            ((args)->cell[idx]->type == ((expect1)) \
+             || (args)->cell[idx]->type == ((expect2))), \
+            "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.", \
+            (fn), \
+            (idx), \
+            ltype_name((args)->cell[idx]->type), \
+            ltype_name(expect1), \
+            ltype_name(expect2) \
+        ); \
+    } while (0)
 
 /// @brief Macro to check whether an index is smaller than a list size
 #define LCHECK_IDX_QEXPR(fn, args, cell_idx, idx) \
     LCHECK( \
         (args), \
-        ((idx) < ((args)->cell[cell_idx]->count)), \
-        "Function '%s' passed index %d but argument has size %d.", \
+        ((long)((args)->cell[cell_idx]->count) > (idx)), \
+        "Function '%s' passed index %li but argument has size %d.", \
         (fn), \
-        (idx), \
-        ((args)->count) \
+        (long)(idx), \
+        ((args)->cell[(cell_idx)]->count) \
+    )
+
+/// @brief Macro to check whether an index is negative
+#define LCHECK_IDX_QEXPR_NEG(fn, args, idx) \
+    LCHECK( \
+        (args), \
+        ((idx) >= 0), \
+        "Function '%s' passed index %li, which is negative.", \
+        (fn), \
+        (long)(idx) \
     )
 
 /// @brief Macro to check whether an index is smaller than a string length
 #define LCHECK_IDX_STR(fn, args, cell_idx, idx) \
     LCHECK( \
         (args), \
-        ((idx) < ((args)->cell[cell_idx]->len)), \
-        "Function '%s' passed index %d but argument has size %d.", \
+        ((long)((args)->cell[cell_idx]->len) > (idx)), \
+        "Function '%s' passed index %li but argument has size %zu.", \
         (fn), \
-        (idx), \
+        (long)(idx), \
         ((args)->cell[(cell_idx)]->len) \
     )
 
@@ -69,7 +99,7 @@
 #define LCHECK_NUM(fn, args, num) \
     LCHECK( \
         (args), \
-        (num) == (args)->count, \
+        (args)->count == (num), \
         "Function '%s' passed incorrect number of arguments. Got %i, Expected %i.", \
         (fn), \
         (args)->count, \
@@ -81,7 +111,7 @@
 #define LCHECK_QEXPR_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
-        (0 != (args)->cell[idx]->count), \
+        ((args)->cell[idx]->count != 0), \
         "Function '%s' passed {} for argument %i.", \
         (fn), \
         (idx) \
@@ -91,7 +121,7 @@
 #define LCHECK_STR_NOT_EMPTY(fn, args, idx) \
     LCHECK( \
         (args), \
-        (0 != (args)->cell[idx]->len), \
+        ((args)->cell[idx]->len != 0), \
         "Function '%s' passed {} for argument %i.", \
         (fn), \
         (idx) \

@@ -7,9 +7,9 @@
 
 //==== Arithmetic functions ====================================================
 Value* builtin_op(Environment* env, Value* args, char* op) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
-    ASSERT(NULL != op);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    ASSERT(op != NULL);
     UNUSED(env);
     LCHECK_TYPES(op, args, 0, LISPY_VAL_NUM, LISPY_VAL_DEC);
     // Ensure all arguments are numbers
@@ -18,9 +18,9 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
     }
     // Pop the first element
     Value* x = val_pop(args, 0);
-    ASSERT(NULL != x);
+    ASSERT(x != NULL);
     // If no arguments and sub then perform unary negation
-    if ((0 == strcmp(op, "-")) && 0 == args->count) {
+    if ((strcmp(op, "-") == 0) && args->count == 0) {
         switch (x->type) {
             case LISPY_VAL_NUM: {
                 x->num = -x->num;
@@ -36,7 +36,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
     while (args->count > 0) {
         // Pop the next element
         Value* y = val_pop(args, 0);
-        ASSERT(NULL != y);
+        ASSERT(y != NULL);
         switch (arithm_op_from_str(op)) {
             case LISPY_ARITHM_ADD: {
                 switch (x->type) {
@@ -83,7 +83,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
             case LISPY_ARITHM_DIV: {
                 switch (x->type) {
                     case LISPY_VAL_NUM: {
-                        if (0 == y->num) {
+                        if (y->num == 0) {
                             val_del(x);
                             val_del(y);
                             x = val_err("Division By Zero!");
@@ -94,7 +94,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
                         break;
                     }
                     case LISPY_VAL_DEC: {
-                        if (0.0 == y->dec) {
+                        if (y->dec == 0.0) {
                             val_del(x);
                             val_del(y);
                             x = val_err("Division By Zero!");
@@ -110,7 +110,7 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
             case LISPY_ARITHM_MOD: {
                 switch (x->type) {
                     case LISPY_VAL_NUM: {
-                        if (0 == y->num) {
+                        if (y->num == 0) {
                             val_del(x);
                             val_del(y);
                             x = val_err("Division By Zero!");
@@ -132,7 +132,12 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
             case LISPY_ARITHM_POW: {
                 switch (x->type) {
                     case LISPY_VAL_NUM: {
-                        x->num = power_long(x->num, y->num);
+                        if (y->num >= 0) {
+                            x->num = power_long(x->num, y->num);
+                        } else {
+                            x->type = LISPY_VAL_DEC;
+                            x->dec = pow(x->num, y->num);
+                        }
                         break;
                     }
                     case LISPY_VAL_DEC: {
@@ -186,56 +191,56 @@ Value* builtin_op(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_add(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "+");
 }
 
 Value* builtin_sub(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "-");
 }
 
 Value* builtin_mul(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "*");
 }
 
 Value* builtin_div(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "/");
 }
 
 Value* builtin_mod(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "%");
 }
 
 Value* builtin_pow(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "^");
 }
 
 Value* builtin_max(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "max");
 }
 
 Value* builtin_min(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_op(env, args, "min");
 }
 
 Value* builtin_sum(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -244,7 +249,17 @@ Value* builtin_sum(Environment* env, Value* args) {
     long int_sum = 0;
     bool dec_flag = false;
     for (int i = 0; i < list->count; i++) {
-        LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
+        LCHECK(
+            args,
+            list->cell[i]->type == LISPY_VAL_NUM
+                || list->cell[i]->type == LISPY_VAL_DEC,
+            "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.",
+            __func__,
+            i,
+            ltype_name(list->cell[i]->type),
+            ltype_name(LISPY_VAL_NUM),
+            ltype_name(LISPY_VAL_DEC)
+        );
         switch (list->cell[i]->type) {
             case LISPY_VAL_NUM: {
                 dec_sum += (double)list->cell[i]->num;
@@ -263,8 +278,8 @@ Value* builtin_sum(Environment* env, Value* args) {
 }
 
 Value* builtin_prod(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     LCHECK_NUM(__func__, args, 1);
     LCHECK_TYPE(__func__, args, 0, LISPY_VAL_QEXPR);
@@ -273,7 +288,17 @@ Value* builtin_prod(Environment* env, Value* args) {
     long int_prod = 1;
     bool dec_flag = false;
     for (int i = 0; i < list->count; i++) {
-        LCHECK_TYPES(__func__, list, i, LISPY_VAL_NUM, LISPY_VAL_DEC);
+        LCHECK(
+            args,
+            list->cell[i]->type == LISPY_VAL_NUM
+                || list->cell[i]->type == LISPY_VAL_DEC,
+            "Function '%s' passed incorrect type for argument %i. Got %s, Expected %s or %s.",
+            __func__,
+            i,
+            ltype_name(list->cell[i]->type),
+            ltype_name(LISPY_VAL_NUM),
+            ltype_name(LISPY_VAL_DEC)
+        );
         switch (list->cell[i]->type) {
             case LISPY_VAL_NUM: {
                 dec_prod *= (double)list->cell[i]->num;

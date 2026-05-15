@@ -13,6 +13,8 @@
 /// parser and sets up the command line arguments.
 
 #include <editline/readline.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 #include "builtins.h"
 #include "common.h"
@@ -137,24 +139,29 @@ int main(int argc, const char** argv) {
     // Parse arguments and set up logfile, if necessary
     FILE* log_file = NULL;
     parse_args(argc, argv);
-    if (0 == get_print_logs()) {
+    if (get_print_logs() == 0) {
         log_file = prepare_logfile();
-        log_add_fp(log_file, 0);
+        if (log_file != NULL) {
+            log_add_fp(log_file, 0);
+        }
         log_set_quiet(true);
     }
     // Set up the interpreter
     setup_parser();
     Environment* env = set_env();
     Value* std = NULL;
-    if (0 == get_nostdlib()) {
+    if (get_nostdlib() == 0) {
         std = get_stdlib(env);
     }
-    if (NULL != get_filename()) {
+    if (get_filename() != NULL) {
         file_interpreter(env, get_filename());
     } else {
         cli_interpreter(env);
     }
     cleanup(std, env);
+    if (log_file != NULL) {
+        fclose(log_file);
+    }
     return 0;
 }
 
@@ -195,7 +202,7 @@ void setup_parser(void) {
 
 void cleanup(Value* std, Environment* env) {
     mpc_cleanup(8, number, symbol, sexpr, qexpr, string, comment, expr, lispy);
-    if (NULL != std) {
+    if (std != NULL) {
         val_del(std);
     }
     env_del(env);
@@ -214,16 +221,19 @@ void cli_interpreter(Environment* env) {
     int i = 0;
     while (true) {
         char* input = readline(">>> ");
+        if (input == NULL) {
+            break;
+        }
         add_history(input);
         i++;
-        if (0 == strcmp(input, "exit")) {
+        if (strcmp(input, "exit") == 0) {
             FREE(input);
             break;
         }
         mpc_result_t parse_result;
         if (mpc_parse("<stdin>", input, lispy, &parse_result)) {
             Value* read_result = val_read(parse_result.output);
-            ASSERT(NULL != read_result);
+            ASSERT(read_result != NULL);
             Value* eval_result = val_eval(env, read_result);
             val_println(eval_result);
             val_del(eval_result);
@@ -244,7 +254,7 @@ void file_interpreter(Environment* env, const char* file) {
     // Pass to builtin load and get the result
     Value* x = builtin_load(env, args);
     // If the result is an error, be sure to print it
-    if (LISPY_VAL_ERR == x->type) {
+    if (x->type == LISPY_VAL_ERR) {
         val_println(x);
     }
     val_del(x);
@@ -265,7 +275,7 @@ Environment* set_env(void) {
 
 int get_history(void) {
     const char* cache_dir = getenv("XDG_CACHE_HOME");
-    if (NULL == cache_dir) {
+    if (cache_dir == NULL) {
         return 1;
     }
     size_t history_file_size = strlen(cache_dir) + strlen("/lispy/history") + 1;
@@ -279,7 +289,7 @@ int get_history(void) {
 
 void save_history(const int num_elements) {
     const char* cache_dir = getenv("XDG_CACHE_HOME");
-    if (NULL == cache_dir) {
+    if (cache_dir == NULL) {
         return;
     }
     size_t history_file_size = strlen(cache_dir) + strlen("/lispy/history") + 1;
@@ -293,23 +303,22 @@ void save_history(const int num_elements) {
 
 //--- Logger -------------------------------------------------------------------
 FILE* prepare_logfile(void) {
-    FILE* log = NULL;
-    char* cache_dir = getenv("XDG_CACHE_HOME");
-    if (NULL == cache_dir) {
-        char* tmp_dir = "/tmp";
-        size_t log_file_size = strlen(tmp_dir) + strlen("/lispy/lispy.log") + 1;
-        char* log_file = malloc(log_file_size);
-        strlcpy(log_file, tmp_dir, log_file_size);
-        strlcat(log_file, "/lispy/lispy.log", log_file_size);
-        log = fopen(log_file, "we");
-        free(log_file);
-        return log;
+    const char* cache_dir = getenv("XDG_CACHE_HOME");
+    const char* base_dir = cache_dir == NULL ? "/tmp" : cache_dir;
+    size_t log_dir_size = strlen(base_dir) + strlen("/lispy") + 1;
+    char* log_dir = malloc(log_dir_size);
+    strlcpy(log_dir, base_dir, log_dir_size);
+    strlcat(log_dir, "/lispy", log_dir_size);
+    if (mkdir(log_dir, 0700) != 0 && errno != EEXIST) {
+        free(log_dir);
+        return NULL;
     }
-    size_t log_file_size = strlen(cache_dir) + strlen("/lispy/lispy.log") + 1;
+    size_t log_file_size = strlen(log_dir) + strlen("/lispy.log") + 1;
     char* log_file = malloc(log_file_size);
-    strlcpy(log_file, cache_dir, log_file_size);
-    strlcat(log_file, "/lispy/lispy.log", log_file_size);
-    log = fopen(log_file, "we");
+    strlcpy(log_file, log_dir, log_file_size);
+    strlcat(log_file, "/lispy.log", log_file_size);
+    FILE* log = fopen(log_file, "we");
+    free(log_dir);
     free(log_file);
     return log;
 }

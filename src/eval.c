@@ -5,8 +5,8 @@
 //==== EVALUATION METHODS ======================================================
 
 Value* val_eval(Environment* env, Value* val) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != val);
+    ASSERT(env != NULL);
+    ASSERT(val != NULL);
     // Evaluate symbols
     if (LISPY_VAL_SYM == val->type) {
         Value* x = env_get(env, val);
@@ -22,8 +22,8 @@ Value* val_eval(Environment* env, Value* val) {
 }
 
 Value* val_eval_sexpr(Environment* env, Value* val) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != val);
+    ASSERT(env != NULL);
+    ASSERT(val != NULL);
     // Evaluate Children
     for (int i = 0; i < val->count; i++) {
         val->cell[i] = val_eval(env, val->cell[i]);
@@ -35,12 +35,19 @@ Value* val_eval_sexpr(Environment* env, Value* val) {
         }
     }
     // Empty Expression
-    if (0 == val->count) {
+    if (val->count == 0) {
         return val;
     }
     // Single Expression
-    if (1 == val->count) {
-        return val_eval(env, val_take(val, 0));
+    if (val->count == 1) {
+        Value* x = val_take(val, 0);
+        if (LISPY_VAL_FN != x->type) {
+            return val_eval(env, x);
+        }
+        Value* args = val_sexpr();
+        Value* result = val_call(env, x, args);
+        val_del(x);
+        return result;
     }
     // Ensure first element is a function after evaluation
     Value* fn = val_pop(val, 0);

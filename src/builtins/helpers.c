@@ -20,7 +20,7 @@ enum LISPY_ARITHM_OP arithm_op_from_str(const char* key) {
 #pragma unroll
     for (int i = 0; i < NUMBER_OF_ARITHM_OPS; i++) {
         lispy_arithm_op_map_t larithmop = lispy_arithm_ops_map[i];
-        if (0 == strcmp(larithmop.key, key)) {
+        if (strcmp(larithmop.key, key) == 0) {
             return larithmop.value;
         }
     }
@@ -28,19 +28,20 @@ enum LISPY_ARITHM_OP arithm_op_from_str(const char* key) {
 }
 
 long power_long(long base, long exponent) {
-    if (0 == exponent) {
+    if (exponent == 0) {
         return 1;
     }
-    if (1 == exponent) {
+    if (exponent == 1) {
         return base;
     }
     long result = 1;
     bool neg = false;
-    if (0 > exponent) {
+    if (exponent < 0) {
         neg = true;
+        exponent *= -1;
     }
-    while (0 < exponent) {
-        if (1 == exponent % 2) {
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
             result *= base;
         }
         base *= base;
@@ -60,7 +61,7 @@ enum LISPY_LOGIC_OP logic_op_from_str(const char* key) {
 #pragma unroll
     for (int i = 0; i < NUMBER_OF_LOGIC_OPS; i++) {
         lispy_logic_op_map_t llogic = lispy_logic_ops_map[i];
-        if (0 == strcmp(llogic.key, key)) {
+        if (strcmp(llogic.key, key) == 0) {
             return llogic.value;
         }
     }

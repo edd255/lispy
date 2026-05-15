@@ -5,8 +5,8 @@
 
 //==== Logical functions =======================================================
 Value* builtin_logic(Environment* env, Value* args, char* op) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     UNUSED(env);
     int result = 0;
     switch (logic_op_from_str(op)) {
@@ -14,20 +14,20 @@ Value* builtin_logic(Environment* env, Value* args, char* op) {
             LCHECK_NUM(op, args, 2);
             LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
             LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
-            result = !((0 == args->cell[0]->num) || (0 == args->cell[1]->num));
+            result = !((args->cell[0]->num == 0) || (args->cell[1]->num == 0));
             break;
         }
         case LISPY_LOGIC_OR: {
             LCHECK_NUM(op, args, 2);
             LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
             LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
-            result = !((0 == args->cell[0]->num) && (0 == args->cell[1]->num));
+            result = !((args->cell[0]->num == 0) && (args->cell[1]->num == 0));
             break;
         }
         case LISPY_LOGIC_NOT: {
             LCHECK_NUM(op, args, 1);
             LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
-            result = (0 == args->cell[0]->num);
+            result = (args->cell[0]->num == 0);
             break;
         }
         case LISPY_LOGIC_UNKNOWN: {

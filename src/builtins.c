@@ -3,7 +3,7 @@
 //==== BUILTIN METHODS =========================================================
 
 void env_add_builtins(Environment* env) {
-    ASSERT(NULL != env);
+    ASSERT(env != NULL);
     // Variable functions
     env_add_builtin_fn(env, "lambda", builtin_lambda);
     env_add_builtin_fn(env, "def", builtin_def);
@@ -84,9 +84,9 @@ void env_add_builtins(Environment* env) {
 }
 
 void env_add_builtin_fn(Environment* env, char* name, Function fn) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != name);
-    ASSERT(NULL != fn);
+    ASSERT(env != NULL);
+    ASSERT(name != NULL);
+    ASSERT(fn != NULL);
     Value* key = val_sym(name);
     Value* value = val_fn(fn);
     env_put(env, key, value);
@@ -95,9 +95,9 @@ void env_add_builtin_fn(Environment* env, char* name, Function fn) {
 }
 
 void env_add_builtin_const(Environment* env, char* name, Value* value) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != name);
-    ASSERT(NULL != value);
+    ASSERT(env != NULL);
+    ASSERT(name != NULL);
+    ASSERT(value != NULL);
     Value* key = val_sym(name);
     env_put(env, key, value);
     val_del(key);

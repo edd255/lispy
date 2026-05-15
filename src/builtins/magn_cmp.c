@@ -5,21 +5,21 @@
 //==== Comparison functions ====================================================
 //---- Magnitude comparison functions ------------------------------------------
 Value* builtin_ord(Environment* env, Value* args, char* op) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
-    ASSERT(NULL != op);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
+    ASSERT(op != NULL);
     UNUSED(env);
     LCHECK_NUM(op, args, 2);
     LCHECK_TYPE(op, args, 0, LISPY_VAL_NUM);
     LCHECK_TYPE(op, args, 1, LISPY_VAL_NUM);
     int r;
-    if (0 == strcmp(op, ">")) {
+    if (strcmp(op, ">") == 0) {
         r = (args->cell[0]->num > args->cell[1]->num);
-    } else if (0 == strcmp(op, "<")) {
+    } else if (strcmp(op, "<") == 0) {
         r = (args->cell[0]->num < args->cell[1]->num);
-    } else if (0 == strcmp(op, ">=")) {
+    } else if (strcmp(op, ">=") == 0) {
         r = (args->cell[0]->num >= args->cell[1]->num);
-    } else if (0 == strcmp(op, "<=")) {
+    } else if (strcmp(op, "<=") == 0) {
         r = (args->cell[0]->num <= args->cell[1]->num);
     } else {
         return val_err(
@@ -31,25 +31,25 @@ Value* builtin_ord(Environment* env, Value* args, char* op) {
 }
 
 Value* builtin_gt(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_ord(env, args, ">");
 }
 
 Value* builtin_lt(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_ord(env, args, "<");
 }
 
 Value* builtin_ge(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_ord(env, args, ">=");
 }
 
 Value* builtin_le(Environment* env, Value* args) {
-    ASSERT(NULL != env);
-    ASSERT(NULL != args);
+    ASSERT(env != NULL);
+    ASSERT(args != NULL);
     return builtin_ord(env, args, "<=");
 }
