@@ -6,17 +6,8 @@
 
 //=== CONSTRUCTORS =============================================================
 
-#define LVAL_INIT() val_init(__func__, __FILE__, __LINE__)
-
-Value* val_init(const char* fn, const char* file, int line) {
-#ifdef LOG_ALLOCS
-    Value* self = log_malloc(sizeof(Value), fn, file, line);
-#else
-    UNUSED(fn);
-    UNUSED(file);
-    UNUSED(line);
+Value* val_init(void) {
     Value* self = malloc(sizeof(Value));
-#endif
     self->type = 0;
     self->num = 0;
     self->dec = 0.0f;
@@ -35,32 +26,32 @@ Value* val_init(const char* fn, const char* file, int line) {
 
 /* Create a new number type Value */
 Value* val_num(long value) {
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_NUM;
     self->num = value;
     return self;
 }
 
 Value* val_dec(double value) {
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_DEC;
     self->dec = value;
     return self;
 }
 
 Value* val_err(char* fmt, ...) {
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_ERR;
     // Create a va list and initialize it
     va_list arg_list;
     va_start(arg_list, fmt);
     // Allocate 512 bytes of space
-    self->err = MALLOC(BUFSIZE);
+    self->err = malloc(BUFSIZE);
     // printf the error string with a maximum of 511 character
     vsnprintf(self->err, BUFSIZE - 1, fmt, arg_list);
     // Reallocate to number of bytes actually used
     self->len = strlen(self->err);
-    self->err = REALLOC(self->err, self->len + 1);
+    self->err = realloc(self->err, self->len + 1);
     // Cleanup our va list
     va_end(arg_list);
     return self;
@@ -68,26 +59,26 @@ Value* val_err(char* fmt, ...) {
 
 Value* val_sym(char* str) {
     ASSERT(str != NULL);
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_SYM;
     self->len = strlen(str);
-    self->sym = MALLOC(self->len + 1);
+    self->sym = malloc(self->len + 1);
     strlcpy(self->sym, str, self->len + 1);
     return self;
 }
 
 Value* val_str(const char* str) {
     ASSERT(str != NULL);
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_STR;
     self->len = strlen(str);
-    self->str = MALLOC(self->len + 1);
+    self->str = malloc(self->len + 1);
     strlcpy(self->str, str, self->len + 1);
     return self;
 }
 
 Value* val_sexpr(void) {
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_SEXPR;
     self->count = 0;
     self->cell = NULL;
@@ -95,7 +86,7 @@ Value* val_sexpr(void) {
 }
 
 Value* val_qexpr(void) {
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_QEXPR;
     self->count = 0;
     self->cell = NULL;
@@ -104,7 +95,7 @@ Value* val_qexpr(void) {
 
 Value* val_fn(Function fn) {
     ASSERT(fn != NULL);
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_FN;
     self->builtin = fn;
     return self;
@@ -114,7 +105,7 @@ Value* val_lambda(Environment* env, Value* formals, Value* body) {
     ASSERT(env != NULL);
     ASSERT(formals != NULL);
     ASSERT(body != NULL);
-    Value* self = LVAL_INIT();
+    Value* self = val_init();
     self->type = LISPY_VAL_FN;
     // Set builtin to NULL
     self->builtin = NULL;
@@ -130,7 +121,7 @@ Value* val_lambda(Environment* env, Value* formals, Value* body) {
 
 Value* val_copy(const Value* self) {
     ASSERT(self != NULL);
-    Value* x = MALLOC(sizeof(Value));
+    Value* x = malloc(sizeof(Value));
     x->type = self->type;
     switch (self->type) {
         // Copy Functions and Numbers directly
@@ -155,19 +146,19 @@ Value* val_copy(const Value* self) {
         }
         // Copy Strings using malloc and strlcpy
         case LISPY_VAL_ERR: {
-            x->err = MALLOC(self->len + 1);
+            x->err = malloc(self->len + 1);
             strlcpy(x->err, self->err, self->len + 1);
             x->len = self->len;
             break;
         }
         case LISPY_VAL_SYM: {
-            x->sym = MALLOC(self->len + 1);
+            x->sym = malloc(self->len + 1);
             strlcpy(x->sym, self->sym, self->len + 1);
             x->len = self->len;
             break;
         }
         case LISPY_VAL_STR: {
-            x->str = MALLOC(self->len + 1);
+            x->str = malloc(self->len + 1);
             strlcpy(x->str, self->str, self->len + 1);
             x->len = self->len;
             break;
@@ -176,7 +167,7 @@ Value* val_copy(const Value* self) {
         case LISPY_VAL_SEXPR:
         case LISPY_VAL_QEXPR:
             x->count = self->count;
-            x->cell = MALLOC(sizeof(Value*) * x->count);
+            x->cell = malloc(sizeof(Value*) * x->count);
             for (int i = 0; i < x->count; i++) {
                 x->cell[i] = val_copy(self->cell[i]);
             }
@@ -189,7 +180,7 @@ Value* val_add(Value* self, Value* other) {
     ASSERT(self != NULL);
     ASSERT(other != NULL);
     self->count++;
-    self->cell = REALLOC(self->cell, sizeof(Value*) * self->count);
+    self->cell = realloc(self->cell, sizeof(Value*) * self->count);
     self->cell[self->count - 1] = other;
     return self;
 }
@@ -229,13 +220,13 @@ Value* val_join(Value* self, Value* other) {
     // For strings
     if ((self->type == LISPY_VAL_STR) && (other->type == LISPY_VAL_STR)) {
         size_t joined_len = self->len + other->len + 1;
-        char* str = MALLOC(joined_len);
+        char* str = malloc(joined_len);
         strlcpy(str, self->str, joined_len);
         strlcat(str, other->str, joined_len);
         val_del(self);
         val_del(other);
         Value* joined = val_str(str);
-        FREE(str);
+        free(str);
         return joined;
     }
     // For each cell in 'other' add it to 'self'
@@ -244,8 +235,8 @@ Value* val_join(Value* self, Value* other) {
         self = val_add(self, other->cell[i]);
     }
     // Delete the empty 'other' and return 'self'
-    FREE(other->cell);
-    FREE(other);
+    free(other->cell);
+    free(other);
     return self;
 }
 
@@ -270,7 +261,7 @@ Value* val_pop(Value* self, const int idx) {
     // Decrease the count of items in the list
     self->count--;
     // Reallocate the memory used
-    self->cell = REALLOC(self->cell, sizeof(Value*) * self->count);
+    self->cell = realloc(self->cell, sizeof(Value*) * self->count);
     return value;
 }
 
@@ -433,14 +424,14 @@ void val_del(Value* self) {
             if (self->err == NULL) {
                 break;
             }
-            FREE(self->err);
+            free(self->err);
             break;
         }
         case LISPY_VAL_SYM: {
             if (self->sym == NULL) {
                 break;
             }
-            FREE(self->sym);
+            free(self->sym);
             break;
         }
         case LISPY_VAL_FN: {
@@ -455,7 +446,7 @@ void val_del(Value* self) {
             if (self->str == NULL) {
                 break;
             }
-            FREE(self->str);
+            free(self->str);
             break;
         }
         // If S-Expression or Q-Expression, then delete all elements inside
@@ -464,9 +455,9 @@ void val_del(Value* self) {
             for (int i = 0; i < self->count; i++) {
                 val_del(self->cell[i]);
             }
-            FREE(self->cell);
+            free(self->cell);
             break;
         }
     }
-    FREE(self);
+    free(self);
 }

@@ -2,7 +2,7 @@
 
 //=== ENVIRONMENT ==============================================================
 Environment* env_new(void) {
-    Environment* env = MALLOC(sizeof(Environment));
+    Environment* env = malloc(sizeof(Environment));
     env->parent = NULL;
     env->count = 0;
     env->syms = NULL;
@@ -13,12 +13,12 @@ Environment* env_new(void) {
 void env_del(Environment* env) {
     ASSERT(env != NULL);
     for (int i = 0; i < env->count; i++) {
-        FREE(env->syms[i]);
+        free(env->syms[i]);
         val_del(env->vals[i]);
     }
-    FREE(env->syms);
-    FREE(env->vals);
-    FREE(env);
+    free(env->syms);
+    free(env->vals);
+    free(env);
 }
 
 Value* env_get(Environment* env, Value* key) {
@@ -56,24 +56,24 @@ void env_put(Environment* env, const Value* key, const Value* val) {
     }
     // If no existing entry found allocate space for new entry
     env->count++;
-    env->vals = REALLOC(env->vals, sizeof(Value*) * env->count);
-    env->syms = REALLOC(env->syms, sizeof(char*) * env->count);
+    env->vals = realloc(env->vals, sizeof(Value*) * env->count);
+    env->syms = realloc(env->syms, sizeof(char*) * env->count);
     // Copy contents of Value and symbol string into new location
     env->vals[env->count - 1] = val_copy(val);
-    env->syms[env->count - 1] = MALLOC(key->len + 1);
+    env->syms[env->count - 1] = malloc(key->len + 1);
     strlcpy(env->syms[env->count - 1], key->sym, key->len + 1);
 }
 
 Environment* env_copy(Environment* env) {
     ASSERT(env != NULL);
-    Environment* n = MALLOC(sizeof(Environment));
+    Environment* n = malloc(sizeof(Environment));
     n->parent = env->parent;
     n->count = env->count;
-    n->syms = MALLOC(sizeof(char*) * (n->count));
-    n->vals = MALLOC(sizeof(Value*) * (n->count));
+    n->syms = malloc(sizeof(char*) * (n->count));
+    n->vals = malloc(sizeof(Value*) * (n->count));
     for (int i = 0; i < env->count; i++) {
         size_t env_syms_len = strlen(env->syms[i]) + 1;
-        n->syms[i] = MALLOC(env_syms_len);
+        n->syms[i] = malloc(env_syms_len);
         strlcpy(n->syms[i], env->syms[i], env_syms_len);
         n->vals[i] = val_copy(env->vals[i]);
     }

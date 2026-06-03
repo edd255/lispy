@@ -69,13 +69,13 @@ Value* val_read_str(mpc_ast_t* tree) {
     tree->contents[strlen(tree->contents) - 1] = '\0';
     // Copy the string missing out the first quote character
     size_t unescaped_size = strlen(tree->contents + 1) + 1;
-    char* unescaped = MALLOC(unescaped_size);
+    char* unescaped = malloc(unescaped_size);
     strlcpy(unescaped, tree->contents + 1, unescaped_size);
     // Pass through the unescape function
     unescaped = mpcf_unescape(unescaped);
     // Construct a new Value using the string
     Value* str = val_str(unescaped);
     // Free the string and return
-    FREE(unescaped);
+    free(unescaped);
     return str;
 }

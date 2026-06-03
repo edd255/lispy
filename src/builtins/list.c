@@ -72,10 +72,10 @@ Value* builtin_tail(Environment* env, Value* args) {
                 return val_err("Function '%s' needs a longer string", __func__);
             }
             size_t new_len = args->cell[0]->len;
-            char* tail_str = MALLOC(new_len + 1);
+            char* tail_str = malloc(new_len + 1);
             strlcpy(tail_str, str + 1, new_len + 1);
             Value* tail = val_str(tail_str);
-            FREE(tail_str);
+            free(tail_str);
             val_del(args);
             return tail;
         }
@@ -359,11 +359,11 @@ Value* builtin_init(Environment* env, Value* args) {
                 val_del(args);
                 return val_str("");
             }
-            char* init_str = MALLOC(length);
+            char* init_str = malloc(length);
             strlcpy(init_str, old_str, length);
             val_del(args);
             Value* init = val_str(init_str);
-            FREE(init_str);
+            free(init_str);
             return init;
         }
     }
@@ -422,7 +422,7 @@ Value* builtin_take(Environment* env, Value* args) {
             strlcpy(taken_str, expr->str, (num->num + 1));
             val_del(args);
             Value* res = val_str(taken_str);
-            FREE(taken_str);
+            free(taken_str);
             return res;
         }
     }
@@ -542,8 +542,8 @@ Value* builtin_split(Environment* env, Value* args) {
             Value* res = val_qexpr();
             res = val_add(res, val_qexpr());
             res = val_add(res, val_qexpr());
-            char* str0 = MALLOC(sizeof(char) * (num->num + 1));
-            char* str1 = MALLOC(sizeof(char) * (len - num->num + 1));
+            char* str0 = malloc(sizeof(char) * (num->num + 1));
+            char* str1 = malloc(sizeof(char) * (len - num->num + 1));
             // Copy the strings and add them to the resulting qexpr
             strlcpy(str0, expr->str, (num->num + 1));
             strlcpy(str1, expr->str + (num->num), (len - num->num + 1));
@@ -551,8 +551,8 @@ Value* builtin_split(Environment* env, Value* args) {
             (void)val_add(res->cell[1], val_str(str1));
             // Cleanup
             val_del(args);
-            FREE(str0);
-            FREE(str1);
+            free(str0);
+            free(str1);
             return res;
         }
     }

@@ -15,7 +15,6 @@
 #include <string.h>
 
 #include "deps/logger/log.h"
-#include "utils/alloc.h"
 #include "utils/errors.h"
 
 /// Buffer size definition

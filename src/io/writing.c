@@ -81,14 +81,14 @@ void val_print_str(const Value* val) {
         return;
     }
     // Make a copy of the string
-    char* escaped = MALLOC(val->len + 1);
+    char* escaped = malloc(val->len + 1);
     strlcpy(escaped, val->str, val->len + 1);
     // Pass it through the escape function
     escaped = mpcf_escape(escaped);
     // Print it between " characters
     printf("%s", escaped);
     // free copied string
-    FREE(escaped);
+    free(escaped);
 }
 
 char* ltype_name(enum LISPY_VAL type) {

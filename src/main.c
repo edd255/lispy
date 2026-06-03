@@ -227,7 +227,7 @@ void cli_interpreter(Environment* env) {
         add_history(input);
         i++;
         if (strcmp(input, "exit") == 0) {
-            FREE(input);
+            free(input);
             break;
         }
         mpc_result_t parse_result;
@@ -242,7 +242,7 @@ void cli_interpreter(Environment* env) {
             mpc_err_print(parse_result.error);
             mpc_err_delete(parse_result.error);
         }
-        FREE(input);
+        free(input);
     }
     save_history(i);
 }

@@ -73,7 +73,7 @@ Value* builtin_load(Environment* env, Value* args) {
     mpc_err_delete(parse_result.error);
     // Create new error message using it
     Value* err = val_err("Could not load library %s", err_msg);
-    FREE(err_msg);
+    free(err_msg);
     val_del(args);
     // Cleanup and return error
     return err;
