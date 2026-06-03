@@ -17,7 +17,7 @@ void parse_args(int argc, const char** argv);
 /// Getter for filename arg
 char* get_filename(void);
 
-/// Getter for no_stdlib arg
+/// Getter for no-stdlib arg
 int get_nostdlib(void);
 
 /// Getter for print_logs arg

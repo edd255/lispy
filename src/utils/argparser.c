@@ -17,7 +17,7 @@ int print_logs = 0;
 /// The usage of the binary is printed out in case the binary gets a wrong
 /// format of arguments
 static const char* const usages[] = {
-    "lispy --filename=<FILENAME> --nostdlib --print_logs ",
+    "lispy --filename=<FILENAME> --no-stdlib --print_logs ",
     NULL,
 };
 
@@ -28,7 +28,7 @@ void parse_args(int argc, const char** argv) {
         OPT_HELP(),
         OPT_GROUP("Basic options"),
         OPT_STRING('f', "filename", &filename, "lispy file to run", NULL, 0, 0),
-        OPT_BOOLEAN('n', "no_stdlib", &no_stdlib, "exclude stdlib", NULL, 0, 0),
+        OPT_BOOLEAN('n', "no-stdlib", &no_stdlib, "exclude stdlib", NULL, 0, 0),
         OPT_BOOLEAN(
             'w',
             "print_logs",
