@@ -53,8 +53,8 @@ profiling: $(BIN)_profiling
 
 clean:
 	$(Q)echo "====> Cleaning..."
-	$(Q)$(RM) --recursive --force $(BUILD_DIR)/$(SRC_DIR)
-	$(Q)$(RM) cscope.files cscope.in.out cscope.out cscope.po.out tags
+	$(Q)$(RM) --recursive --force $(BUILD_DIR) $(BIN_DIR) $(LOGS_DIR) $(DOCS_DIR) compile_commands.json
+	$(Q)$(RM) --force cscope.files cscope.in.out cscope.out cscope.po.out tags
 
 #---- DOCUMENTATION ------------------------------------------------------------
 
@@ -71,15 +71,15 @@ style:
 #---- ANALYSIS -----------------------------------------------------------------
 
 analyze:
-	$(Q)$(MKDIR) logs
+	$(Q)$(MKDIR) $(LOGS_DIR)
 	$(Q)echo "====> Running scan-build..."
 	$(Q)scan-build make all
 	$(Q)echo "====> Running cppcheck..."
-	$(Q)cppcheck src/ $(CPPCHECK) 2> logs/cppcheck.log
+	$(Q)cppcheck src/ $(CPPCHECK) 2> $(LOGS_DIR)/cppcheck.log
 	$(Q)echo "====> Running clang-tidy..."
 	$(Q)compiledb make all
 	$(Q)clang-tidy.py $(PROJ_SRCS) $(CLANG_TIDY_CFG) || true
-	$(Q)yq 'del(.Diagnostics[] | select(.DiagnosticMessage.FilePath | test("deps")))' tidy.log > logs/tidy.log
+	$(Q)yq 'del(.Diagnostics[] | select(.DiagnosticMessage.FilePath | test("deps")))' tidy.log > $(LOGS_DIR)/tidy.log
 	$(Q)$(RM) tidy.log
 	$(Q)scan-build $(MAKE)
 

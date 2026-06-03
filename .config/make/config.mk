@@ -21,6 +21,8 @@ PREFIX := /usr/local
 SRC_DIR := src
 BUILD_DIR := build
 BIN_DIR := bin
+LOGS_DIR := logs
+DOCS_DIR := docs
 LIB := lib
 SHELL := /bin/bash
 
